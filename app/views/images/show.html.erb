@@ -1,0 +1,16 @@
+<p>
+  <img src="<%= @image.url %>">
+</p>
+
+<p>
+    <strong>url:</strong>
+  <%= @image.url %>
+</p>
+
+<p>
+  <strong>Site:</strong>
+  <%= @image.site %>
+</p>
+
+<%= link_to 'Edit', edit_image_path(@image) %>
+<%= link_to 'Back', images_path %>
