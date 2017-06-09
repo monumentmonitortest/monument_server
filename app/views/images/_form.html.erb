@@ -15,13 +15,36 @@
   <% end %>
 
   <p>
-    <%= f.label :url %><br>
+    <%= f.label :url %>
     <%= f.text_field :url %>
   </p>
 
   <p>
-    <%= f.label :site %><br>
-    <%= f.text_field :site %>
+    <%= f.label :site %>
+    <%= f.select(:site) do %>
+      <% Image::SITES.each do |s| -%>
+        <%= content_tag(:option, s.downcase, value: s) %>
+      <% end %>
+    <% end %>
+  </p>
+
+  <p>
+    <%= f.label :source %>
+    <%= f.select(:source) do %>
+      <% Image::SOURCE.each do |s| -%>
+        <%= content_tag(:option, s.downcase, value: s) %>
+      <% end %>
+    <% end %>
+  </p>
+
+  <p>
+    <%= f.label :reliable? %>
+    <%= f.check_box :reliable %>
+  </p>
+
+  <p>
+    <%= f.label :date_taken %>
+    <%= f.date_field :date_taken %>
   </p>
 
   <p>
