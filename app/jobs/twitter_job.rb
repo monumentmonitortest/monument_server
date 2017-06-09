@@ -30,7 +30,7 @@ class TwitterJob
     user = tweet.user
     twitter_user = TwitterUser.find_by(twitter_id: user.id) || create_twitter_user(user)
     # require "pry"; binding.pry
-    image = Image.new(url: url, twitter_id: image_id, site: 'twitter', twitter_user_id: twitter_user.id)
+    image = Image.new(url: url, twitter_id: image_id, source: 'twitter', twitter_user_id: twitter_user.id)
     image.save
   end
 

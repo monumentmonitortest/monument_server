@@ -24,7 +24,7 @@ class InstaJob
     Image.new(
       url: post.image,
       date_taken: post.date,
-      site: "instagram",
+      source: "instagram",
       insta_user_id: user_id
     ).save
   end
