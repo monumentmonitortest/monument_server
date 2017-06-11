@@ -1,6 +1,5 @@
-# create job to scrape twitter
 require 'twitter'
-
+# TODO: move this out maybe?!?!
 class TwitterClient
   attr_reader :client
 
