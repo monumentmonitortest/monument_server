@@ -1,7 +1,16 @@
 // Place all the styles related to the Images controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-img.main {
-  width: 350px;
+img.index-main {
+  width: 150px;
   height: auto;
+}
+
+div.show-view img {
+  width: 150px;
+  height: auto;
+}
+
+div.show-view ul {
+  list-style: none;
 }
