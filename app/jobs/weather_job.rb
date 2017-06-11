@@ -8,7 +8,6 @@ class WeatherJob
       else image.holyrood?
         image.weather_info = get_holyrood_info(image)
       end
-
       image.save
     end
   end

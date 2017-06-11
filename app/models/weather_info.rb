@@ -5,6 +5,7 @@ class WeatherInfo
   HOLYROOD = {lat: 55.9526539, long: -3.174227}
 
   def initialize(image)
+    @date = image.date_taken? ? image.date_taken : image.created_at
     if image.machrie?
       @lat = MACHRIE[:lat]
       @long = MACHRIE[:long]
@@ -12,9 +13,12 @@ class WeatherInfo
       @lat = HOLYROOD[:lat]
       @long = HOLYROOD[:long]
     end
+
+
   end
 
   def get_info
-    @info ||= HTTParty.get("http://api.openweathermap.org/data/2.5/weather?lat=#{@lat}&lon=#{@long}&appid=#{ENV['OPEN_WEATHER_API_KEY']}")
+    @info ||= HTTParty.get("https://api.darksky.net/forecast/#{ENV['DARK_SKY_API_KEY']}/#{@lat},#{@long},#{@date.yesterday.to_time.to_i}")
+    @info['daily']
   end
 end
