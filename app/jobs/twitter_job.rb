@@ -14,7 +14,7 @@ end
 
 class TwitterJob
   def perform
-    client.search("#upcyclegarden").each do |tweet|
+    client.search("#monumentmonitor").each do |tweet|
       tweet.media.each do |media|
         Image.find_by(twitter_id: media.id) ? "" : create_image(tweet, media)
       end
@@ -29,7 +29,6 @@ class TwitterJob
     url = URI.parse(media.media_url).to_s
     user = tweet.user
     twitter_user = TwitterUser.find_by(twitter_id: user.id) || create_twitter_user(user)
-    # require "pry"; binding.pry
     image = Image.new(url: url, twitter_id: image_id, source: 'twitter', twitter_user_id: twitter_user.id)
     image.save
   end
