@@ -1,16 +1,46 @@
-<p>
-  <img src="<%= @image.url %>">
-</p>
+<div class="row show-view">
+  <div class="three columns">
+    <img src="<%= @image.url %>">
+  </div>
 
-<p>
-    <strong>url:</strong>
-  <%= @image.url %>
-</p>
+  <div class="nine columns">
+    <ul>
+      <li>
+        <strong>url:</strong>
+        <%= @image.url %>
+      </li>
+      <li>
+        <strong>Site:</strong>
+        <%= @image.site %>
+      </li>
+      <li>
+        <strong>Weather info:</strong>
+        <%= @image.weather_info["data"] %>
+      </li>
+      <li>
+        <strong>Reliable?</strong>
+        <%= @image.reliable %>
+      </li>
+      <li>
+        <strong>Source</strong>
+        <%= @image.source %>
+      </li>
+      <% if @image.twitter_user_id? %>
+        <li>
+          <strong>Twitter user id</strong>
+          <%= @image.twitter_user_id %>
+        </li>
+      <% end %>
 
-<p>
-  <strong>Site:</strong>
-  <%= @image.site %>
-</p>
+      <% if @image.insta_user_id? %>
+        <li>
+          <strong>Instagram user id</strong>
+          <%= @image.insta_user_id %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
 
 <%= link_to 'Edit', edit_image_path(@image) %>
 <%= link_to 'Back', images_path %>

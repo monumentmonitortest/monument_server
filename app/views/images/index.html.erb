@@ -8,7 +8,7 @@
 
   <% @images.each do |image| %>
     <tr>
-      <td><img class="main" src="<%= image.url %>"></td>
+      <td><img class="index-main" src="<%= image.url %>"></td>
       <td><%= image.site %></td>
       <td><%= link_to 'Show', image_path(image) %></td>
       <td><%= link_to 'Edit', edit_image_path(image) %></td>
