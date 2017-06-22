@@ -1,20 +1,3 @@
 <h1>Listing images</h1>
 
-<table>
-  <tr>
-    <th>Url</th>
-    <th>Site</th>
-  </tr>
-
-  <% @images.each do |image| %>
-    <tr>
-      <td><img class="index-main" src="<%= image.url %>"></td>
-      <td><%= image.site %></td>
-      <td><%= link_to 'Show', image_path(image) %></td>
-      <td><%= link_to 'Edit', edit_image_path(image) %></td>
-      <td><%= link_to 'Delete', image_path(image),
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %></td>
-    </tr>
-  <% end %>
-</table>
+<%= smart_listing_render :images %>

@@ -1,6 +1,16 @@
+
+include SmartListing::Helper::ControllerExtensions
 class ImagesController < ApplicationController
+  helper  SmartListing::Helper
+
+
   def index
-    @images = Image.all
+    # @images = Image.order(:created_at)
+    # @images = smart_listing_create(:images, Image.active, partial: "images/listing")
+    smart_listing_create :images,
+                       Image.all,
+                       partial: "images/list",
+                       default_sort: {created_at: "asc"}
   end
 
   def new

@@ -1,0 +1,44 @@
+<% unless smart_listing.empty? %>
+  <table class="table table-striped">
+    <thead>
+      <% # Second argument of sortable is sorted attribute name %>
+      <th class="col-md-3">
+        Image
+      </th>
+      <th class="col-md-3">
+        <%= smart_listing.sortable "site", "site" %>
+      </th>
+      <th class="col-md-3">
+        <%= smart_listing.sortable "source", "source" %>
+      </th>
+      <th class="col-md-4">
+        <%= smart_listing.sortable "reliable", "reliable" %>
+      </th>
+      <th>
+        Weather
+      </th>
+      <th class="col-md-2">
+      </th>
+    </thead>
+    <tbody>
+      <% smart_listing.collection.each do |image| %>
+        <tr>
+          <td><img class="index-main" src="<%= image.url %>"></td>
+          <td><%= image.site %></td>
+          <td><%= image.source %></td>
+          <td><%= image.reliable %></td>
+          <td><%= image.weather_info['data'].first["icon"] if image.weather_info.present? %></td>
+          <td><%= link_to 'Show', image_path(image) %></td>
+          <td><%= link_to 'Edit', edit_image_path(image) %></td>
+          <td><%= link_to 'Delete', image_path(image),
+                  method: :delete,
+                  data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= smart_listing.paginate %>
+  <%= smart_listing.pagination_per_page_links %>
+<% else %>
+  <p class="warning">No records!</p>
+<% end %>
