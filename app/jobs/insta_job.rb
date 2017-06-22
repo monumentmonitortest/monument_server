@@ -7,7 +7,7 @@ class InstaJob
     # scrape_result = InstaScrape.long_scrape_hashtag('monumentMonitor', 10, include_meta_data: true)
 
     scrape_result.each do |post|
-      if !Image.where(["site = ?", "instagram"]).find_by(url: post.image)
+      if !Image.where(["source = ?", "instagram"]).find_by(url: post.image)
         create_image(post)
       end
     end
