@@ -12,7 +12,7 @@ class ImagesController < ApplicationController
       params[:images_smart_listing][:page] = 1
     end
 
-    @images = smart_listing_create :images, images_scope, partial: "images/list"
+    @images = @images ||= smart_listing_create :images, images_scope, partial: "images/list"
   end
 
   def new
@@ -20,10 +20,7 @@ class ImagesController < ApplicationController
   end
 
   def show
-    # @image = Image.find(params[:id])
-    respond_to do |format|
-      format.json { render json: @image }
-    end
+    @image = Image.find(params[:id])
   end
 
   def create

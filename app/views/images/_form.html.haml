@@ -1,0 +1,40 @@
+%td
+  = form_for object, url: object.new_record? ? images_path : image_path(object), remote: true, html: {enctype: 'multipart/form-data', class: ""} do |f|
+
+    %div
+      - if object.url
+        %img{:src => "#{object.url}"}/
+
+    %div
+      = f.label :url, "URL #{object.errors['url'][0]}"
+      = f.text_field :url
+      %br
+
+    %div
+      = f.label :site, "Site #{object.errors['site'][0]}"
+      = f.select(:site) do
+        - Image::SITES.each do |s|
+          = content_tag(:option, s.downcase, value: s)
+      %br
+
+    %div
+      = f.label :source, "Source #{object.errors['source'][0]}"
+      = f.select(:source) do
+        - Image::SOURCE.each do |s|
+          = content_tag(:option, s.downcase, value: s)
+      %br
+
+    %div
+      = f.label :reliable?, "Reliable? #{object.errors['reliable'][0]}"
+      = f.check_box :reliable
+      %br
+
+    %div
+      = f.label :date_taken, "date taken #{object.errors['date_taken'][0]}"
+      = f.date_field :date_taken
+      %br
+
+    %hr
+
+    = f.submit "Save"
+    %button.cancel Cancel
