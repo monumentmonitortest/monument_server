@@ -2,6 +2,8 @@
 class ImagesController < ApplicationController
   include SmartListing::Helper::ControllerExtensions
   helper  SmartListing::Helper
+  before_action :set_image, only: [:show, :edit, :update, :destroy]
+
 
 
   def index
@@ -52,7 +54,15 @@ class ImagesController < ApplicationController
     redirect_to images_path
   end
 
+  def search
+    render json: Image.where("LOWER(site) LIKE LOWER(?)", "%#{params[:q]}%")
+  end
+
+
   private
+  def set_image
+    @image = Image.find(params[:id])
+  end
 
   def image_params
     params.require(:image).permit(:url, :site)
