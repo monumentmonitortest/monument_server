@@ -36,6 +36,8 @@ gem 'insta_scrape'
 gem 'httparty'
 gem "smart_listing"
 gem "jquery-rails"
+gem 'haml', '~> 5.0', '>= 5.0.1'
+gem 'font-awesome-rails', '~> 4.5'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
