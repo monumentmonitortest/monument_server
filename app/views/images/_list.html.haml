@@ -1,0 +1,22 @@
+- unless smart_listing.empty?
+  %table.table.table-striped
+    %thead
+      %th.col-md-3= "Image"
+      %th.col-md-3= "Site"
+      %th.col-md-4= "Source"
+      %th.col-md-3= "Reliable"
+      %th.col-md-3= "Weather Info"
+      %th.col-md-4= "actions"
+    %tbody
+      - smart_listing.collection.each do |o|
+        %tr
+          -# User row goes here...
+
+        - smart_listing.collection.each do |o|
+          %tr.editable{:data => {:id => o.id}}
+            = smart_listing.render object: o, partial: "images/image", locals: {object: o}
+
+  = smart_listing.paginate
+  = smart_listing.pagination_per_page_links
+- else
+  %p.warning No records!

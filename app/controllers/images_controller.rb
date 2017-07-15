@@ -1,5 +1,4 @@
 
-include SmartListing::Helper::ControllerExtensions
 class ImagesController < ApplicationController
   include SmartListing::Helper::ControllerExtensions
   helper  SmartListing::Helper
@@ -21,7 +20,10 @@ class ImagesController < ApplicationController
   end
 
   def show
-    @image = Image.find(params[:id])
+    # @image = Image.find(params[:id])
+    respond_to do |format|
+      format.json { render json: @image }
+    end
   end
 
   def create

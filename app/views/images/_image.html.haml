@@ -1,0 +1,7 @@
+%td.table-text
+  %img.index-main{:src => "#{object.url}"}/
+%td.table-text= object.site
+%td.table-text= object.source
+%td.table-text= object.reliable
+%td.table-text= object.weather_info
+%td.actions= smart_listing_item_actions [{name: :show, url: image_path(object)}, {name: :edit, url: edit_image_path(object)}, {name: :destroy, url: image_path(object), confirmation: "Are you sure you want to delete this image?"}]
