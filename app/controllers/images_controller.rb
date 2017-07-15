@@ -7,14 +7,17 @@ class ImagesController < ApplicationController
 
 
   def index
-    images_scope = Image.all
-    images_scope = images_scope.like(params[:filter]) if params[:filter]
+    scope ||= Image.all
+    options = {}
+    options = options.merge(query: params[:filter]) if params[:filter].present?
+    options = options.merge(filters: params[:f]) if params[:f].present?
+    scope = Image.all_with_filter(options, scope)
 
     if params[:images_smart_listing] && params[:images_smart_listing][:page].blank?
       params[:images_smart_listing][:page] = 1
     end
 
-    @images = @images ||= smart_listing_create :images, images_scope, partial: "images/list"
+    @images ||= smart_listing_create :images, scope, partial: "images/list", page_sizes: [10, 25, 50]
   end
 
   def new
