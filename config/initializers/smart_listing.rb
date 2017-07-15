@@ -42,14 +42,14 @@ SmartListing.configure do |config|
     #:filtering_cancel      => "glyphicon-remove",
     #:filtering_disabled    => "disabled",
     #:sortable              => "sortable",
-    #:icon_new              => "glyphicon glyphicon-plus",
-    #:icon_edit             => "glyphicon glyphicon-pencil",
-    #:icon_trash            => "glyphicon glyphicon-trash",
-    #:icon_inactive         => "glyphicon glyphicon-circle",
-    #:icon_show             => "glyphicon glyphicon-share-alt",
-    #:icon_sort_none        => "glyphicon glyphicon-resize-vertical",
-    #:icon_sort_up          => "glyphicon glyphicon-chevron-up",
-    #:icon_sort_down        => "glyphicon glyphicon-chevron-down",
+    :icon_new              => "fa fa-plus",
+    :icon_edit             => "fa fa-pencil",
+    :icon_trash            => "fa fa-times",
+    :icon_inactive         => "fa fa-eye-slash",
+    :icon_show             => "fa fa-eye",
+    :icon_sort_none        => "fa fa-sort",
+    :icon_sort_up          => "fa fa-chevron-up",
+    :icon_sort_down        => "fa fa-chevron-down"
     #:muted                 => "text-muted",
   }
 
