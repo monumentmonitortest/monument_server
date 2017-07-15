@@ -1,16 +1,19 @@
 
 include SmartListing::Helper::ControllerExtensions
 class ImagesController < ApplicationController
+  include SmartListing::Helper::ControllerExtensions
   helper  SmartListing::Helper
 
 
   def index
-    # @images = Image.order(:created_at)
-    # @images = smart_listing_create(:images, Image.active, partial: "images/listing")
-    smart_listing_create :images,
-                       Image.all,
-                       partial: "images/list",
-                       default_sort: {created_at: "asc"}
+    images_scope = Image.all
+    images_scope = images_scope.like(params[:filter]) if params[:filter]
+
+    if params[:images_smart_listing] && params[:images_smart_listing][:page].blank?
+      params[:images_smart_listing][:page] = 1
+    end
+
+    @images = smart_listing_create :images, images_scope, partial: "images/list"
   end
 
   def new
