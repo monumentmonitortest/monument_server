@@ -15,7 +15,12 @@
       </li>
       <li>
         <strong>Weather info:</strong>
-        <%= @image.weather_info["data"] %>
+
+        <% if @image.weather_info %>
+          <%= @image.weather_info["data"] %>
+        <% else %>
+          No weather info
+        <% end %>
       </li>
       <li>
         <strong>Reliable?</strong>
