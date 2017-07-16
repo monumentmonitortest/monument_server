@@ -9,14 +9,11 @@
       %th.col-md-3= "actions"
     %tbody
       - smart_listing.collection.each do |o|
-        %tr
+        %tr.editable{:data => {:id => o.id}}
+          = smart_listing.render object: o, partial: "images/image", locals: {object: o}
 
-        - smart_listing.collection.each do |o|
-          %tr.editable{:data => {:id => o.id}}
-            = smart_listing.render object: o, partial: "images/image", locals: {object: o}
-
-      %div.smart-listing-new-button
-        = smart_listing.item_new colspan: 12, link: new_image_path
+    %div.smart-listing-new-button
+      = smart_listing.item_new colspan: 12, link: new_image_path
 
   = smart_listing.paginate
   = smart_listing.pagination_per_page_links
