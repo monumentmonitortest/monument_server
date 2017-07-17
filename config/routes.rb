@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
   get 'welcome/index'
 
-  get '/images/search', to: 'images#search'
-
   resources :images
 
-  root 'welcome#index'
+  get '/images/search', to: 'images#search'
+  get '/csv', to: 'images#csv', as: :csv
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  root 'welcome#index'
 end
