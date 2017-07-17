@@ -12,9 +12,19 @@ class Image < ApplicationRecord
       csv << attributes
 
       all.each do |image|
-        csv << attributes.map{ |attr| image.send(attr) }
+        csv << attributes.map do |attr|
+          if attr == 'weather_info'
+            set_weather_attribute(image, attr)
+          else
+           image.send(attr)
+          end
+        end
       end
     end
+  end
+
+  def self.set_weather_attribute(image, attr)
+    !image.send(attr).nil? ? image.send(attr)["data"][0] : image.send(attr)
   end
 
   def machrie?
