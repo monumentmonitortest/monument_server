@@ -28,7 +28,8 @@ class TwitterJob
     url = URI.parse(media.media_url).to_s
     user = tweet.user
     twitter_user = TwitterUser.find_by(twitter_id: user.id) || create_twitter_user(user)
-    image = Image.new(url: url, twitter_id: image_id, source: 'twitter', twitter_user_id: twitter_user.id)
+    record_taken = tweet.created_at
+    image = Image.new(url: url, twitter_id: image_id, source: 'twitter', twitter_user_id: twitter_user.id, record_taken: record_taken)
     image.save
   end
 
