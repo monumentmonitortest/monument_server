@@ -7,7 +7,7 @@
 
     %div
       = f.label :url, "URL #{object.errors['url'][0]}"
-      = f.text_field :url
+      = f.text_field :url, :disabled => true
       %br
 
       = f.label :site, "Site #{object.errors['site'][0]}"
@@ -30,6 +30,8 @@
       = f.date_field :record_taken
       %br
 
+      = f.label :twitter_id, "twitter id"
+      = f.text_field :twitter_id
     %hr
 
     = f.submit "Save"
