@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170718182122) do
+ActiveRecord::Schema.define(version: 20170718224238) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20170718182122) do
     t.integer "insta_user_id"
     t.string "source"
     t.datetime "record_taken"
+    t.bigint "media_id"
   end
 
   create_table "insta_users", force: :cascade do |t|
