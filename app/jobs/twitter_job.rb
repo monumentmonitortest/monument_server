@@ -20,16 +20,24 @@ class TwitterJob
     end
   end
 
+
+
   private
 
   def create_image(tweet, media)
     twitter_desc = tweet.text
     image_id = media.id
+    twitter_id = tweet.id
     url = URI.parse(media.media_url).to_s
     user = tweet.user
     twitter_user = TwitterUser.find_by(twitter_id: user.id) || create_twitter_user(user)
     record_taken = tweet.created_at
-    image = Image.new(url: url, twitter_id: image_id, source: 'twitter', twitter_user_id: twitter_user.id, record_taken: record_taken)
+    image = Image.new(url: url,
+                      twitter_id: twitter_id,
+                      source: 'twitter',
+                      twitter_user_id: twitter_user.id,
+                      record_taken: record_taken,
+                      media_id: media_id)
     image.save
   end
 
