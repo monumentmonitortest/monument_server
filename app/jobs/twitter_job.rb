@@ -26,7 +26,7 @@ class TwitterJob
 
   def create_image(tweet, media)
     twitter_desc = tweet.text
-    image_id = media.id
+    media_id = media.id
     twitter_id = tweet.id
     url = URI.parse(media.media_url).to_s
     user = tweet.user
