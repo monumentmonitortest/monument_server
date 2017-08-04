@@ -47,7 +47,7 @@ class ImagesController < ApplicationController
   def update
   @image = Image.find(params[:id])
     if @image.update(image_params)
-      redirect_to @image
+      redirect_to images_path
     else
       render 'edit'
     end
