@@ -6,7 +6,7 @@ class Image < ApplicationRecord
   SOURCE = ["TWITTER", "INSTAGRAM", "UPLOAD"]
 
   def self.to_csv
-    attributes = %w{id url site watson_info weather_info reliable date_taken insta_user_id twitter_user_id source created_at updated_at}
+    attributes = %w{id url site watson_info weather_info reliable record_taken insta_user_id twitter_user_id source created_at updated_at}
 
     CSV.generate(headers: true) do |csv|
       csv << attributes
