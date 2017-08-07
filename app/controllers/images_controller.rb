@@ -71,7 +71,7 @@ class ImagesController < ApplicationController
   end
 
   def image_params
-    params.require(:image).permit(:reliable)
+    params.require(:image).permit(:reliable, :site)
   end
 
 end
