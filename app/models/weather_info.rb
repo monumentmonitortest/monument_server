@@ -5,7 +5,7 @@ class WeatherInfo
   HOLYROOD = {lat: 55.9526539, long: -3.174227}
 
   def initialize(image)
-    @date = image.date_taken? ? image.date_taken : image.created_at.yesterday.to_i
+    @date = image.record_taken? ? image.record_taken.to_i / 10 : image.created_at.yesterday.to_i
     if image.machrie?
       @lat = MACHRIE[:lat]
       @long = MACHRIE[:long]
