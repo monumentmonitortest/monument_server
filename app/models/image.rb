@@ -15,6 +15,8 @@ class Image < ApplicationRecord
         csv << attributes.map do |attr|
           if attr == 'weather_info'
             set_weather_attribute(image, attr)
+          elsif attr == 'record_taken'
+            set_record_taken_attribute(image, attr)
           else
            image.send(attr)
           end
@@ -25,6 +27,10 @@ class Image < ApplicationRecord
 
   def self.set_weather_attribute(image, attr)
     !image.send(attr).nil? ? image.send(attr)["data"][0] : image.send(attr)
+  end
+
+  def self.set_record_taken_attribute(image, attr)
+    !image.send(attr).nil? ? image.send(attr).to_date : image.send(attr)
   end
 
   def machrie?
