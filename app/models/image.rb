@@ -26,7 +26,7 @@ class Image < ApplicationRecord
   end
 
   def self.set_weather_attribute(image, attr)
-    !image.send(attr).nil? ? image.send(attr)["data"][0] : image.send(attr)
+    !image.send(attr).nil? ? image.send(attr)["data"][0]['precipIntensityMax'] : image.send(attr)
   end
 
   def self.set_record_taken_attribute(image, attr)
