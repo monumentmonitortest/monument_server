@@ -41,16 +41,10 @@ class ImagesController < ApplicationController
   end
 
   def edit
-    @image = Image.find(params[:id])
   end
 
   def update
-  @image = Image.find(params[:id])
-    if @image.update(image_params)
-      redirect_to images_path
-    else
-      render 'edit'
-    end
+    @image.update_attributes(image_params)
   end
 
   def destroy
