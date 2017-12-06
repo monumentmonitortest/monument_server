@@ -40,4 +40,8 @@ class Image < ApplicationRecord
   def holyrood?
     self.site == "HOLYROOD"
   end
+
+  def other_locations
+    Image::SOURCE.reject { |i| i == self.source.upcase }
+  end
 end

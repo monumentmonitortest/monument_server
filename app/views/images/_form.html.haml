@@ -18,7 +18,8 @@
 
       = f.label :source, "Source #{object.errors['source'][0]}"
       = f.select(:source) do
-        - Image::SOURCE.each do |s|
+        = content_tag(:option, @image.source, value: @image.source)
+        - @image.other_locations.each do |s|
           = content_tag(:option, s.downcase, value: s)
       %br
 
