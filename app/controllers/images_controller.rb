@@ -5,9 +5,12 @@ class ImagesController < ApplicationController
 
   def index
     @scope ||= Image.all
+    @scope = @scope.reliable if params[:reliable?] == "1"
+
     options = {}
     options = options.merge(query: params[:filter]) if params[:filter].present?
     options = options.merge(filters: params[:f]) if params[:f].present?
+    
     @scope = Image.all_with_filter(options, @scope)
 
     if params[:images_smart_listing] && params[:images_smart_listing][:page].blank?
@@ -28,7 +31,6 @@ class ImagesController < ApplicationController
   end
 
   def show
-    @image = Image.find(params[:id])
   end
 
   def create

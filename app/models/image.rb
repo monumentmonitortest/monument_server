@@ -5,6 +5,8 @@ class Image < ApplicationRecord
   SITES = ["MACHRIE", "HOLYROOD"]
   SOURCE = ["TWITTER", "INSTAGRAM", "UPLOAD"]
 
+  scope :reliable, -> { where(reliable: true) }
+
   def self.to_csv
     attributes = %w{id url site watson_info weather_info reliable record_taken insta_user_id twitter_user_id source created_at updated_at}
 
