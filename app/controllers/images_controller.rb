@@ -20,12 +20,6 @@ class ImagesController < ApplicationController
     @images ||= smart_listing_create :images, @scope, partial: "images/list", page_sizes: [10, 25, 50]
   end
 
-  def csv
-    respond_to do |format|
-      format.csv { send_data Image.all.to_csv, filename: "collection-#{Date.today}.csv" }
-    end
-  end
-
   def new
     @image = Image.new
   end

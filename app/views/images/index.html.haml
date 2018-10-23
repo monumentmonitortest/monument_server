@@ -10,7 +10,7 @@
 
     %div.filter.form-search
       .input-group
-        = text_field_tag :filter, '', class: "", placeholder: "Search...", autocomplete: :off, value: "#{params[:filter]}"
+        = text_field_tag :filter, '', class: "image-options", placeholder: "Search...", autocomplete: :off, value: "#{params[:filter]}"
         %span.input-group-btn
           = submit_tag 'Refresh', :class => "btn btn-default", :name => "do_query"
           = link_to  "Clear search", '/images', class: "btn btn-default"
@@ -27,3 +27,7 @@
               $.filters.append(humanize("#{field}"), "#{field}", "#{Image.columns_hash[field].type}", value, "#{value['o']}", "", "#{option}");
 
   = smart_listing_render :images
+
+  %br
+
+  = link_to "View JS CSV", {}, :class => "js-csv"

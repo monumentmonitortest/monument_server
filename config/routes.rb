@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   resources :images
 
   get '/images/search', to: 'images#search'
-  get '/csv', to: 'images#csv', as: :csv
+
+  post '/results', to: 'csv#results', as: :results
 
   get '/machrie', to: 'images#machrie'
 

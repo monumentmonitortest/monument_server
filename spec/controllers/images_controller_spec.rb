@@ -55,6 +55,7 @@ RSpec.describe ImagesController do
     end
 
     context "with multiple filters" do
+      # TODO
     end
 
     context "with 'reliable' selected" do
@@ -67,9 +68,5 @@ RSpec.describe ImagesController do
         expect(images).to include(machrie_image_insta)
       end
     end
-  end
-
-  context "#csv" do
-
   end
 end
