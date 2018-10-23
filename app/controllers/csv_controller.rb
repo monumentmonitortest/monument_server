@@ -8,7 +8,7 @@ class CsvController < ApplicationController
 
   private
 
-  def sort_images    
+  def sort_images
     options = {}
     options = options.merge(query: filter) if filter.present?
     
@@ -20,7 +20,7 @@ class CsvController < ApplicationController
   end
 
   def reliable_images?
-    permitted_params[:reliable_filter] == "0"
+    permitted_params[:reliable_filter] == "1"
   end
 
   def filter

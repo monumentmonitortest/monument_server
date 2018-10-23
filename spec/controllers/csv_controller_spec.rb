@@ -37,7 +37,7 @@ RSpec.describe CsvController do
     end
 
     context "when reliable is selected" do
-      let(:params) { { reliable_filter: "0" } }
+      let(:params) { { reliable_filter: "1" } }
 
       it "CSV returns only reliable images" do
         csv = response.body
