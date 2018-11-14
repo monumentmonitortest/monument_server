@@ -4,6 +4,7 @@ class Image < ApplicationRecord
 
   SITES = ["MACHRIE", "HOLYROOD"]
   SOURCE = ["TWITTER", "INSTAGRAM", "UPLOAD"]
+  MACHRIE_CATGORIES = %w(negligible light moderate heavy extensive n/a)
 
   scope :reliable, -> { where(reliable: true) }
 
