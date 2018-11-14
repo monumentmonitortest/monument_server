@@ -2,8 +2,8 @@
 - cache object do
   %td.table-text
     %img.index-main{:src => "#{object.url}"}/
-  %td.table-text= object.record_taken.to_date if object.record_taken
-  %td.table-text= object.created_at
+  %td.table-text= object.record_taken.to_date.strftime "%d/%m/%y" if object.record_taken
+  %td.table-text= object.created_at.strftime "%d/%m/%y"
   %td.table-text= object.site
   %td.table-text= object.source
   %td.table-text= object.reliable
