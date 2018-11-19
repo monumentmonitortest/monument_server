@@ -7,13 +7,7 @@ function readyCSVExport() {
   $( ".js-csv" ).click(function(e) {
     e.preventDefault()
     var options = $( ".image-options").val()
-    var reliableSelected = $( "input:checkbox").first().attr("checked")
-
-    if (reliableSelected == "checked") {
-      var reliable = "1"
-    } else {
-      var reliable = "0"
-    }
+    var reliable = $( "input:checkbox").first().attr("value")
 
     $.ajax({
       url: "results",
