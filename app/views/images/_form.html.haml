@@ -11,20 +11,20 @@
       %br
 
       = f.label :site, "Site #{object.errors['site'][0]}"
-      = f.select(:site) do
-        - Image::SITES.each do |s|
-          = content_tag(:option, s.downcase, value: s)
+      = f.select :site, 
+          options_for_select(Image::SITES.each{|c| [c, c]}, @image.site),
+          {:include_blank => true}
       %br
 
       -# refactor the fuck out of this please. 
       - if object.site == "MACHRIE"
         = f.label :category, "Category #{object.errors['category'][0]}"
-        = f.select(:category) do
-          - Image::MACHRIE_CATGORIES.each do |s|
-            = content_tag(:option, s.downcase, value: s)
+        = f.select :category, 
+            options_for_select(Image::MACHRIE_CATGORIES.each{|c| [c, c]}, @image.category),
+            {:include_blank => true}
+     
+
       %br
-
-
       = f.label :source, "Source #{object.errors['source'][0]}"
       = f.select(:source) do
         = content_tag(:option, @image.source, value: @image.source)
