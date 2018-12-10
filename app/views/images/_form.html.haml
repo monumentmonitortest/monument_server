@@ -1,13 +1,16 @@
 %td
-  = form_for object, url: object.new_record? ? images_path : image_path(object), remote: true, html: {enctype: 'multipart/form-data', class: ""} do |f|
+  = form_for object, url: object.new_record? ? images_path : image_path(object), remote: true, multipart: true, html: {enctype: 'multipart/form-data', class: ""} do |f|
 
     %div.image
-      - if object.url
-        %img{:src => "#{object.url}"}/
+      %img{:src => "#{object.submission.url}"}/
 
     %div
       = f.label :url, "URL #{object.errors['url'][0]}"
       = f.text_field :url
+      %br
+
+      = f.label :submission
+      = f.file_field :submission
       %br
 
       = f.label :site, "Site #{object.errors['site'][0]}"
@@ -16,20 +19,18 @@
           {:include_blank => true}
       %br
 
-      -# refactor the fuck out of this please. 
+      -# refactor the fuck out of this please. (preferably with  presenter)
       - if object.site == "MACHRIE"
         = f.label :category, "Category #{object.errors['category'][0]}"
         = f.select :category, 
             options_for_select(Image::MACHRIE_CATGORIES.each{|c| [c, c]}, @image.category),
             {:include_blank => true}
-     
-
       %br
+
       = f.label :source, "Source #{object.errors['source'][0]}"
-      = f.select(:source) do
-        = content_tag(:option, @image.source, value: @image.source)
-        - @image.other_locations.each do |s|
-          = content_tag(:option, s.downcase, value: s)
+      = f.select :source, 
+        options_for_select(Image::SOURCE.each{|s| [s, s]}, @image.source),
+        {:include_blank => true}
       %br
 
       = f.label :reliable?, "Reliable / useful? #{object.errors['reliable'][0]}"

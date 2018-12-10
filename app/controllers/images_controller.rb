@@ -59,7 +59,6 @@ class ImagesController < ApplicationController
   end
 
   def image_params
-    params.require(:image).permit(:reliable, :source, :site, :category)
+    params.require(:image).permit(:reliable, :source, :site, :category, :submission, :record_taken)
   end
-
 end

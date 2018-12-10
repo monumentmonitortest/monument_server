@@ -1,7 +1,12 @@
 class Image < ApplicationRecord
-  validates :url, presence: true,
-                    length: { minimum: 5 }
+  has_attached_file :submission, 
+                    styles: {
+                      medium: '300x300>'
+                    }
 
+  # Validate the attached image is image/jpg, image/png, etc
+  validates_attachment_content_type :submission, :content_type => /\Aimage\/.*\Z/
+                  
   SITES = ["MACHRIE", "HOLYROOD"]
   SOURCE = ["TWITTER", "INSTAGRAM", "UPLOAD"]
   MACHRIE_CATGORIES = %w(negligible light moderate heavy extensive n/a)
