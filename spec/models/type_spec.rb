@@ -1,6 +1,5 @@
 require 'rails_helper'
-RSpec.describe Site, type: :model do
-  # spec anything special to do with the site
+RSpec.describe Type, type: :model do
   
   context 'associations' do
     it { should have_many(:submissions) }
