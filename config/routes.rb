@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   resources :sites
 
+  resources :types
+
   get '/images/search', to: 'images#search'
 
   post '/results', to: 'csv#results', as: :results
