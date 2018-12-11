@@ -56,6 +56,11 @@ group :development, :test do
   gem 'dotenv-rails', groups: [:development, :test]
 end
 
+group :test do
+  gem 'shoulda', '~> 3.5'
+  gem 'shoulda-matchers', '~> 2.0'
+end
+
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console', '>= 3.3.0'

@@ -1,0 +1,20 @@
+
+- unless smart_listing.empty?
+  %table.table.table-striped
+    %thead
+      %th{scope: "col"} Name
+      %th{scope: "col"} Meta Data
+      %th{scope: "col"} Actions
+    %tbody
+      - smart_listing.collection.each do |o|
+        %tr.editable{data: {id: o.id}}
+          -# Render type row partial
+          = smart_listing.render object: o, partial: "types/type", locals: {object: o}
+
+      -# Render nice "new item" button fitted for Bootstrap 3 by default
+      = smart_listing.item_new colspan: 3, link: new_type_path
+      
+  = smart_listing.paginate
+  = smart_listing.pagination_per_page_links
+- else
+  %p.warning No records!
