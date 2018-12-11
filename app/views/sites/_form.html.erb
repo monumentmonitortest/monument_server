@@ -1,0 +1,82 @@
+
+<% if site && site.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(site.errors.count, "error") %> prohibited this site from being saved:</h2>
+
+    <ul>
+    <% site.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class='row'>
+  <div class="col">
+    <%= form.label :name, "Site Name"%>
+  </div>
+  <div class="col">
+    <%= form.text_field :name, id: :name %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <%= form.label :latitude, "Lattitude"%>
+  </div>
+  <div class="col">
+    <%= form.number_field :latitude, step: :any %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <%= form.label :longitude, "Longitude"%>
+  </div>
+  <div class="col">
+    <%= form.number_field :longitude, step: :any %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <%= form.label :pic_id, "PIC ID"%>
+  </div>
+  <div class="col">
+    <%= form.text_field :pic_id %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <%= form.label :visits, "Visits per annum"%>
+  </div>
+  <div class="col">
+    <%= form.number_field :visits %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <%= form.label :visitors, "Visitors per annum"%>
+  </div>
+  <div class="col">
+    <%= form.number_field :visitors %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <%= form.label :notes, "Notes, eg, what are we monitoring here"%>
+  </div>
+  <div class="col">
+    <%= form.text_area :notes %>
+  </div>
+</div>
+
+
+
+<div class="actions">
+  <%= form.submit %>
+</div>
+
