@@ -2,10 +2,9 @@ Rails.application.routes.draw do
   get 'welcome/index'
 
   resources :images
-
   resources :sites
-
   resources :types
+  resources :submissions
 
   get '/images/search', to: 'images#search'
 

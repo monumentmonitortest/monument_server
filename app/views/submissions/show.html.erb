@@ -1,0 +1,5 @@
+<%= @submission.site.name %>
+
+<%= form_with(model: @submission, local: true) do |form| %>
+  <%= render 'form', form: form, submission: @submission %>
+<% end %>
