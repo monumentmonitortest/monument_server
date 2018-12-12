@@ -1,8 +1,16 @@
-%td= object.site.name
-%td= object.type
-%td= object.reliable
-%td= object.tags
 
-%td.actions= smart_listing_item_actions [{name: :show, url: submission_path(object)},
-  {name: :edit,    url: edit_submission_path(object)},
-  {name: :destroy, url: submission_path(object), confirmation: "Are you sure you want to delete this?"}]
+- cache object do
+  %td.table-text= object.site.name
+  %td.table-text
+    -# TODO: refactor this with presenter
+    %img.index-main{:src => ""}/
+  
+  %td.table-text= object.type.name
+  %td.table-text= object.reliable
+  %td.table-text= object.tags
+  %td.table-text= object.record_taken.to_date.strftime "%d/%m/%y" if object.record_taken
+  %td.table-text= object.created_at.strftime "%d/%m/%y"
+
+  -# if object.weather_info
+    %td.table-text= object.weather_info["data"][0]["summary"]
+  %td.actions= smart_listing_item_actions [{name: :show, url: submission_path(object)}, {name: :edit, url: edit_submission_path(object)}, {name: :destroy, url: submission_path(object), confirmation: "Are you sure you want to delete this submission?"}]

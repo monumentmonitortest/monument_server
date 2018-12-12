@@ -1,0 +1,38 @@
+%td
+  =# form_for object, url: submission_path(object), remote: true, multipart: true, html: {enctype: 'multipart/form-data', class: ""} do |f|
+  = form_for object, url: object.new_record? ? submissions_path : submission_path(object),  remote: true, html: {class: "form-horizontal"} do |f|
+    %div.submission
+      %img{:src => "#{}"}/
+
+    %div
+      =# f.label :url, "URL #{object.errors['url'][0]}"
+      =# f.text_field :url
+      %br
+
+      = f.label :submission
+      = f.file_field :submission
+      %br
+
+      = f.label :site, "Site #{object.errors['site'][0]}"
+      = f.select :site_id, 
+          options_for_select(Site.all.map {|s| [s.name, s.id]}, @submission.site.name || "")
+      %br
+
+      = f.label :type, "Source/Type #{object.errors['source'][0]}"
+      = f.select :type_id, 
+        options_for_select(Type.all.map{|t| [t.name, t.id]}, @submission.type.name)
+
+      %br
+
+      = f.label :reliable?, "Reliable / useful? #{object.errors['reliable'][0]}"
+      = f.check_box :reliable
+      %br
+
+      = f.label :record_taken, "date taken #{object.errors['record_taken'][0]}"
+      = f.date_field :record_taken
+      %br
+
+    %hr
+
+    = f.submit "Save"
+    %button.cancel Cancel
