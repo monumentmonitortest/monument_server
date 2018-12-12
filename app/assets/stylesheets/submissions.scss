@@ -1,0 +1,9 @@
+div.submission-form {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  padding: 0 15px;
+  span, span.submission {
+    width: 50%
+  }
+}
