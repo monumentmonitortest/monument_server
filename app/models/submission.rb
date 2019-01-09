@@ -1,6 +1,6 @@
 class Submission < ApplicationRecord
   belongs_to :site
-  belongs_to :type
+  has_one :type,  :dependent => :destroy
   
   validates_presence_of :type_id
   # validates site_id is an actual site

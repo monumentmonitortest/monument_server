@@ -1,3 +1,6 @@
 class Type < ApplicationRecord
-  has_many :submissions
+  belongs_to :submission
+
+  NAMES = %w(INSTAGRAM EMAIL TWITTER WHATSAPP OTHER )
+
 end
