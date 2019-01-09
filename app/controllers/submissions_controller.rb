@@ -15,7 +15,6 @@ class SubmissionsController < ApplicationController
   end
 
   def update
-    binding.pry
     @submission.update_attributes(submission_params)
   end
 

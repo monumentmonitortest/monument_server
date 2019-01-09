@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   resources :types
   resources :submissions
 
+  get '/submissions', to: 'submissions#plain_index'
+
   get '/images/search', to: 'images#search'
 
   post '/results', to: 'csv#results', as: :results
