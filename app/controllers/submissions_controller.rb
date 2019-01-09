@@ -20,7 +20,19 @@ class SubmissionsController < ApplicationController
 
   def new
     @submission = Submission.new(site_id: params[:site_id])
-    @submission.
+    @submission.build_type
+    @presenter = ::Submissions::BasePresenter.new(@submission, view_context)
+  end
+
+  def create
+    # TODO - specs for this
+    outcome = CreateSubmissionService.run(submission_params.to_h)
+
+    if outcome.valid?
+      redirect_to site_path(outcome.site_id)
+    else
+      render 'new'
+    end
   end
 
   private
@@ -29,7 +41,14 @@ class SubmissionsController < ApplicationController
   end
 
   def submission_params
-    params.require(:submission).permit(:reliable, :site_id, :type_id, :image, :record_taken, :tags)
+    params.require(:submission).permit(:reliable, 
+                                       :site_id,
+                                       :type_id,
+                                       :type_name, 
+                                       :image, 
+                                       :record_taken, 
+                                       :tags, 
+                                       type_attributes: [:name, :data])
   end
   
 end

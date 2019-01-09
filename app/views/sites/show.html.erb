@@ -27,8 +27,10 @@
   <h3>Submissions</h3>
   <%= smart_listing_render_foo :submissions %>
 
+  <%= link_to "New Submission", new_site_submission_url(@site, @submission) %>
 
-
+<br/>
+<br/><br/>
 <%= link_to 'Edit', edit_site_path(@site.id) %> |
 <%= link_to 'Back', sites_path %>
 <script>

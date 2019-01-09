@@ -8,15 +8,14 @@
       %th{scope: "col"}= "Tags"
       %th{scope: "col"}= smart_listing.sortable "Record taken", "record_taken"
       %th{scope: "col"}= smart_listing.sortable "created at", "created_at"
-      
+      %th{scope: "col"}= "Action"
     %tbody
       - smart_listing.collection.each do |o|
-        = smart_listing.render object: o, partial: "site_submission", locals: {object: o}
+        %tr.editable{data: {id: o.id}}
+          -# Render user row partial
+          = smart_listing.render object: o, partial: "site_submission", locals: {object: o}
 
-          
-  %div.smart-listing-new-button
-    = smart_listing.item_new colspan: 12, link: new_site_submission_path(@site)
-
+    
   = smart_listing.paginate
   = smart_listing.pagination_per_page_links
 

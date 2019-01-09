@@ -1,6 +1,7 @@
 %td{colspan: 8}
   =# form_for object, url: submission_path(object), remote: true, multipart: true, html: {enctype: 'multipart/form-data', class: ""} do |f|
-  = form_for object, url: object.new_record? ? submissions_path : submission_path(object),  remote: true, html: {class: "form-horizontal"} do |f|
+  -# - presenter = FormPresenter.new(object ||)
+  = form_for object, url: @presenter.url,  remote: true, html: {class: "form-horizontal"} do |f|
     %div.submission-form
       %span.submission
         %img{:src => "#{}"}/
@@ -20,8 +21,9 @@
   
       %span
         = f.label :type, "Source/Type #{object.errors['source'][0]}"
-        = f.select :type_id, 
-          options_for_select(Type.all.map{|t| [t.name, t.id]}, @submission.type.name)
+        = f.fields_for :type do |t|
+          = t.select :name, 
+            options_for_select(Type::NAMES, @submission.type.name)
 
       %span
         = f.label :reliable?, "Reliable / useful? #{object.errors['reliable'][0]}"

@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :images
   resources :types
-  resources :submissions, only: [:index, :edit]
+  resources :submissions
   
   resources :sites do
     resources :submissions
