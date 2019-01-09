@@ -2,9 +2,12 @@ Rails.application.routes.draw do
   get 'welcome/index'
 
   resources :images
-  resources :sites
   resources :types
-  resources :submissions
+  resources :submissions, only: [:index, :edit]
+  
+  resources :sites do
+    resources :submissions
+  end
 
   get '/submissions', to: 'submissions#plain_index'
 

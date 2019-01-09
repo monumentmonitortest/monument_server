@@ -18,6 +18,11 @@ class SubmissionsController < ApplicationController
     @submission.update_attributes(submission_params)
   end
 
+  def new
+    @submission = Submission.new(site_id: params[:site_id])
+    @submission.
+  end
+
   private
   def set_submission
     @submission = Submission.find(params[:id])

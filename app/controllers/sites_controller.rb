@@ -31,7 +31,7 @@ class SitesController < ApplicationController
   end
 
   def show
-    @submissions = smart_listing_create :submissions, @site.submissions, partial: "sites/list"
+    @submissions = smart_listing_create :submissions, @site.submissions, partial: "sites/submission_list"
     # binding.pry
     # @sites_submissions
   end
