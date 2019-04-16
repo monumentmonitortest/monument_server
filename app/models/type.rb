@@ -10,7 +10,14 @@ class Type < ApplicationRecord
 
   private
 
+  def annonymize_present_data
+    self.data.map do |k, v|
+      annonymised_value = v.empty? ? v : encrypt(v)
+      self.data[k] =  annonymised_value
+    end
+  end
+
   def encrypt(data)
     Digest::SHA1.hexdigest data
-  end
+  end  
 end
