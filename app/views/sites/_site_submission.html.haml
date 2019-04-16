@@ -5,7 +5,7 @@
     -# TODO: refactor this with presenter
     %img.index-main{:src => ""}/
   
-  %td.table-text= object.type.name
+  %td.table-text= object.type.name if object.type
   %td.table-text= object.reliable
   %td.table-text= object.tags
   %td.table-text= object.record_taken.to_date.strftime "%d/%m/%y" if object.record_taken

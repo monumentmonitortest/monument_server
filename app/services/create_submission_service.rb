@@ -10,6 +10,13 @@ class CreateSubmissionService  < ActiveInteraction::Base
 
   hash :type_attributes do
     string :name
+    
+    # hash :data do
+      string :email_address
+      string :number
+      string :insta_username
+      string :twitter_username
+    # end
     # interface :data
 
   end
@@ -22,7 +29,14 @@ class CreateSubmissionService  < ActiveInteraction::Base
   private
 
   def create_type(submission)
-    type ||= Type.new(name: type_attributes[:name], submission_id: submission.id).save
+    type ||= Type.new(
+      name:             type_attributes[:name],
+      email_address:    type_attributes[:email_address],
+      insta_username:   type_attributes[:insta_username],
+      twitter_username: type_attributes[:twitter_username],
+      number:           type_attributes[:number],
+      submission_id:    submission.id
+    ).save
   end
     
     def create_submission

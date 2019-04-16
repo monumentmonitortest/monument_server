@@ -3,6 +3,6 @@ RSpec.describe Submission, type: :model do
   
   context 'associations' do
     it { should belong_to(:site) }
-    it { should belong_to(:type) }
+    it { should have_one(:type) }
   end 
 end
