@@ -1,6 +1,4 @@
 %td{colspan: 8}
-  =# form_for object, url: submission_path(object), remote: true, multipart: true, html: {enctype: 'multipart/form-data', class: ""} do |f|
-  -# - presenter = FormPresenter.new(object ||)
   = form_for object, url: @presenter.url,  remote: true, html: {class: "form-horizontal"} do |f|
     %div.submission-form
       %span.submission
@@ -20,12 +18,6 @@
             options_for_select(Site.all.map {|s| [s.name, s.id]}, @submission.site.name || "")
   
       %span
-        = f.label :type, "Source/Type #{object.errors['source'][0]}"
-        = f.fields_for :type do |t|
-          = t.select :name, 
-            options_for_select(Type::NAMES, @submission.type.name)
-
-      %span
         = f.label :reliable?, "Reliable / useful? #{object.errors['reliable'][0]}"
         = f.check_box :reliable
   
@@ -33,5 +25,16 @@
         = f.label :record_taken, "date taken #{object.errors['record_taken'][0]}"
         = f.date_field :record_taken
   
+      %span
+        = f.label :type, "Source/Type #{object.errors['source'][0]}"
+        = f.fields_for :type do |t|
+          = t.select :name, 
+            options_for_select(Type::NAMES, @submission.type.name)
+
+          - Type::DATA_TYPES.each do |type|
+            = t.label type.to_sym
+            = t.text_field type.to_sym
+
+
       = f.submit "Save"
       %button.cancel Cancel

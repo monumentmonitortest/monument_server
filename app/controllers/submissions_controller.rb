@@ -26,12 +26,14 @@ class SubmissionsController < ApplicationController
 
   def create
     # TODO - specs for this
-    outcome = CreateSubmissionService.run(submission_params.to_h)
-
+    outcome = CreateSubmissionService.run(service_params)
     if outcome.valid?
       redirect_to site_path(outcome.site_id)
     else
-      render 'new'
+      puts outcome.errors.messages
+      redirect_to new_site_submission_path(outcome.site_id)
+      flash[:error] = outcome.errors.messages
+      # this way is not quite working because of daisy-chaining which is Bad.
     end
   end
 
@@ -40,15 +42,31 @@ class SubmissionsController < ApplicationController
     @submission = Submission.find(params[:id])
   end
 
+  def service_params
+    type_attributes = type_params.to_h
+    params = submission_params.to_h
+    params[:type_attributes] = type_attributes
+    params
+  end
+
   def submission_params
     params.require(:submission).permit(:reliable, 
                                        :site_id,
                                        :type_id,
-                                       :type_name, 
                                        :image, 
                                        :record_taken, 
-                                       :tags, 
-                                       type_attributes: [:name, :data])
+                                       :tags 
+    )
+  end
+
+  def type_params
+    params.require(:submission).require(:type_attributes).permit(
+                                                                  :name,
+                                                                  :email_address,
+                                                                  :number,
+                                                                  :insta_username,
+                                                                  :twitter_username
+    )
   end
   
 end

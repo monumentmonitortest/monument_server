@@ -2,10 +2,10 @@ class CreateTypeService  < ActiveInteraction::Base
   
   integer :submission_id
   string :name
-
-  
-  hash :data,
-    strip: false
+  string :email_address
+  string :insta_username
+  string :twitter_username
+  string :number
 
   def execute
     validate_params
@@ -17,10 +17,10 @@ class CreateTypeService  < ActiveInteraction::Base
   def create_type#(submission)
     type ||= Type.new(
       name:             name,
-      email_address:    (data[:email_address] if data[:email_address]),
-      insta_username:   (data[:insta_username] if data[:insta_username]),
-      twitter_username: (data[:twitter_handle] if data[:twitter_handle]),
-      number:           (data[:wa_number] if data[:wa_number]),
+      email_address:    email_address,
+      insta_username:   insta_username,
+      twitter_username: twitter_username,
+      number:           number,
       submission_id:    submission_id
     ).save
   end
@@ -33,18 +33,18 @@ class CreateTypeService  < ActiveInteraction::Base
   end
 
   def validate_email
-    errors.add(:data, :email_not_present) unless data[:email_address].present? 
+    errors.add(:email_not_present, "Email not present") unless email_address.present? 
   end
 
   def validate_instagram
-    errors.add(:data, :insta_username_not_present) unless data[:insta_username].present? 
+    errors.add(:insta_username_not_present, "Instagram user not present") unless insta_username.present? 
   end
 
   def validate_twitter
-    errors.add(:data, :twitter_handle_not_present) unless data[:twitter_handle].present? 
+    errors.add(:twitter_handle_not_present, "Twitter handle not present") unless twitter_username.present? 
   end
 
   def validate_whatsapp
-    errors.add(:data, :whatsapp_number_not_present) unless data[:wa_number].present? 
+    errors.add(:whatsapp_number_not_present, "Whatsapp number not present") unless number.present? 
   end
 end
