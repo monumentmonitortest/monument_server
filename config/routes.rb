@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   
   resources :sites do
     resources :submissions
+    resources :registrations
   end
 
   get '/submissions', to: 'submissions#plain_index'

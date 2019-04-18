@@ -9,13 +9,12 @@
         =# f.text_field :url
   
       %span
-        = f.label :submission 
-        = f.file_field :submission
+        = f.label :image 
+        = f.file_field :image
   
       %span
-        = f.label :site, "Site #{object.errors['site'][0]}"
-        = f.select :site_id, 
-            options_for_select(Site.all.map {|s| [s.name, s.id]}, @submission.site.name || "")
+        = f.label :site_id, "Site #{object.errors['site'][0]}"
+        = f.select :site_id,   options_for_select(Site.all.map {|s| [s.name, s.id]}, @site.name || "")
   
       %span
         = f.label :reliable?, "Reliable / useful? #{object.errors['reliable'][0]}"
@@ -26,14 +25,12 @@
         = f.date_field :record_taken
   
       %span
-        = f.label :type, "Source/Type #{object.errors['source'][0]}"
-        = f.fields_for :type do |t|
-          = t.select :name, 
-            options_for_select(Type::NAMES, @submission.type.name)
+        = f.label :type_name, "Source/Type #{object.errors['source'][0]}"
+        = f.select :type_name, Type::NAMES
 
-          - Type::DATA_TYPES.each do |type|
-            = t.label type.to_sym
-            = t.text_field type.to_sym
+        - Type::DATA_TYPES.each do |type|
+          = f.label type.to_sym
+          = f.text_field type.to_sym
 
 
       = f.submit "Save"

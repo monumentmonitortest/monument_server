@@ -1,6 +1,6 @@
 class Type < ApplicationRecord
   belongs_to :submission
-  # data is a shit name for a field btw.
+  # delete data - it's shit
   store_accessor :data, :email_address, :number, :insta_username, :twitter_username 
   
   before_create :annonymize_present_data
@@ -20,4 +20,6 @@ class Type < ApplicationRecord
   def encrypt(data)
     Digest::SHA1.hexdigest data
   end  
+
+  # validate presence of the right things here...
 end
