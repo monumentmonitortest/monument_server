@@ -27,6 +27,10 @@ class SubmissionsController < ApplicationController
   def create
   end
 
+  def destroy
+    @submission.destroy
+  end
+  
   private
   
   def set_submission
