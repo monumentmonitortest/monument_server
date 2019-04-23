@@ -1,6 +1,5 @@
 class Type < ApplicationRecord
   belongs_to :submission
-  # delete data - it's shit
   store_accessor :data, :email_address, :number, :insta_username, :twitter_username 
   validate :validate_params, on: :create
 

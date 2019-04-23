@@ -18,7 +18,6 @@ class ImagesController < ApplicationController
     end
 
     @images ||= smart_listing_create :images, @scope, partial: "images/list", page_sizes: [10, 25, 50]
-    # binding.pry
   end
 
   def new

@@ -4,8 +4,6 @@ RSpec.describe Type, type: :model do
     it { should belong_to(:submission) }
   end 
   
-  
-  # specs to fix
   subject { described_class.create(params) }
   let(:submission) { create(:submission) }
   let(:name)              { "EMAIL" }
