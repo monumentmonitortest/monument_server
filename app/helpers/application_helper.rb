@@ -1,6 +1,6 @@
 module ApplicationHelper
 
-  def smart_listing_render_foo name = controller_name, *args
+  def smart_listing_render_controller name = controller_name, *args
     options = args.dup.extract_options!
     
     smart_listing_for(name, *args) do |smart_listing|
