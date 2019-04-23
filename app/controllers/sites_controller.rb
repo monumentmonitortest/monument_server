@@ -32,8 +32,6 @@ class SitesController < ApplicationController
 
   def show
     @submissions = smart_listing_create :submissions, @site.submissions, partial: "sites/submission_list"
-    # binding.pry
-    # @sites_submissions
   end
 
   private
@@ -43,15 +41,5 @@ class SitesController < ApplicationController
 
   def site_params
     params.require(:site).permit(:id, :name, :latitude, :longitude, :visits, :visitors, :pic_id, :notes)
-  end
-
-
-  def smart_listing_render_foo name = controller_name, *args
-    options = args.dup.extract_options!
-    
-    smart_listing_for(name, *args) do |smart_listing|
-      binding.pry
-      concat(smart_listing.render_list(options[:locals]))
-    end
   end
 end
