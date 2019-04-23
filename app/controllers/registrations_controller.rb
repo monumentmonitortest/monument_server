@@ -1,19 +1,21 @@
 class RegistrationsController < ApplicationController
-  
+  include SmartListing::Helper::ControllerExtensions
+  helper  SmartListing::Helper
+
   def new
     @registration = Registration.new(site_id: params[:site_id])
     @site = Site.find(params[:site_id])
     @presenter = ::Registrations::BasePresenter.new(@registration, view_context)
   end
 
-  
   def create
     @registration = Registration.new(permitted_params)
 
     if @registration.save
-      redirect_to root_url, notice: 'Registration successful!'
+      redirect_to site_url(permitted_params[:site_id]), notice: 'Registration successful!'
     else
-      render :new
+      # TODO - get some form of feedback for when uploading doesn't work...
+      render :new, notice: "Whoops! Looks like you've missed something out"
     end
   end
 

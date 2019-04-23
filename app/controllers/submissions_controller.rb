@@ -21,7 +21,7 @@ class SubmissionsController < ApplicationController
   def new
     @submission = Submission.new(site_id: params[:site_id])
     @submission.build_type
-    @presenter = ::Submissions::BasePresenter.new(@submission, view_context)
+    @presenter = ::Registrations::BasePresenter.new(@submission, view_context)
   end
 
   def create
