@@ -5,7 +5,12 @@ class Submission < ApplicationRecord
 
   # validates site_id is an actual site
 
-  
+  validate :validate_site_id
   # when they are scraped, it will be 'unclassified' (no site)
-  # TODO: should maybe have validation on type
+
+  private
+
+  def validate_site_id
+    errors.add(:site_id, "site id is invalid") unless Site.exists?(self.site_id)
+  end
 end
