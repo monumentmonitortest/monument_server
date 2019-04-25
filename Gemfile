@@ -59,6 +59,7 @@ end
 group :test do
   gem 'shoulda', '~> 3.5'
   gem 'shoulda-matchers', '~> 2.0'
+  gem 'rspec_junit_formatter', '~> 0.2.3'
 end
 
 group :development do
