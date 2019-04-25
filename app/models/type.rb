@@ -1,7 +1,7 @@
 class Type < ApplicationRecord
   belongs_to :submission
   store_accessor :data, :email_address, :number, :insta_username, :twitter_username 
-  validate :validate_params, on: :create
+  validate :validate_name, :validate_params, on: :create
 
   before_create :annonymize_present_data
 
@@ -20,6 +20,10 @@ class Type < ApplicationRecord
   def encrypt(data)
     Digest::SHA1.hexdigest data
   end  
+
+  def validate_name
+    errors.add(:name, "Invalid type name") unless NAMES.include?(name)
+  end
 
   def validate_params
     validate_email if name == "EMAIL" 
