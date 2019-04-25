@@ -22,6 +22,14 @@ RSpec.describe Type, type: :model do
 
 
   context "validations" do
+    context "when invalid name" do
+      let(:name) { "NOTANAME" }
+
+      it "returns false" do
+        expect(subject.valid?).to be false
+        expect(subject.errors.messages[:name].to_sentence).to eq "Invalid type name"
+      end
+    end
     context "when email type" do
       let(:name) { "EMAIL" }
       
