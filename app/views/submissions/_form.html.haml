@@ -1,0 +1,28 @@
+%td{colspan: 8}
+  = form_for object, url: site_submission_path(object.site_id, object.id),  remote: true, html: {class: "form-horizontal"} do |f|
+    %div.submission-form
+      %span.submission
+        %img{:src => "#{}"}/
+
+      %span
+        =# f.label :url, "URL #{object.errors['url'][0]}"
+        =# f.text_field :url
+  
+      %span
+        = f.label :image 
+        = f.file_field :image
+  
+      %span
+        = f.label :site_id, "Site #{object.site.name}"
+        = f.select :site_id,   options_for_select(Site.all.map {|s| [s.name, s.id]}, [object.site.name, object.site.id] || "")
+  
+      %span
+        = f.label :reliable?, "Reliable / useful? #{object.errors['reliable'][0]}"
+        = f.check_box :reliable
+  
+      %span
+        = f.label :record_taken, "date taken #{object.errors['record_taken'][0]}"
+        = f.date_field :record_taken
+  
+      = f.submit "Save"
+      %button.cancel Cancel

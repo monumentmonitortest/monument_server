@@ -85,6 +85,7 @@ ActiveRecord::Schema.define(version: 20181211110819) do
   create_table "types", force: :cascade do |t|
     t.string "name"
     t.jsonb "data"
+    t.integer "submission_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

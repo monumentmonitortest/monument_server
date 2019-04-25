@@ -1,0 +1,29 @@
+<div class="row show-view">
+  <div class="eight columns">
+    <img src="<%#= @submission.image.url %>">
+  </div>
+
+  <div class="four columns">
+    <ul>
+      <li>
+        <strong>Site</strong>
+        <%= @submission.site.name %>
+      </li>
+      <li>
+        <strong>Date taken</strong>
+        <%= @submission.record_taken.to_date.strftime "%d/%m/%y" %>
+      </li>
+      <li>
+        <strong>Reliable?</strong>
+        <%= @submission.reliable %>
+      </li>
+      <li>
+        <strong>Source</strong>
+        <%= @submission.type.name %>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<%= link_to 'Edit', edit_submission_path(@submission) %>
+<%= link_to 'Back', submissions_path %>

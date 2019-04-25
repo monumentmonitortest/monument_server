@@ -1,4 +1,7 @@
 class SitesController < ApplicationController
+  include SmartListing::Helper::ControllerExtensions
+  helper  SmartListing::Helper
+
   before_action :set_site, only: [:show, :edit, :update, :destroy]
   
   def index
@@ -25,6 +28,10 @@ class SitesController < ApplicationController
     else
       render 'edit'
     end
+  end
+
+  def show
+    @submissions = smart_listing_create :submissions, @site.submissions, partial: "sites/submission_list"
   end
 
   private
