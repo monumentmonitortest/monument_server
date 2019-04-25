@@ -1,5 +1,5 @@
 %td{colspan: 8}
-  = form_for object, url: site_submission_path(object.site_id, object.id),  remote: true, html: {class: "form-horizontal"} do |f|
+  = form_for object, url: site_submission_path(object.site_id, object.id),  multipart: true, remote: true, html: {class: "form-horizontal"} do |f|
     %div.submission-form
       %span.submission
         %img{:src => "#{}"}/
