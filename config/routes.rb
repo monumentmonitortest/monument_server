@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   get 'welcome/index'
 
-  resources :images
   resources :types
   resources :submissions
   
@@ -15,8 +14,6 @@ Rails.application.routes.draw do
   get '/images/search', to: 'images#search'
 
   post '/sites/csv/results', to: 'csv#results', as: :results
-
-  get '/machrie', to: 'images#machrie'
 
   get '/d3/machrie', to: 'd3#machrie'
   
