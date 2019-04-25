@@ -7,7 +7,7 @@ class Registration
     return false if invalid?
 
     ActiveRecord::Base.transaction do
-      submission = Submission.create!(site_id: site_id, reliable: reliable, record_taken: record_taken)
+      submission = Submission.create!(site_id: site_id, reliable: reliable, record_taken: record_taken, image: image)
       submission.create_type!(name: type_name, 
                         email_address: email_address, 
                         number: number, 
