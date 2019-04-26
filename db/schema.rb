@@ -10,31 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181211110819) do
+ActiveRecord::Schema.define(version: 20190425161509) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "images", force: :cascade do |t|
-    t.string "url"
-    t.string "site", default: "UNDEFINED"
-    t.jsonb "watson_info"
-    t.jsonb "weather_info"
-    t.boolean "reliable", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "twitter_id"
-    t.bigint "twitter_user_id"
-    t.integer "insta_user_id"
-    t.string "source"
-    t.datetime "record_taken"
-    t.bigint "media_id"
-    t.string "category"
-    t.string "submission_file_name"
-    t.string "submission_content_type"
-    t.bigint "submission_file_size"
-    t.datetime "submission_updated_at"
-  end
 
   create_table "insta_users", force: :cascade do |t|
     t.string "user_name"

@@ -1,5 +1,4 @@
 class CsvController < ApplicationController
-
   def results
     respond_to do |format|
       format.csv { send_data create_csv, filename: "collection-#{Date.today}.csv" }
