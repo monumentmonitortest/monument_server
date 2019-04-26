@@ -13,15 +13,15 @@ class Submission < ApplicationRecord
   # when they are scraped, it will be 'unclassified' (no site)
 
   def type_name
-    type.name
+    @type_name ||= type.name
   end
 
   def site_name
-    site.name
+    @site_name ||= site.name
   end
   
   def image_url
-    image.url
+    @image_url ||= image.url
   end
   private
 
