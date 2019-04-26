@@ -22,7 +22,7 @@ RSpec.describe CSVCreateService do
     end
 
     it "only includes headers and submission details" do
-      expect(subject.result.split("\n").size).to eq(10)
+      expect(subject.split("\n").size).to eq(2)
     end
   end
 
