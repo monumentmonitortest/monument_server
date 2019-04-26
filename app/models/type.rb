@@ -8,6 +8,10 @@ class Type < ApplicationRecord
   NAMES = %w(INSTAGRAM EMAIL TWITTER WHATSAPP OTHER )
   DATA_TYPES = %W(email_address number insta_username twitter_username)
 
+  def legible_type_data
+    data.map {|a, b| b unless b.empty?}.compact.first
+  end
+
   private
 
   def annonymize_present_data
