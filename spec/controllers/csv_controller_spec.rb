@@ -3,46 +3,35 @@ RSpec.describe CsvController do
   
   context "#results" do
     render_views
-    let!(:machrie) { create(:image, site: "MACHRIE", reliable: true) }
-    let!(:holyrood) { create(:image, site: "HOLYROOD") }
     
-    let(:params) { {} }
+    let(:site)            { create(:site) }
+    let(:params)          { {site_id: site.id} }
+    let(:service_double)  { double(:create_csv_service) }
+    let(:result)          { "csv,file" }
+
     before do
-      post :results,  { params: params, format: :csv }
-    end
+      allow(CSVCreateService).to receive(:new).and_return(service_double)
+      allow(service_double).to receive(:create).and_return(result)
 
-    it "returns a 200" do
-      expect(response.status).to eq(200)
     end
     
-    it "returns a CSV file" do
-      expect(response.content_type).to eq "text/csv"
+    it "calls the CSV create service" do
+      expect(service_double).to receive(:create)
+      post :results,  { params: params, format: :csv }
+      expect(response.body).to eq result
     end
 
-    it "contains all image information in csv file" do
-      csv = response.body
-      expect(csv). to include(machrie.site)
-      expect(csv). to include(holyrood.site)
-      expect(csv.split("\n").size).to eq(3)
-    end
-
-    context "when filters are used" do
-      let(:params) { { filter: "MACHRIE" } }
-
-      it "CSV file only contains filtered images" do
-        csv = response.body
-        expect(csv). to_not include(holyrood.site)
-        expect(csv.split("\n").size).to eq(2)
+    context "response" do
+      before do
+        post :results,  { params: params, format: :csv }
       end
-    end
 
-    context "when reliable is selected" do
-      let(:params) { { reliable_filter: "1" } }
-
-      it "CSV returns only reliable images" do
-        csv = response.body
-        expect(csv). to_not include(holyrood.site)
-        expect(csv.split("\n").size).to eq(2)
+      it "returns a 200" do
+        expect(response.status).to eq(200)
+      end
+      
+      it "returns a CSV file" do
+        expect(response.content_type).to eq "text/csv"
       end
     end
   end
