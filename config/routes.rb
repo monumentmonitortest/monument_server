@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   get '/images/search', to: 'images#search'
 
-  post '/results', to: 'csv#results', as: :results
+  post '/sites/csv/results', to: 'csv#results', as: :results
 
   get '/machrie', to: 'images#machrie'
 

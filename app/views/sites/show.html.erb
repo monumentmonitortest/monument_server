@@ -28,7 +28,8 @@
   <%= smart_listing_render_controller :submissions %>
 
   <%= link_to "New Submission", new_site_registration_url(@site, @submission) %>
-
+  <br/><br/>
+  <%= link_to "View JS CSV", {}, :class => "js-csv" %>
 <br/>
 <br/><br/>
 <%= link_to 'Edit', edit_site_path(@site.id) %> |
