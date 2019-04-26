@@ -11,6 +11,18 @@ class Submission < ApplicationRecord
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
   validate :validate_site_id
   # when they are scraped, it will be 'unclassified' (no site)
+
+  def type_name
+    type.name
+  end
+
+  def site_name
+    site.name
+  end
+  
+  def image_url
+    image.url
+  end
   private
 
   def validate_site_id
