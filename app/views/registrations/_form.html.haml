@@ -13,9 +13,8 @@
         = f.file_field :image
   
       %span
-        = f.label :site_id, "Site #{object.errors['site'][0]}"
-        = f.select :site_id,   options_for_select(Site.all.map {|s| [s.name, s.id]}, @site.name || "")
-  
+        = f.label :site_id, "Site #{@site.name}"
+        = f.select :site_id, options_for_select(Site.all.collect { | site | [site.name, site.id] }, @site.id), {}, {}
       %span
         = f.label :reliable?, "Reliable / useful? #{object.errors['reliable'][0]}"
         = f.check_box :reliable
