@@ -1,23 +1,33 @@
 <p id="notice"><%= notice %></p>
 <h3>Site general info</h3>
-<div class="row">
-  <div class="info col">
-    <span>Name</span>
-    <%= @site.name %>
+<div class="row flex flex-wrap">
+  <div class="w-50 flex flex-column">
 
-    <span>PIC ID</span>
-    <%= @site.pic_id %>
+    <div class="fw9 mb2">
+      <%= @site.name %>
+    </div>
 
-    <span>Visits per annum</span>
-    <%= @site.visits %>
+    <div class="fw9 mv2">
+      <%= @site.pic_id %>
+    </div>
 
-    <span>Visitors per annum</span>
-    <%= @site.visitors %>
+    <div class="mv2">
+      <span class="fw9 db">Visits per annum:</span>
+      <%= @site.visits %>
+    </div>
 
-    <span>Notes</span>
-    <span></span>
+    <div class="mv2">
+      <span class="fw9 db">Visitors per annum:</span>
+      <%= @site.visitors %>
+    </div>
+
+    <div class="mv2">
+      <span class="fw9 db">Notes:</span>
+      <span></span>
+    </div>
+
   </div>
-  <div class="col">
+  <div class="w-50">
     <div id="map"></div>
   </div>
   
