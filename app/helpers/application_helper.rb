@@ -13,5 +13,9 @@ module ApplicationHelper
       @template.render :partial => @smart_listing.partial, :locals => {:smart_listing => self}.merge(locals || {})
     end
   end
+
+  def admin?
+    current_user.try(:admin?)
+  end
 end
 
