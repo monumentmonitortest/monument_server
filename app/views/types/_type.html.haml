@@ -1,4 +1,7 @@
 %td= object.name
 %td= object.data
-%td.actions= smart_listing_item_actions [{name: :edit,    url: edit_type_path(object)},
- {name: :destroy, url: type_path(object), confirmation: "Are you sure you want to delete this?"}]
+- if admin?
+  %td.actions= smart_listing_item_actions [{name: :edit,    url: edit_type_path(object)},
+    {name: :destroy, url: type_path(object), confirmation: "Are you sure you want to delete this?"}]
+- else
+  %td.actions Admins only
