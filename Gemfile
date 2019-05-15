@@ -40,6 +40,7 @@ gem 'haml', '~> 5.0', '>= 5.0.1'
 gem 'font-awesome-rails', '~> 4.5'
 gem 'paperclip'
 gem 'aws-sdk-s3'
+gem 'devise'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
