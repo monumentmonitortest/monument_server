@@ -12,7 +12,6 @@
           = smart_listing.render object: o, partial: "types/type", locals: {object: o}
 
       -# Render nice "new item" button fitted for Bootstrap 3 by default
-      = smart_listing.item_new colspan: 3, link: new_type_path
       
   = smart_listing.paginate
   = smart_listing.pagination_per_page_links

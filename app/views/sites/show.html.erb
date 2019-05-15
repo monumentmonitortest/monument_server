@@ -37,13 +37,23 @@
   <h3>Submissions</h3>
   <%= smart_listing_render_controller :submissions %>
 
-  <%= link_to "New Submission", new_site_registration_url(@site, @submission) %>
+  <% if admin? %>
+    <%= link_to "New Submission", new_site_registration_url(@site, @submission) %>
+  <% end %>
+  
   <br/><br/>
   <%= link_to "View JS CSV", {}, :class => "js-csv" %>
 <br/>
 <br/><br/>
-<%= link_to 'Edit', edit_site_path(@site.id) %> |
+
+<% if admin? %>
+  <%= link_to 'Edit', edit_site_path(@site.id) %> |
+<% end %>
+
 <%= link_to 'Back', sites_path %>
+
+
+
 <script>
   function initMap() {
     var site_location = {lat: <%=@site.latitude%>, lng: <%=@site.longitude%>};

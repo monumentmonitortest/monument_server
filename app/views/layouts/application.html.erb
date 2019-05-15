@@ -15,11 +15,22 @@
       <div class="container">
         <%= image_tag("logo-2019-inverted.png", :alt => "logos", class: "logo") %>
       </div>
+      <div class="fr pr5 pt3">
+        <% if user_signed_in? %>
+          <%= link_to('Logout', destroy_user_session_path, method: :delete) %>        
+        <% else %>
+          <%= link_to('Login', new_user_session_path)  %>  
+        <% end %>
+      <div>
     </nav>
-    <div class="container">
-      <% flash.each do |key, value| %>
-        <div class="alert alert-<%= key %>"><%= value %></div>
+    <div class="container">      
+      <% if notice %>
+        <p class="alert alert-success"><%= notice %></p>
       <% end %>
+      <% if alert %>
+        <p class="alert alert-danger"><%= alert %></p>
+      <% end %>
+
       <%= yield %>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
