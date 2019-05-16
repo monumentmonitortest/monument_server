@@ -5,12 +5,14 @@ Rails.application.routes.draw do
   resources :types
   resources :submissions
   
+
   resources :sites do
     resources :submissions
     resources :registrations
   end
-
-  get '/submissions', to: 'submissions#plain_index'
+  
+  get '/bulk_upload', to: 'submissions#bulk_upload'
+  post '/js_bulk_upload', to: 'submissions#js_bulk_upload'
 
   post '/sites/csv/results', to: 'csv#results', as: :results
 
