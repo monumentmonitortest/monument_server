@@ -3,6 +3,7 @@ class SubmissionsController < ApplicationController
   helper  SmartListing::Helper
   before_action :set_submission, only: [:show, :edit, :update, :destroy]
 
+  skip_before_action :verify_authenticity_token, :only => [:js_bulk_upload]
   def index
     @submissions = smart_listing_create(:submissions, Submission.all, partial: "submissions/list")
   end
@@ -24,6 +25,17 @@ class SubmissionsController < ApplicationController
     @presenter = ::Registrations::BasePresenter.new(@submission, view_context)
   end
 
+
+  def js_bulk_upload
+    # TODO - individual params for each of these!
+    params[:file].each do |key, image|
+      Submission.create(site_id: params[:site_id], image: image)
+    end
+    respond_to do |format|
+      format.json{ render json: { ok: 'ok' } }
+    end
+  end
+  
   def create
   end
 
@@ -46,4 +58,10 @@ class SubmissionsController < ApplicationController
                                        :tags 
     )
   end
+
+  def bulk_upload_permitted_params
+    params.require(:submission).permit(:site_id, :image)
+
+  end
+
 end

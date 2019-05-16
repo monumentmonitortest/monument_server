@@ -1,0 +1,83 @@
+
+
+ <!--<form action="/js_bulk_upload" method="post" class="dropzone"></form> -->
+<%#= form_for :request, html: { multipart: true } do %>
+  <%#= select_tag :site_id, options_for_select(Site.all.collect { | site | [site.name, site.id] }) %>
+   <!--<div id="mydropzone" class="dropzone"></div> -->
+  <%#= submit_tag %>
+<%# end %>
+
+<%= form_for :myDropzoneForm, html: {id: "dropzone-form-id"} do |f| %>
+  <p>
+    <%= f.label :site_id %><br>
+    <%= f.select :site_id, options_for_select(Site.all.collect { | site | [site.name, site.id] }) %>
+  </p>
+
+  <div id="files-field"
+       class="dropzone"
+       style="border: 2px dashed rgba(0, 0, 0, 0.3);
+              min-height: 100px !important;">
+    <div class="dz-message"
+         style="margin: 20px">
+      Drag your cats' pics here!
+    </div>
+  </div>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+
+
+<span>this is just a template</span>
+<div id="tpl">
+  <%#= label_tag :reliable?, "Reliable / useful?" %>
+  <%#= check_box_tag :reliable %>
+  <%#= label_tag :record_taken, "date taken" %>
+  <%#= date_field_tag :record_taken %>
+  
+  <%#= label_tag :type_name, "Source/Type" %>
+  <%#= select_tag :type_name, Type::NAMES %>
+  <%# Type::DATA_TYPES.each do |type| %>
+    <%#= label_tag type.to_sym %>
+    <%#= text_field_tag type.to_sym %>
+  <%# end %><br/>
+  <%#= submit_tag %>
+<div>
+
+
+<script type="text/javascript">
+  // Dropzone.autoDiscover = false;
+
+  Dropzone.options.filesField = {
+  url: "/js_bulk_upload",
+  addRemoveLinks: true,
+  autoProcessQueue: false,
+  uploadMultiple: true,
+  accept: function(file, done) {
+    $("div#files-field").css({"height": "auto"});
+    done();
+  },
+  init: function() {
+    var myDropzone = this;
+
+    var form = document.getElementById('dropzone-form-id');
+    form.addEventListener('submit', function(event) {
+      // stop the form's submit event
+      if(myDropzone.getQueuedFiles().length > 0){
+        event.preventDefault();
+        event.stopPropagation();
+        myDropzone.processQueue();
+      }
+    });
+
+    myDropzone.on("sendingmultiple", function(file, xhr, formData) {
+      formData.append("site_id", $('#myDropzoneForm_site_id').val());
+      // formData.append("text", $('#myDropzoneForm_text').val());
+    });
+  },
+  successmultiple: function(data,response) {
+    alert(response);
+  }
+};
+</script>
