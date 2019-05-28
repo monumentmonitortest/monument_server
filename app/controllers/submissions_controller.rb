@@ -27,12 +27,18 @@ class SubmissionsController < ApplicationController
 
 
   def js_bulk_upload
-    # TODO - individual params for each of these!
+    submissions = []
     params[:file].each do |key, image|
-      Submission.create(site_id: params[:site_id], image: image)
+      registration_params = bulk_upload_permitted_params.merge(image: image)
+      @registration = Registration.new(registration_params)
+      if @registration.save
+        submissions << "Image number #{key.to_i + 1}, upload sucessful"
+      else
+        submissions << "Image number #{key.to_i + 1}, upload unsucessful: #{@registration.errors.messages}"
+      end
     end
     respond_to do |format|
-      format.json{ render json: { ok: 'ok' } }
+      format.json{ render json: submissions }
     end
   end
   
@@ -60,8 +66,14 @@ class SubmissionsController < ApplicationController
   end
 
   def bulk_upload_permitted_params
-    params.require(:submission).permit(:site_id, :image)
-
+    params.permit(:site_id,
+                  :reliable, 
+                  :record_taken, 
+                  :type_name, 
+                  :email_address, 
+                  :number, 
+                  :insta_username, 
+                  :twitter_username)
   end
 
 end

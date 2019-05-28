@@ -470,7 +470,7 @@ var Dropzone = function (_Emitter) {
         /**
          * If `addRemoveLinks` is true, the text to be used to remove a file.
          */
-        dictRemoveFile: "Remove file",
+        dictRemoveFile: "",
 
         /**
          * If this is not null, then the user will be prompted before removing a file.
@@ -749,7 +749,8 @@ var Dropzone = function (_Emitter) {
 
           if (this.previewsContainer) {
             var template = document.querySelector('#tpl')
-            var templateClone = template.cloneNode(true);
+            // var templateClone = template.cloneNode(true);
+            // templateClone.setAttribute('id', 'addedDetails')
 
             file.previewElement = Dropzone.createElement(this.options.previewTemplate.trim());
 
