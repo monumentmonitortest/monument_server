@@ -20,7 +20,6 @@ class Registration
     # Handle exception that caused the transaction to fail
     # e.message and e.cause.message can be helpful
     errors.add(:base, e.message)
-
     false
   end
 

@@ -5,7 +5,7 @@ $(document).ready(function(){
 
 function readyBulkUpload() {
   Dropzone.options.filesField = {
-    url: "/js_bulk_upload",
+    url: "/bulk_upload",
     addRemoveLinks: true,
     autoProcessQueue: false,
     uploadMultiple: true,

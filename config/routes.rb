@@ -11,8 +11,10 @@ Rails.application.routes.draw do
     resources :registrations
   end
   
-  get '/bulk_upload', to: 'submissions#bulk_upload'
-  post '/js_bulk_upload', to: 'submissions#js_bulk_upload'
+  resources :bulk_upload, only: [:index, :create]
+
+  # get '/bulk_upload', to: 'bulk_upload#bulk_upload'
+  # post '/bulk_upload', to: 'bulk_upload#js_bulk_upload'
 
   post '/sites/csv/results', to: 'csv#results', as: :results
 
