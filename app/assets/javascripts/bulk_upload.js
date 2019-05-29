@@ -1,9 +1,13 @@
-// TODO - if page has class do this...
-$(document).ready(function(){ 
-  readyBulkUpload();
-}) 
+core.BulkUpload = {};
 
-function readyBulkUpload() {
+$(document).on("ready page:load", function() {
+  if ($('h3#bulk-upload').size() > 0) {
+    core.BulkUpload.readyBulkUpload();
+  } 
+});
+
+core.BulkUpload.readyBulkUpload = function() {
+  console.log('fired!')
   Dropzone.options.filesField = {
     url: "/bulk_upload",
     addRemoveLinks: true,
