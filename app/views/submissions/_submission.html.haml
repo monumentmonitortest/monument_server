@@ -3,7 +3,7 @@
   %td.table-text= object.site_name
   %td.table-text
     -# TODO: refactor this with presenter
-    %img.index-main{:src => "#{object.image.url }"}/
+    = image_tag(url_for(object.image))
   
   %td.table-text= object.reliable
   %td.table-text= object.type_name

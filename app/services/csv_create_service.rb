@@ -18,6 +18,6 @@ class CSVCreateService
   private
   
   def attributes
-    %w{site_name image_url type_name reliable record_taken}
+    %w{site_name type_name reliable record_taken}
   end
 end

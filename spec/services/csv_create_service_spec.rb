@@ -2,7 +2,7 @@ require "rails_helper"
 RSpec.describe CSVCreateService do
   let(:submission) { create(:submission_with_type) }
   let(:params) {{ site_id: submission.site_id }}
-  let(:expected_csv) { "site_name,image_url,type_name,reliable,record_taken\nSome Stones,/images/original/missing.png,EMAIL,false,2019-04-26 00:00:00 UTC\n" }
+  let(:expected_csv) { "site_name,type_name,reliable,record_taken\nSome Stones,EMAIL,false,2019-04-26 00:00:00 UTC\n" }
   
   subject { described_class.new(params) }
 
@@ -15,9 +15,8 @@ RSpec.describe CSVCreateService do
 
     it "includes submission details" do
       expect(subject).to include(submission.site.name)
-      expect(subject).to include(submission.image.url)
       expect(subject).to include(submission.type.name)
-      expect(subject).to include(submission.image.url)
+      expect(subject).to include(submission.reliable.to_s)
       expect(subject).to include(submission.record_taken.to_s)
     end
 
