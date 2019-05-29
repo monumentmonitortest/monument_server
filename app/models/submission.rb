@@ -15,9 +15,6 @@ class Submission < ApplicationRecord
     @site_name ||= site.name
   end
   
-  def image_url
-    @image_url ||= image.url
-  end
   private
 
   def validate_site_id

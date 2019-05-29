@@ -29,7 +29,6 @@ RSpec.describe Submission, type: :model do
 
   context "instance methods" do
     subject { create(:submission_with_type) }
-
     describe "#site_name" do
     it "returns site name" do
       expect(subject.site_name).to eq subject.site.name
@@ -40,12 +39,6 @@ RSpec.describe Submission, type: :model do
       it "returns type name" do
         expect(subject.type_name).to eq subject.type.name
       end   
-    end
-  
-    describe "#image_url" do
-      it "returns site name" do
-        expect(subject.image_url).to eq subject.image.url
-      end 
     end
   end
 
