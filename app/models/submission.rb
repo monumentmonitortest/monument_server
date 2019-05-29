@@ -8,7 +8,7 @@ class Submission < ApplicationRecord
   # to get url for image when developing API - use s.image.service_url
 
   def type_name
-    @type_name ||= type.name
+    @type_name ||= type.present? ? type.name : ""
   end
 
   def site_name
