@@ -8,7 +8,7 @@
       %th{scope: "col"}= "Type Data"
       %th{scope: "col"}= "Tags"
       %th{scope: "col"}= smart_listing.sortable "Record taken", "record_taken"
-      %th{scope: "col"}= smart_listing.sortable "created at", "created_at"
+      %th{scope: "col"}= "Actions"
       
     %tbody
       - smart_listing.collection.each do |o|

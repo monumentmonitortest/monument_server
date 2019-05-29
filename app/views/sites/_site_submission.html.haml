@@ -8,7 +8,6 @@
   %td.table-text= object.reliable
   %td.table-text= object.tags
   %td.table-text= object.record_taken.to_date.strftime "%d/%m/%y" if object.record_taken
-  %td.table-text= object.created_at.strftime "%d/%m/%y"
 
   -# if object.weather_info
     %td.table-text= object.weather_info["data"][0]["summary"]
