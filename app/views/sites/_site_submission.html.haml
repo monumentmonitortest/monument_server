@@ -2,8 +2,8 @@
   %td.table-text= object.site.name
   %td.table-text
     -# TODO: refactor this with presenter when add images in...
-    %img.index-main{:src => "#{object.image.url }"}/
-  
+    = image_tag(url_for(object.image))
+
   %td.table-text= object.type.name if object.type
   %td.table-text= object.reliable
   %td.table-text= object.tags
