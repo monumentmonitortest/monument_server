@@ -13,7 +13,7 @@ RSpec.describe "BulkUpload", type: :request do
         params = {  
                     "site_id": site.id,
                     "reliable": "false", 
-                    "date_taken": "", 
+                    "record_taken": "1111-11-11",
                     "type_name": "INSTAGRAM", 
                     "email_address": "", 
                     "number": "", 
