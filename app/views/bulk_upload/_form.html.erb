@@ -1,0 +1,33 @@
+
+<%= form_for :myDropzoneForm, html: {id: "dropzone-form-id"} do |f| %>
+  <div id="tpl">
+    <p>
+      <%= f.label :site_id %><br>
+      <%= f.select :site_id, options_for_select(Site.all.collect { | site | [site.name, site.id] }) %>
+      <%= label_tag :reliable?, "Reliable / useful?" %>
+      <%= check_box_tag :reliable %>
+      <%= label_tag :record_taken, "date taken" %>
+      <%= date_field_tag :record_taken %>
+  
+      <%= label_tag :type_name, "Source/Type" %>
+      <%= select_tag :type_name, options_for_select(Type::NAMES), class: "type_name_select" %>
+      <div id="data-types">
+        <% Type::DATA_TYPES.each do |type| %>
+          <%= text_field_tag type.to_sym, "", placeholder: type, class: "#{type}" %>
+        <% end %>
+      </div>
+    </p>
+  </div>
+
+  <div id="files-field" class="dropzone" style="border: 2px dashed rgba(0, 0, 0, 0.3); min-height: 100px !important;">
+    <div class="dz-message" style="margin: 20px">
+      Drag your pics here!
+    </div>
+  </div>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+
+<div id="response" class="hidden"></div>

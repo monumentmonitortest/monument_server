@@ -4,11 +4,13 @@ class Submission < ApplicationRecord
   accepts_nested_attributes_for :type
   
   validate :validate_site_id
+  validates_presence_of :record_taken
+
   has_one_attached :image
   # to get url for image when developing API - use s.image.service_url
 
   def type_name
-    @type_name ||= type.name
+    @type_name ||= type.present? ? type.name : ""
   end
 
   def site_name

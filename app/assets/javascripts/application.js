@@ -15,4 +15,6 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require smart_listing
+//= require core
+//= require bulk_upload
 //= require_tree .

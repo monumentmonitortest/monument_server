@@ -8,7 +8,7 @@ RSpec.describe Submission, type: :model do
   
   context 'validations' do
     subject { described_class.new(params) }
-    let(:params) { { site_id: 123 }}
+    let(:params) { { site_id: 123, record_taken: Date.today }}
     
     context 'when site id invalid' do
       it 'throws error' do
@@ -19,7 +19,7 @@ RSpec.describe Submission, type: :model do
     
     context 'when site id valid' do
       let(:site)   { create(:site) }
-      let(:params) { { site_id: site.id }}
+      let(:params) { { site_id: site.id, record_taken: Date.today }}
 
       it 'creates submission' do
         expect(subject.valid?).to be true

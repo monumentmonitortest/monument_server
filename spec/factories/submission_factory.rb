@@ -8,5 +8,9 @@ FactoryBot.define do
     factory :submission_with_type do
       type { Type.new(name: "EMAIL", data: { email_address: "thing@thing.com" }) }
     end
+
+    factory :submission_with_insta_type do
+      type { Type.new(name: "INSTAGRAM", data: { insta_username: "blob" }) }
+    end
   end
 end

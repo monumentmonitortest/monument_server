@@ -2,7 +2,7 @@ require 'rails_helper'
 RSpec.describe Registration, type: :model do
   let(:klass) { described_class.new(params) }
 
-  let(:site) {create(:site) }
+  let(:site) { create(:site) }
   let(:email) { "email@thing.com" }
 
   let(:params) { {
@@ -14,7 +14,6 @@ RSpec.describe Registration, type: :model do
     number: "",
     insta_username: "",
     twitter_username: "",
-
   }}
 
   describe "#save" do
@@ -28,7 +27,7 @@ RSpec.describe Registration, type: :model do
     context "with incorrect params" do
       let(:email) { "" }
       it "does not create submission or type" do
-        expect{subject}.to  raise_error(ActiveRecord::RecordInvalid)
+        expect(subject).to be false
       end
     end
   end

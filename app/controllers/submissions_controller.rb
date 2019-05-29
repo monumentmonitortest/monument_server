@@ -23,7 +23,7 @@ class SubmissionsController < ApplicationController
     @submission.build_type
     @presenter = ::Registrations::BasePresenter.new(@submission, view_context)
   end
-
+  
   def create
   end
 
@@ -46,4 +46,5 @@ class SubmissionsController < ApplicationController
                                        :tags 
     )
   end
+
 end
