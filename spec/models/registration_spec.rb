@@ -2,7 +2,7 @@ require 'rails_helper'
 RSpec.describe Registration, type: :model do
   let(:klass) { described_class.new(params) }
 
-  let(:site) {create(:site) }
+  let(:site) { create(:site) }
   let(:email) { "email@thing.com" }
 
   let(:params) { {
@@ -14,7 +14,6 @@ RSpec.describe Registration, type: :model do
     number: "",
     insta_username: "",
     twitter_username: "",
-
   }}
 
   describe "#save" do
