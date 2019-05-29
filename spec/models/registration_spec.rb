@@ -27,7 +27,7 @@ RSpec.describe Registration, type: :model do
     context "with incorrect params" do
       let(:email) { "" }
       it "does not create submission or type" do
-        expect{subject}.to  raise_error(ActiveRecord::RecordInvalid)
+        expect(subject).to be false
       end
     end
   end
