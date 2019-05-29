@@ -8,8 +8,8 @@ class BulkUploadController < ApplicationController
     if params[:file].present?
       results = bulk_upload_images
       respond_to do |format|
-        format.html
-        format.json{ render json: results }
+        format.html { redirect_to submissions_url }
+        format.json { render json: results }
       end
     else
       flash[:notice] = 'Make sure you include some pictures!'
