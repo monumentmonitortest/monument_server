@@ -43,7 +43,7 @@ core.BulkUpload.readyBulkUpload = function() {
           var twitterUsername = $('#tpl').find('#twitter_username').val()
           
           formData.append('reliable', reliable);
-          formData.append('date_taken', date);
+          formData.append('record_taken', date);
           formData.append('type_name', typeName);
   
           formData.append('email_address', emailAddress);
