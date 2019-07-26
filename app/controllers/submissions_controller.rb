@@ -4,7 +4,13 @@ class SubmissionsController < ApplicationController
   before_action :set_submission, only: [:show, :edit, :update, :destroy]
 
   def index
-    @submissions = smart_listing_create(:submissions, Submission.all, partial: "submissions/list")
+    submissions_scope = Submission.all
+        
+    submissions_scope = submissions_scope.reliable if params[:reliable] == "1"
+    submissions_scope = search_site(submissions_scope, params[:site_filter]) if params[:site_filter].present?
+    submissions_scope = type_search(submissions_scope, params[:type_filter]) if params[:type_filter].present?
+   
+    @submissions = smart_listing_create(:submissions, submissions_scope, partial: "submissions/list")
   end
 
   def show
@@ -45,6 +51,16 @@ class SubmissionsController < ApplicationController
                                        :record_taken, 
                                        :tags 
     )
+  end
+
+  def search_site(collection, name)
+    collection.where(site_id: Site.find_by(name: name))
+  end
+  
+  def type_search(collection, type_name)
+    type_name.upcase!
+    collection = collection.joins(:type).where(types: { name: type_name})
+    collection
   end
 
 end

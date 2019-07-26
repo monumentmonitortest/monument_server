@@ -27,6 +27,16 @@ RSpec.describe Submission, type: :model do
     end
   end
 
+  context "scope" do
+    let!(:submission_one) { create(:submission, reliable: true) }
+    let!(:submission_two) { create(:submission) }
+   
+    it "should scope on reliable" do
+      expect(Submission.all.reliable.count).to eq 1
+      expect(Submission.all.reliable).to include submission_one
+    end
+  end
+
   context "instance methods" do
     subject { create(:submission_with_type) }
     describe "#site_name" do
