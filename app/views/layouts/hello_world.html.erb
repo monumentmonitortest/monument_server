@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ReactOnRailsWithWebpacker</title>
+    <title>Monument Monitor</title>
     <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'hello-world-bundle' %>
   </head>
 
   <body>
-    <%= yield %>
+    <nav>
+      <%= image_tag("logo-2019-inverted.png", :alt => "logos", class: "logo") %>
+    </nav>
+    
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>
