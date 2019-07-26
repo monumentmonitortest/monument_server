@@ -9,11 +9,15 @@ class Submission < ApplicationRecord
   has_one_attached :image
   # to get url for image when developing API - use s.image.service_url
 
+  scope :reliable, -> { where(reliable: true) }
+
+
+  
   def type_name
     @type_name ||= type.present? ? type.name : ""
   end
 
-  def site_name
+    def site_name
     @site_name ||= site.name
   end
   
