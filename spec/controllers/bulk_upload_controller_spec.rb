@@ -2,9 +2,14 @@ require 'rails_helper'
 RSpec.describe "BulkUpload", type: :request do
   include Rack::Test::Methods
   include ActionDispatch::TestProcess
-  
+  include Devise::Test::IntegrationHelpers
+
   describe "bulk uploading submissions" do
-    
+    before do
+      user = User.create!(email: "thing@thing.com", password: "supersecure", admin: true)
+      sign_in user
+    end
+
     context "with correct params" do
       let(:site) { create(:site) }
       it "create new submissions" do
@@ -21,14 +26,13 @@ RSpec.describe "BulkUpload", type: :request do
                     "twitter_username": "",
                     "file": { "0": Rack::Test::UploadedFile.new(test_image_path, 'image/jpg', true) } 
                   }
-        
+                  
         expect {
           post "/bulk_upload", params, headers: headers
         }.to change(Submission, :count)
+
       end
     end
-      
-      
       
     context "with image but incorrect params" do
       it "does not create submissions" do
