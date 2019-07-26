@@ -1,28 +1,22 @@
 %div
-  %h1= "Listing submissions"
+  %h1= "Submissions"
+  %p= "Browse through and filter all the submissions to date"
   = smart_listing_controls_for(:submissions, {class: ""}) do
     .checkbox
       %label.checkbox.inline
-        =# TODO - get reliable? working
         = hidden_field_tag :reliable, "0"
         = check_box_tag :reliable
         = "Reliable?"
 
     %div.filter.form-search
       .input-group
-        =# TODO - get seach working
         = text_field_tag :site_filter, '', class: "submission-options", placeholder: "Search Site", autocomplete: :off, value: "#{params[:site_filter]}"
         %span.input-group-btn
-          =# submit_tag 'Refresh', :class => "btn btn-default", :name => "do_query"
-          =# link_to  "Clear search", '/submissions', class: "btn btn-default"
 
     %div.filter.form-search
       .input-group
-        =# TODO - get seach working
         = text_field_tag :type_filter, '', class: "submission-options", placeholder: "Search Type", autocomplete: :off, value: "#{params[:type_filter]}"
         %span.input-group-btn
-          =# submit_tag 'Refresh', :class => "btn btn-default", :name => "do_query"
-          =# link_to  "Clear search", '/submissions', class: "btn btn-default"
 
   %script(type="text/javascript")
     - if params[:f]
