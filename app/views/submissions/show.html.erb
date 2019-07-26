@@ -1,6 +1,6 @@
 <div class="row show-view">
   <div class="eight columns">
-    <img src="<%#= @submission.image.url %>">
+    <%= image_tag(url_for(@submission.image)) %>
   </div>
 
   <div class="four columns">
@@ -25,5 +25,5 @@
   </div>
 </div>
 
-<%= link_to 'Edit', edit_submission_path(@submission) %>
+<%#= link_to 'Edit', edit_submission_path(@submission) %>
 <%= link_to 'Back', submissions_path %>

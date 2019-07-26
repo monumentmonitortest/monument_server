@@ -1,7 +1,9 @@
 class BulkUploadController < ApplicationController
   skip_before_action :verify_authenticity_token, :only => [:create]
+  before_action :redirect_unless_admin
 
   def index
+
   end
   
   def create
