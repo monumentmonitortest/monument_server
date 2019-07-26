@@ -10,9 +10,6 @@ class SubmissionsController < ApplicationController
     submissions_scope = search_site(submissions_scope, params[:site_filter]) if params[:site_filter].present?
     submissions_scope = type_search(submissions_scope, params[:type_filter]) if params[:type_filter].present?
    
-    # @submissions = smart_listing_create :submissions, submissions_scope, partial: "submissions/list",
-                                          # default_sort: {name: "asc"}
-
     @submissions = smart_listing_create(:submissions, submissions_scope, partial: "submissions/list")
   end
 

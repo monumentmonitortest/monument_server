@@ -17,7 +17,7 @@ class Submission < ApplicationRecord
     @type_name ||= type.present? ? type.name : ""
   end
 
-    def site_name
+  def site_name
     @site_name ||= site.name
   end
   
