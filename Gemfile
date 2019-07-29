@@ -41,6 +41,9 @@ gem 'font-awesome-rails', '~> 4.5'
 gem 'paperclip'
 gem 'aws-sdk-s3'
 gem 'devise'
+gem 'active_model_serializers'
+gem 'rack-attack'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
