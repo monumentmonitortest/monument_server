@@ -18,4 +18,12 @@ Rails.application.routes.draw do
   get '/d3/machrie', to: 'd3#machrie'
   
   root 'welcome#index'
+
+  # API  
+  namespace :api do
+    namespace :v1 do
+      resources :submissions
+    end
+  end
+  
 end
