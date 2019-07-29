@@ -15,6 +15,7 @@
 !/tmp/.keep
 storage/
 
+/packs/*
 /node_modules
 /yarn-error.log
 
