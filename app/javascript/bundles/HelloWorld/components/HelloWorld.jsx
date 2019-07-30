@@ -1,6 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import Submission from './Submission.jsx'
+
+
 export default class HelloWorld extends React.Component {
   static propTypes = {
     name: PropTypes.string.isRequired, // this is passed from the Rails view
@@ -14,31 +17,57 @@ export default class HelloWorld extends React.Component {
 
     // How to set initial state in ES6 class syntax
     // https://reactjs.org/docs/state-and-lifecycle.html#adding-local-state-to-a-class
-    this.state = { name: this.props.name };
+    this.state = { submissions: this.props.submissions };
+    // debugger
   }
 
-  updateName = (name) => {
-    this.setState({ name });
+  updateName = (submissions) => {
+    this.setState({ submissions });
   };
 
-  render() {
+  renderSubmissions = () => {
+    const submissions = JSON.parse(this.state.submissions)
+    {submissions.map(submission => <Submission {...submission} />)}
+    // return submissions.map(submission => {
+    //   return (
+    //     <tr>
+    //       <td>{submission.id}</td>
+    //       <td>{submission.reliable}</td>
+    //       <td>{submission.image}</td>
+    //     </tr>
+    //   );
+    // })
+}
+
+render() {
+  const submissions = JSON.parse(this.state.submissions)
+
     return (
       <div>
         <h3>
-          Hello, {this.state.name}!
+          Here we have a load of Submissions
         </h3>
-        <hr />
         <form >
           <label htmlFor="name">
-            Say hello to:
+            This will be a form to filter the submissions
           </label>
-          <input
+          {/* <input
             id="name"
             type="text"
             value={this.state.name}
             onChange={(e) => this.updateName(e.target.value)}
-          />
+          /> */}
         </form>
+
+        <div>
+          And here are the submissions:
+          {/* {this.state.submissions}! */}
+          <div className="flex flex-wrap container">
+            {/* {this.renderSubmissions()} */}
+            {submissions.map(submission => <Submission {...submission} />)}
+          </div>
+        </div>  
+        <hr />
       </div>
     );
   }
