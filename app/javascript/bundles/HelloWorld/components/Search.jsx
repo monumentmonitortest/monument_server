@@ -8,16 +8,16 @@ export default class Search extends React.Component {
     // How to set initial state in ES6 class syntax
     // https://reactjs.org/docs/state-and-lifecycle.html#adding-local-state-to-a-class
     this.state = {
-      site: 'Clava',
+      site: '',
       type: '',
-      reliable: false
+      reliable: false,
+      submissions: []
     };
   }
 
 
   handleSubmit = event => {
     event.preventDefault()
-    console.log(this.state)
     this.refineView(this.state.reliable, this.state.site, this.state.reliable)
   }
 
@@ -31,20 +31,40 @@ export default class Search extends React.Component {
     });
   }
 
+  renderSubmissions = () => {
+    const submissions = this.state.submissions
+    if (submissions.length < 1) {
+      return(<div>Whoops! No submissions of that type!</div>)
+    } else {
+      return({submissions})
+    }
+  }
+
   refineView = async (reliable, site, type) => {
+    const url = `api/v1/submissions?reliable=${reliable}&site=${site}&type${type}`
+
     try {
-      const response =  await fetch(
-        `api/v1/submissions?reliable=${reliable}&site=${site}&type${type}`
+      const response =  await fetch(url, {
+        method: 'GET',
+        withCredentials: true,
+        credentials: 'include',
+        headers: {
+          // TODO - work out how to use this properly I guess...
+          'Authorization': 'hi'
+        }
+      }
       );
       
       const {data} = await response.json()
-      debugger
-      console.log(data)
-
+      this.setState({
+        // TODO - get this working properly...
+        submissions: data
+      })
     } catch (error) {
       console.log("there has been an error in fetching the data!")
     }
   }
+
   
   render() {
     return (
@@ -75,6 +95,8 @@ export default class Search extends React.Component {
             Search
           </button>
         </form>
+
+        {this.renderSubmissions()}
       </div>
     );
   }
