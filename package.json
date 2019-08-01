@@ -11,6 +11,7 @@
     "react-on-rails": "11.3.0"
   },
   "devDependencies": {
+    "tachyons": "^4.10.0",
     "webpack-dev-server": "2.11.2"
   }
 }

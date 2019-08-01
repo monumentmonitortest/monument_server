@@ -90,7 +90,12 @@ export default class Search extends React.Component {
             Search
           </button>
         </form>
-          {this.state.submissions.map((submission, i)=>(<Submission {...submission} key={i} />))}
+
+        <div className="w-100-l relative z-1">
+          <div className="flex flex-wrap justify-between submissions ph3 ph4-l">
+              {this.state.submissions.map((submission, i)=>(<Submission {...submission} key={i} />))}
+          </div>
+        </div>
       </div>
     );
   }

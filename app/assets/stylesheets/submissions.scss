@@ -7,3 +7,15 @@ div.submission-form {
     width: 50%
   }
 }
+
+.submissions {
+  padding-bottom: 5rem;
+}
+
+.submission {
+  width: calc(50% - 1rem);
+}
+
+.submission:nth-of-type(even) {
+  transform: translateY(4rem);
+}
