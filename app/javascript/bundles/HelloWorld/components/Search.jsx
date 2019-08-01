@@ -8,8 +8,6 @@ export default class Search extends React.Component {
   constructor(props) {
     super(props);
 
-    // How to set initial state in ES6 class syntax
-    // https://reactjs.org/docs/state-and-lifecycle.html#adding-local-state-to-a-class
     this.state = {
       site: '',
       type: '',
@@ -21,14 +19,14 @@ export default class Search extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    this.refineView(this.state.reliable, this.state.site, this.state.reliable)
+    this.refineView(this.state.reliable, this.state.site, this.state.type)
   }
 
   handleInputChange = event => {
     const target = event.target
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.id;
-    
+
     this.setState({
       [name]: value
     });
@@ -41,7 +39,7 @@ export default class Search extends React.Component {
         throw Error(response.statusText)
       }
       const json = await response.json()
-      // debugger
+
       this.setState({submissions: json.data})
     } catch (error) {
       console.log(error)
@@ -49,23 +47,21 @@ export default class Search extends React.Component {
   }
 
   refineView = async (reliable, site, type) => {
-    console.log('triggered')
-    // try {
-    //   const response = await fetch('api/v1/submissions')
-    //   if (!response.ok) {
-    //     throw Error(response.statusText)
-    //   }
-    //   const json = await response.json()
-    //   // debugger
-    //   this.setState({submissions: json.data})
-    // } catch (error) {
-    //   console.log(error)
-    // }
+    try {
+      const response = await fetch(`api/v1/submissions?reliable=${reliable}&site_filter=${site}&type_filter=${type}`)
+      if (!response.ok) {
+        throw Error(response.statusText)
+      }
+      const json = await response.json()
+      // debugger
+      this.setState({submissions: json.data})
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   
   render() {
-    const { submissions = [] } = this.props
     return (
       <div className="ui raised segment no padding">
         <form onSubmit={this.handleSubmit}>
