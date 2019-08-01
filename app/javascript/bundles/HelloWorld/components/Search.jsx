@@ -1,6 +1,9 @@
 import React from 'react';
 import 'babel-polyfill';
 
+import Submission from './Submission.jsx'
+
+
 export default class Search extends React.Component {
   constructor(props) {
     super(props);
@@ -14,7 +17,7 @@ export default class Search extends React.Component {
       submissions: []
     };
   }
-
+  
 
   handleSubmit = event => {
     event.preventDefault()
@@ -32,41 +35,35 @@ export default class Search extends React.Component {
   }
 
   renderSubmissions = () => {
-    const submissions = this.state.submissions
-    if (submissions.length < 1) {
-      return(<div>Whoops! No submissions of that type!</div>)
-    } else {
-      return({submissions})
+    // const submissions = this.state.submissions
+    // if (submissions.length < 1) {
+    //   return(<div>Whoops! No submissions of that type!</div>)
+    // } else {
+    //   return({submissions})
+    // }
+  }
+
+  async componentDidMount() {
+    try {
+      const response = await fetch('api/v1/submissions')
+      if (!response.ok) {
+        throw Error(response.statusText)
+      }
+      const json = await response.json()
+      // debugger
+      this.setState({submissions: json.data})
+    } catch (error) {
+      console.log(error)
     }
   }
 
   refineView = async (reliable, site, type) => {
-    const url = `api/v1/submissions?reliable=${reliable}&site=${site}&type${type}`
-
-    try {
-      const response =  await fetch(url, {
-        method: 'GET',
-        withCredentials: true,
-        credentials: 'include',
-        headers: {
-          // TODO - work out how to use this properly I guess...
-          'Authorization': 'hi'
-        }
-      }
-      );
-      
-      const {data} = await response.json()
-      this.setState({
-        // TODO - get this working properly...
-        submissions: data
-      })
-    } catch (error) {
-      console.log("there has been an error in fetching the data!")
-    }
+    console.log('triggered')
   }
 
   
   render() {
+    const { submissions = [] } = this.props
     return (
       <div className="ui raised segment no padding">
         <form onSubmit={this.handleSubmit}>
@@ -95,8 +92,7 @@ export default class Search extends React.Component {
             Search
           </button>
         </form>
-
-        {this.renderSubmissions()}
+          {this.state.submissions.map(submission =>(<Submission {...submission} />))}
       </div>
     );
   }
