@@ -34,15 +34,6 @@ export default class Search extends React.Component {
     });
   }
 
-  renderSubmissions = () => {
-    // const submissions = this.state.submissions
-    // if (submissions.length < 1) {
-    //   return(<div>Whoops! No submissions of that type!</div>)
-    // } else {
-    //   return({submissions})
-    // }
-  }
-
   async componentDidMount() {
     try {
       const response = await fetch('api/v1/submissions')
@@ -59,6 +50,17 @@ export default class Search extends React.Component {
 
   refineView = async (reliable, site, type) => {
     console.log('triggered')
+    // try {
+    //   const response = await fetch('api/v1/submissions')
+    //   if (!response.ok) {
+    //     throw Error(response.statusText)
+    //   }
+    //   const json = await response.json()
+    //   // debugger
+    //   this.setState({submissions: json.data})
+    // } catch (error) {
+    //   console.log(error)
+    // }
   }
 
   
@@ -92,7 +94,7 @@ export default class Search extends React.Component {
             Search
           </button>
         </form>
-          {this.state.submissions.map(submission =>(<Submission {...submission} />))}
+          {this.state.submissions.map((submission, i)=>(<Submission {...submission} key={i} />))}
       </div>
     );
   }
