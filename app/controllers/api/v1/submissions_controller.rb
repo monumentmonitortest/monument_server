@@ -6,10 +6,10 @@ module Api
       def index
         submissions_scope = Submission.all
 
-        submissions_scope = submissions_scope.reliable if params[:reliable] == "1"
+        submissions_scope = submissions_scope.reliable if params[:reliable] == "true"
         submissions_scope = search_site(submissions_scope, params[:site_filter]) if params[:site_filter].present?
         submissions_scope = type_search(submissions_scope, params[:type_filter]) if params[:type_filter].present?
-      
+
         render json: submissions_scope
       end
 

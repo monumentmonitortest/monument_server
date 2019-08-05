@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Monument Monitor</title>
+    <%= csrf_meta_tags %>
+    <%# NOTE TO SELF - tachyons is here because issues with yarn %>
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css"/>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'filter-home-bundle' %>
+  </head>
+
+  <body>
+    <nav>
+      <%= image_tag("logo-2019-inverted.png", :alt => "logos", class: "logo") %>
+    </nav>
+
+    <div class="container">
+      <%= yield %>
+    </div>
+  </body>
+</html>

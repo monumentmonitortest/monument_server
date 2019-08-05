@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'filter', to: 'filter_home#index'
   devise_for :users
   get 'welcome/index'
 
@@ -25,5 +26,4 @@ Rails.application.routes.draw do
       resources :submissions
     end
   end
-  
 end
