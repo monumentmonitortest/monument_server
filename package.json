@@ -1,6 +1,10 @@
 {
   "name": "monumental_server",
   "private": true,
+  "cacheDirectories": [
+    "node_modules",
+    "client/node_modules"
+  ],
   "dependencies": {
     "@rails/webpacker": "3.5",
     "babel-polyfill": "^6.26.0",
