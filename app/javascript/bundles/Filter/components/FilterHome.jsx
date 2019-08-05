@@ -4,7 +4,7 @@ import React from 'react';
 import Submission from './Submission.jsx'
 
 
-export default class HelloWorld extends React.Component {
+export default class FilterHome extends React.Component {
   static propTypes = {
     name: PropTypes.string.isRequired, // this is passed from the Rails view
   };
@@ -18,7 +18,6 @@ export default class HelloWorld extends React.Component {
     // How to set initial state in ES6 class syntax
     // https://reactjs.org/docs/state-and-lifecycle.html#adding-local-state-to-a-class
     this.state = { submissions: this.props.submissions };
-    // debugger
   }
 
   updateName = (submissions) => {
@@ -49,7 +48,7 @@ render() {
         </h3>
         <form >
           <label htmlFor="name">
-            This will be a form to filter the submissions
+            This will be a form to filterHome the submissions
           </label>
           {/* <input
             id="name"
