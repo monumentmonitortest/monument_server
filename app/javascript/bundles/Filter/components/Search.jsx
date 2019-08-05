@@ -53,7 +53,6 @@ export default class Search extends React.Component {
         throw Error(response.statusText)
       }
       const json = await response.json()
-      // debugger
       this.setState({submissions: json.data})
     } catch (error) {
       console.log(error)

@@ -12,20 +12,16 @@ export default class Submission extends React.Component {
     const type  = this.props.attributes["type-name"] || ""
     const recordTaken  = this.props.attributes["record-taken"] || ""
 
-    const styles = {
-      backgroundImage: `url(${image})`,
-      backgroundSize: 'cover'
-    }
 
     return (
       <div className='submission mb4'>
         <div className="aspect-ratio aspect-ratio--3x4 pointer bg-black">
-          <div className="ph3 pv4 aspect-ratio--object mix-overlay" style={styles}>
+          <div className="ph3 pv4 aspect-ratio--object mix-overlay" >
             <div className="flex flex-column relative z-2">
               <h1 className="f2 f3-l mv0 ttu pr2 lh-title">{site}</h1>
               <h2 className="f2">{type}</h2>
               <h2 className="f2">{recordTaken}</h2>
-              {/* <img src={image} />           */}
+              <img src={image} />          
             </div>
           </div>
         </div>
