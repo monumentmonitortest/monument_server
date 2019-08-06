@@ -3,7 +3,8 @@ module Api
     class SubmissionsController < BaseController
 
       def index
-        submissions_scope ||= reliable? ? Submission.all.reliable : Submission.all
+        submissions_scope ||= reliable? ? Submission.with_attached_image.reliable : Submission.with_attached_image
+        
         submissions_scope ||= search_site(submissions_scope, site_filter) if site_filter?
         submissions_scope ||= type_search(submissions_scope, type_filter) if type_filter?
 
