@@ -5,6 +5,7 @@ import Search from '../bundles/Filter/components/Search';
 import Submission from '../bundles/Filter/components/Submission';
 import Pagination from '../bundles/Filter/components/Pagination';
 import ImageLoader from '../bundles/Filter/components/ImageLoader';
+import Form from '../bundles/Filter/components/Form';
 
 // This is how react_on_rails can see the HelloWorld in the browser.
 ReactOnRails.register({
@@ -12,5 +13,6 @@ ReactOnRails.register({
   Search,
   Submission,
   Pagination,
-  ImageLoader
+  ImageLoader,
+  Form
 });
