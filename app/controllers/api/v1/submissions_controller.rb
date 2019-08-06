@@ -22,7 +22,7 @@ module Api
         end
 
         def page_size
-          params[:bespoke_size] || (params[:page] && params[:page][:size]) || 2
+          params[:bespoke_size] || (params[:page] && params[:page][:size]) || 10
         end
 
         def reliable?
