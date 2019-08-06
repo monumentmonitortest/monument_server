@@ -127,12 +127,12 @@ export default class Search extends React.Component {
             ))}
         </div>
 
-        {/* <ul>
-          <li>Show per page</li>
-          <li><a onClick={this.handlePaginationCount}>10</a></li>
-          <li><a onClick={this.handlePaginationCount}>25</a></li>
-          <li><a onClick={this.handlePaginationCount}>50</a></li>
-        </ul>  */}
+        <ul className="list flex flex-wrap items-center pa0 ma0">
+          <li className="pointer mh2 tc">Show per page:</li>
+          <li className="pointer mh2 tc"><a onClick={this.handlePaginationCount}>10</a></li>
+          <li className="pointer mh2 tc"><a onClick={this.handlePaginationCount}>25</a></li>
+          <li className="pointer mh2 tc"><a onClick={this.handlePaginationCount}>50</a></li>
+        </ul>
       </div>
     );
   }

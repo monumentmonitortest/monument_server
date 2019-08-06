@@ -10,7 +10,7 @@ module Api
         submissions_scope = search_site(submissions_scope, params[:site_filter]) if params[:site_filter].present?
         submissions_scope = type_search(submissions_scope, params[:type_filter]) if params[:type_filter].present?
 
-        paginate json: submissions_scope, per_page: params[:bespoke_size] || 2
+        paginate json: submissions_scope, per_page: params[:bespoke_size] || 10
       end
 
       private
