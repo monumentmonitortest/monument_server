@@ -1,4 +1,6 @@
 import React from 'react';
+import LazyLoad from 'react-lazy-load';
+import ImageLoader from './ImageLoader.jsx'
 
 export default class Submission extends React.Component {
   constructor(props) {
@@ -21,7 +23,13 @@ export default class Submission extends React.Component {
               <h1 className="f2 f3-l mv0 ttu pr2 lh-title">{site}</h1>
               <h2 className="f2">{type}</h2>
               <h2 className="f2">{recordTaken}</h2>
-              <img src={image} />          
+              <LazyLoad  
+                debounce={false}
+                offsetVertical={500}>
+                  <ImageLoader 
+                    src={image}
+                  />
+              </LazyLoad>
             </div>
           </div>
         </div>
