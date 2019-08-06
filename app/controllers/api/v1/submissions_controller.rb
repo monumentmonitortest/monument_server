@@ -2,24 +2,47 @@ module Api
   module V1
     class SubmissionsController < BaseController
 
-      # TODO - this is the same as the normal frontend, thus is should be dried up rather
       def index
-        submissions_scope = Submission.all
+        submissions_scope ||= reliable? ? Submission.all.reliable : Submission.all
+        submissions_scope ||= search_site(submissions_scope, site_filter) if site_filter?
+        submissions_scope ||= type_search(submissions_scope, type_filter) if type_filter?
 
-        submissions_scope = submissions_scope.reliable if params[:reliable] == "true"
-        submissions_scope = search_site(submissions_scope, params[:site_filter]) if params[:site_filter].present?
-        submissions_scope = type_search(submissions_scope, params[:type_filter]) if params[:type_filter].present?
-
-        render json: submissions_scope
+        paginate json: submissions_scope, per_page: page_size
       end
 
       private
 
         def permitted_params
-          params.require(:submission).permit(:reliable, 
-                                            :site_id,
-                                            :site_name,
-                                            :type_name)
+          params.permit(:reliable, 
+                        :site_id,
+                        :site_name,
+                        :type_name,
+                        :bespoke_size,
+                        :page)
+        end
+
+        def page_size
+          params[:bespoke_size] || (params[:page] && params[:page][:size]) || 2
+        end
+
+        def reliable?
+          permitted_params[:reliable] == "true"
+        end
+
+        def site_filter?
+          site_filter.present?
+        end
+
+        def type_filter?
+          type_filter.present?
+        end
+
+        def site_filter
+          permitted_params[:site_filter]
+        end
+
+        def type_filter
+          permitted_params[:site_filter]
         end
 
         def search_site(collection, name)
