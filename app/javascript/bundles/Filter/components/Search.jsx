@@ -117,7 +117,8 @@ export default class Search extends React.Component {
           </div>
         </div>
 
-        <div className="flex">
+        <ul className="list flex flex-wrap items-center pa0 ma0">
+          <li className="pointer mh2 tc">Navigate to:</li>
           { Object.keys(this.state.links).map((keyName, i) => ( 
             <Pagination 
             direction={keyName}
@@ -125,7 +126,7 @@ export default class Search extends React.Component {
             handlePagination={this.handlePagination}
             />
             ))}
-        </div>
+        </ul>
 
         <ul className="list flex flex-wrap items-center pa0 ma0">
           <li className="pointer mh2 tc">Show per page:</li>

@@ -7,7 +7,7 @@ module Api
         submissions_scope ||= search_site(submissions_scope, site_filter) if site_filter?
         submissions_scope ||= type_search(submissions_scope, type_filter) if type_filter?
 
-        paginate json: submissions_scope, per_page: params[:bespoke_size] || 10
+        paginate json: submissions_scope, per_page: page_size
       end
 
       private
@@ -19,6 +19,10 @@ module Api
                         :type_name,
                         :bespoke_size,
                         :page)
+        end
+
+        def page_size
+          params[:bespoke_size] || (params[:page] && params[:page][:size]) || 2
         end
 
         def reliable?

@@ -7,9 +7,9 @@ export default class Pagination extends React.Component {
   
   render() {
     return (
-      <span className="ph3">
-        <a href={this.props.link} onClick={this.props.handlePagination}>{this.props.direction}</a>
-      </span>
+      <li className="">
+        <a className="pointer mh2 tc" href={this.props.link} onClick={this.props.handlePagination}>{this.props.direction}</a>
+      </li>
     )
   }
 }
