@@ -67,6 +67,13 @@ export default class Search extends React.Component {
       <div className="ui raised segment no padding">
         
         <Form refineView={this.refineView}/>
+        
+        <div className="flex flex-wrap justify-around items-center mb6">
+          <div className="pv4 tc w-25 whatsapp">WhatsApp</div>
+          <div className="pv4 tc w-25 twitter">Twitter</div>
+          <div className="pv4 tc w-25 instagram">Instagram</div>
+          <div className="pv4 tc w-25 email">Email</div>
+        </div>
 
         <div className="w-100-l relative z-1">
           <div className="flex flex-wrap justify-between submissions ph3 ph4-l">

@@ -28,7 +28,7 @@ export default class Form extends React.Component {
   
   render() {
     return (
-      <form className="ph4 pv3 green-background br1" onSubmit={this.handleSubmit}>
+      <form className="ph4 pv4 mb0 green-background br1" onSubmit={this.handleSubmit}>
           <div className="flex flex-wrap items-center justify-between">
             <span className="h-25">
               <label>
