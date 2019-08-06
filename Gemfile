@@ -45,6 +45,9 @@ gem 'active_model_serializers'
 gem 'rack-attack'
 gem 'webpacker'
 gem 'react_on_rails', '11.2.1' 
+gem 'kaminari' 
+gem 'api-pagination'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
