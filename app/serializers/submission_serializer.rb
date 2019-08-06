@@ -2,7 +2,13 @@ class SubmissionSerializer < ActiveModel::Serializer
   attributes :id, :siteName, :siteId, :recordTaken, :tags, :imageUrl, :typeName,
 
   def imageUrl
-    self.object.image.attachment.service_url
+    if Rails.env == 'development'
+      ActiveStorage::Current.set(host: "localhost:3000") do
+        self.object.image.attachment.service_url
+      end
+    else
+      self.object.image.attachment.service_url
+    end
   end
 
   def siteName
