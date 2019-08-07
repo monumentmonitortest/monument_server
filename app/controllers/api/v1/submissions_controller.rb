@@ -3,10 +3,11 @@ module Api
     class SubmissionsController < BaseController
 
       def index
-        submissions_scope ||= reliable? ? Submission.all.reliable : Submission.all
-        submissions_scope ||= search_site(submissions_scope, site_filter) if site_filter?
-        submissions_scope ||= type_search(submissions_scope, type_filter) if type_filter?
-
+        submissions_scope ||= reliable? ? Submission.with_attached_image.reliable : Submission.with_attached_image
+        
+        submissions_scope = search_site(submissions_scope, site_filter) if site_filter?
+        submissions_scope = type_search(submissions_scope, type_filter) if type_filter?
+        
         paginate json: submissions_scope, per_page: page_size
       end
 
@@ -15,8 +16,8 @@ module Api
         def permitted_params
           params.permit(:reliable, 
                         :site_id,
-                        :site_name,
-                        :type_name,
+                        :site_filter,
+                        :type_filter,
                         :bespoke_size,
                         :page)
         end
@@ -42,7 +43,7 @@ module Api
         end
 
         def type_filter
-          permitted_params[:site_filter]
+          permitted_params[:type_filter]
         end
 
         def search_site(collection, name)

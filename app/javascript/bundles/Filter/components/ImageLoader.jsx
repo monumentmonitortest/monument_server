@@ -11,7 +11,7 @@ class ImageLoader extends React.Component {
 
   //define our loading and loaded image classes
   static defaultProps = {
-    className: "",
+    className: "w-100 pointer",
     loadingClassName: "img-loading",
     loadedClassName: "img-loaded"
   };
@@ -34,10 +34,10 @@ class ImageLoader extends React.Component {
     return (
       <div className={className}>
         <img 
-                 src={this.props.src} 
-                 onClick={this.props.onClick} 
-                 className={className} 
-                 onLoad={this.onLoad} />;
+          src={this.props.src} 
+          onClick={()=> window.open(this.props.src, "_blank")} 
+          className={className} 
+          onLoad={this.onLoad}  />;
       </div>
     )
   }

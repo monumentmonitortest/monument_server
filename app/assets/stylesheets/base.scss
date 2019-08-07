@@ -1,3 +1,22 @@
+// Background
+$bg-color: #000000;
+$dot-color: #565656;
+$main-font-color: #eaeaea;
+
+// Dimensions
+$dot-size: 2px;
+$dot-space: 22px;
+$green-background: #004035;
+
+body {
+	background:
+		linear-gradient(90deg, $bg-color ($dot-space - $dot-size), transparent 1%) center,
+		linear-gradient($bg-color ($dot-space - $dot-size), transparent 1%) center,
+		$dot-color;
+  background-size: $dot-space $dot-space;
+  color: $main-font-color;
+}
+
 nav {
   height: 100px;
   background: #000000;
@@ -12,4 +31,40 @@ div.container, img.logo {
 
 .hidden {
   display: none;
+}
+
+.main-container {
+  background-color: rgba(28,28,33,0.86)
+}
+
+.green-background {
+  background-color: $green-background;
+}
+
+.white-background {
+  background-color: $main-font-color
+}
+
+.dark-color {
+  color: rgb(28,28,33)
+}
+
+.twitter {
+  background-color: #38A1F3;
+}
+
+.email {
+  background-color: #B23121;
+}
+
+.instagram {
+  background-color: #833AB4;
+}
+
+.whatsapp {
+  background-color: #00b753;
+}
+
+.h-85 {
+  height: 85%;
 }

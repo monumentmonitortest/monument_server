@@ -3,6 +3,8 @@ import 'babel-polyfill';
 
 import Submission from './Submission.jsx'
 import Pagination from './Pagination.jsx'
+import Form from './Form.jsx'
+import Key from './Key.jsx'
 
 export default class Search extends React.Component {
   constructor(props) {
@@ -13,36 +15,16 @@ export default class Search extends React.Component {
       type: '',
       reliable: false,
       submissions: [],
-      links: [],
-      firstLink: '',
-      lastLink: '',
-      nextLink: '',
-      prevLink: '',
-      selfLink: '',
-      perPage: 10
+      links: []
     };
   }
   
-
-  handleSubmit = event => {
-    event.preventDefault()
-    this.refineView(this.state.reliable, this.state.site, this.state.type)
-  }
 
   handlePagination = (event) => {
     event.preventDefault()
     this.refineView('','','', event.target.href)
   }
   
-  handleInputChange = event => {
-    const target = event.target
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.id;
-    
-    this.setState({
-      [name]: value
-    });
-  }
   
   handlePaginationCount = event => {
     event.preventDefault()
@@ -84,32 +66,9 @@ export default class Search extends React.Component {
   render() {
     return (
       <div className="ui raised segment no padding">
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Useful?
-            <input
-              name="useful"
-              id="reliable"
-              type="checkbox"
-              checked={this.state.reliable}
-              onChange={this.handleInputChange} />
-          </label>
-
-          <label>
-            Site:
-            <input type="text" id="site" value={this.state.site} onChange={this.handleInputChange} />
-          </label>
-
-          <label>
-            Type:
-            <input type="text" id="type" value={this.state.type} onChange={this.handleInputChange} />
-          </label>
-
-          
-          <button type="submit" onClick={this.handleSubmit}>
-            Search
-          </button>
-        </form>
+        
+        <Form refineView={this.refineView}/>
+        <Key />
 
         <div className="w-100-l relative z-1">
           <div className="flex flex-wrap justify-between submissions ph3 ph4-l">
