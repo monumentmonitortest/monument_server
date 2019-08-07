@@ -37,7 +37,7 @@ class ImageLoader extends React.Component {
           src={this.props.src} 
           onClick={()=> window.open(this.props.src, "_blank")} 
           className={className} 
-          onLoad={this.onLoad}  />;
+          onLoad={this.onLoad}  />
       </div>
     )
   }

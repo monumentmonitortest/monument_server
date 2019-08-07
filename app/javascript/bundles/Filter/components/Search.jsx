@@ -66,16 +66,9 @@ export default class Search extends React.Component {
   render() {
     return (
       <div className="ui raised segment no padding">
-        
         <Form refineView={this.refineView}/>
         <Key />
-
-        <div className="w-100-l relative z-1">
-          <div className="flex flex-wrap justify-between submissions ph3 ph4-l">
-              {this.state.submissions.map((submission, i)=>(<Submission {...submission} key={i} />))}
-          </div>
-        </div>
-
+        
         <ul className="list flex flex-wrap items-center pa0 ma0">
           <li className="pointer mh2 tc">Navigate to:</li>
           { Object.keys(this.state.links).map((keyName, i) => ( 
@@ -86,14 +79,22 @@ export default class Search extends React.Component {
               key={i} />
             ))}
         </ul>
-
-        <ul className="list flex flex-wrap items-center pa0 ma0">
+        <ul className="list flex flex-wrap items-center pa0 ma0 mb4">
           <li className="pointer mh2 tc">Show per page:</li>
           <li className="pointer mh2 tc"><a onClick={this.handlePaginationCount}>10</a></li>
           <li className="pointer mh2 tc"><a onClick={this.handlePaginationCount}>25</a></li>
           <li className="pointer mh2 tc"><a onClick={this.handlePaginationCount}>50</a></li>
         </ul>
+
+        <div className="w-100-l relative z-1">
+          <div className="flex flex-wrap justify-between submissions ph3 ph4-l">
+              {this.state.submissions.map((submission, i)=>(<Submission {...submission} key={i} />))}
+          </div>
+        </div>
+
+       
+
       </div>
-    );
+    )
   }
 }

@@ -7,7 +7,7 @@ export default class Key extends React.Component {
   
   render() {
     return (
-      <div className="flex flex-wrap justify-around items-center mt3 mb6">
+      <div className="flex flex-wrap justify-around items-center mv3">
         <div className="pv3 tc w-100">Key</div>
         <div className="pv4 tc w-25 whatsapp">WhatsApp</div>
         <div className="pv4 tc w-25 twitter">Twitter</div>
