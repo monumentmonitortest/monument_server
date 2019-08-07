@@ -4,6 +4,7 @@ import 'babel-polyfill';
 import Submission from './Submission.jsx'
 import Pagination from './Pagination.jsx'
 import Form from './Form.jsx'
+import Key from './Key.jsx'
 
 export default class Search extends React.Component {
   constructor(props) {
@@ -67,13 +68,7 @@ export default class Search extends React.Component {
       <div className="ui raised segment no padding">
         
         <Form refineView={this.refineView}/>
-        
-        <div className="flex flex-wrap justify-around items-center mb6">
-          <div className="pv4 tc w-25 whatsapp">WhatsApp</div>
-          <div className="pv4 tc w-25 twitter">Twitter</div>
-          <div className="pv4 tc w-25 instagram">Instagram</div>
-          <div className="pv4 tc w-25 email">Email</div>
-        </div>
+        <Key />
 
         <div className="w-100-l relative z-1">
           <div className="flex flex-wrap justify-between submissions ph3 ph4-l">
