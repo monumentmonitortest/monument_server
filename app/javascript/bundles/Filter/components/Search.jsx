@@ -80,10 +80,10 @@ export default class Search extends React.Component {
           <li className="pointer mh2 tc">Navigate to:</li>
           { Object.keys(this.state.links).map((keyName, i) => ( 
             <Pagination 
-            direction={keyName}
-            link={this.state.links[keyName]}
-            handlePagination={this.handlePagination}
-            />
+              direction={keyName}
+              link={this.state.links[keyName]}
+              handlePagination={this.handlePagination}
+              key={i} />
             ))}
         </ul>
 
