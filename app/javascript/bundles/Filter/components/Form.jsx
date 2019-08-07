@@ -38,6 +38,7 @@ export default class Form extends React.Component {
                 name="useful"
                 id="reliable"
                 type="checkbox"
+                className='mt4'
                 checked={this.state.reliable}
                 onChange={this.handleInputChange} />
             </span>
