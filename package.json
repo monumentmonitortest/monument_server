@@ -12,6 +12,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-exif-orientation-img": "^0.1.5",
     "react-lazy-load": "^3.0.13",
     "react-on-rails": "11.3.0"
   },

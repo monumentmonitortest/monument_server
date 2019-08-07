@@ -1,4 +1,5 @@
 import React from "react";
+import ExifOrientationImg from 'react-exif-orientation-img'
 
 const _loaded = {};
 
@@ -33,11 +34,11 @@ class ImageLoader extends React.Component {
 
     return (
       <div className={className}>
-        <img 
+        <ExifOrientationImg 
           src={this.props.src} 
           onClick={()=> window.open(this.props.src, "_blank")} 
           className={className} 
-          onLoad={this.onLoad}  />;
+          onLoad={this.onLoad}  />
       </div>
     )
   }
