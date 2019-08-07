@@ -39,15 +39,3 @@ export default class Submission extends React.Component {
     )
   }
 }
-
-
-
-{/* <div className="aspect-ratio aspect-ratio--3x4 pointer">
-          <div className="ph3 pv4 mix-overlay" >
-            <div className="flex flex-column relative z-2">
-              <h1 className="f2 f3-l mv0 ttu pr2 lh-title">{site}</h1>
-              <h2 className="f2">{recordTaken}</h2>
-              <img src={image} />          
-            </div>
-          </div>
-        </div> */}
