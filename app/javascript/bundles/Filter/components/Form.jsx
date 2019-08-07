@@ -50,6 +50,7 @@ export default class Form extends React.Component {
               <input 
                 type="text" 
                 id="site" 
+                className="black"
                 value={this.state.site} 
                 onChange={this.handleInputChange} />
             </span>
@@ -61,6 +62,7 @@ export default class Form extends React.Component {
               <input 
                 type="text" 
                 id="type" 
+                className="black"
                 value={this.state.type} 
                 onChange={this.handleInputChange} />
             </span>

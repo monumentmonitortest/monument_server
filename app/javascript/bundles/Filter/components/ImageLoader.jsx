@@ -34,10 +34,11 @@ class ImageLoader extends React.Component {
     return (
       <div className={className}>
         <img 
-                 src={this.props.src} 
-                 onClick={this.props.onClick} 
-                 className={className} 
-                 onLoad={this.onLoad} />;
+          src={this.props.src} 
+          onClick={()=> window.open(image, "_blank")} 
+          className={className} 
+          onLoad="w-100 pointer" 
+          className="w-100 pointer" />;
       </div>
     )
   }
