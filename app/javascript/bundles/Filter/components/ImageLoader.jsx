@@ -34,7 +34,7 @@ class ImageLoader extends React.Component {
 
     return (
       <div className={className}>
-        <img 
+        <ExifOrientationImg 
           src={this.props.src} 
           onClick={()=> window.open(this.props.src, "_blank")} 
           className={className} 
