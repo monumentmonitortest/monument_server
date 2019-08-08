@@ -5,6 +5,7 @@ import Submission from './Submission.jsx'
 import Pagination from './Pagination.jsx'
 import Form from './Form.jsx'
 import Key from './Key.jsx'
+import Compare from './Compare.jsx'
 
 export default class Search extends React.Component {
   constructor(props) {
@@ -93,6 +94,7 @@ export default class Search extends React.Component {
       <div className="ui raised segment no padding">
         <Form refineView={this.refineView} siteNames={this.props.siteNames}/>
         <Key />
+        <Compare />
         
         <span className="mh2">{totalSubmissions} submissions found, page {pageNumber} of {pageNumbers}.</span>
         <ul className="list flex flex-wrap items-center pa0 ma0">
