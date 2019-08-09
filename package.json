@@ -9,6 +9,7 @@
     "@rails/webpacker": "3.5",
     "babel-polyfill": "^6.26.0",
     "babel-preset-react": "^6.24.1",
+    "blueimp-load-image": "^2.23.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
