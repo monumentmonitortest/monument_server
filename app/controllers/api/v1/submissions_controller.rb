@@ -8,7 +8,7 @@ module Api
         submissions_scope = search_site(submissions_scope, site_filter) if site_filter?
         submissions_scope = type_search(submissions_scope, type_filter) if type_filter?
         
-        paginate json: submissions_scope, per_page: page_size
+        paginate json: submissions_scope.order(record_taken: :desc), per_page: page_size
       end
 
       private

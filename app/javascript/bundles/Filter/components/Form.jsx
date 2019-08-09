@@ -13,7 +13,9 @@ export default class Form extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    this.props.refineView(this.state.reliable, this.state.site, this.state.type)
+    this.props.refineView({reliable: this.state.reliable, 
+                           site: this.state.site, 
+                           type: this.state.type})
   }
 
   handleInputChange = event => {
