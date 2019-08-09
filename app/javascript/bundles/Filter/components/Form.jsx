@@ -22,7 +22,7 @@ export default class Form extends React.Component {
     const target = event.target
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.id;
-    
+
     this.setState({
       [name]: value
     });
@@ -49,12 +49,14 @@ export default class Form extends React.Component {
               <label>
                 Site:
               </label>
-              <input 
-                type="text" 
-                id="site" 
-                className="black"
-                value={this.state.site} 
-                onChange={this.handleInputChange} />
+              <select id="site" className="dark-color" onChange={this.handleInputChange}>
+                <option id="site" value=""></option>
+              {this.props.siteNames.map((site, i) => 
+                <option 
+                  value={site} 
+                  key={i}
+                  className="dark-color">{site}</option>)}
+              </select>
             </span>
 
             <span className="h-25">
