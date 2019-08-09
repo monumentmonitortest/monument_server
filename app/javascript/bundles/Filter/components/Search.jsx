@@ -91,7 +91,7 @@ export default class Search extends React.Component {
 
     return (
       <div className="ui raised segment no padding">
-        <Form refineView={this.refineView}/>
+        <Form refineView={this.refineView} siteNames={this.props.siteNames}/>
         <Key />
         
         <span className="mh2">{totalSubmissions} submissions found, page {pageNumber} of {pageNumbers}.</span>
