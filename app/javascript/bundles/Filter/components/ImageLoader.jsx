@@ -30,11 +30,11 @@ class ImageLoader extends React.Component {
 
   // when searching, refining - we need to re-render component with new image url
   componentDidUpdate(prevProps) {
-    if (this.props.src !== prevProps.src) {
+    if (this.props.submissionId !== prevProps.submissionId) {
       this.setState({loaded: false})
       loadImage( this.props.src, (img) => {
         var base64data = img.toDataURL('image/jpeg'); this.setState({ imgSrc: base64data }); 
-        }, { orientation: true, } );
+      }, { orientation: true, });
     }
   }
 
