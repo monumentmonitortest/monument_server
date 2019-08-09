@@ -6,7 +6,6 @@ import ImageLoader from './ImageLoader.jsx'
 export default class Submission extends React.Component {
   constructor(props) {
     super(props);
-
   }
   
   render() {
