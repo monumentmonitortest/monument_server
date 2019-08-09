@@ -13,6 +13,7 @@ export default class Submission extends React.Component {
     const site  = this.props.attributes["site-name"] || ""
     const type  = this.props.attributes["type-name"] || ""
     const recordTaken  = this.props.attributes["record-taken"] || ""
+    const submissionId = this.props.id
     const submissionClass = `submission mb6 br4 ${type.toLowerCase()}`
 
     return (
@@ -28,6 +29,7 @@ export default class Submission extends React.Component {
                   offsetVertical={500}>
                     <ImageLoader 
                       src={image}
+                      submissionId={submissionId}
                     />
                 </LazyLoad>        
               </div>
