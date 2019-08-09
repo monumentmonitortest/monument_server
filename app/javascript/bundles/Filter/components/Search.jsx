@@ -15,21 +15,24 @@ export default class Search extends React.Component {
       type: '',
       reliable: false,
       submissions: [],
-      links: []
+      links: [],
+      pageSize: 10, // how many submissons per page
+      totalSubmissions: '', // how many submissions there are
+      pageNumber: '' // what page we're on at the moment
     };
   }
   
-
-  handlePagination = (event) => {
+  handlePaginationUrl = (event) => {
     event.preventDefault()
-    this.refineView('','','', event.target.href)
+    const pageUrl = event.target.href
+    this.refineView({url: pageUrl})
   }
-  
   
   handlePaginationCount = event => {
     event.preventDefault()
-    const url = encodeURI(`api/v1/submissions?bespoke_size=${event.target.innerHTML}`)
-    this.refineView('','','', url)
+    const pageSize = event.target.innerHTML
+    this.setState({pageSize: pageSize})
+    this.refineView({size: pageSize})
   }
 
   async componentDidMount() {
@@ -39,23 +42,40 @@ export default class Search extends React.Component {
         throw Error(response.statusText)
       }
       const json = await response.json()
+      const total = await response.headers.get("Total")
 
-      this.setState({submissions: json.data})
-      json.links && this.setState({links: json.links})
+      this.setState({submissions: json.data,
+                     totalSubmissions: total,
+                     pageNumber: '1',
+                     links: json.links})
     } catch (error) {
       console.log(error)
     }
   }
 
-  refineView = async (reliable, site, type, url) => {
+  refineView = async ({reliable=this.state.reliable, 
+                      site=this.state.site, 
+                      type=this.state.type, 
+                      size=this.state.pageSize,
+                      pageNumber=this.state.pageNumber,
+                      url=""}) => {
     try {
-      const requestURL = url ? url : `api/v1/submissions?reliable=${reliable}&site_filter=${site}&type_filter=${type}`
+      const requestURL = url ? url : `api/v1/submissions?reliable=${reliable}&site_filter=${site}&type_filter=${type}&bespoke_size=${size}&page=${pageNumber}`
       const response = await fetch(requestURL)
       if (!response.ok) {
         throw Error(response.statusText)
       }
       const json = await response.json()
-      this.setState({submissions: json.data})
+      const total = await response.headers.get("Total")
+      const newPageNumber = await response.headers.get("current-page")
+
+      this.setState({submissions: json.data,
+                     reliable: reliable,
+                     site: site, 
+                     type: type, 
+                     pageSize: size, 
+                     totalSubmissions: total,
+                     pageNumber: newPageNumber})
       json.links && this.setState({links: json.links})
     } catch (error) {
       console.log(error)
@@ -64,21 +84,28 @@ export default class Search extends React.Component {
 
   
   render() {
+    const {totalSubmissions} = this.state
+    const {pageNumber} =  this.state
+    const {pageSize} = this.state
+    const pageNumbers = Math.round(Number(totalSubmissions) / Number(pageSize))
+
     return (
       <div className="ui raised segment no padding">
         <Form refineView={this.refineView}/>
         <Key />
         
+        <span className="mh2">{totalSubmissions} submissions found, page {pageNumber} of {pageNumbers}.</span>
         <ul className="list flex flex-wrap items-center pa0 ma0">
           <li className="pointer mh2 tc">Navigate to:</li>
           { Object.keys(this.state.links).map((keyName, i) => ( 
             <Pagination 
               direction={keyName}
               link={this.state.links[keyName]}
-              handlePagination={this.handlePagination}
+              handlePagination={this.handlePaginationUrl}
               key={i} />
             ))}
         </ul>
+        
         <ul className="list flex flex-wrap items-center pa0 ma0 mb4">
           <li className="pointer mh2 tc">Show per page:</li>
           <li className="pointer mh2 tc"><a onClick={this.handlePaginationCount}>10</a></li>
@@ -91,9 +118,6 @@ export default class Search extends React.Component {
               {this.state.submissions.map((submission, i)=>(<Submission {...submission} key={i} />))}
           </div>
         </div>
-
-       
-
       </div>
     )
   }
