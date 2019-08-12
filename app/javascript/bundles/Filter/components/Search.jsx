@@ -5,6 +5,7 @@ import Submission from './Submission.jsx'
 import Pagination from './Pagination.jsx'
 import Form from './Form.jsx'
 import Key from './Key.jsx'
+import Compare from './Compare.jsx'
 
 export default class Search extends React.Component {
   constructor(props) {
@@ -16,25 +17,13 @@ export default class Search extends React.Component {
       reliable: false,
       submissions: [],
       links: [],
+      imageCompare: [],
       pageSize: 10, // how many submissons per page
       totalSubmissions: '', // how many submissions there are
       pageNumber: '' // what page we're on at the moment
     };
   }
   
-  handlePaginationUrl = (event) => {
-    event.preventDefault()
-    const pageUrl = event.target.href
-    this.refineView({url: pageUrl})
-  }
-  
-  handlePaginationCount = event => {
-    event.preventDefault()
-    const pageSize = event.target.innerHTML
-    this.setState({pageSize: pageSize})
-    this.refineView({size: pageSize})
-  }
-
   async componentDidMount() {
     try {
       const response = await fetch('api/v1/submissions')
@@ -52,6 +41,37 @@ export default class Search extends React.Component {
       console.log(error)
     }
   }
+
+  handlePaginationUrl = (event) => {
+    event.preventDefault()
+    const pageUrl = event.target.href
+    this.refineView({url: pageUrl})
+  }
+  
+  handlePaginationCount = event => {
+    event.preventDefault()
+    const pageSize = event.target.innerHTML
+    this.setState({pageSize: pageSize})
+    this.refineView({size: pageSize})
+  }
+  
+  handleSelectCompare = event => {
+    const images = this.state.imageCompare
+    const imageUrl = event.target.value
+    var filteredImages = images
+    if (images.includes(imageUrl)) {
+      console.log('image in array')
+      filteredImages = filteredImages.filter(image => image !== imageUrl)
+    } else {
+      if (images.length > 1) {
+        filteredImages.shift()
+      }
+      filteredImages.push(imageUrl)
+    }
+
+    this.setState({imageCompare: filteredImages})
+  }
+
 
   refineView = async ({reliable=this.state.reliable, 
                       site=this.state.site, 
@@ -93,6 +113,7 @@ export default class Search extends React.Component {
       <div className="ui raised segment no padding">
         <Form refineView={this.refineView} siteNames={this.props.siteNames}/>
         <Key />
+        <Compare imageCompare={this.state.imageCompare}/>
         
         <span className="mh2">{totalSubmissions} submissions found, page {pageNumber} of {pageNumbers}.</span>
         <ul className="list flex flex-wrap items-center pa0 ma0">
@@ -115,7 +136,7 @@ export default class Search extends React.Component {
 
         <div className="w-100-l relative z-1">
           <div className="flex flex-wrap justify-between submissions ph3 ph4-l">
-              {this.state.submissions.map((submission, i)=>(<Submission {...submission} key={i} />))}
+              {this.state.submissions.map((submission, i)=>(<Submission {...submission} key={i} handleSelectCompare={this.handleSelectCompare} />))}
           </div>
         </div>
       </div>

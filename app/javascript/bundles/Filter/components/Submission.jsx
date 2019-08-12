@@ -22,7 +22,19 @@ export default class Submission extends React.Component {
           <div className="ph3 pv4 " >
             <div className="aspect-ratio--object">
               <h1 className="f2 f3-l mv0 ph3 pt4 pb2 pr2 lh-title">{site}</h1>
-              <h2 className="f2 ph3 pb3">{recordTaken}</h2>
+
+              <span className="flex flex-wrap">
+                <h2 className="f2 ph3 pb3 w-70">{recordTaken}</h2>
+                <span className="w-25 flex flex-wrap">
+                  <label className="mr3">Compare</label>
+                  <input name="compare" 
+                         type="checkbox" 
+                         value={image}
+                         className="mt2 mb0" 
+                         onChange={this.props.handleSelectCompare}/>
+                </span>
+              </span>
+
               <div className="h-85 overflow-hidden">
                 <LazyLoad  
                   debounce={false}

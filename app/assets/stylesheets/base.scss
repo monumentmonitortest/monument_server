@@ -7,6 +7,7 @@ $main-font-color: #eaeaea;
 $dot-size: 2px;
 $dot-space: 22px;
 $green-background: #004035;
+$blue-background: #002040;
 
 body {
 	background:
@@ -41,6 +42,10 @@ div.container, img.logo {
   background-color: $green-background;
 }
 
+.blue-background {
+  background-color: $blue-background; 
+}
+
 .white-background {
   background-color: $main-font-color
 }
@@ -67,4 +72,22 @@ div.container, img.logo {
 
 .h-85 {
   height: 85%;
+}
+
+.sticky {
+  position: -webkit-sticky;
+  position: -moz-sticky;
+  position: -ms-sticky;
+  position: -o-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.ReactModal__Overlay--after-open {
+  z-index: 3 !important;
+}
+
+.ReactModal__Overlay--after-open div {
+  max-height: 85%;
 }
