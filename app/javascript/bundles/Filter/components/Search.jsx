@@ -60,7 +60,6 @@ export default class Search extends React.Component {
     const imageUrl = event.target.value
     var filteredImages = images
     if (images.includes(imageUrl)) {
-      console.log('image in array')
       filteredImages = filteredImages.filter(image => image !== imageUrl)
     } else {
       if (images.length > 1) {
