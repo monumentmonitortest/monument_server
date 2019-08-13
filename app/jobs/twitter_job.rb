@@ -1,65 +1,53 @@
 require 'twitter'
-# TODO: move this out maybe?!?!
-class TwitterClient
-  attr_reader :client
-
-  def client
-    @client = Twitter::REST::Client.new do |config|
-      config.consumer_key    = ENV["TWITTER_API_KEY"]
-      config.consumer_secret = ENV["TWITTER_API_SECRET"]
-    end
-  end
-end
+require 'twitter_client.rb'
+require 'open-uri'
 
 class TwitterJob
   def perform
     client.search("#monumentmonitor").each do |tweet|
-      tweet.media.each do |media|
-        Image.find_by(twitter_id: media.id) ? "" : create_image(tweet, media)
+      if !tweet.retweet? && tweet.media.present?
+        tweet.media.each do |media|
+          Type.find_by(type_specific_id: media.id.to_s) ? "" : create_submission(tweet, media)
+        end
       end
     end
   end
 
-
-
   private
 
-  def create_image(tweet, media)
+  def create_submission(tweet, media)
     twitter_desc = tweet.text
-    media_id = media.id
-    twitter_id = tweet.id
-    url = URI.parse(media.media_url).to_s
-    user = tweet.user
-    twitter_user = TwitterUser.find_by(twitter_id: user.id) || create_twitter_user(user)
+    type_specific_id = media.id.to_s
+    twitter_user = tweet.user.id.to_s
     record_taken = tweet.created_at
-    image = Image.new(url: url,
-                      twitter_id: twitter_id,
-                      source: 'twitter',
-                      twitter_user_id: twitter_user.id,
-                      record_taken: record_taken,
-                      media_id: media_id)
-    image.save
-  end
+    image_url = media.media_url
 
-  def create_twitter_user(user)
-    user_id = user.id
-    user_name = user.screen_name
-    location = user.geo_enabled? ? user.location : "not given"
-    friends_count = user.friends_count
-    followers_count = user.followers_count
-
-    twitter_user = TwitterUser.new(
-                            twitter_id: user_id,
-                            user_name: user_name,
-                            location: location,
-                            followers_count: followers_count,
-                            friends_count: friends_count
-     )
-     twitter_user.save
-     twitter_user
+    
+    registration = Registration.new(reliable: false, 
+    site_id: site_id, 
+    image_file: image_url, 
+    comment: twitter_desc,
+    record_taken: record_taken, 
+    type_name: 'TWITTER', 
+    insta_username: '',
+    email_address: '',
+    number: '',
+    twitter_username: twitter_user, 
+    type_specific_id: type_specific_id
+    )
+    
+    if registration.save
+      puts 'saved successffully'
+    else
+      puts "there was an error: #{registration.error}"
+    end
   end
 
   def client
-    @client ||= TwitterClient.new.client
+    @client ||= ::TwitterClient.new.client
+  end
+
+  def site_id
+    @site_id ||= Site.find_by(name: 'Twitter unsorted').id
   end
 end
