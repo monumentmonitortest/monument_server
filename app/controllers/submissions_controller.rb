@@ -2,6 +2,7 @@ class SubmissionsController < ApplicationController
   include SmartListing::Helper::ControllerExtensions
   helper  SmartListing::Helper
   before_action :set_submission, only: [:show, :edit, :update, :destroy]
+  before_action :redirect_unless_admin
 
   def index
     submissions_scope = Submission.all

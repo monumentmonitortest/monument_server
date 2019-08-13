@@ -1,4 +1,6 @@
 class SitesController < ApplicationController
+  before_action :redirect_unless_admin
+
   include SmartListing::Helper::ControllerExtensions
   helper  SmartListing::Helper
 

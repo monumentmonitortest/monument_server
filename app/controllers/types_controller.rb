@@ -2,6 +2,7 @@ class TypesController < ApplicationController
   include SmartListing::Helper::ControllerExtensions
   helper  SmartListing::Helper
 
+  before_action :redirect_unless_admin
   before_action :set_type, only: [:show, :edit, :update, :destroy]
   
   def index
