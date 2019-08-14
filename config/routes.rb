@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
   get '/', to: 'filter_home#index'
   devise_for :users
-  
-  
+    
   scope '/admin' do
     get '/', to: 'welcome#index'
     resources :types
@@ -17,10 +16,6 @@ Rails.application.routes.draw do
     resources :bulk_upload, only: [:index, :create]
   
     post '/sites/csv/results', to: 'csv#results', as: :results
-  
-    # get '/d3/machrie', to: 'd3#machrie'
-    
-    # root 'welcome#index'
   end
 
   # API  

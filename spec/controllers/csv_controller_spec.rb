@@ -9,10 +9,10 @@ RSpec.describe CsvController do
     let(:service_double)  { double(:create_csv_service) }
     let(:result)          { "csv,file" }
 
+    login_user
     before do
       allow(CSVCreateService).to receive(:new).and_return(service_double)
       allow(service_double).to receive(:create).and_return(result)
-
     end
     
     it "calls the CSV create service" do
