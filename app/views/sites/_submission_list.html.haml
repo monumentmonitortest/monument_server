@@ -14,9 +14,6 @@
           -# Render user row partial
           = smart_listing.render object: o, partial: "site_submission", locals: {object: o}
 
-    
-  = smart_listing.paginate
-  = smart_listing.pagination_per_page_links
 
 - else
   %p.warning No records!
