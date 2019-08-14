@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
 
   def redirect_unless_admin
     unless current_user.try(:admin?)
-      redirect_to '/welcome/index' 
+      redirect_to '/admin' 
       flash[:notice] = 'Sorry, you have to be an admin to do that!'
     end
   end

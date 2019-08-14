@@ -9,8 +9,9 @@ RSpec.describe "BulkUpload", type: :request do
       user = User.create!(email: "thing@thing.com", password: "supersecure", admin: true)
       sign_in user
     end
-
+    
     context "with correct params" do
+      # login_user/
       let(:site) { create(:site) }
       it "create new submissions" do
         headers = { "CONTENT_TYPE" => "application/json" }
@@ -28,20 +29,21 @@ RSpec.describe "BulkUpload", type: :request do
                   }
                   
         expect {
-          post "/bulk_upload", params, headers: headers
+          post "/admin/bulk_upload", params, headers: headers
         }.to change(Submission, :count)
 
       end
     end
       
     context "with image but incorrect params" do
+      # login_user
       it "does not create submissions" do
         headers = { "CONTENT_TYPE" => "application/json" }
         test_image_path = 'spec/support/assets/test-image.jpg'
         params = { "file": { "0": Rack::Test::UploadedFile.new(test_image_path, 'image/jpg', true) } }
         
         expect {
-          post "/bulk_upload", params, headers: headers
+          post "/admin/bulk_upload", params, headers: headers
         }.to_not change(Submission, :count)
       end
     end
@@ -52,7 +54,7 @@ RSpec.describe "BulkUpload", type: :request do
         headers = { "CONTENT_TYPE" => "application/json" }
 
         expect {
-          post "/bulk_upload", params: params, headers: headers
+          post "/admin/bulk_upload", params: params, headers: headers
         }.to_not change(Submission, :count)
         
         # TODO - why does this not work?

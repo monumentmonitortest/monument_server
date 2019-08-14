@@ -2,11 +2,11 @@ class SubmissionsController < ApplicationController
   include SmartListing::Helper::ControllerExtensions
   helper  SmartListing::Helper
   before_action :set_submission, only: [:show, :edit, :update, :destroy]
+  before_action :redirect_unless_admin
 
   def index
-    submissions_scope = Submission.all
-        
-    submissions_scope = submissions_scope.reliable if params[:reliable] == "1"
+    submissions_scope ||= reliable? ? Submission.with_attached_image.reliable : Submission.with_attached_image
+
     submissions_scope = search_site(submissions_scope, params[:site_filter]) if params[:site_filter].present?
     submissions_scope = type_search(submissions_scope, params[:type_filter]) if params[:type_filter].present?
    
@@ -39,6 +39,19 @@ class SubmissionsController < ApplicationController
   
   private
   
+  def permitted_params
+    params.permit(:reliable, 
+                  :site_id,
+                  :site_filter,
+                  :type_filter,
+                  :bespoke_size,
+                  :page)
+  end
+
+  def reliable?
+    permitted_params[:reliable] == "true"
+  end
+
   def set_submission
     @submission = Submission.find(params[:id])
   end

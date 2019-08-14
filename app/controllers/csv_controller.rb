@@ -1,4 +1,6 @@
 class CsvController < ApplicationController
+  before_action :redirect_unless_admin
+
   def results
     respond_to do |format|
       format.csv { send_data create_csv, filename: "collection-#{Date.today}.csv" }

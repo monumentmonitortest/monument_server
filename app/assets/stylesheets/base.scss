@@ -18,6 +18,20 @@ body {
   color: $main-font-color;
 }
 
+// some basic admin stuff
+body.admin {
+  background: #798a80 !important;
+  color: black;
+}
+
+body.admin input {
+  color: rgb(28,28,33);
+}
+
+body.admin a {
+  color: #1e5669;
+}
+
 nav {
   height: 100px;
   background: #000000;

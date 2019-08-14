@@ -1,9 +1,12 @@
 require 'rails_helper'
-RSpec.describe SitesController do
-  context 'GET index' do
+RSpec.describe SitesController, type: :controller do
+  include Devise::Test::ControllerHelpers
+
+  context 'GET /admin/sites' do
     let!(:site) { create(:site, name: 'MACHRIE') }
     let(:params) { {} }
 
+    login_user
     before do
       get :index, params: params
     end

@@ -15,7 +15,7 @@ class BulkUploadController < ApplicationController
       end
     else
       flash[:notice] = 'Make sure you include some pictures!'
-      redirect_back(fallback_location: root_path)
+      redirect_back(fallback_location: bulk_upload_index_path)
     end
   end
 

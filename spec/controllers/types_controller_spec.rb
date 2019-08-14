@@ -1,19 +1,17 @@
 require 'rails_helper'
-RSpec.describe TypesController, :type => :request do
+RSpec.describe TypesController, type: :controller do
   context 'GET types' do
     let!(:email_submission) { create(:submission_with_type) }
     let!(:insta_submission) { create(:submission_with_insta_type) }
     let(:params) { {} }
+    login_user
 
     it 'gets all the types' do
-      get "/types"
+      get :index, params: params
       expect(response.status).to eq(200)
-      expect(response.body).to include(email_submission.type.name)
-      expect(response.body).to include(insta_submission.type.name)
-    end
 
-    # TODO - implement filter?
-    context 'without filter' do
+      expect(assigns(:types)).to include(email_submission.type)
+      expect(assigns(:types)).to include(insta_submission.type)
     end
   end
 end
