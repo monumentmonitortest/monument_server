@@ -11,7 +11,6 @@ RSpec.describe "BulkUpload", type: :request do
     end
     
     context "with correct params" do
-      # login_user/
       let(:site) { create(:site) }
       it "create new submissions" do
         headers = { "CONTENT_TYPE" => "application/json" }
