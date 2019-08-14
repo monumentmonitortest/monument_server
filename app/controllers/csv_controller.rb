@@ -1,32 +1,46 @@
 class CsvController < ApplicationController
   before_action :redirect_unless_admin
 
-  def results
-    respond_to do |format|
-      format.csv { send_data create_csv, filename: "collection-#{Date.today}.csv" }
-    end
+  def index
   end
-  
+
+  def create
+    file = params["CSV-file"].read
+    data = JSON.parse(file)
+    import_instagram(data)
+    redirect_to '/admin'
+  end
+
   private
   
-  def create_csv
-    options = {}
-    # TODO, get options with filter working when you can search for specific types
-    # options = options.merge(query: filter) if type_filter.present?
-
-    ::CSVCreateService.new(permitted_params).create
+  def import_instagram(data)
+    data.each do |submission|
+      Type.find_by(type_specific_id: submission["imageUrl"]) ? "" : create_registration(submission)
+    end
   end
 
-  def scope
-    # this will scope on reliable images when implemented
-    # reliable_images? ? Image.all.reliable : Image.all
+  def instagram_site_id
+    Site.find_by(name: 'Instagram unsorted').id
   end
 
-  def site
-    Site.find(permitted_params[:site_id])
-  end
+  def create_registration(hash)
+    registration = Registration.new(reliable: false,
+                                    site_id: instagram_site_id,
+                                    image_file: hash["imageUrl"],
+                                    record_taken: hash["timestamp"],
+                                    type_name: "INSTAGRAM",
+                                    email_address: "",
+                                    number: "",
+                                    insta_username: hash["url"],
+                                    twitter_username: "",
+                                    type_specific_id: hash["imageUrl"],
+                                    comment: hash["firstComment"])
 
-  def permitted_params
-    params.permit(:filter, :reliable_filter, :site_id)
+    if registration.save
+      puts "registration save succesfull"
+    else
+      binding.pry
+      puts "whoops, there's been an error:"
+    end
   end
 end

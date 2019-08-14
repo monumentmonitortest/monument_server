@@ -34,6 +34,4 @@ class Registration
       file = URI.open(image_file)
       submission.image.attach(io: file, filename: 'animage.jpg')
     end
-
-
 end
