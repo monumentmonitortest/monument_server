@@ -1,7 +1,7 @@
 puts "Starting Twitter script"
-count = Image.count
+count = Submission.count
 TwitterJob.new.perform
-new_count = Image.count
+new_count = Submission.count
 
 new = new_count - count
-puts "DONE! Lets hope it worked, #{new} images created"
+puts "DONE! Lets hope it worked, #{new} submissions created"
