@@ -32,6 +32,7 @@ class RegistrationsController < ApplicationController
                                          :email_address, 
                                          :number, 
                                          :insta_username, 
-                                         :twitter_username)
+                                         :twitter_username,
+                                         :type_specific_id)
   end
 end

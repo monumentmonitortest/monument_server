@@ -1,6 +1,6 @@
 class Type < ApplicationRecord
   belongs_to :submission
-  store_accessor :data, :email_address, :number, :insta_username, :twitter_username 
+  store_accessor :data, :email_address, :number, :insta_username, :twitter_username
   validate :validate_name, :validate_params, on: :create
 
   before_create :annonymize_present_data
@@ -16,8 +16,10 @@ class Type < ApplicationRecord
 
   def annonymize_present_data
     self.data.map do |k, v|
-      annonymised_value = v.empty? ? v : encrypt(v)
-      self.data[k] =  annonymised_value
+      if DATA_TYPES.include?(k)
+        annonymised_value = v.empty? ? v : encrypt(v)
+        self.data[k] =  annonymised_value
+      end
     end
   end
 
