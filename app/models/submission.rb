@@ -10,6 +10,10 @@ class Submission < ApplicationRecord
   # to get url for image when developing API - use s.image.service_url
 
   scope :reliable, -> { where(reliable: true) }
+  
+  scope :exclude_unsorted, ->(id) { 
+    where.not(site_id: id)
+  }
 
 
   
