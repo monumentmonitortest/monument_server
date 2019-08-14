@@ -151,6 +151,9 @@ Site.create([
     latitude: 57.473488,
     longitude: -4.0753611,
     pic_id: "PIC328",
+  },
+  {
+    name: "Twitter unsorted"
   }
 ])
 
