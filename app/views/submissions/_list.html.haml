@@ -5,7 +5,7 @@
       %th{scope: "col"}= "Image"
       %th{scope: "col"}= "Reliable"
       %th{scope: "col"}= "Type"
-      %th{scope: "col"}= "Type Data"
+      %th{scope: "col"}= "Comments"
       %th{scope: "col"}= "Tags"
       %th{scope: "col"}= smart_listing.sortable "Record taken", "record_taken"
       %th{scope: "col"}= "Actions"
@@ -13,7 +13,7 @@
     %tbody
       - smart_listing.collection.each do |o|
         %tr
-        = smart_listing.render object: o, partial: "submissions/submission", locals: {object: o}
+        = smart_listing.render object: o, partial: "/submissions/submission", locals: {object: o}
 
           
   %div.smart-listing-new-button

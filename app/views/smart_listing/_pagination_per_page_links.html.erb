@@ -7,6 +7,7 @@
     smart_listing:      current SmartListing instance
     builder:            current builder instance
 -%>
+<% per_page_sizes = [10,50,80]%>
 
 <%= content_tag(:div, :class => container_classes ) do %>
   <% if smart_listing.options[:paginate] && (smart_listing.count > smart_listing.page_sizes.first) %>
