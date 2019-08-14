@@ -121,21 +121,6 @@ RSpec.describe Type, type: :model do
         
         expect(first.email_address).to eq second.email_address
       end
-
-      # context "when other data type involved" do
-      #   let(:params)  {{ 
-      #                     submission_id: submission.id,
-      #                     name: name, 
-      #                     email_address: email_address, 
-      #                     twitter_username: twitter_username, 
-      #                     insta_username: insta_username, 
-      #                     number: number ,
-      #                     type_specific_id: "123456"
-      #                   }}
-      #   it "does not scrambe the data" do
-      #     expect(subject.data["type_specific_id"]).to eq '123456'
-      #   end
-      # end
     end
   end
 end
