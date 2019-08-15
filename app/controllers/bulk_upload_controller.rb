@@ -28,7 +28,8 @@ class BulkUploadController < ApplicationController
                   :email_address, 
                   :number, 
                   :insta_username, 
-                  :twitter_username)
+                  :twitter_username,
+                  :comment)
   end
 
   # TODO - work out if this should be somewhere else?
@@ -37,7 +38,6 @@ class BulkUploadController < ApplicationController
     params[:file].each do |key, image|
       registration_params = permitted_params.merge(image: image)
       
-      # binding.pry
       @registration = Registration.new(registration_params)
 
       if @registration.save

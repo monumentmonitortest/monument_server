@@ -8,6 +8,9 @@
       <%= check_box_tag :reliable %>
       <%= label_tag :record_taken, "date taken" %>
       <%= date_field_tag :record_taken %>
+
+      <%= label_tag :comment, "Comment" %>
+      <%= text_field_tag :comment %>
   
       <%= label_tag :type_name, "Source/Type" %>
       <%= select_tag :type_name, options_for_select(Type::NAMES), class: "type_name_select" %>

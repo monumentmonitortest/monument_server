@@ -9,7 +9,7 @@ $(document).on("ready page:load", function() {
 core.BulkUpload.readyBulkUpload = function() {
   console.log('fired!')
   Dropzone.options.filesField = {
-    url: "/bulk_upload",
+    url: "/admin/bulk_upload",
     addRemoveLinks: true,
     autoProcessQueue: false,
     uploadMultiple: true,
@@ -41,11 +41,13 @@ core.BulkUpload.readyBulkUpload = function() {
           var number = $('#tpl').find('#number').val()
           var instaUsername = $('#tpl').find('#insta_username').val()
           var twitterUsername = $('#tpl').find('#twitter_username').val()
+          var comment = $('#tpl').find('#comment').val()
           
           formData.append('reliable', reliable);
           formData.append('record_taken', date);
           formData.append('type_name', typeName);
-  
+          formData.append('comment', comment);
+
           formData.append('email_address', emailAddress);
           formData.append('number', number);
           formData.append('insta_username', instaUsername);
