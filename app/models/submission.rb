@@ -15,7 +15,18 @@ class Submission < ApplicationRecord
     where.not(site_id: id)
   }
 
+  scope :search_site, ->(site_name) {
+    if site_name.present?
+      where(site_id: Site.find_by(name: site_name))
+    end
+  }
 
+  scope :type_search, ->(type_name) {
+    if type_name.present?
+      type_name.upcase!
+      joins(:type).where(types: { name: type_name})
+    end
+  }
   
   def type_name
     @type_name ||= type.present? ? type.name : ""
