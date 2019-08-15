@@ -110,9 +110,11 @@ export default class Search extends React.Component {
 
     return (
       <div className="ui raised segment no padding">
-        <Form refineView={this.refineView} siteNames={this.props.siteNames}/>
-        <Key />
-        <Compare imageCompare={this.state.imageCompare}/>
+        <div class="w-90 center">
+          <Form refineView={this.refineView} siteNames={this.props.siteNames}/>
+          <Key />
+          <Compare imageCompare={this.state.imageCompare}/>
+        </div>
         
         <span className="mh2">{totalSubmissions} submissions found, page {pageNumber} of {pageNumbers}.</span>
         <ul className="list flex flex-wrap items-center pa0 ma0">
