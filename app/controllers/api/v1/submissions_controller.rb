@@ -50,12 +50,18 @@ module Api
           permitted_params[:type_filter]
         end
 
+        def search_site(collection, name)
           collection.where(site_id: Site.find_by(name: name))
         end
         
+        def type_search(collection, type_name)
           type_name.upcase!
           collection = collection.joins(:type).where(types: { name: type_name})
           collection
+        end
+
+        def unsorted_sites
+          @unsorted_sites||= Site::UNSORTED_SITES.map {|name| Site.find_by(name: name).try(:id) }
         end
     end
   end
