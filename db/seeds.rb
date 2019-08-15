@@ -154,6 +154,12 @@ Site.create([
   },
   {
     name: "Twitter unsorted"
+  },
+  {
+    name: "Instagram unsorted"
+  },
+  {
+    name: "unidentified"
   }
 ])
 
