@@ -13,10 +13,14 @@ div.submission-form {
 }
 
 .submission {
-  width: calc(50% - 1rem);
+  width: calc(25% - 1rem);
 }
 
-.submission:nth-of-type(even) {
+.submission:nth-of-type(2n) {
+  transform: translateY(4rem);
+}
+
+.submission:nth-of-type(4n) {
   transform: translateY(4rem);
 }
 

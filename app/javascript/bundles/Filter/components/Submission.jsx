@@ -19,7 +19,7 @@ export default class Submission extends React.Component {
     return (
       <div className={submissionClass}>
         <div className="aspect-ratio aspect-ratio--3x4">
-          <div className="ph3 pv4 " >
+          <div className="ph3 pv4" >
             <div className="aspect-ratio--object">
               <h1 className="f2 f3-l mv0 ph3 pt4 pb2 pr2 lh-title">{site}</h1>
 
