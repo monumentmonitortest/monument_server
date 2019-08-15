@@ -3,15 +3,20 @@ module Api
     class SubmissionsController < BaseController
 
       def index
-        submissions_scope ||= reliable? ? Submission.with_attached_image.reliable : Submission.with_attached_image
-        
-        submissions_scope = search_site(submissions_scope, site_filter) if site_filter?
-        submissions_scope = type_search(submissions_scope, type_filter) if type_filter?
-        
+        submissions_scope ||= reliable? ? scope.reliable : scope
+
+        unsorted_sites.each do |id|
+          submissions_scope = submissions_scope.exclude_unsorted(id)
+        end
+
         paginate json: submissions_scope.order(record_taken: :desc), per_page: page_size
       end
 
       private
+
+        def scope
+          Submission.with_attached_image.search_site(site_filter).type_search(type_filter)
+        end
 
         def permitted_params
           params.permit(:reliable, 
@@ -30,14 +35,6 @@ module Api
           permitted_params[:reliable] == "true"
         end
 
-        def site_filter?
-          site_filter.present?
-        end
-
-        def type_filter?
-          type_filter.present?
-        end
-
         def site_filter
           permitted_params[:site_filter]
         end
@@ -46,14 +43,8 @@ module Api
           permitted_params[:type_filter]
         end
 
-        def search_site(collection, name)
-          collection.where(site_id: Site.find_by(name: name))
-        end
-        
-        def type_search(collection, type_name)
-          type_name.upcase!
-          collection = collection.joins(:type).where(types: { name: type_name})
-          collection
+        def unsorted_sites
+          @unsorted_sites||= Site::UNSORTED_SITES.map {|name| Site.find_by(name: name).try(:id) }
         end
     end
   end

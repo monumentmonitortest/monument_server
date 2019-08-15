@@ -3,9 +3,8 @@ class BulkUploadController < ApplicationController
   before_action :redirect_unless_admin
 
   def index
-
   end
-  
+
   def create
     if params[:file].present?
       results = bulk_upload_images

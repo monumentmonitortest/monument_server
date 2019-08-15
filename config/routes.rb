@@ -15,7 +15,9 @@ Rails.application.routes.draw do
     
     resources :bulk_upload, only: [:index, :create]
   
-    post '/sites/csv/results', to: 'csv#results', as: :results
+    resources :csv
+    
+    # post '/sites/csv/results', to: 'csv#results', as: :results
   end
 
   # API  
