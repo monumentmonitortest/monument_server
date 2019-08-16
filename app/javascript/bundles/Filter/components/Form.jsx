@@ -31,8 +31,8 @@ export default class Form extends React.Component {
   render() {
     return (
       <form className="ph4 pv4 mb0 green-background br1" onSubmit={this.handleSubmit}>
-          <div className="flex flex-wrap items-center justify-between">
-            <span className="h-25">
+          <div className="flex flex-wrap items-center justify-around">
+            {/* <span className="h-25">
               <label>
                 Useful?
               </label>
@@ -43,7 +43,7 @@ export default class Form extends React.Component {
                 className='mt4'
                 checked={this.state.reliable}
                 onChange={this.handleInputChange} />
-            </span>
+            </span> */}
 
             <span className="h-25">
               <label>
@@ -70,12 +70,14 @@ export default class Form extends React.Component {
                 value={this.state.type} 
                 onChange={this.handleInputChange} />
             </span>
+
+            <span className="h-25">
+              <button className="flex center mt4 white-background dark-color" type="submit" onClick={this.handleSubmit}>
+                Search
+              </button>
+            </span>
           </div>
           
-          
-          <button className="flex center mt4 white-background dark-color" type="submit" onClick={this.handleSubmit}>
-            Search
-          </button>
         </form>
     )
   }
