@@ -18,7 +18,7 @@ export default class Search extends React.Component {
       submissions: [],
       links: [],
       imageCompare: [],
-      pageSize: 10, // how many submissons per page
+      pageSize: 20, // how many submissons per page
       totalSubmissions: '', // how many submissions there are
       pageNumber: '' // what page we're on at the moment
     };
@@ -130,9 +130,9 @@ export default class Search extends React.Component {
         
         <ul className="list flex flex-wrap items-center pa0 ma0 mb4">
           <li className="pointer mh2 tc">Show per page:</li>
-          <li className="pointer mh2 tc"><a onClick={this.handlePaginationCount}>10</a></li>
-          <li className="pointer mh2 tc"><a onClick={this.handlePaginationCount}>25</a></li>
+          <li className="pointer mh2 tc"><a onClick={this.handlePaginationCount}>20</a></li>
           <li className="pointer mh2 tc"><a onClick={this.handlePaginationCount}>50</a></li>
+          <li className="pointer mh2 tc"><a onClick={this.handlePaginationCount}>100</a></li>
         </ul>
 
         <div className="w-100-l relative z-1">
