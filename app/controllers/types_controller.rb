@@ -6,7 +6,7 @@ class TypesController < ApplicationController
   before_action :set_type, only: [:show, :edit, :update, :destroy]
   
   def index
-    @types = smart_listing_create(:types, Type.all, partial: "types/listing")
+    @types = Type.all
   end
   
   def new
