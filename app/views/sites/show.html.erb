@@ -31,7 +31,7 @@
 
   <h3>Submissions</h3>
 
-  <%= render template: "sites/site_submissions_norms", site: @site %>
+  <%= render template: "sites/site_submissions", site: @site %>
 
   <% if admin? %>
     <%= link_to "New Submission", new_site_registration_url(@site, @submission) %>

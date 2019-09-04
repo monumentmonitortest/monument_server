@@ -15,11 +15,14 @@
   width: 100%;
  }
 
- div.pagination {
-   span.previous_page {
-     margin-right: 5px;
-   }
-   a {
-     margin: 0 5px;
-   }
+.admin nav.pagination {
+  background: initial;
+  height: initial;
+
+  span.previous_page {
+    margin-right: 5px;
+  }
+  span {
+    margin: 0 5px;
+  }
  }
