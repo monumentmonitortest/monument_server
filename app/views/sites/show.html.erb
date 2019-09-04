@@ -21,11 +21,6 @@
       <%= @site.visitors %>
     </div>
 
-    <div class="mv2">
-      <span class="fw9 db">Notes:</span>
-      <span></span>
-    </div>
-
   </div>
   <div class="w-50">
     <div id="map"></div>
@@ -35,7 +30,8 @@
 </div>
 
   <h3>Submissions</h3>
-  <%= smart_listing_render_controller :submissions %>
+
+  <%= render template: "sites/site_submissions_norms", site: @site %>
 
   <% if admin? %>
     <%= link_to "New Submission", new_site_registration_url(@site, @submission) %>
@@ -54,13 +50,13 @@
 
 
 
-<script>
-  function initMap() {
-    var site_location = {lat: <%=@site.latitude%>, lng: <%=@site.longitude%>};
-    var map = new google.maps.Map(
-        document.getElementById('map'), {zoom: 10, center: site_location});
-    var marker = new google.maps.Marker({position: site_location, map: map});
-  }
-</script>
-<script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQXZ0R4z8Jh0dL_5EkXREphusFS8_zCto&callback=initMap">
+<%# <script> %>
+  <%# function initMap() { %>
+    <%# var site_location = {lat: =@site.latitude, lng: =@site.longitude}; %>
+    <%# var map = new google.maps.Map( %>
+        <%# document.getElementById('map'), {zoom: 10, center: site_location}); %>
+    <%# var marker = new google.maps.Marker({position: site_location, map: map}); %>
+  <%# } %>
+<%# </script> %>
+<%# <script async defer %>
+    <%# src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQXZ0R4z8Jh0dL_5EkXREphusFS8_zCto&callback=initMap"> %>

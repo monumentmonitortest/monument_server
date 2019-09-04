@@ -33,7 +33,7 @@ class SitesController < ApplicationController
   end
 
   def show
-    @submissions = smart_listing_create :submissions, @site.submissions, partial: "sites/submission_list"
+    @submissions = @site.submissions.paginate(:page => params[:page]).order('record_taken DESC')
   end
 
   private

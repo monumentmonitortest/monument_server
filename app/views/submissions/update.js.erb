@@ -1,1 +1,5 @@
-<%= smart_listing_item :submissions, :update, @submission, @submission.valid? ? "submissions/submission" : "submissions/form" %>
+<%# This is not working... %>
+
+$("input.<%= @submission.id %>").eq(0).css({"background-color": "green"});
+$("input[name=commit].<%= @submission.id %>").eq(0).attr('value', "Submission Updated")
+ 

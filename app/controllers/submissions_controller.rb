@@ -22,6 +22,9 @@ class SubmissionsController < ApplicationController
 
   def update
     @submission.update_attributes(submission_params)
+    respond_to do |format|  
+      format.js { render 'submissions/update'}
+    end  
   end
 
   def new
