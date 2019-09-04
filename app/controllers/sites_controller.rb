@@ -33,7 +33,7 @@ class SitesController < ApplicationController
   end
 
   def show
-    @submissions = @site.submissions.paginate(:page => params[:page]).order('record_taken DESC')
+    @submissions = @site.submissions.order(:record_taken).page params[:page]
   end
 
   private

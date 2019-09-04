@@ -46,7 +46,6 @@ gem 'react_on_rails', '11.2.1'
 gem 'kaminari' 
 gem 'api-pagination'
 gem "mini_magick"
-gem 'will_paginate', '~> 3.1.0'
 
 
 group :development, :test do
