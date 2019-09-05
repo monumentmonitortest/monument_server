@@ -10,17 +10,23 @@ class TweetBacklogJob
     tweet_json = JSON.parse(tweets)
     tweet_json.each do |tweet|
       tweet_id = tweet["tweet_id"]
-      tweet_object = client.status(tweet_id)
-
-      if !tweet_object.retweet? && tweet_object.media.present? && tweet_object.created_at < DATE
-        puts "tweet is ok"
-        images = tweet_object.media
-        images.each do |image|
-          create_submission(tweet_object, image)
+        begin
+        tweet_object = client.status(tweet_id)
+        if !tweet_object.retweet? && tweet_object.media? && tweet_object.created_at < DATE
+          puts "tweet is ok"
+          images = tweet_object.media
+          images.each do |image|
+            create_submission(tweet_object, image)
+          end
+        else
+          puts "tweet is not ok"
         end
-      else
-        puts "tweet is not ok"
-      end
+        rescue Twitter::Error::TooManyRequests => error
+          puts "too many requests"
+
+        rescue Twitter::Error::Forbidden => error
+          puts "not allowed to see this tweet"
+        end
     end
   end
 
