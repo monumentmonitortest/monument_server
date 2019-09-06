@@ -31,7 +31,7 @@ class CsvController < ApplicationController
                                     type_name: "INSTAGRAM",
                                     email_address: "",
                                     number: "",
-                                    insta_username: hash["url"],
+                                    insta_username: hash["url"], #this is wrong...
                                     twitter_username: "",
                                     type_specific_id: hash["imageUrl"],
                                     comment: hash["firstComment"])
