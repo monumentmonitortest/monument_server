@@ -9,7 +9,7 @@ class CsvController < ApplicationController
     file = params["CSV-file"].read
     data = JSON.parse(file)
     
-    InstagramUploadJob.perform_later(data, date)
+    InstagramUploadJob.perform(data, date)
     redirect_to '/admin'
   end
 end
