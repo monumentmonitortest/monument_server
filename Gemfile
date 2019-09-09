@@ -46,7 +46,7 @@ gem 'react_on_rails', '11.2.1'
 gem 'kaminari' 
 gem 'api-pagination'
 gem "mini_magick"
-
+gem 'rearmed'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
