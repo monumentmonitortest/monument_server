@@ -1,12 +1,13 @@
 require 'open-uri'
 
-class InstagramUploadJob < ApplicationJob
-  queue_as :default
-
-  def perform(json_data, date)
+class InstagramUploadJob
+  def initialize(json_data, date)
+    @json_data = json_data
     @date = date.to_date
+  end
 
-    json_data.each do |post|
+  def perform
+    @json_data.each do |post|
         
       if post['shortcode_media']['edge_sidecar_to_children']
         images = post['shortcode_media']['edge_sidecar_to_children']['edges']
