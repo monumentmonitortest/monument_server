@@ -1,10 +1,13 @@
 require 'open-uri'
 
 class InstaBacklogJob
+  def initialize(json_data, date)
+    @date = date.to_date
+    @json_data = json_data # data from instamncer scrape
+  end
+
   def perform
-    posts = File.read('./lib/monumentmonitor.json')
-    post_json = JSON.parse(posts)
-    post_json.each do |post|
+    @json_data.each do |post|
         
       if post['shortcode_media']['edge_sidecar_to_children']
         images = post['shortcode_media']['edge_sidecar_to_children']['edges']
@@ -25,35 +28,41 @@ class InstaBacklogJob
   private
 
   def create_submission(post, image, id)
-    post_desc = post['shortcode_media']['edge_media_to_caption']['edges'][0]['node']['text']
-    insta_user = post['shortcode_media']['owner']['username']
     taken = post['shortcode_media']['taken_at_timestamp']
     record_taken = DateTime.strptime(taken.to_s,'%s')
+    # binding.pry
+    
+    if record_taken > @date
+      text_node = post['shortcode_media']['edge_media_to_caption']['edges']
+      post_desc = text_node.present? ? text_node[0]['node']['text'] : ""
+      insta_user = post['shortcode_media']['owner']['username']
 
-    type_specific_id = id
-    image_url = image
+      type_specific_id = id
+      image_url = image
 
-    unless Type.find_by(type_specific_id: type_specific_id)
-      registration = Registration.new(reliable: false, 
-        site_id: site_id, 
-        image_file: image_url, 
-        comment: post_desc,
-        record_taken: record_taken, 
-        type_name: 'INSTAGRAM', 
-        twitter_username: '',
-        email_address: '',
-        number: '',
-        insta_username: insta_user, 
-        type_specific_id: type_specific_id
-      )
-      
-      if registration.save
-        puts 'saved successffully'
+      unless Type.find_by(type_specific_id: type_specific_id)
+        registration = Registration.new(reliable: false, 
+          site_id: site_id, 
+          image_file: image_url, 
+          comment: post_desc,
+          record_taken: record_taken, 
+          type_name: 'INSTAGRAM', 
+          twitter_username: '',
+          email_address: '',
+          number: '',
+          insta_username: insta_user, 
+          type_specific_id: type_specific_id
+        )
+        
+        if registration.save
+          puts 'saved successffully'
+        else
+          puts "there was an error: #{registration.error}"
+        end
       else
-        puts "there was an error: #{registration.error}"
+        puts "submission already exists"
       end
-    else
-      puts "submission already exists"
+
     end
   end
 
