@@ -1,13 +1,12 @@
 require 'open-uri'
 
-class InstaBacklogJob
-  def initialize(json_data, date)
-    @date = date.to_date
-    @json_data = json_data # data from instamncer scrape
-  end
+class InstagramUploadJob < ApplicationJob
+  queue_as :default
 
-  def perform
-    @json_data.each do |post|
+  def perform(json_data, date)
+    @date = date.to_date
+
+    json_data.each do |post|
         
       if post['shortcode_media']['edge_sidecar_to_children']
         images = post['shortcode_media']['edge_sidecar_to_children']['edges']
