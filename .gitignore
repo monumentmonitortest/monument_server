@@ -14,7 +14,7 @@
 !/log/.keep
 !/tmp/.keep
 storage/
-
+dump.rdb
 /packs/*
 /node_modules
 /yarn-error.log

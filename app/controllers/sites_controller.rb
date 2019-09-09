@@ -33,7 +33,7 @@ class SitesController < ApplicationController
   end
 
   def show
-    @submissions = @site.submissions.order(:record_taken).page params[:page]
+    @submissions = @site.submissions.order(:record_taken).page(params[:page]).per(100)
   end
 
   private

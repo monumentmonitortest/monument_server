@@ -31,7 +31,13 @@ class Registration
   private
 
     def save_image(submission, image_file)
-      file = URI.open(image_file)
-      submission.image.attach(io: file, filename: 'animage.jpg')
+      begin
+        file = URI.open(image_file)
+        submission.image.attach(io: file, filename: 'animage.jpg')
+      rescue OpenURI::HTTPError => e
+        puts "image is buggered"
+        errors.add(:base, e.message)
+        false
+      end
     end
 end

@@ -1,11 +1,12 @@
 <h2>Upload CSV from instagram scape here</h2>
 
-<p>Instagram can be scraped using this service <a href="https://blog.apify.com/scrape-instagram-posts-comments-and-more-21d05506aeb3">on apify</a></p>
+<p>Instagram can be scraped using this instamancer</p>
 <p>
-  specific product <a href="https://apify.com/jaroslavhejlek/instagram-scraper">here</a>
+  right <a href="https://adamsm.com/instamancer/">here</a>
 </p>
 
 <%= form_tag({action: :create}, multipart: true) do %>
+  <%= date_field_tag(:from_date, Date.today - 1.week) %><br/>
   <%= file_field_tag 'CSV-file' %>
   <%= submit_tag("Upload") %>
 <% end %>

@@ -46,6 +46,7 @@ gem 'react_on_rails', '11.2.1'
 gem 'kaminari' 
 gem 'api-pagination'
 gem "mini_magick"
+gem 'sidekiq'
 
 
 group :development, :test do
