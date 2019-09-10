@@ -15,8 +15,10 @@ Rails.application.routes.draw do
     
     resources :bulk_upload, only: [:index, :create]
   
-    resources :csv
+    resources :insta_upload
     
+    resources :results
+
     # post '/sites/csv/results', to: 'csv#results', as: :results
   end
 
@@ -24,6 +26,8 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :submissions
+      get :type_specific_report, to: 'csv#type_specific'
+      get :basic_submission_report, to: 'csv#basic_submission'
     end
   end
 end

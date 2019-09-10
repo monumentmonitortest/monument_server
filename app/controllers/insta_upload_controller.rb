@@ -1,4 +1,4 @@
-class CsvController < ApplicationController
+class InstaUploadController < ApplicationController
   before_action :redirect_unless_admin
 
   def index
