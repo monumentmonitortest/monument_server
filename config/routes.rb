@@ -19,7 +19,6 @@ Rails.application.routes.draw do
     
     resources :results
 
-    # get '/person-specific-type-results', to: 'results#person_specific_type_results'
     # post '/sites/csv/results', to: 'csv#results', as: :results
   end
 
