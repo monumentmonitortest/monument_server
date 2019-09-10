@@ -26,7 +26,7 @@ module Api
             csv << attributes
 
             Submission.all.each do |submission|
-              row = [submission.id, submission.site.name, submission.record_taken, submission.type.name]
+              row = [submission.id, submission.site.name, submission.record_taken.strftime("%d/%m/%Y"), submission.type.name]
               csv << row
             end
           end
@@ -43,7 +43,7 @@ module Api
             users.map do |user| 
               submissions = Type.where('data @> ?', {insta_username: user}.to_json)
               row = [user, submissions.count]
-              row = row + submissions.map {|s| s.submission.record_taken}.uniq.flatten
+              row = row + submissions.map {|s| s.submission.record_taken.strftime("%d/%m/%Y")}.uniq.flatten
               csv << row
             end
           end
