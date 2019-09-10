@@ -6,7 +6,7 @@ module Api
       def type_specific
         # returns report with breakdown of individuals submissions
         respond_to do |format|
-          format.csv { send_data create_specific_type_report(params[:type_name]), filename: "user-specific-submissions-#{Date.today}.csv"  }
+          format.csv { send_data create_specific_type_report(params[:type_name], params[:data]), filename: "user-specific-submissions-#{Date.today}.csv"  }
         end
       end
 
@@ -34,14 +34,14 @@ module Api
 
 
         # creates report on specific type
-        def create_specific_type_report(name)
+        def create_specific_type_report(name, data)
           attributes = %w{user-id submission-numbers records-taken}
           CSV.generate(headers: true) do |csv|
             csv << attributes
 
-            users = Type.where(name: name).map { |t| t.data['insta_username']}.uniq
+            users = Type.where(name: name).map { |t| t.data[data]}.uniq
             users.map do |user| 
-              submissions = Type.where('data @> ?', {insta_username: user}.to_json)
+              submissions = Type.where('data @> ?', {data => user}.to_json)
               row = [user, submissions.count]
               row = row + submissions.map {|s| s.submission.record_taken.strftime("%d/%m/%Y")}.uniq.flatten
               csv << row
