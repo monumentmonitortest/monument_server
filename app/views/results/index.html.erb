@@ -55,34 +55,34 @@ Numbers of submissions by type
 
 <h3>Basic breakdown of submissions</h3>
 <div>
-  <%= link_to 'Basic submission report', api_v1_basic_submission_report_path(format: "csv", type_name: 'INSTAGRAM'), class: 'button' %>
+  <%= link_to 'Basic submission report', api_v1_basic_submission_report_path(format: "csv"), class: 'button' %>
 </div>
 
 <h3>Breakdown of submissions by type</h3>
 <div>
   <p>
     Export breakdown of results by individual submittors by type (instagram)
-    <%= link_to 'instagram report', api_v1_type_specific_report_path(format: "csv", type_name: 'INSTAGRAM'), class: 'button' %>
+    <%= link_to 'instagram report', api_v1_type_specific_report_path(format: "csv", type_name: 'INSTAGRAM', data: 'insta_username'), class: 'button' %>
   </p>
 </div>
 
 <div>
   <p>
     Export breakdown of results by individual submittors by type (twitter)
-    <%= link_to 'twitter report', api_v1_type_specific_report_path(format: "csv", type_name: 'TWITTER'), class: 'button'  %>
+    <%= link_to 'twitter report', api_v1_type_specific_report_path(format: "csv", type_name: 'TWITTER', data: 'twitter_username'), class: 'button'  %>
   </p>
 </div>
 
 <div>
   <p>
     Export breakdown of results by individual submittors by type (email)
-    <%= link_to 'email report', api_v1_type_specific_report_path(format: "csv", type_name: 'EMAIL'), class: 'button'  %>
+    <%= link_to 'email report', api_v1_type_specific_report_path(format: "csv", type_name: 'EMAIL', data: 'email_address'), class: 'button'  %>
   </p>
 </div>
 
 <div>
   <p>
     Export breakdown of results by individual submittors by type (whatsapp)
-    <%= link_to 'whatsapp report', api_v1_type_specific_report_path(format: "csv", type_name: 'WHATSAPP'), class: 'button'  %>
+    <%= link_to 'whatsapp report', api_v1_type_specific_report_path(format: "csv", type_name: 'WHATSAPP', data: 'number'), class: 'button'  %>
   </p>
 </div>
