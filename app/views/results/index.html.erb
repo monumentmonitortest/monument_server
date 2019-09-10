@@ -1,0 +1,88 @@
+<h2>Results</h2>
+
+<div>
+  <p>
+    Note - all results here are from after 01/09/2018
+  </p>
+</div>
+
+Numbers of submissions by type
+<table class="u-full-width">
+  <thead>
+    <tr>
+      <% Type::NAMES.each do |type| %>
+        <th><%= type %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <% @type_numbers.each do |type| %>
+        <td><%= type %></td>
+      <% end %>
+    </tr>
+  </tbody>
+</table>
+<button>To CSV</button>
+
+<p>Numbers of submissions by site</p>
+
+<table class="u-full-width">
+  <thead>
+    <tr>
+      <th>Site name</th>
+      <th>Submission count</th>
+      <th>Instagram</th>
+      <th>Email</th>
+      <th>Twitter</th>
+      <th>Whatsapp</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @site_numbers.each do |site| %>
+      <tr>
+        <td><%= site[:name] %></td>
+        <td><%= site[:submissions] %></td>
+        <td><%= site[:instagram] %></td>
+        <td><%= site[:email] %></td>
+        <td><%= site[:twitter] %></td>
+        <td><%= site[:whatsapp] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<button>To CSV</button>
+
+<h3>Basic breakdown of submissions</h3>
+<div>
+  <%= link_to 'Basic submission report', api_v1_basic_submission_report_path(format: "csv", type_name: 'INSTAGRAM'), class: 'button' %>
+</div>
+
+<h3>Breakdown of submissions by type</h3>
+<div>
+  <p>
+    Export breakdown of results by individual submittors by type (instagram)
+    <%= link_to 'instagram report', api_v1_type_specific_report_path(format: "csv", type_name: 'INSTAGRAM'), class: 'button' %>
+  </p>
+</div>
+
+<div>
+  <p>
+    Export breakdown of results by individual submittors by type (twitter)
+    <%= link_to 'twitter report', api_v1_type_specific_report_path(format: "csv", type_name: 'TWITTER'), class: 'button'  %>
+  </p>
+</div>
+
+<div>
+  <p>
+    Export breakdown of results by individual submittors by type (email)
+    <%= link_to 'email report', api_v1_type_specific_report_path(format: "csv", type_name: 'EMAIL'), class: 'button'  %>
+  </p>
+</div>
+
+<div>
+  <p>
+    Export breakdown of results by individual submittors by type (whatsapp)
+    <%= link_to 'whatsapp report', api_v1_type_specific_report_path(format: "csv", type_name: 'WHATSAPP'), class: 'button'  %>
+  </p>
+</div>
