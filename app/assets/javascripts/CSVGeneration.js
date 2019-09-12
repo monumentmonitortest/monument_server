@@ -1,27 +1,17 @@
+core.CsvReports = {};
 
-$(document).ready(function(){ 
-  readyCSVExport();
- }) 
+$(document).on("ready page:load", function() {
+  if ($('h2#csv-reports').size() > 0) {
+    core.CsvReports.readySiteReport();
+  } 
+});
 
-function readyCSVExport() {
-  $( ".js-csv" ).click(function(e) {
-    e.preventDefault()
-    var options = $( ".image-options").val()
-    var reliable = $( "input:checkbox").first().attr("value")
-    
-    var pageURL = $(location).attr("href");
-    var siteId = /sites\/(\d+)/.exec(pageURL)[1];
 
-    $.ajax({
-      url: "csv/results",
-      type: 'POST',
-      data: { filter: options, reliable_filter: reliable, site_id: siteId },
-      dataType: 'text',
-      success: function(result) {
-        var uri = 'data:application/csv;charset=UTF-8,' + encodeURIComponent(result);
-        window.open(uri, 'site-data.csv');
-      }
+core.CsvReports.readySiteReport = function() {
+  $( "select.site-select" ).change(function(e) {
+    var id = $('select#site_id').children("option:selected").val()
+    var href = $( "#site-specific-report" ).attr("href")
+    var newLink = href.split('?')[0] + '?site_id=' + id
+    $( "#site-specific-report" ).attr("href", newLink)
   });
-    alert( "CSV download complete (disable popups if it hasn't)" );
-  })
-}
+} 

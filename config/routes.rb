@@ -28,6 +28,7 @@ Rails.application.routes.draw do
       resources :submissions
       get :type_specific_report, to: 'csv#type_specific'
       get :basic_submission_report, to: 'csv#basic_submission'
+      get :site_specific_report, to: 'csv#site_specific'
     end
   end
 end

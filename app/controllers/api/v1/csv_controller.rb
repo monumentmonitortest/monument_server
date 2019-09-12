@@ -17,6 +17,12 @@ module Api
         end
       end
 
+      def site_specific
+        respond_to do |format|
+          format.csv { send_data create_specific_site_report(params[:site_id]), filename: "submissions-by-site#{Date.today}.csv"  }
+        end
+      end
+
 
       private
 
@@ -49,6 +55,18 @@ module Api
           end
         end
 
+        def create_specific_site_report(site_id)
+          attributes = %w{date submissions}
+          CSV.generate(headers: true) do |csv|
+            csv << attributes
+
+            submissions = Submission.where(site_id: site_id).select(:record_taken).group(:record_taken).having("count(*) > 1").size
+            submissions.map do |submission|
+              submission[0] = submission[0].strftime("%d/%m/%Y")
+              csv << submission
+            end
+          end
+        end
 
     end
   end
