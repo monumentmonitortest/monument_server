@@ -23,7 +23,7 @@ class ResultsController < ApplicationController
         submissions: site.submissions.where("record_taken > ?", DATE).count,
         twitter: site.submissions.joins(:type).where(types: { name: "TWITTER" }).where("record_taken > ?", DATE).count,
         instagram: site.submissions.joins(:type).where(types: { name: "INSTAGRAM" }).where("record_taken > ?", DATE).count,
-        email: site.submissions.joins(:type).where(types: { name: "EMAIK" }).where("record_taken > ?", DATE).count,
+        email: site.submissions.joins(:type).where(types: { name: "EMAIL" }).where("record_taken > ?", DATE).count,
         whatsapp: site.submissions.joins(:type).where(types: { name: "WHATSAPP" }).where("record_taken > ?", DATE).count
       }
     end
