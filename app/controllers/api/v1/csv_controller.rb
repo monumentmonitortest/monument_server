@@ -61,12 +61,19 @@ module Api
           attributes = %w{date submissions}
           CSV.generate(headers: true) do |csv|
             csv << attributes
-
-            submissions = Submission.where(site_id: site_id).select(:record_taken).group(:record_taken).having("count(*) > 1").size
-            submissions.map do |submission|
-              submission[0] = submission[0].strftime("%d/%m/%Y")
-              csv << submission
+            
+            submissions_hash = {}
+            submissions = Submission.where(site_id: site_id)
+            submissions.map do |s|
+              date = s.record_taken.strftime("%d/%m/%Y")
+              if submissions_hash[date]
+                submissions_hash[date] += 1
+              else
+                submissions_hash[date] = 1
+              end
             end
+
+            submissions_hash.map {|s| csv << s }
           end
         end
 
