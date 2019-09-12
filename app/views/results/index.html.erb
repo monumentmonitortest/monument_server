@@ -1,4 +1,4 @@
-<h2>Results</h2>
+<h2 id="csv-reports">Results</h2>
 
 <div>
   <p>
@@ -56,6 +56,15 @@ Numbers of submissions by type
 <h3>Basic breakdown of submissions</h3>
 <div>
   <%= link_to 'Basic submission report', api_v1_basic_submission_report_path(format: "csv"), class: 'button' %>
+</div>
+
+<h3>Breakdown of submissions by site</h3>
+<div>
+  <p>
+      Choose site: 
+      <%= select_tag :site_id, options_for_select(Site.all.collect { | site | [site.name, site.id] }), class: 'site-select'%>
+      <%= link_to 'Site specific report',  api_v1_site_specific_report_path(format: "csv", ), class: 'button', id: 'site-specific-report' %>
+  </p>
 </div>
 
 <h3>Breakdown of submissions by type</h3>
