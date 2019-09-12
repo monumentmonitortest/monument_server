@@ -18,8 +18,10 @@ module Api
       end
 
       def site_specific
+        name = Site.find(params[:site_id])
+
         respond_to do |format|
-          format.csv { send_data create_specific_site_report(params[:site_id]), filename: "submissions-by-site#{Date.today}.csv"  }
+          format.csv { send_data create_specific_site_report(params[:site_id]), filename: "submissions-for-#{name}-#{Date.today}.csv"  }
         end
       end
 
