@@ -61,9 +61,13 @@ Numbers of submissions by type
 <h3>Breakdown of submissions by site</h3>
 <div>
   <p>
+      From date:
+        <%= date_field_tag(:from_date, Date.today - 1.week, class: 'from-date') %><br/>
+      To date:
+        <%= date_field_tag(:from_date, Date.today, class: 'to-date') %><br/>
       Choose site: 
-      <%= select_tag :site_id, options_for_select(Site.all.collect { | site | [site.name, site.id] }), class: 'site-select'%>
-      <%= link_to 'Site specific report',  api_v1_site_specific_report_path(format: "csv", ), class: 'button', id: 'site-specific-report' %>
+        <%= select_tag :site_id, options_for_select(Site.all.collect { | site | [site.name, site.id] }), class: 'site-select'%>
+        <%= link_to 'Site specific report',  api_v1_site_specific_report_path(format: "csv", ), class: 'button', id: 'site-specific-report' %>
   </p>
 </div>
 

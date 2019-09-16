@@ -21,7 +21,7 @@ module Api
         name = Site.find(params[:site_id]).name
 
         respond_to do |format|
-          format.csv { send_data create_specific_site_report(params[:site_id]), filename: "submissions-for-#{name}-#{Date.today}.csv"  }
+          format.csv { send_data create_specific_site_report(params[:site_id], params[:from_date], params[:to_date]), filename: "submissions-for-#{name}-#{Date.today}.csv"  }
         end
       end
 
@@ -57,23 +57,24 @@ module Api
           end
         end
 
-        def create_specific_site_report(site_id)
+        def create_specific_site_report(site_id, from_date, to_date)
           attributes = %w{date submissions}
           CSV.generate(headers: true) do |csv|
             csv << attributes
             
             submissions_hash = {}
-            submissions = Submission.where(site_id: site_id)
-            submissions.map do |s|
-              date = s.record_taken.strftime("%d/%m/%Y")
-              if submissions_hash[date]
-                submissions_hash[date] += 1
-              else
-                submissions_hash[date] = 1
-              end
+            submissions = Submission.
+                            where(site_id: site_id).
+                            where("record_taken >= :start_date AND created_at <= :end_date",
+                               {start_date: Date.today- 1.year, end_date: Date.today}).
+                            order(:record_taken)
+            
+             
+            (from_date.to_date).upto(to_date.to_date) do |date|
+              subs = submissions.where(record_taken: date).count
+              
+              csv << [date.strftime("%d/%m/%Y"), subs]
             end
-
-            submissions_hash.map {|s| csv << s }
           end
         end
 
