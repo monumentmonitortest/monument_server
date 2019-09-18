@@ -58,7 +58,7 @@ module Api
         end
 
         def create_specific_site_report(site_id, from_date, to_date)
-          attributes = %w{date submissions}
+          attributes = %w{date submissions ind-submitters}
           CSV.generate(headers: true) do |csv|
             csv << attributes
             
@@ -71,9 +71,11 @@ module Api
             
              
             (from_date.to_date).upto(to_date.to_date) do |date|
-              subs = submissions.where(record_taken: date).count
+              subs = submissions.where(record_taken: date)
+              total_subs = subs.count
+              unique_submitters = subs.map {|q| q.type.data}.uniq.count
               
-              csv << [date.strftime("%d/%m/%Y"), subs]
+              csv << [date.strftime("%d/%m/%Y"), total_subs, unique_submitters]
             end
           end
         end
