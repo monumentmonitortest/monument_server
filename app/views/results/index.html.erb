@@ -74,28 +74,49 @@ Numbers of submissions by type
 <h3>Breakdown of submissions by type</h3>
 <div>
   <p>
-    Export breakdown of results by individual submittors by type (instagram)
     <%= link_to 'instagram report', api_v1_type_specific_report_path(format: "csv", type_name: 'INSTAGRAM', data: 'insta_username'), class: 'button' %>
   </p>
 </div>
 
 <div>
   <p>
-    Export breakdown of results by individual submittors by type (twitter)
     <%= link_to 'twitter report', api_v1_type_specific_report_path(format: "csv", type_name: 'TWITTER', data: 'twitter_username'), class: 'button'  %>
   </p>
 </div>
 
 <div>
   <p>
-    Export breakdown of results by individual submittors by type (email)
     <%= link_to 'email report', api_v1_type_specific_report_path(format: "csv", type_name: 'EMAIL', data: 'email_address'), class: 'button'  %>
   </p>
 </div>
 
 <div>
   <p>
-    Export breakdown of results by individual submittors by type (whatsapp)
     <%= link_to 'whatsapp report', api_v1_type_specific_report_path(format: "csv", type_name: 'WHATSAPP', data: 'number'), class: 'button'  %>
+  </p>
+</div>
+
+<h3>Image quality report</h3>
+<div>
+  <p>
+    <%= link_to 'instagram report', api_v1_image_quality_report_path(format: "csv", type_name: 'INSTAGRAM'), class: 'button'  %>
+  </p>
+</div>
+
+<div>
+  <p>
+    <%= link_to 'twitter report', api_v1_image_quality_report_path(format: "csv", type_name: 'TWITTER'), class: 'button'  %>
+  </p>
+</div>
+
+<div>
+  <p>
+    <%= link_to 'email report', api_v1_image_quality_report_path(format: "csv", type_name: 'EMAIL'), class: 'button'  %>
+  </p>
+</div>
+
+<div>
+  <p>
+    <%= link_to 'whatsapp report', api_v1_image_quality_report_path(format: "csv", type_name: 'WHATSAPP'), class: 'button'  %>
   </p>
 </div>
