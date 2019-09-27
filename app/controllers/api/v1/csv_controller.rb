@@ -1,3 +1,4 @@
+# TODO - rename this reports controller or something
 module Api
   module V1
     # note, this inherites from action controller not base controller as is not exact API
@@ -25,6 +26,11 @@ module Api
         end
       end
 
+      def image_quality
+        respond_to do |format|
+          format.csv { send_data create_image_quality_report(params[:type_name]), filename: "image-quality-#{params[:type_name].downcase}-#{Date.today}.csv"  }
+        end
+      end
 
       private
 
@@ -77,6 +83,21 @@ module Api
               
               csv << [date.strftime("%d/%m/%Y"), total_subs, unique_submitters]
             end
+          end
+        end
+
+        def create_image_quality_report(type_params)
+          attributes = %w{submission-id width height size resolution make model}
+          types = Type.where(name: type_params)
+          CSV.generate(headers: true) do |csv|
+            csv << attributes
+            
+            types.each do |type|
+              image = MiniMagick::Image.open(type.submission.image.attachment.service_url)
+
+              csv << [type.submission.id, image.width, image.height, image.size, image.resolution, image.exif["Make"], image.exif["Model"]]
+            end
+            
           end
         end
 
