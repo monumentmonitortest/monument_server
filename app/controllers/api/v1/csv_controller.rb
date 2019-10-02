@@ -93,9 +93,9 @@ module Api
             csv << attributes
             
             types.each do |type|
-              image = MiniMagick::Image.open(type.submission.image.attachment.service_url)
-
-              csv << [type.submission.id, image.width, image.height, image.size, image.resolution, image.exif["Make"], image.exif["Model"]]
+              sub = type.submission
+              metadata = sub.metadata
+              csv << [sub.id, metadata['width'], metadata['height'], metadata['size'], metadata['resolution'], metadata['make'], metadata['model']]
             end
             
           end
