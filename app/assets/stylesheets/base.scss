@@ -16,37 +16,13 @@ body {
 		$dot-color;
   background-size: $dot-space $dot-space;
   color: $main-font-color;
-}
-
-// some basic admin stuff
-body.admin {
-  background: #798a80 !important;
-  color: black;
-}
-
-body.admin input {
-  color: rgb(28,28,33);
-}
-
-body.admin a {
-  color: #1e5669;
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  min-height: 100vh;
 }
 
 nav {
-  height: 100px;
-  background: #000000;
-  max-width: 100%;
-  width: 100%;
-  margin-bottom: 50px;
-}
-
-.filter-container {
-  width: 95%;
-  margin: 0 auto;
-}
-
-div.container, img.logo {
-  height: 100%;
+  background: $bg-color
 }
 
 .hidden {

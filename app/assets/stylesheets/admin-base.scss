@@ -1,0 +1,28 @@
+/* // some basic admin stuff */
+body.admin {
+  background: #798a80 !important;
+  color: black;
+  display: initial;
+}
+
+body.admin input {
+  color: rgb(28,28,33);
+}
+
+body.admin a {
+  color: #1e5669;
+}
+
+body.admin nav {
+  height: 100px;
+  background: #000000;
+  max-width: 100%;
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+body.admin {
+  div.container, img.logo {
+    height: 100%;
+  }
+}
