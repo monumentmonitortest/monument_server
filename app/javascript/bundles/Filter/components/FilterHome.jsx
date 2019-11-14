@@ -1,12 +1,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import Search from './Search.jsx'
 
-import Submission from './Submission.jsx'
 
-// THIS IS NOT CURRENTLY USED!
 export default class FilterHome extends React.Component {
   static propTypes = {
-    name: PropTypes.string.isRequired, // this is passed from the Rails view
+    siteNames: PropTypes.array.isRequired, // this is passed from the Rails view
   };
 
   /**
@@ -14,15 +13,25 @@ export default class FilterHome extends React.Component {
    */
   constructor(props) {
     super(props);
+
   }
 
 render() {
     return (
       <div>
-        <h3>
-          Here we have a load of Submissions, and some nice design, and you can filter them
-        </h3>
-      </div>
+        <nav>
+        <div>
+          <img></img>
+      
+          <h2>add an icon for assistance</h2>
+          <h2>add search functionality here</h2>
+        </div>
+      </nav>
+      
+      <main>
+        <Search siteNames={this.props.sitenames}/>
+      </main>
+    </div>
     );
   }
 }
