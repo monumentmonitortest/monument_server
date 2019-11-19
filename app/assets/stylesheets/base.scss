@@ -16,9 +16,12 @@ body {
 		$dot-color;
   background-size: $dot-space $dot-space;
   color: $main-font-color;
+  min-height: 100vh;
+}
+
+div.grid {
   display: grid;
   grid-template-columns: 320px 1fr;
-  min-height: 100vh;
 }
 
 nav {

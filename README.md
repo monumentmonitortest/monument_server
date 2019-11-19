@@ -1,23 +1,22 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+# Running Locally
+## Run React fonrend:
+sh -c rm -rf public/packs/* || true && bundle exec rake react_on_rails:locale && bin/webpack-dev-server
 
-YAY FOR CONFLICTS AND REBASING
+## Run server:
 
-* System dependencies
+bs rails s
 
-* Configuration
+## Download backup and restore DB:
+heroku pg:backups:capture
+heroku pg:backups:download
+pg_restore --verbose --clean --no-acl --no-owner -h localhost -U roo -d monumental_server_development latest.dump
 
-* Database creation
+Create dump file
+PGPASSWORD=mypassword pg_dump -Fc --no-acl --no-owner -h localhost -U roo monumental_sever_production > ms_prod.dump
 
-* Database initialization
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
+## Run instagram scraper
+instamancer hashtag monumentmonitor --full --logging=info --visible

@@ -32,7 +32,7 @@ export default class Form extends React.Component {
     return (
       <form className="ph4 pv4 mb0 green-background br1" onSubmit={this.handleSubmit}>
           <div className="flex flex-wrap items-center justify-around">
-            {/* <span className="h-25">
+            <span className="h-25">
               <label>
                 Useful?
               </label>
@@ -43,7 +43,7 @@ export default class Form extends React.Component {
                 className='mt4'
                 checked={this.state.reliable}
                 onChange={this.handleInputChange} />
-            </span> */}
+            </span>
 
             <span className="h-25">
               <label>
