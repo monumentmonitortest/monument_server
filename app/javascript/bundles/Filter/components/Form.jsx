@@ -30,27 +30,13 @@ export default class Form extends React.Component {
   
   render() {
     return (
-      <form className="ph4 pv4 mb0 green-background br1" onSubmit={this.handleSubmit}>
-          <div className="flex flex-wrap items-center justify-around">
-            <span className="h-25">
-              <label>
-                Useful?
-              </label>
-              <input
-                name="useful"
-                id="reliable"
-                type="checkbox"
-                className='mt4'
-                checked={this.state.reliable}
-                onChange={this.handleInputChange} />
-            </span>
+      <form className="ph4 pv4 mb0 br1" onSubmit={this.handleSubmit}>
+          <div className="flex flex-wrap items-center justify-between">
+           
 
             <span className="h-25">
-              <label>
-                Site:
-              </label>
               <select id="site" className="dark-color" onChange={this.handleInputChange}>
-                <option id="site" value=""></option>
+                <option selected="">Select Site</option>
               {this.props.siteNames.map((site, i) => 
                 <option 
                   value={site} 
@@ -60,14 +46,25 @@ export default class Form extends React.Component {
             </span>
 
             <span className="h-25">
-              <label>
-                Type:
-              </label>
               <input 
+                placeholder="Select submission type"
                 type="text" 
                 id="type" 
                 className="black"
                 value={this.state.type} 
+                onChange={this.handleInputChange} />
+            </span>
+
+            <span className="h-25">
+              <label>
+                Useful?
+              </label>
+              <input
+                name="useful"
+                id="reliable"
+                type="checkbox"
+                className=''
+                checked={this.state.reliable}
                 onChange={this.handleInputChange} />
             </span>
 

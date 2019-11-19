@@ -9,6 +9,11 @@ $dot-space: 22px;
 $green-background: #004035;
 $blue-background: #002040;
 
+
+.hidden {
+  display: none;
+}
+
 body {
 	background:
 		linear-gradient(90deg, $bg-color ($dot-space - $dot-size), transparent 1%) center,
@@ -19,18 +24,30 @@ body {
   min-height: 100vh;
 }
 
-div.grid {
-  display: grid;
-  grid-template-columns: 320px 1fr;
-}
-
+// Mobile
 nav {
-  background: $bg-color
+  width: 100vw;
 }
 
-.hidden {
-  display: none;
+// Desktop 
+@media (min-width:801px) {
+  nav {
+    background: $bg-color;
+    width: 25vw;
+    height: 100vh;
+    position: fixed;
+  }
+  
+  main {
+    width: 75vw;
+    float: right;
+  } 
+
+  .display-desktop {
+    display: initial;
+  }
 }
+
 
 .main-container {
   background-color: rgba(28,28,33,0.86)
@@ -72,20 +89,19 @@ nav {
   height: 85%;
 }
 
-.sticky {
-  position: -webkit-sticky;
-  position: -moz-sticky;
-  position: -ms-sticky;
-  position: -o-sticky;
-  position: sticky;
-  top: 0;
-  z-index: 2;
-}
-
 .ReactModal__Overlay--after-open {
   z-index: 3 !important;
 }
 
 .ReactModal__Overlay--after-open div {
   max-height: 85%;
+}
+
+button {
+  color: $main-font-color;
+}
+
+.active-button {
+  background-color: $main-font-color;
+  color: #000000;
 }

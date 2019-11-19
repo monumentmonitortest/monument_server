@@ -55,9 +55,8 @@ export default class ResultsManager extends React.Component {
 
     return (
       <div className="ui raised segment no padding">
-        <div class="w-90 center">
+        <div class="fixed top w-100 z-3">
           {/* <Form refineView={this.refineView} siteNames={this.props.siteNames}/> */}
-          <Key />
           <Compare imageCompare={this.state.imageCompare}/>
         </div>
         
