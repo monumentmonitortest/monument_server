@@ -8,7 +8,7 @@ export default class DataVis extends React.Component {
   render() {
     return (
       <div>
-        Here will be some data vis
+        Coming soon... data visualisations
       </div>
     )
   }

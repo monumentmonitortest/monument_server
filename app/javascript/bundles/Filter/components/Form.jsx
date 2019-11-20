@@ -33,13 +33,13 @@ export default class Form extends React.Component {
       <form className="ph4 pv4 mb0 br1" onSubmit={this.handleSubmit}>
           <div className="flex flex-wrap items-center justify-between">
             <span className="h-25">
-              <select id="site" className="dark-color" onChange={this.handleInputChange}>
+              <select id="site" className="dark-color w-100" onChange={this.handleInputChange}>
                 <option defaultValue="">Select Site</option>
               {this.props.siteNames.map((site, i) => 
                 <option 
                   value={site} 
                   key={i}
-                  className="dark-color">{site}</option>)}
+                  className="dark-color w-100">{site}</option>)}
               </select>
             </span>
 
@@ -48,7 +48,7 @@ export default class Form extends React.Component {
                 placeholder="Select submission type"
                 type="text" 
                 id="type" 
-                className="black"
+                className="black w-100"
                 value={this.state.type} 
                 onChange={this.handleInputChange} />
             </span>

@@ -26,18 +26,13 @@ export default class Nav extends React.Component {
     const {collapsed} = this.state
     return (
       <nav className={collapsed ? "collapsed" : "full"}>
-        
+        <img src={collapsed ? SquareLogo : Logo} onClick={this.toggleNav}/>
         {collapsed ? (
           // collapsed nav
-          <div className="f1 lh-solid">
-            <img src={SquareLogo} onClick={this.toggleNav}/>
-
-          </div>
-
+              <div className="nav-content"></div>
         ) : (
           // normal nav
-          <div>
-            <img src={Logo} onClick={this.toggleNav} className="hidden display-desktop mb5"/>
+          <div className="nav-content">
             <div className="mb5">
               <button 
                 className={this.props.viewDataVis ? "w-50 br--left active-button" : "w-50 br--left"} 

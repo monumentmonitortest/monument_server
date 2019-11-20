@@ -27,7 +27,7 @@ body {
 // Mobile
 nav {
   width: 100vw;
-  transition: all 0.2s ease-out,
+  transition: width 0.2s ease-out;
 }
 
 // Desktop 
@@ -41,6 +41,13 @@ nav {
     top: 0;
     left: 0;
     bottom: 0;
+    div.nav-content {
+      opacity: 1;
+      transition: opacity 0.5s ease-out 0.5s;
+    }
+    img {
+      opacity: 1;
+    }
   }
 
   nav.collapsed {
@@ -49,8 +56,12 @@ nav {
       margin: 0 auto;
       width: 100%;
     }
+    div.nav-content {
+      opacity: 0;
+    }
     img {
       width : 5vw;
+      opacity: 1;
     }
   }
   

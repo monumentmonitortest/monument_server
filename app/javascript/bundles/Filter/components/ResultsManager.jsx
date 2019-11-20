@@ -73,7 +73,15 @@ export default class ResultsManager extends React.Component {
           <Compare imageCompare={this.state.imageCompare} compareHeight={this.state.compareHeight} compareWidth={this.state.compareWidth}/>
         </div>
         
-        <span className="mh2">{totalSubmissions} submissions found, page {pageNumber} of {pageNumbers}.</span>
+
+        
+        <ul className="list flex flex-wrap items-center pa0 ma0 mb0">
+          <li><span className="mh2">{totalSubmissions} submissions found, page {pageNumber} of {pageNumbers}.</span></li>
+          <li className="pointer mh2 tc">Show per page:</li>
+          <li className="pointer mh2 tc"><a onClick={this.handlePaginationCount}>20</a></li>
+          <li className="pointer mh2 tc"><a onClick={this.handlePaginationCount}>50</a></li>
+          <li className="pointer mh2 tc"><a onClick={this.handlePaginationCount}>100</a></li>
+        </ul>
         
         <ul className="list flex flex-wrap items-center pa0 ma0">
           <li className="pointer mh2 tc">Navigate to:</li>
@@ -86,12 +94,6 @@ export default class ResultsManager extends React.Component {
             ))}
         </ul>
         
-        <ul className="list flex flex-wrap items-center pa0 ma0 mb4">
-          <li className="pointer mh2 tc">Show per page:</li>
-          <li className="pointer mh2 tc"><a onClick={this.handlePaginationCount}>20</a></li>
-          <li className="pointer mh2 tc"><a onClick={this.handlePaginationCount}>50</a></li>
-          <li className="pointer mh2 tc"><a onClick={this.handlePaginationCount}>100</a></li>
-        </ul>
 
         <div className="w-100-l relative z-1">
           <div className="flex flex-wrap justify-between submissions ph3 ph4-l">
