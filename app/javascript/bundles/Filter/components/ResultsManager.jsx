@@ -3,7 +3,6 @@ import 'babel-polyfill';
 
 import Submission from './Submission.jsx'
 import Pagination from './Pagination.jsx'
-import Key from './Key.jsx'
 import Compare from './Compare.jsx'
 
 export default class ResultsManager extends React.Component {
@@ -12,11 +11,12 @@ export default class ResultsManager extends React.Component {
 
     this.state = {
       imageCompare: [],
+      compareHeight: 0,
+      compareWidth: 0, // this is to set the height of the image on the compare modal
       pageSize: 20, // how many submissons per page
     };
   }
   
-  // TODO - deal with this - move refineURL into new component
   handlePaginationUrl = (event) => {
     event.preventDefault()
     const pageUrl = event.target.href
@@ -33,18 +33,31 @@ export default class ResultsManager extends React.Component {
   handleSelectCompare = event => {
     const images = this.state.imageCompare
     const imageUrl = event.target.value
+
+    const image = event.target.closest('#submission-card').querySelectorAll('img')[0]
+    const width = image.naturalWidth
+    const height = image.naturalHeight
+
     var filteredImages = images
     if (images.includes(imageUrl)) {
       filteredImages = filteredImages.filter(image => image !== imageUrl)
     } else {
       if (images.length > 1) {
-        filteredImages.shift()
+        alert("You can only select two images at a time!")
+        event.preventDefault()
+      } else {
+        filteredImages.push(imageUrl)
       }
-      filteredImages.push(imageUrl)
     }
-
-    this.setState({imageCompare: filteredImages})
+    
+    this.setState({
+      imageCompare: filteredImages,
+      compareHeight: width,
+      compareWidth: height,
+    })
   }
+
+ 
 
   render() {
     const {totalSubmissions} = this.props
@@ -55,9 +68,9 @@ export default class ResultsManager extends React.Component {
 
     return (
       <div className="ui raised segment no padding">
-        <div class="fixed top w-100 z-3">
+        <div className="sticky w-100 z-3">
           {/* <Form refineView={this.refineView} siteNames={this.props.siteNames}/> */}
-          <Compare imageCompare={this.state.imageCompare}/>
+          <Compare imageCompare={this.state.imageCompare} compareHeight={this.state.compareHeight} compareWidth={this.state.compareWidth}/>
         </div>
         
         <span className="mh2">{totalSubmissions} submissions found, page {pageNumber} of {pageNumbers}.</span>

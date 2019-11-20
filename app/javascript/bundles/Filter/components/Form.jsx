@@ -36,7 +36,7 @@ export default class Form extends React.Component {
 
             <span className="h-25">
               <select id="site" className="dark-color" onChange={this.handleInputChange}>
-                <option selected="">Select Site</option>
+                <option defaultValue="">Select Site</option>
               {this.props.siteNames.map((site, i) => 
                 <option 
                   value={site} 

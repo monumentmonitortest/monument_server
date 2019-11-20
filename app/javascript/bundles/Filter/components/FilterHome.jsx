@@ -104,8 +104,8 @@ export default class FilterHome extends React.Component {
       <div>
         <SubmissionsContextProvider>
           <nav>
-            <img src={Logo} className="hidden display-desktop"/>
-            <div>
+            <img src={Logo} className="hidden display-desktop mb5"/>
+            <div className="mb5">
               <button className={this.state.viewDataVis ? "w-50 br--left active-button" : "w-50 br--left"} onClick={this.handleToggle}>Data</button>
               <button className={this.state.viewDataVis ? "w-50 br--right white" : "w-50 br--right active-button"} onClick={this.handleToggle}>Images</button>
             </div>
