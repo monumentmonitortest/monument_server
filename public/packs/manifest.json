@@ -1,9 +1,12 @@
 {
   "_/assets/images/logo-2019-inverted.png": "/packs/_/assets/images/logo-2019-inverted-6f880e61b1f5fc40b10c17266e82e70d.png",
-  "application.js": "/packs/application-b80c4adff9aea542d080.js",
-  "application.js.map": "/packs/application-b80c4adff9aea542d080.js.map",
-  "filter-home-bundle.js": "/packs/filter-home-bundle-b80c4adff9aea542d080.js",
-  "filter-home-bundle.js.map": "/packs/filter-home-bundle-b80c4adff9aea542d080.js.map",
-  "hello_react.js": "/packs/hello_react-b80c4adff9aea542d080.js",
-  "hello_react.js.map": "/packs/hello_react-b80c4adff9aea542d080.js.map"
+  "application.js": "/packs/application-8681ac53144bd8bd21a7.js",
+  "application.js.map": "/packs/application-8681ac53144bd8bd21a7.js.map",
+  "filter-home-bundle.js": "/packs/filter-home-bundle-8681ac53144bd8bd21a7.js",
+  "filter-home-bundle.js.map": "/packs/filter-home-bundle-8681ac53144bd8bd21a7.js.map",
+  "hello_react.js": "/packs/hello_react-8681ac53144bd8bd21a7.js",
+  "hello_react.js.map": "/packs/hello_react-8681ac53144bd8bd21a7.js.map",
+  "_/assets/images/main-logo-black-squished.jpg": "/packs/_/assets/images/main-logo-black-squished-65ac3998e85599a3b730f8d438b94865.jpg",
+  "_/assets/images/hamburger.png": "/packs/_/assets/images/hamburger-9306f47897660011b876026d15023672.png",
+  "_/assets/images/hambuger.png": "/packs/_/assets/images/hambuger-f7a30a131ef869d4644390e1a6ee665f.png"
 }

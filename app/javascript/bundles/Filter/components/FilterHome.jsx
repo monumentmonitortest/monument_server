@@ -6,6 +6,7 @@ import SubmissionsContextProvider from './SubmissionContext.jsx'
 import Logo from 'images/logo-2019-inverted.png'
 import Key from './Key.jsx'
 import DataVis from './DataVis.jsx'
+import Nav from './Nav.jsx'
 
 export default class FilterHome extends React.Component {
   static propTypes = {
@@ -25,7 +26,8 @@ export default class FilterHome extends React.Component {
       links: [],
       totalSubmissions: '', // how many submissions there are
       pageNumber: '', // what page we're on at the moment
-      viewDataVis: false // viewing submissions or data view
+      viewDataVis: false, // viewing submissions or data view
+      navCollapsed: true
     };
   }
 
@@ -84,35 +86,40 @@ export default class FilterHome extends React.Component {
       this.setState({viewDataVis: false})
     }
   }
+
+  handleToggleNav = () => {
+    this.setState({navCollapsed: !this.state.navCollapsed});
+  }
   
   render() {
+    const {navCollapsed} = this.state
     let data
     if (this.state.viewDataVis) {
-      data = <DataVis />
+      data = <DataVis className={navCollapsed ? "collapsed" : "full"}/>
     } else {
-      data = <ResultsManager siteNames={this.props.siteNames} 
-                  submissions={this.state.submissions} 
-                  links={this.state.links} 
-                  totalSubmissions={this.state.totalSubmissions}
-                  pageNumber={this.state.pageNumber}
-                  refineView={this.refineView}
-                  updateState={this.updateState} />
+      data = <ResultsManager 
+                siteNames={this.props.siteNames} 
+                submissions={this.state.submissions} 
+                links={this.state.links} 
+                totalSubmissions={this.state.totalSubmissions}
+                pageNumber={this.state.pageNumber}
+                refineView={this.refineView}
+                updateState={this.updateState} />
     }
 
 
     return (
       <div>
         <SubmissionsContextProvider>
-          <nav>
-            <img src={Logo} className="hidden display-desktop mb5"/>
-            <div className="mb5">
-              <button className={this.state.viewDataVis ? "w-50 br--left active-button" : "w-50 br--left"} onClick={this.handleToggle}>Data</button>
-              <button className={this.state.viewDataVis ? "w-50 br--right white" : "w-50 br--right active-button"} onClick={this.handleToggle}>Images</button>
-            </div>
-            <Form siteNames={this.props.siteNames} refineView={this.refineView} />
-            <Key />
-          </nav>
-          <main className="ph4-ns">
+          <Nav 
+            viewDataVis={this.state.viewDataVis}
+            handleToggle={this.handleToggle}
+            refineView={this.refineView}
+            siteNames={this.props.siteNames}
+            handleToggleNav={this.handleToggleNav}
+            navCollapsed={this.state.navCollapsed}
+             />
+          <main className={navCollapsed ? "collapsed ph4-ns" : "full ph4-ns"}>
             {data}
           </main>
         </SubmissionsContextProvider>

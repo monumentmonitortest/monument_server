@@ -32,8 +32,6 @@ export default class Form extends React.Component {
     return (
       <form className="ph4 pv4 mb0 br1" onSubmit={this.handleSubmit}>
           <div className="flex flex-wrap items-center justify-between">
-           
-
             <span className="h-25">
               <select id="site" className="dark-color" onChange={this.handleInputChange}>
                 <option defaultValue="">Select Site</option>
