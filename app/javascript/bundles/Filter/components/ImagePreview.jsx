@@ -11,7 +11,7 @@ class ImagePreview extends React.Component {
     let preview;
 
     if (imagePresent) {
-      preview = <span className="flex items-center"><img src={imageCompare[this.props.index]} className="h3 mh3" />Image selected</span>
+      preview = <span className="flex items-center"><img src={imageCompare[this.props.index]} className="h3 mh3 compare-images" />Image selected</span>
     } else {
       preview =  <span>Select image to compare</span>
     }

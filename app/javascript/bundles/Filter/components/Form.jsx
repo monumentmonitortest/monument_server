@@ -30,9 +30,30 @@ export default class Form extends React.Component {
   
   render() {
     return (
-      <form className="ph4 pv4 mb0 green-background br1" onSubmit={this.handleSubmit}>
-          <div className="flex flex-wrap items-center justify-around">
-            {/* <span className="h-25">
+      <form className="ph4 pv4 mb0 br1" onSubmit={this.handleSubmit}>
+          <div className="flex flex-wrap items-center justify-between">
+            <span className="h-25">
+              <select id="site" className="dark-color w-100" onChange={this.handleInputChange}>
+                <option defaultValue="">Select Site</option>
+              {this.props.siteNames.map((site, i) => 
+                <option 
+                  value={site} 
+                  key={i}
+                  className="dark-color w-100">{site}</option>)}
+              </select>
+            </span>
+
+            <span className="h-25">
+              <input 
+                placeholder="Select submission type"
+                type="text" 
+                id="type" 
+                className="black w-100"
+                value={this.state.type} 
+                onChange={this.handleInputChange} />
+            </span>
+
+            <span className="h-25">
               <label>
                 Useful?
               </label>
@@ -40,34 +61,8 @@ export default class Form extends React.Component {
                 name="useful"
                 id="reliable"
                 type="checkbox"
-                className='mt4'
+                className=''
                 checked={this.state.reliable}
-                onChange={this.handleInputChange} />
-            </span> */}
-
-            <span className="h-25">
-              <label>
-                Site:
-              </label>
-              <select id="site" className="dark-color" onChange={this.handleInputChange}>
-                <option id="site" value=""></option>
-              {this.props.siteNames.map((site, i) => 
-                <option 
-                  value={site} 
-                  key={i}
-                  className="dark-color">{site}</option>)}
-              </select>
-            </span>
-
-            <span className="h-25">
-              <label>
-                Type:
-              </label>
-              <input 
-                type="text" 
-                id="type" 
-                className="black"
-                value={this.state.type} 
                 onChange={this.handleInputChange} />
             </span>
 

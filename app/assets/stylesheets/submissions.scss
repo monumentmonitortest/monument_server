@@ -1,3 +1,8 @@
+
+.pointer {
+  cursor: pointer;
+}
+
 div.submission-form {
   width: 100%;
   display: flex;
@@ -10,22 +15,29 @@ div.submission-form {
 
 .submissions {
   padding-bottom: 5rem;
+  display: grid;
+  grid-template-rows: 160px;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px 20px;
 }
 
 .submission {
-  width: calc(25% - 1rem);
+  grid-column: span 1;
+  grid-row: span 2;
+  overflow: hidden;  
 }
 
-.submission:nth-of-type(2n) {
-  transform: translateY(4rem);
+@media (min-width:550px) {
+  .submissions {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }
 
-.submission:nth-of-type(4n) {
-  transform: translateY(4rem);
-}
-
-.pointer {
-  cursor: pointer;
+// Desktop 
+@media (min-width:801px) {
+  .submissions {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
 }
 
 @keyframes fadeInImg {
@@ -46,3 +58,38 @@ div.submission-form {
   animation-duration: 1s;
   animation-delay: 0.4s;
 }
+
+// Getting the overlap within the submission box
+.submission .positioner {
+  display: grid;
+  height: 100%;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: 'overlap';
+
+  .submission-image-holder {
+    grid-area: overlap;
+  }
+
+  .submission-text {
+    padding-top: 10%;
+    grid-area: overlap;
+    align-self: flex-end;
+    z-index: 5;
+    background-image: linear-gradient(rgba(171,201,232,0), rgba(171,201,232,1));
+    color: black;
+  }
+}
+
+// submission compare overlay
+
+.ReactModal__Overlay--after-open {
+  z-index: 3 !important;
+}
+
+.ReactModal__Overlay--after-open div {
+  max-height: 85%;
+}
+
+
+
