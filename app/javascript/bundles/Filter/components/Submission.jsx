@@ -1,13 +1,27 @@
 import React from 'react';
 import LazyLoad from 'react-lazy-load';
+import Modal from 'react-modal';
 
 import ImageLoader from './ImageLoader.jsx'
+import SubmissionModal from './SubmissionModal.jsx'
 
 export default class Submission extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      showModal: false,
+      setIsOpen: false,
+    }
   }
   
+  handleOpenModal = () => {
+    this.setState({ showModal: true });
+  }
+  
+  handleCloseModal = () => {
+    this.setState({ showModal: false });
+  }
+
   render() {
     const image =  this.props.attributes["image-url"] || ""
     const site  = this.props.attributes["site-name"] || ""
@@ -15,13 +29,14 @@ export default class Submission extends React.Component {
     const recordTaken  = this.props.attributes["record-taken"] || ""
     const submissionId = this.props.id
     const submissionClass = `submission ${type.toLowerCase()}`
+    const {showModal} = this.state
 
     return (
       <div className={submissionClass}>
         <div className="aspect-ratio aspect-ratio--3x4" id="submission-card">
           <div className="aspect-ratio--object">
 
-            <div className="positioner">
+            <div className="positioner" onClick={this.handleOpenModal}>
 
               <div className="overflow-hidden submission-image-holder">
                 <LazyLoad  
@@ -51,9 +66,26 @@ export default class Submission extends React.Component {
                   </div>
 
             </div>
-            
           </div>
         </div>
+
+        <Modal
+          isOpen={showModal}
+          // onAfterOpen={this.afterOpenModal}
+          onRequestClose={this.handleCloseModal}
+          style={this.customStyles}
+          contentLabel="Example Modal"
+          style={{
+            content: {
+              backgroundColor: '#24242b',
+              border: 'none',
+              borderRadius: 'none'
+            }
+          }}
+        >
+          <SubmissionModal attributes={this.props.attributes} closeModal={this.handleCloseModal} />
+          
+        </Modal>
       </div>
     )
   }

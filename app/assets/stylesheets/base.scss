@@ -6,6 +6,10 @@ $main-font-color: #eaeaea;
 $green-background: #004035;
 $blue-background: #002040;
 $main-background-color: #101010;
+$twitter: #38A1F3;
+$whatsapp: #00b753;
+$instagram: #833AB4;
+$email: #B23121;
 
 .hidden {
   display: none;
@@ -17,7 +21,9 @@ body {
   min-height: 100vh;
 }
 
-
+.black-background {
+  background-color: $main-background-color;
+}
 
 .green-background {
   background-color: $green-background;
@@ -35,22 +41,54 @@ body {
   color: rgb(28,28,33)
 }
 
-.twitter {
-  background-color: #38A1F3;
+div.twitter {
+  background-color: $twitter;
 }
 
-.email {
-  background-color: #B23121;
+div.email {
+  background-color: $email;
 }
 
-.instagram {
-  background-color: #833AB4;
+div.instagram {
+  background-color: $instagram;
 }
 
-.whatsapp {
-  background-color: #00b753;
+div.whatsapp {
+  background-color: $whatsapp;
+}
+svg {
+  padding-top: 15px;
+}
+svg.instagram {
+  width: 30px;
+  height: 30px;
+  background-color: none;
+  stroke: $instagram;
+  fill: $instagram;
 }
 
+svg.twiter {
+  width: 30px;
+  height: 30px;
+  background-color: none;
+  stroke: $twitter;
+  fill: $twitter;
+}
+
+svg.email {
+  width: 30px;
+  height: 30px;
+  background-color: none;
+  stroke: $email;
+  fill: $email;
+}
+svg.whatsapp {
+  width: 30px;
+  height: 30px;
+  background-color: none;
+  stroke: $whatsapp;
+  fill: $whatsapp;
+}
 
 button {
   color: $main-font-color;
