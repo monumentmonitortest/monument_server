@@ -96,7 +96,8 @@ export default class ResultsManager extends React.Component {
         
 
         <div className="w-100-l relative z-1">
-          <div className="flex flex-wrap justify-between submissions ph3 ph4-l">
+          {/* css for grid can be found in submissions.css file */}
+          <div className="submissions ph3 ph4-l">
               {this.props.submissions.map((submission, i)=>(<Submission {...submission} key={i} handleSelectCompare={this.handleSelectCompare} />))}
           </div>
         </div>
