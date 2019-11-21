@@ -97,3 +97,16 @@ div.submission-form {
   width: 10px;
   border-radius: 10px;
 }
+
+img.modal-image {
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+
+a.download-icon {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 1em;
+  width: 6em;
+}

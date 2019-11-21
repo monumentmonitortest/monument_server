@@ -1,5 +1,5 @@
 class SubmissionSerializer < ActiveModel::Serializer
-  attributes :id, :siteName, :siteId, :recordTaken, :tags, :imageUrl, :typeName,
+  attributes :id, :siteName, :siteId, :recordTaken, :tags, :imageUrl, :typeName, :typeComment, :tags
 
   def imageUrl
     if Rails.env == 'development'
@@ -23,8 +23,16 @@ class SubmissionSerializer < ActiveModel::Serializer
     self.object.type.name
   end
 
+  def typeComment
+    self.object.type.comment
+  end
+
   def recordTaken
     self.object.record_taken.strftime("%d/%m/%Y")
+  end
+
+  def tags
+    self.object.tags
   end
 
 end

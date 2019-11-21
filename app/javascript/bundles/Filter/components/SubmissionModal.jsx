@@ -1,4 +1,5 @@
 import React from 'react';
+import downloadIcon from 'images/download.png'
 
 export default class SubmissionModal extends React.Component {
   constructor(props) {
@@ -10,6 +11,7 @@ export default class SubmissionModal extends React.Component {
     const date = this.props.attributes['record-taken']
     const name = this.props.attributes['site-name']
     const type = this.props.attributes['type-name'].toLowerCase()
+    const comment = this.props.attributes['type-comment']
     const tags = this.props.attributes['tags']
     
     return (
@@ -17,7 +19,9 @@ export default class SubmissionModal extends React.Component {
         <div className="w-75 h-100">
           <img src={url} className="h-100 mw-100 mh-100 pr6"/>
         </div>
-        <div className="">
+
+        {/* Text stuff */}
+        <div className="w-25">
           
           <span className="w-100 flex justify-between">
             <svg className={type}>
@@ -30,10 +34,16 @@ export default class SubmissionModal extends React.Component {
             <h2 className="f2 tr mt3 mb2">{date}</h2>
             <h2 className="w-100 tr f1 mb5">{name}</h2>
           </span>
-
           <div>
-            here will go loads and loads of comments
+            <div>Tags:</div>{tags}
           </div>
+          <div>
+            <div>Comments: </div>{comment}
+          </div>
+
+          <a href={url} className="download-icon" download>
+            <img src={downloadIcon} />
+          </a>
         </div>
       </div>
     )

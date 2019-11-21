@@ -36,9 +36,9 @@ export default class Submission extends React.Component {
         <div className="aspect-ratio aspect-ratio--3x4" id="submission-card">
           <div className="aspect-ratio--object">
 
-            <div className="positioner" onClick={this.handleOpenModal}>
+            <div className="positioner">
 
-              <div className="overflow-hidden submission-image-holder">
+              <div className="overflow-hidden submission-image-holder" onClick={this.handleOpenModal}>
                 <LazyLoad  
                   debounce={false}
                   offsetVertical={500}
