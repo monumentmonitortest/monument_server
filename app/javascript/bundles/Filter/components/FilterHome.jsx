@@ -27,7 +27,7 @@ export default class FilterHome extends React.Component {
       totalSubmissions: '', // how many submissions there are
       pageNumber: '', // what page we're on at the moment
       viewDataVis: false, // viewing submissions or data view
-      navCollapsed: true
+      navCollapsed: false
     };
   }
 

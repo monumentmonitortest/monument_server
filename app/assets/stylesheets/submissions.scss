@@ -81,5 +81,15 @@ div.submission-form {
   }
 }
 
+// submission compare overlay
+
+.ReactModal__Overlay--after-open {
+  z-index: 3 !important;
+}
+
+.ReactModal__Overlay--after-open div {
+  max-height: 85%;
+}
+
 
 

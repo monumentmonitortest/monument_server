@@ -10,7 +10,7 @@ export default class Nav extends React.Component {
   constructor(props) {
     super(props);
     this.state = {     
-      collapsed: true
+      collapsed: false,
     }
 
   }
@@ -26,7 +26,7 @@ export default class Nav extends React.Component {
     const {collapsed} = this.state
     return (
       <nav className={collapsed ? "collapsed" : "full"}>
-        <img src={collapsed ? SquareLogo : Logo} onClick={this.toggleNav}/>
+        <img src={collapsed ? SquareLogo : Logo} onClick={this.toggleNav} className="pointer"/>
         {collapsed ? (
           // collapsed nav
               <div className="nav-content"></div>
