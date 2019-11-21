@@ -40,10 +40,12 @@ export default class FilterHome extends React.Component {
       const json = await response.json()
       const total = await response.headers.get("Total")
 
-      this.setState({submissions: json.data,
-                     totalSubmissions: total,
-                     pageNumber: '1',
-                     links: json.links})
+      this.setState({
+        submissions: json.data,
+        totalSubmissions: total,
+        pageNumber: '1',
+        links: json.links
+      })
     } catch (error) {
       console.log(error)
     }
@@ -65,13 +67,15 @@ export default class FilterHome extends React.Component {
       const total = await response.headers.get("Total")
       const newPageNumber = await response.headers.get("current-page")
 
-      this.setState({submissions: json.data,
+      this.setState({
+        submissions: json.data,
         reliable: reliable,
         site: site, 
         type: type, 
         pageSize: size, 
         totalSubmissions: total,
-        pageNumber: newPageNumber})
+        pageNumber: newPageNumber
+      })
       json.links && this.setState({links: json.links})
     } catch (error) {
       console.log(error)

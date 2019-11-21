@@ -52,7 +52,7 @@ export default class Compare extends React.Component {
         >
           <p className="dark-color tc">Move the cursor across the images to compare them</p>
 
-          <div className="yup" style={divStyle}>
+          <div style={divStyle}>
             <ReactCompareImage className="image-compare" leftImage={imagesArray[0]} rightImage={imagesArray[1]} />;
           </div>
           

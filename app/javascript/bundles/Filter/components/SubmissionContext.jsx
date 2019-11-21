@@ -5,8 +5,6 @@ export const SubmissionContext = React.createContext();
 
 export default class SubmissionsContextProvider extends React.Component {
   state = {
-    contextSubmissions: [],
-    aWord: 'hi'
   }
   render() {
     return (

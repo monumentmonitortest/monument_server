@@ -11,8 +11,8 @@ export default class ResultsManager extends React.Component {
 
     this.state = {
       imageCompare: [],
-      compareHeight: 0,
-      compareWidth: 0, // this is to set the height of the image on the compare modal
+      compareHeight: 0, // this is to set the height of the image on the compare modal
+      compareWidth: 0, 
       pageSize: 20, // how many submissons per page
     };
   }
@@ -69,7 +69,6 @@ export default class ResultsManager extends React.Component {
     return (
       <div className="ui raised segment no padding">
         <div className="sticky w-100 z-3">
-          {/* <Form refineView={this.refineView} siteNames={this.props.siteNames}/> */}
           <Compare imageCompare={this.state.imageCompare} compareHeight={this.state.compareHeight} compareWidth={this.state.compareWidth}/>
         </div>
         
