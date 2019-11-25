@@ -1,10 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import ResultsManager from './ResultsManager.jsx'
-import Form from './Form.jsx'
 import SubmissionsContextProvider from './SubmissionContext.jsx'
-import Logo from 'images/logo-2019-inverted.png'
-import Key from './Key.jsx'
 import DataVis from './DataVis.jsx'
 import Nav from './Nav.jsx'
 
@@ -66,7 +63,6 @@ export default class FilterHome extends React.Component {
       const json = await response.json()
       const total = await response.headers.get("Total")
       const newPageNumber = await response.headers.get("current-page")
-
       this.setState({
         submissions: json.data,
         reliable: reliable,

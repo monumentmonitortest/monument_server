@@ -55,7 +55,6 @@ class ImageLoader extends React.Component {
       <div className={className} ref="foo">
         <img 
           src={this.state.imgSrc} 
-          onClick={()=> window.open(this.props.src, "_blank")} 
           className={className} 
           onLoad={this.onLoad}  />
       </div>

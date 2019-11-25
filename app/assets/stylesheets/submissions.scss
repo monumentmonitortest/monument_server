@@ -88,8 +88,25 @@ div.submission-form {
 }
 
 .ReactModal__Overlay--after-open div {
-  max-height: 85%;
+  // max-height: 85%;
 }
 
 
+#type-dot {
+  height: 10px;
+  width: 10px;
+  border-radius: 10px;
+}
 
+img.modal-image {
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+
+a.download-icon {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 1em;
+  width: 6em;
+}

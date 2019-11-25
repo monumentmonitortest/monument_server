@@ -4,6 +4,9 @@ import 'babel-polyfill';
 import Submission from './Submission.jsx'
 import Pagination from './Pagination.jsx'
 import Compare from './Compare.jsx'
+import Modal from 'react-modal';
+
+// Modal.setAppElement('#submissionModal')
 
 export default class ResultsManager extends React.Component {
   constructor(props) {
@@ -100,6 +103,7 @@ export default class ResultsManager extends React.Component {
               {this.props.submissions.map((submission, i)=>(<Submission {...submission} key={i} handleSelectCompare={this.handleSelectCompare} />))}
           </div>
         </div>
+
       </div>
     )
   }
