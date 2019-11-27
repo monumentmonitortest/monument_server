@@ -10,8 +10,8 @@ sh -c rm -rf public/packs/* || true && bundle exec rake react_on_rails:locale &&
 bs rails s
 
 ## Download backup and restore DB:
-heroku pg:backups:capture
-heroku pg:backups:download
+heroku pg:backups:capture --app monument-monitor
+heroku pg:backups:download --app monument-monitor
 pg_restore --verbose --clean --no-acl --no-owner -h localhost -U roo -d monumental_server_development latest.dump
 
 Create dump file
