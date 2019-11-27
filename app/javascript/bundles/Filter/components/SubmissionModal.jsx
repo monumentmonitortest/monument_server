@@ -21,7 +21,7 @@ export default class SubmissionModal extends React.Component {
         </div>
 
         {/* Text stuff */}
-        <div className="w-25">
+        <div className="w-25 ph3">
           
           <span className="w-100 flex justify-between">
             <svg className={type}>
@@ -35,10 +35,16 @@ export default class SubmissionModal extends React.Component {
             <h2 className="w-100 tr f1 mb5">{name}</h2>
           </span>
           <div>
-            <div>Tags:</div>{tags}
+            <div className="fw9">AI Tags:</div>
+            <ul className="list ph3">
+              {tags.map((tag) => {
+                return <li className="mb0">{tag[0]}: {tag[1].toFixed(2)}</li>
+              })}
+            </ul>
           </div>
           <div>
-            <div>Comments: </div>{comment}
+            <div className="fw9">Comments: </div>
+            <div className="ph3">{comment}</div>
           </div>
 
           <a href={url} className="download-icon" download>

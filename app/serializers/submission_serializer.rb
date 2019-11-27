@@ -32,7 +32,8 @@ class SubmissionSerializer < ActiveModel::Serializer
   end
 
   def tags
-    self.object.tags
+    # sorts the tags by most likely, then reverses them, then splats them out as an array
+    self.object.tags.sort_by {|_key, value| value}.reverse
   end
 
 end
