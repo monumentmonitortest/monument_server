@@ -26,3 +26,6 @@ dump.rdb
 yarn-debug.log*
 .yarn-integrity
 public/packs/manifest.json
+
+# Ignore google credentials
+mm-key.json
