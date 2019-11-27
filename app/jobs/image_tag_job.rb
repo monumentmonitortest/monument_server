@@ -1,9 +1,12 @@
 require "google/cloud/vision"
 
 class ImageTagJob
-  def perform
-    submissions = Submission.where(tags: {}).first(100)
+  def initialize(count: 100)
+    @count = count
+  end
 
+  def perform
+    submissions = Submission.where(tags: {}).first(@count)
     submissions.each do |submission|
       get_tags(submission)
     end
