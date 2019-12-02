@@ -17,7 +17,8 @@
     "react-exif-orientation-img": "^0.1.5",
     "react-lazy-load": "^3.0.13",
     "react-modal": "^3.9.1",
-    "react-on-rails": "11.3.0"
+    "react-on-rails": "11.3.0",
+    "victory": "^33.1.5"
   },
   "devDependencies": {
     "tachyons": "^4.10.0",

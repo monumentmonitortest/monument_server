@@ -1,0 +1,15 @@
+
+rect {
+  fill: var(--primary-orange);
+  /* transition: fill 0.5s; */
+}
+
+rect.transparent {
+  opacity: 0;
+}
+
+svg.daily text {
+  fill: var(--secondary-orange);
+  text-anchor: middle;
+  font-size: 14px;
+}

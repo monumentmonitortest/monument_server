@@ -24,8 +24,12 @@ export default class FilterHome extends React.Component {
       totalSubmissions: '', // how many submissions there are
       pageNumber: '', // what page we're on at the moment
       viewDataVis: false, // viewing submissions or data view
-      navCollapsed: false
+      navCollapsed: false,
+      submissionsData: []
     };
+
+    // doing all of the binding
+    this.handleToggle = this.handleToggle.bind(this);
   }
 
   async componentDidMount() {
@@ -53,9 +57,11 @@ export default class FilterHome extends React.Component {
                        type=this.state.type, 
                        size=this.state.pageSize,
                        pageNumber=this.state.pageNumber,
-                       url=""}) => {
+                       url="",
+                       dataOnly=false}) => {
     try {
-      const requestURL = url ? url : `api/v1/submissions?reliable=${reliable}&site_filter=${site}&type_filter=${type}&bespoke_size=${size}&page=${pageNumber}`
+      const endpoint = (dataOnly || this.state.viewDataVis) ? 'api/v1/submission_data' : 'api/v1/submissions'
+      const requestURL = url ? url : `${endpoint}?reliable=${reliable}&site_filter=${site}&type_filter=${type}&bespoke_size=${size}&page=${pageNumber}`
       const response = await fetch(requestURL)
       if (!response.ok) {
       throw Error(response.statusText)
@@ -63,16 +69,21 @@ export default class FilterHome extends React.Component {
       const json = await response.json()
       const total = await response.headers.get("Total")
       const newPageNumber = await response.headers.get("current-page")
-      this.setState({
-        submissions: json.data,
-        reliable: reliable,
-        site: site, 
-        type: type, 
-        pageSize: size, 
-        totalSubmissions: total,
-        pageNumber: newPageNumber
-      })
-      json.links && this.setState({links: json.links})
+      if (dataOnly || this.state.viewDataVis) {
+        this.setState({ submissionData: json})
+      } else {
+        this.setState({
+          submissions: json.data,
+          reliable: reliable,
+          site: site, 
+          type: type, 
+          pageSize: size, 
+          totalSubmissions: total,
+          pageNumber: newPageNumber
+        })
+        json.links && this.setState({links: json.links})
+      }
+      
     } catch (error) {
       console.log(error)
     }
@@ -82,6 +93,12 @@ export default class FilterHome extends React.Component {
     const target = event.target.textContent
     if (target == "Data") {
       this.setState({viewDataVis: true})
+      console.log(this.state)
+      // debugger
+      this.refineView({reliable: this.state.reliable, 
+                       site: this.state.site, 
+                       type: this.state.type,
+                       dataOnly: true})
     } else if (target == "Images") {
       this.setState({viewDataVis: false})
     }
@@ -95,7 +112,9 @@ export default class FilterHome extends React.Component {
     const {navCollapsed} = this.state
     let data
     if (this.state.viewDataVis) {
-      data = <DataVis className={navCollapsed ? "collapsed" : "full"}/>
+      data = <DataVis 
+              className={navCollapsed ? "collapsed" : "full"}
+              submissions={this.state.submissions}/>
     } else {
       data = <ResultsManager 
                 siteNames={this.props.siteNames} 
