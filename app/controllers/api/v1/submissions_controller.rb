@@ -13,11 +13,15 @@ module Api
       end
 
       def data
-        byMonth = Submission.search_site(site_filter).group("TO_CHAR(record_taken, 'Month YYYY')").count
+        submissions ||= Submission.where('record_taken >= ?', 1.year.ago).search_site(site_filter)
+
+        by_month = submissions.group("TO_CHAR(record_taken, 'MM/YY')").count.sort
+        by_month_object = by_month.map {|k,v| {x: k, y: v}}
+
         tags = Submission.search_site(site_filter).select(:tags).map { |t| t[:tags].keys }.flatten
         types = Type.select(:name)
 
-        render json: { byMonth: byMonth, tags: tags, types: types }
+        render json: { byMonth: by_month_object, tags: tags, types: types }
       end
 
       private

@@ -5,12 +5,10 @@ export default class DataVis extends React.Component {
   constructor(props) {
     super(props);
   }
-
-  
-
-  
+    
   render() {
-    const dailyData = []
+    const dailyData = this.props.submissionsData != "undefined" ? this.props.submissionsData.byMonth : []
+
     return (
       <div>
         <h1>Last Month</h1>

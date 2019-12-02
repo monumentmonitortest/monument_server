@@ -52,6 +52,7 @@ export default class FilterHome extends React.Component {
     }
   }
 
+  // this refines the view, collecting the images and or data to show
   refineView = async ({reliable=this.state.reliable, 
                        site=this.state.site, 
                        type=this.state.type, 
@@ -69,8 +70,10 @@ export default class FilterHome extends React.Component {
       const json = await response.json()
       const total = await response.headers.get("Total")
       const newPageNumber = await response.headers.get("current-page")
+      // if its on data, we do not want any images being searched for!
       if (dataOnly || this.state.viewDataVis) {
-        this.setState({ submissionData: json})
+        this.setState({ submissionsData: json,
+                        viewDataVis: true})
       } else {
         this.setState({
           submissions: json.data,
@@ -92,9 +95,6 @@ export default class FilterHome extends React.Component {
   handleToggle = event => {
     const target = event.target.textContent
     if (target == "Data") {
-      this.setState({viewDataVis: true})
-      console.log(this.state)
-      // debugger
       this.refineView({reliable: this.state.reliable, 
                        site: this.state.site, 
                        type: this.state.type,
@@ -111,10 +111,11 @@ export default class FilterHome extends React.Component {
   render() {
     const {navCollapsed} = this.state
     let data
-    if (this.state.viewDataVis) {
+    if (this.state.viewDataVis) { 
       data = <DataVis 
               className={navCollapsed ? "collapsed" : "full"}
-              submissions={this.state.submissions}/>
+              submissionsData={this.state.submissionsData}
+              refineView={this.refineview}/>
     } else {
       data = <ResultsManager 
                 siteNames={this.props.siteNames} 
