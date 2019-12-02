@@ -12,10 +12,22 @@ module Api
         paginate json: submissions_scope.order(record_taken: :desc), per_page: page_size
       end
 
+      def data
+        byMonth = Submission.search_site(site_filter).group("TO_CHAR(record_taken, 'Month YYYY')").count
+        tags = Submission.search_site(site_filter).select(:tags).map { |t| t[:tags].keys }.flatten
+        types = Type.select(:name)
+
+        render json: { byMonth: byMonth, tags: tags, types: types }
+      end
+
       private
 
         def scope
           Submission.with_attached_image.search_site(site_filter).type_search(type_filter)
+        end
+
+        def scope_without_images
+          Submission.search_site(site_filter).type_search(type_filter)
         end
 
         def permitted_params
@@ -24,11 +36,16 @@ module Api
                         :site_filter,
                         :type_filter,
                         :bespoke_size,
-                        :page)
+                        :page,
+                        :pagination)
         end
 
         def page_size
           params[:bespoke_size] || (params[:page] && params[:page][:size]) || 10
+        end
+
+        def paginate?
+          permitted_params[:pagination] == "true"
         end
 
         def reliable?
@@ -36,7 +53,7 @@ module Api
         end
 
         def site_filter
-          permitted_params[:site_filter]
+          Site.find_by(name: permitted_params[:site_filter]).id if permitted_params[:site_filter].present?
         end
 
         def type_filter

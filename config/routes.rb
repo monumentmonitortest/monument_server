@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :submissions
+      get :submission_data, to: 'submissions#data'
       get :type_specific_report, to: 'csv#type_specific'
       get :basic_submission_report, to: 'csv#basic_submission'
       get :site_specific_report, to: 'csv#site_specific'
