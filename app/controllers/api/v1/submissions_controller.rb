@@ -13,11 +13,12 @@ module Api
       end
 
       def data
-        submissions ||= Submission.where('record_taken >= ?', 1.year.ago).search_site(site_filter)
+        date = Date.today - 1.year
+        submissions ||= Submission.where('record_taken >= ?', date).search_site(site_filter)
 
-        by_month = submissions.group("TO_CHAR(record_taken, 'MM/YY')").count.sort
-        by_month_object = by_month.map {|k,v| {x: k, y: v}}
+        by_month_object = submissions_data_hash(submissions, date)
 
+        
         tags = Submission.search_site(site_filter).select(:tags).map { |t| t[:tags].keys }.flatten
         types = Type.select(:name)
 
@@ -66,6 +67,16 @@ module Api
 
         def unsorted_sites
           @unsorted_sites||= Site::UNSORTED_SITES.map {|name| Site.find_by(name: name).try(:id) }
+        end
+
+        # todo - move this into a separate service probably, bit too much knowledge here
+        def submissions_data_hash(submissions, date)
+          date_hash = Hash[(0..12).collect { |n| [ date.advance(months: n).strftime('%m/%y') , 0 ] }]
+          submissions_by_month = submissions.group("TO_CHAR(record_taken, 'MM/YY')").count.sort
+          
+          date_hash.map do |k,v| 
+            {x: k, y: submissions_by_month.to_h[k] ? submissions_by_month.to_h[k] : 0 }
+          end
         end
     end
   end
