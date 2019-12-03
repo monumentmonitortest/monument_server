@@ -11,25 +11,25 @@ export default class DataVis extends React.Component {
 
     return (
       <div>
-        <h1>Last Month</h1>
+        <h1 className="f2 f1-l lh-title mb0 mt4">Submission numbers in last year</h1>
         <VictoryChart
-          // theme={VictoryTheme.grayscale}
+          className="mv0"
           domainPadding={10}
         >
           <VictoryAxis 
-            style={{tickLabels: {fill: "#bbbbbb"}}} />
+            style={{tickLabels: {fill: "#bbbbbb", fontSize: 8}}} />
           <VictoryBar
             data={dailyData}
-            labels={({ datum }) => `${datum.y}`}
+            labels={({ datum }) => `${Math.floor(datum.y)}`}
             animate={{
               duration: 2000,
-              onLoad: { duration: 1000 }
+              // onLoad: { duration: 1000 }
             }}
             barRatio={0.8}
             alignment="middle"
             style={{
               data: { fill: ({ datum }) => datum.y > 0 ? "#bbbbbb" : "#dcdbdb" },
-              labels: { fontSize: ({ text }) => text.length > 10 ? 8 : 12, fill: "#bbbbbb"},
+              labels: { fontSize: 8, fill: "#bbbbbb"},
               parent: { border: "1px solid #ccc" },
               x: { fill:  "#bbbbbb"}
             }}
