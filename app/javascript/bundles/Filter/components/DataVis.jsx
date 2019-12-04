@@ -1,5 +1,5 @@
 import React from 'react';
-import { VictoryBar, VictoryChart, VictoryTheme, VictoryAxis } from 'victory';
+import { VictoryBar, VictoryChart, VictoryAxis } from 'victory';
 
 export default class DataVis extends React.Component {
   constructor(props) {

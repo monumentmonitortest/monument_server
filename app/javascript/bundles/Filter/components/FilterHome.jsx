@@ -59,9 +59,9 @@ export default class FilterHome extends React.Component {
                        size=this.state.pageSize,
                        pageNumber=this.state.pageNumber,
                        url="",
-                       dataOnly=false}) => {
+                       dataOnly=this.state.viewDataVis}) => {
     try {
-      const endpoint = (dataOnly || this.state.viewDataVis) ? 'api/v1/submission_data' : 'api/v1/submissions'
+      const endpoint = dataOnly ? 'api/v1/submission_data' : 'api/v1/submissions'
       const requestURL = url ? url : `${endpoint}?reliable=${reliable}&site_filter=${site}&type_filter=${type}&bespoke_size=${size}&page=${pageNumber}`
       const response = await fetch(requestURL)
       if (!response.ok) {
@@ -70,16 +70,22 @@ export default class FilterHome extends React.Component {
       const json = await response.json()
       const total = await response.headers.get("Total")
       const newPageNumber = await response.headers.get("current-page")
-      // if its on data, we do not want any images being searched for!
+      
+      // Sets the state of the page wide variables
+      this.setState({
+        reliable: reliable,
+        site: site, 
+        type: type, 
+      })
+      
+      // set state if data is returned
       if (dataOnly || this.state.viewDataVis) {
         this.setState({ submissionsData: json,
                         viewDataVis: true})
       } else {
+        // Set state if images are returned
         this.setState({
           submissions: json.data,
-          reliable: reliable,
-          site: site, 
-          type: type, 
           pageSize: size, 
           totalSubmissions: total,
           pageNumber: newPageNumber
@@ -101,6 +107,7 @@ export default class FilterHome extends React.Component {
                        dataOnly: true})
     } else if (target == "Images") {
       this.setState({viewDataVis: false})
+      this.refineView({dataOnly: false})
     }
   }
 
