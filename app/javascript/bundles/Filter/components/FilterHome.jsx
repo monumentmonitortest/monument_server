@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import ResultsManager from './ResultsManager.jsx'
 import SubmissionsContextProvider from './SubmissionContext.jsx'
-import DataVis from './DataVis.jsx'
+import DataVisConsole from './DataVisConsole.jsx'
 import Nav from './Nav.jsx'
 
 export default class FilterHome extends React.Component {
@@ -119,10 +119,9 @@ export default class FilterHome extends React.Component {
     const {navCollapsed} = this.state
     let data
     if (this.state.viewDataVis) { 
-      data = <DataVis 
+      data = <DataVisConsole 
               className={navCollapsed ? "collapsed" : "full"}
-              submissionsData={this.state.submissionsData}
-              refineView={this.refineview}/>
+              submissionsData={this.state.submissionsData}/>
     } else {
       data = <ResultsManager 
                 siteNames={this.props.siteNames} 

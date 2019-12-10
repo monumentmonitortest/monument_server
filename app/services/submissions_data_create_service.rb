@@ -7,11 +7,10 @@ class SubmissionsDataCreateService
   def create
     by_month_object = submissions_data_hash(@submissions, @date)
 
-    tags = @submissions.select(:tags).map { |t| t[:tags].keys }.flatten
-    
+   
+    # binding.pry
     # types = types_data_hash
-
-    {  byMonth: by_month_object, tags: tags, types: types_data_hash }
+    { byMonth: by_month_object, tags: tags_object, types: types_object }
   end
 
   private
@@ -25,8 +24,15 @@ class SubmissionsDataCreateService
       end
     end
 
-    def types_data_hash
+    def types_object
       Type.select(:name).group(:name).size.map {|name,number| {x: name, y: number}}
 
+    end
+
+    def tags_object
+      tags = @submissions.select(:tags).map { |t| t[:tags].keys }.flatten
+      tags_hash = Hash.new(0)
+      tags.each {|t| tags_hash[t] += 1}
+      tags_hash.sort_by {|_key, value| value}.map {|k,v| {text: k, value: v}}.last(100)
     end
 end
