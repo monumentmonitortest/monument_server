@@ -27,7 +27,7 @@ export default class DataVis extends React.Component {
         {/* project wide states */}
         <div className="pa4 mt4 br2 data-box">
           <h2 className="mb4 f1 title ">Project wide stats</h2>
-          <div className="flex items-end">
+          <div className="flex-ns items-end">
             <div className="w-30">
               <h1 className="data-bold-color">{this.props.allSubmissionsTotal}</h1> 
               <hr className="w-60 ml0"></hr>
@@ -46,7 +46,7 @@ export default class DataVis extends React.Component {
               Least popular
             </div>
             
-            <div className="w-40">
+            <div className="w-80 w-40-ns">
               <TypePieChart data={typeData} />
               <hr className="w-60 ml0"></hr>
               Type breakdown
@@ -65,8 +65,8 @@ export default class DataVis extends React.Component {
           <SubmissionBarChart data={dailyData} />
           <hr className="w-60 ml0 mt0"></hr>
 
-          <div className="flex">
-            <div className="w-60">
+          <div className="flex-ns">
+            <div className="w-100 w-60-ns">
               <h1 className="f2 f1-l lh-title mb0 mt4 data-bold-color">Vision AI tags</h1>
               <TagScatterChart data={tagData} />
             </div>

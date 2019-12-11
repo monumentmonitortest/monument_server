@@ -26,7 +26,7 @@ export default class Submission extends React.Component {
     const image =  this.props.attributes["image-url"] || ""
     const site  = this.props.attributes["site-name"] || ""
     const type  = this.props.attributes["type-name"] || ""
-    const recordTaken  = this.props.attributes["record-taken"] || ""
+    const recordTaken  = new Date(this.props.attributes["record-taken"]) || ""
     const submissionId = this.props.id
     const submissionClass = `submission ${type.toLowerCase()}`
     const {showModal} = this.state
@@ -53,8 +53,8 @@ export default class Submission extends React.Component {
                   <div className="submission-text pa2">
                     <h1 className="f4 f3-l lh-title mb0 w-100">{site}</h1>
                     <span className="flex flex-wrap">
-                      <h2 className="f4 f3-l w-50 mb0 inline">{recordTaken}</h2>
-                      <span className="w-50 flex flex-wrap">
+                      <h2 className="f4 f3-l w-100-m w-50-ns mb0 inline">{recordTaken.toLocaleDateString("en-UK")}</h2>
+                      <span className="w-100-m w-50-ns flex flex-wrap">
                         <input name="compare" 
                                 type="checkbox" 
                                 value={image}

@@ -149,7 +149,7 @@ export default class FilterHome extends React.Component {
             handleToggleNav={this.handleToggleNav}
             navCollapsed={this.state.navCollapsed}
              />
-          <main className={navCollapsed ? "collapsed ph4-ns" : "full ph4-ns"}>
+          <main className={navCollapsed ? "collapsed ph4" : "full ph4"}>
             {data}
           </main>
         </SubmissionsContextProvider>
