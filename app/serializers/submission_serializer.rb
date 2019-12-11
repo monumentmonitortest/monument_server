@@ -28,7 +28,7 @@ class SubmissionSerializer < ActiveModel::Serializer
   end
 
   def recordTaken
-    self.object.record_taken.strftime("%d/%m/%Y")
+    self.object.record_taken
   end
 
   def tags

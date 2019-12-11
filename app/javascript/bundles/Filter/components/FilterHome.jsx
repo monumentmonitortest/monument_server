@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import ResultsManager from './ResultsManager.jsx'
 import SubmissionsContextProvider from './SubmissionContext.jsx'
-import DataVis from './DataVis.jsx'
+import DataVisConsole from './DataVisConsole.jsx'
 import Nav from './Nav.jsx'
 
 export default class FilterHome extends React.Component {
@@ -24,8 +24,12 @@ export default class FilterHome extends React.Component {
       totalSubmissions: '', // how many submissions there are
       pageNumber: '', // what page we're on at the moment
       viewDataVis: false, // viewing submissions or data view
-      navCollapsed: false
+      navCollapsed: false,
+      submissionsData: []
     };
+
+    // doing all of the binding
+    this.handleToggle = this.handleToggle.bind(this);
   }
 
   async componentDidMount() {
@@ -48,14 +52,17 @@ export default class FilterHome extends React.Component {
     }
   }
 
+  // this refines the view, collecting the images and or data to show
   refineView = async ({reliable=this.state.reliable, 
                        site=this.state.site, 
                        type=this.state.type, 
                        size=this.state.pageSize,
                        pageNumber=this.state.pageNumber,
-                       url=""}) => {
+                       url="",
+                       dataOnly=this.state.viewDataVis}) => {
     try {
-      const requestURL = url ? url : `api/v1/submissions?reliable=${reliable}&site_filter=${site}&type_filter=${type}&bespoke_size=${size}&page=${pageNumber}`
+      const endpoint = dataOnly ? 'api/v1/submission_data' : 'api/v1/submissions'
+      const requestURL = url ? url : `${endpoint}?reliable=${reliable}&site_filter=${site}&type_filter=${type}&bespoke_size=${size}&page=${pageNumber}`
       const response = await fetch(requestURL)
       if (!response.ok) {
       throw Error(response.statusText)
@@ -63,16 +70,29 @@ export default class FilterHome extends React.Component {
       const json = await response.json()
       const total = await response.headers.get("Total")
       const newPageNumber = await response.headers.get("current-page")
+      
+      // Sets the state of the page wide variables
       this.setState({
-        submissions: json.data,
         reliable: reliable,
         site: site, 
         type: type, 
-        pageSize: size, 
-        totalSubmissions: total,
-        pageNumber: newPageNumber
       })
-      json.links && this.setState({links: json.links})
+      
+      // set state if data is returned
+      if (dataOnly || this.state.viewDataVis) {
+        this.setState({ submissionsData: json,
+                        viewDataVis: true})
+      } else {
+        // Set state if images are returned
+        this.setState({
+          submissions: json.data,
+          pageSize: size, 
+          totalSubmissions: total,
+          pageNumber: newPageNumber
+        })
+        json.links && this.setState({links: json.links})
+      }
+      
     } catch (error) {
       console.log(error)
     }
@@ -81,9 +101,13 @@ export default class FilterHome extends React.Component {
   handleToggle = event => {
     const target = event.target.textContent
     if (target == "Data") {
-      this.setState({viewDataVis: true})
+      this.refineView({reliable: this.state.reliable, 
+                       site: this.state.site, 
+                       type: this.state.type,
+                       dataOnly: true})
     } else if (target == "Images") {
       this.setState({viewDataVis: false})
+      this.refineView({dataOnly: false})
     }
   }
 
@@ -94,8 +118,10 @@ export default class FilterHome extends React.Component {
   render() {
     const {navCollapsed} = this.state
     let data
-    if (this.state.viewDataVis) {
-      data = <DataVis className={navCollapsed ? "collapsed" : "full"}/>
+    if (this.state.viewDataVis) { 
+      data = <DataVisConsole 
+              className={navCollapsed ? "collapsed" : "full"}
+              submissionsData={this.state.submissionsData}/>
     } else {
       data = <ResultsManager 
                 siteNames={this.props.siteNames} 

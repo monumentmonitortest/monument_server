@@ -10,6 +10,7 @@
     "babel-polyfill": "^6.26.0",
     "babel-preset-react": "^6.24.1",
     "blueimp-load-image": "^2.23.0",
+    "d3": "^5.14.2",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-compare-image": "^1.3.0",
@@ -17,7 +18,8 @@
     "react-exif-orientation-img": "^0.1.5",
     "react-lazy-load": "^3.0.13",
     "react-modal": "^3.9.1",
-    "react-on-rails": "11.3.0"
+    "react-on-rails": "11.3.0",
+    "victory": "^33.1.7"
   },
   "devDependencies": {
     "tachyons": "^4.10.0",

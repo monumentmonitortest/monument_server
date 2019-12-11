@@ -8,7 +8,7 @@ export default class SubmissionModal extends React.Component {
   
   render() {
     const url = this.props.attributes['image-url']
-    const date = this.props.attributes['record-taken']
+    const date = Date.new(this.props.attributes['record-taken'])
     const name = this.props.attributes['site-name']
     const type = this.props.attributes['type-name'].toLowerCase()
     const comment = this.props.attributes['type-comment']
