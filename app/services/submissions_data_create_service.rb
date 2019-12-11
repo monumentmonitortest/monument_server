@@ -31,8 +31,37 @@ class SubmissionsDataCreateService
 
     def tags_object
       tags = @submissions.select(:tags).map { |t| t[:tags].keys }.flatten
-      tags_hash = Hash.new(0)
-      tags.each {|t| tags_hash[t] += 1}
-      tags_hash.sort_by {|_key, value| value}.map {|k,v| {text: k, value: v}}.last(100)
+
+      # get all the tags and their values
+      tags = @submissions.select(:tags).map { |t| t[:tags] }.flatten
+      # create new hash
+      new = Hash.new
+      # flatten them down into one object
+      tags.each do |hash| 
+        hash.map do |text, value| 
+          if new[text]
+            new[text][:count] += 1
+            new[text][:value] << value.round(2)
+          else
+            new[text] = {count: 1, value: [value.round(2)]}
+          end
+        end
+      end
+
+      # get the mean score for certaintly
+      new.map do |label| 
+        array = label[1][:value]
+        mean = array.inject{ |sum, el| sum + el }.to_f / array.size
+        label[1][:value] = mean.round(2)
+      end
+
+
+      # make it into another new object, coz why on earth not...
+      final = Array.new
+      new.map {|label| final << { label: label[0], x: label[1][:value], y: label[1][:count]  } }
+      # return the final array
+      #I KNOW THIS IS AWFUL BUT I HAVE A DEADLINE. DON'T JUDGE ME!
+      # sort them and get the last 100
+      final.sort_by {|obj| obj[:y]}.last(70)
     end
 end
