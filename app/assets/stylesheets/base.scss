@@ -11,6 +11,10 @@ $whatsapp: #00b753;
 $instagram: #833AB4;
 $email: #B23121;
 
+// data-vis
+$data-background: #243647;
+$data-bold-font-color: #efebdc;
+$data-text-color: #7b8899;
 .hidden {
   display: none;
 }
@@ -39,6 +43,15 @@ body {
 
 .dark-color {
   color: rgb(28,28,33)
+}
+
+.data-box {
+  background-color: $data-background;
+  color: $data-text-color;
+}
+
+.data-bold-color {
+  color: $data-bold-font-color;
 }
 
 div.twitter {
