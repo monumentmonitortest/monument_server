@@ -1,33 +1,37 @@
 // Theme styles:
 // Background
-$main-background-color: #232327;
-$bg-color: #000000;
-$dot-color: #565656;
-$main-font-color: #eaeaea;
-$green-background: #004035;
-$blue-background: #002040;
-$twitter: #38A1F3;
-$whatsapp: #00b753;
-$instagram: #833AB4;
-$email: #B23121;
+$main-bg-color: #232327;
+$nav-bg-color: #000000;
 
+$main-font-color: #eaeaea;
+$main-off-white-font-color: #efebdc;
+
+$green-background: #004035;
+$blue-background: #243647;
+$twitter: #5b8cd6;
+$whatsapp: #3bb772;
+$instagram: #b766cc;
+$email: #bf4f4f;
+
+// data-vis
+$data-background: #243647;
+
+$data-text-color: #7b8899;
 .hidden {
   display: none;
 }
 
 body {
-	background-color: $main-background-color;
+	background-color: $main-bg-color;
   color: $main-font-color;
   min-height: 100vh;
 }
 
 .black-background {
-  background-color: $main-background-color;
+  background-color: $main-bg-color;
 }
 
-.green-background {
-  background-color: $green-background;
-}
+
 
 .blue-background {
   background-color: $blue-background; 
@@ -39,6 +43,15 @@ body {
 
 .dark-color {
   color: rgb(28,28,33)
+}
+
+.data-box {
+  background-color: $data-background;
+  color: $data-text-color;
+}
+
+.data-bold-color {
+  color: $main-off-white-font-color;
 }
 
 div.twitter {
@@ -120,7 +133,7 @@ nav {
 // Desktop 
 @media (min-width:801px) {
   nav {
-    background: $bg-color;
+    background: $nav-bg-color;
     width: 25vw;
     max-width: 500px;
     height: 100vh;

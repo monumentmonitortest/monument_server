@@ -21,11 +21,12 @@ export default class FilterHome extends React.Component {
       reliable: false, 
       submissions: [],
       links: [],
+      allSubmissionsTotal: '', // Popoulated on the first call, and stays that way for dashboard
       totalSubmissions: '', // how many submissions there are
       pageNumber: '', // what page we're on at the moment
       viewDataVis: false, // viewing submissions or data view
       navCollapsed: false,
-      submissionsData: []
+      submissionsData: [],
     };
 
     // doing all of the binding
@@ -43,6 +44,7 @@ export default class FilterHome extends React.Component {
 
       this.setState({
         submissions: json.data,
+        allSubmissionsTotal: total,
         totalSubmissions: total,
         pageNumber: '1',
         links: json.links
@@ -121,7 +123,9 @@ export default class FilterHome extends React.Component {
     if (this.state.viewDataVis) { 
       data = <DataVisConsole 
               className={navCollapsed ? "collapsed" : "full"}
-              submissionsData={this.state.submissionsData}/>
+              submissionsData={this.state.submissionsData}
+              allSubmissionsTotal={this.state.allSubmissionsTotal}
+              siteName={this.state.site}/>
     } else {
       data = <ResultsManager 
                 siteNames={this.props.siteNames} 
@@ -145,7 +149,7 @@ export default class FilterHome extends React.Component {
             handleToggleNav={this.handleToggleNav}
             navCollapsed={this.state.navCollapsed}
              />
-          <main className={navCollapsed ? "collapsed ph4-ns" : "full ph4-ns"}>
+          <main className={navCollapsed ? "collapsed ph4" : "full ph4"}>
             {data}
           </main>
         </SubmissionsContextProvider>

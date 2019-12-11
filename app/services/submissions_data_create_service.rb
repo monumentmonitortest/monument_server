@@ -7,7 +7,13 @@ class SubmissionsDataCreateService
   def create
     by_month_object = submissions_data_hash(@submissions, @date)
 
-    { byMonth: by_month_object, tags: tags_object, types: types_object }
+    { 
+      byMonth: by_month_object, 
+      tags: tags_object, 
+      types: types_object, 
+      maxSubs: top_scores_object, 
+      minSubs: bottom_scores_object,
+    }
   end
 
   private
@@ -22,8 +28,7 @@ class SubmissionsDataCreateService
     end
 
     def types_object
-      Type.select(:name).group(:name).size.map {|name,number| {x: name, y: number}}
-
+      Type.select(:name).group(:name).size.map {|name,number| {x: name.capitalize, y: number}}
     end
 
     def tags_object
@@ -58,5 +63,17 @@ class SubmissionsDataCreateService
       #I KNOW THIS IS AWFUL BUT I HAVE A DEADLINE. DON'T JUDGE ME!
       # sort them and get the last 100
       final.sort_by {|obj| obj[:y]}.last(70)
+    end
+
+    def top_scores_object
+      scores.first(4).map(&:site).map(&:name)
+    end
+
+    def bottom_scores_object
+      scores.last(4).map(&:site).map(&:name)
+    end
+
+    def scores
+      @scores ||= Submission.select(:site_id).group(:site_id).order("count(site_id) desc")
     end
 end

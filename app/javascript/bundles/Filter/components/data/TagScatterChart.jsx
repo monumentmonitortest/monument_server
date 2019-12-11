@@ -4,10 +4,10 @@ import { VictoryScatter, VictoryChart, VictoryTooltip, VictoryAxis } from 'victo
 
 const axisStyle = {
   axis: {stroke: "#756f6a"},
-  axisLabel: {fontSize: 20, padding: 30, margin: 20, fill: 'grey'},
+  axisLabel: {fontSize: 20, padding: 30, margin: 20, fill: '#efebdc'},
   grid: {stroke:  "none"},
   ticks: {stroke: "none"},
-  tickLabels: {fontSize: 15, padding: 5, fill: 'grey'}
+  tickLabels: {fontSize: 15, padding: 5, fill: '#efebdc'}
 }
 
 export default class TagScatterChart extends React.Component {
