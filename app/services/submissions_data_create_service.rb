@@ -27,8 +27,6 @@ class SubmissionsDataCreateService
     end
 
     def tags_object
-      tags = @submissions.select(:tags).map { |t| t[:tags].keys }.flatten
-
       # get all the tags and their values
       tags = @submissions.select(:tags).map { |t| t[:tags] }.flatten
       # create new hash
