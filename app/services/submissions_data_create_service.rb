@@ -7,9 +7,6 @@ class SubmissionsDataCreateService
   def create
     by_month_object = submissions_data_hash(@submissions, @date)
 
-   
-    # binding.pry
-    # types = types_data_hash
     { byMonth: by_month_object, tags: tags_object, types: types_object }
   end
 

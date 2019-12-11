@@ -13,6 +13,7 @@ module Api
       end
 
       def data
+        # TODO - add some specs you lazy sod.
         date = Date.today - 1.year
         submissions ||= Submission.where('record_taken >= ?', date).search_site(site_filter)
 
