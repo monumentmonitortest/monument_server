@@ -1,10 +1,9 @@
 import React from 'react';
 
 import SubmissionBarChart from './data/SubmissionBarChart'
-import SubmissionAreaChart from './data/SubmissionAreaChart'
+// import SubmissionAreaChart from './data/SubmissionAreaChart'
+import TagScatterChart from './data/TagScatterChart'
 import TypePieChart from './data/TypePieChart'
-import TagBubbleChart from './data/TagBubbleChart'
-
 
 export default class DataVis extends React.Component {
   constructor(props){
@@ -19,10 +18,10 @@ export default class DataVis extends React.Component {
     
     return (
       <div>
-        <SubmissionAreaChart data={dailyData} />
+        {/* <SubmissionAreaChart data={dailyData} /> */}
         <SubmissionBarChart data={dailyData} />
         <TypePieChart data={typeData} />
-        <TagBubbleChart data={tagData} />
+        <TagScatterChart data={tagData} />
       </div>
     )
   }
