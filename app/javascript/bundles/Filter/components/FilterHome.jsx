@@ -124,7 +124,8 @@ export default class FilterHome extends React.Component {
       data = <DataVisConsole 
               className={navCollapsed ? "collapsed" : "full"}
               submissionsData={this.state.submissionsData}
-              allSubmissionsTotal={this.state.allSubmissionsTotal}/>
+              allSubmissionsTotal={this.state.allSubmissionsTotal}
+              siteName={this.state.site}/>
     } else {
       data = <ResultsManager 
                 siteNames={this.props.siteNames} 

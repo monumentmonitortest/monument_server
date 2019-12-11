@@ -28,7 +28,7 @@ class SubmissionsDataCreateService
     end
 
     def types_object
-      Type.select(:name).group(:name).size.map {|name,number| {x: name, y: number}}
+      Type.select(:name).group(:name).size.map {|name,number| {x: name.capitalize, y: number}}
     end
 
     def tags_object

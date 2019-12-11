@@ -10,7 +10,6 @@ export default class SubmissionBarChart extends React.Component {
   render() {
     return (
       <div>
-        <h1 className="f2 f1-l lh-title mb0 mt4">Submission numbers in last year</h1>
         <VictoryChart
           className="mv0"
           domainPadding={10}
