@@ -8,7 +8,7 @@ export default class SubmissionModal extends React.Component {
   
   render() {
     const url = this.props.attributes['image-url']
-    const date = Date.new(this.props.attributes['record-taken'])
+    const date = new Date(this.props.attributes['record-taken'])
     const name = this.props.attributes['site-name']
     const type = this.props.attributes['type-name'].toLowerCase()
     const comment = this.props.attributes['type-comment']
@@ -31,7 +31,7 @@ export default class SubmissionModal extends React.Component {
           </span>
 
           <span className="w-100">
-            <h2 className="f2 tr mt3 mb2">{date}</h2>
+            <h2 className="f2 tr mt3 mb2">{date.toLocaleDateString("en-UK")}</h2>
             <h2 className="w-100 tr f1 mb5">{name}</h2>
           </span>
           <div>
