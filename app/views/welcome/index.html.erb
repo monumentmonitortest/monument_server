@@ -1,17 +1,21 @@
 <div class="">
   <div class="">
-    <h1>Welcome to Monument Monitor</h1>
+    <h1>Admin Interface</h1>
 
     <p>
-      Here you may find the submissions for the various different case study sites in the monitment
-       monitor project. New submissions may be uploaded and, in time, detailed information about the 
-       submissions can be downloaded
+      
     </p>
     <%= link_to 'Veiw all sites', controller: 'sites' %> (edit submissions from here)
     <br/>
     <%= link_to 'Veiw all submissions', controller: 'submissions' %> (no editing or deleting possible)
     <br/>
     <%= link_to 'Veiw all types', controller: 'types' %>
+    <br/>
+    <%= link_to 'Bulk upload', controller: 'bulk_upload' %>
+    <br/>
+    <%= link_to 'Instgram upload', controller: 'insta_upload' %>
+    <br/>
+    <%= link_to 'Extract reports', controller: 'results' %>
 
   </div>
 </div>
