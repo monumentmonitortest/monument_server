@@ -37,13 +37,18 @@ class SubmissionsDataCreateService
       # create new hash
       new = Hash.new
       # flatten them down into one object
+
       tags.each do |hash| 
-        hash.map do |text, value| 
-          if new[text]
-            new[text][:count] += 1
-            new[text][:value] << value.round(2)
-          else
-            new[text] = {count: 1, value: [value.round(2)]}
+        # Hacky hack - due to incorrect migration - needs to be sorted!!
+       unless hash == "{}"
+          puts hash
+          hash.map do |text, value| 
+            if new[text]
+              new[text][:count] += 1
+              new[text][:value] << value.round(2)
+            else
+              new[text] = {count: 1, value: [value.round(2)]}
+            end
           end
         end
       end
