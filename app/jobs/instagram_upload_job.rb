@@ -8,6 +8,7 @@ class InstagramUploadJob
 
   def perform
     @json_data.each do |post|
+      # binding.pry
         
       if post['shortcode_media']['edge_sidecar_to_children']
         images = post['shortcode_media']['edge_sidecar_to_children']['edges']
