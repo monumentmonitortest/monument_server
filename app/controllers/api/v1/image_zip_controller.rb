@@ -65,7 +65,11 @@ module Api
       
       def create_zip_from_tmp_folder(tmp_user_folder, filename, new_filename)
         Zip::File.open("#{tmp_user_folder}.zip", Zip::File::CREATE) do |zf|
-          zf.add(new_filename, "#{tmp_user_folder}/#{filename}")
+          begin
+            zf.add(new_filename, "#{tmp_user_folder}/#{filename}")
+          rescue Zip::EntryExistsError
+            puts "already exists, moving on..."
+          end
         end
       end
     end
