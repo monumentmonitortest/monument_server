@@ -31,6 +31,8 @@ Rails.application.routes.draw do
       get :basic_submission_report, to: 'csv#basic_submission'
       get :site_specific_report, to: 'csv#site_specific'
       get :image_quality_report, to: 'csv#image_quality'
+      get :all_images, to: 'image_zip#get_images'
+
     end
   end
 end

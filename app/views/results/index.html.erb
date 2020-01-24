@@ -120,3 +120,12 @@ Numbers of submissions by type
     <%= link_to 'whatsapp report', api_v1_image_quality_report_path(format: "csv", type_name: 'WHATSAPP'), class: 'button'  %>
   </p>
 </div>
+
+<h3>Get all the images</h3>
+<div class="flex flex-wrap column justify-between">
+<% Site.all.each do |site| %>
+  <p>
+    <%= link_to site.name, api_v1_all_images_path(site_id: site.id), class: 'button'  %>
+  </p>
+<% end %>
+</div>
