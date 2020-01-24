@@ -25,13 +25,14 @@ module Api
           day = submission.record_taken.strftime("%d-")
 
           filename = day + name
+          new_filename = year + month + filename
           # filename = document.blob.filename.to_s
 
           # User should be able to download files if not yet removed from tmp folder
           # if the folder is already there, we'd get an error
           create_tmp_folder_and_store_documents(document, tmp_user_folder, filename) unless directory_length_same_as_documents
           #---------- Convert to .zip --------------------------------------- #
-          create_zip_from_tmp_folder(tmp_user_folder, filename) unless directory_length_same_as_documents
+          create_zip_from_tmp_folder(tmp_user_folder, filename, new_filename) unless directory_length_same_as_documents
         end
         # Sends the *.zip file to be download to the client's browser
         send_file(Rails.root.join("#{tmp_user_folder}.zip"), :type => 'application/zip', :filename => "Files_for_submissions.zip", :disposition => 'attachment')
@@ -41,9 +42,10 @@ module Api
       end
 
       def create_tmp_folder_and_store_documents(document, tmp_user_folder, filename)
-        File.open(File.join(tmp_user_folder, filename), 'wb') do |file|
+        file = File.open(File.join(tmp_user_folder, filename), 'wb') do |file|
           # As per georgeclaghorn in comment ;)
           begin
+            # binding.pry
           document.download { |chunk| file.write(chunk) }
           rescue Aws::S3::Errors::ServiceError
             puts 'BUGGER'
@@ -51,9 +53,9 @@ module Api
         end
       end
       
-      def create_zip_from_tmp_folder(tmp_user_folder, filename)
+      def create_zip_from_tmp_folder(tmp_user_folder, filename, new_filename)
         Zip::File.open("#{tmp_user_folder}.zip", Zip::File::CREATE) do |zf|
-          zf.add(filename, "#{tmp_user_folder}/#{filename}")
+          zf.add(new_filename, "#{tmp_user_folder}/#{filename}")
         end
       end
     end
