@@ -122,8 +122,10 @@ Numbers of submissions by type
 </div>
 
 <h3>Get all the images</h3>
-<div>
+<div class="flex flex-wrap column justify-between">
+<% Site.all.each do |site| %>
   <p>
-    <%= link_to 'all images', api_v1_all_images_path, class: 'button'  %>
+    <%= link_to site.name, api_v1_all_images_path(site_id: site.id), class: 'button'  %>
   </p>
+<% end %>
 </div>

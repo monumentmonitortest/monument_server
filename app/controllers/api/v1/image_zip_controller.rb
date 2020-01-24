@@ -4,9 +4,19 @@ module Api
     class ImageZipController < BaseController
       
       def get_images
+        collect_and_zip_images(permitted_params[:site_id])
+      end
+
+      private
+
+      def permitted_params
+        params.permit(:site_id)
+      end
+
+      def collect_and_zip_images(site_id)
         # Simulation of an object with has_many_attached :documents
         # job = Submission.all.map {|s| s.image.attachment }
-        submissions = Submission.all
+        submissions = Site.find(site_id).submissions
         # Tmp folder to store the download files from S3
         # Notice we prfix the folder with a unique number (current_user.id)
         tmp_user_folder = "tmp/archive_submissions"
