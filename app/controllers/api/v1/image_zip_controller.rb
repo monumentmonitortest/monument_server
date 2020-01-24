@@ -1,9 +1,11 @@
 require 'zip'
 module Api
   module V1
+    # TODO - tests and DRY UP
     class ImageZipController < BaseController
       
       def get_images
+        delete_current_tempfile
         collect_and_zip_images(permitted_params[:site_id])
       end
 
@@ -11,6 +13,14 @@ module Api
 
       def permitted_params
         params.permit(:site_id)
+      end
+
+      def delete_current_tempfile
+        tmp_user_folder = "tmp/archive_submissions"
+
+        if Dir.exists?(tmp_user_folder)
+          FileUtils.rm_rf(Dir["#{tmp_user_folder}/*"]) 
+        end
       end
 
       def collect_and_zip_images(site_id)
