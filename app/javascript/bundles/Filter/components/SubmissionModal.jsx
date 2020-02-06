@@ -31,7 +31,7 @@ export default class SubmissionModal extends React.Component {
           </span>
 
           <span className="w-100">
-            <h2 className="f2 tr mt3 mb2">{date.toLocaleDateString("en-UK")}</h2>
+            <h2 className="f2 tr mt3 mb2">{date.toLocaleDateString("en-GB")}</h2>
             <h2 className="w-100 tr f1 mb5">{name}</h2>
           </span>
           <div>
