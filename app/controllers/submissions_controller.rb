@@ -65,7 +65,7 @@ class SubmissionsController < ApplicationController
                                        :type_id,
                                        :image, 
                                        :record_taken, 
-                                       :tags 
+                                       :ai_tags,
     )
   end
 

@@ -12,7 +12,7 @@ export default class SubmissionModal extends React.Component {
     const name = this.props.attributes['site-name']
     const type = this.props.attributes['type-name'].toLowerCase()
     const comment = this.props.attributes['type-comment']
-    const tags = this.props.attributes['tags']
+    const tags = this.props.attributes['ai-tags']
     
     return (
       <div className="flex flex-wrap flex-column h-100">
