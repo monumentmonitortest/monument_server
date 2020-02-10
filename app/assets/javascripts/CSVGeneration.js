@@ -27,8 +27,13 @@ core.CsvReports.changeURL = function(e) {
   var fromDate = $('input.from-date').val()
   var toDate = $('input.to-date').val()
   
-  var href = $( "#site-specific-report" ).attr("href")
-  
-  var newLink = href.split('?')[0] + '?site_id=' + id + '&from_date=' + fromDate + '&to_date=' + toDate
-  $( "#site-specific-report" ).attr("href", newLink)
+  var hrefSubPatterns = $( "#site-specific-report" ).attr("href")
+  var hrefTags = $( "#site-specific-tag-report" ).attr("href")
+  // console.log(hrefTags)
+  var newSubLink = hrefSubPatterns.split('?')[0] + '?site_id=' + id + '&from_date=' + fromDate + '&to_date=' + toDate
+  $( "#site-specific-report" ).attr("href", newSubLink)
+
+  var newTagLink = hrefTags.split('?')[0] + '?site_id=' + id + '&from_date=' + fromDate + '&to_date=' + toDate
+  $( "#site-specific-tag-report" ).attr("href", newTagLink)
+  // console.log(newTagLink)
 }
