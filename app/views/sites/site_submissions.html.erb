@@ -1,11 +1,15 @@
-<h3>Listing all the submissions for <%=@site.name%> (<%=@site.submissions.count %>)</h3>
+<h3 id='site-info' class="f1">Submissions to date (<%=@site.submissions.count %>)</h3>
 
 <table id="site-submissions-admin-list">
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Content</th>
-      <th colspan="3"></th>
+      <th>Image</th>
+      <th>Site</th>
+      <th></th>
+      <th>Date</th>
+      <th>Tags (manual)</th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
  
@@ -18,6 +22,7 @@
           <td><%= f.select :site_id, options_for_select(Site.all.map {|s| [s.name, s.id]}, [submission.site.name, submission.site.id] || "")%></td>
           <td>Reliable? <%= f.check_box :reliable, checked: submission.reliable %></td>
           <td><%= submission.record_taken.strftime("%d/%m/%Y") %></td>
+          <td><%= f.text_field :tag_list, value: f.object.tag_list.to_s, class: "tags" %> </td>
 
           <td><%= link_to "Destroy", submission, method: :delete, data: { confirm: "Are you sure?" } %></td>
           <td><%= submit_tag("Update Submission", class: "#{submission.id}") %></td>

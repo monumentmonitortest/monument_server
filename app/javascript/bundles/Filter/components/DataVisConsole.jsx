@@ -16,11 +16,11 @@ export default class DataVis extends React.Component {
     const {submissionsData} = this.props
     const dailyData = submissionsData != "undefined" ? submissionsData.byMonth : []
     const typeData = submissionsData != 'undefined' ? submissionsData.types : []
-    const tagData = submissionsData != 'undefined' ? submissionsData.tags : []
+    const tagData = submissionsData != 'undefined' ? submissionsData.ai_tags : []
     const maxData = submissionsData != 'undefined' ? submissionsData.maxSubs : []
     const minData = submissionsData != 'undefined' ? submissionsData.minSubs : []
-    
-    const maxTags = submissionsData != 'undefined' ? submissionsData.tags.slice(Math.max(submissionsData.tags.length - 5, 1)) : []
+
+    const maxTags = submissionsData != 'undefined' ? submissionsData.ai_tags.slice(Math.max(submissionsData.ai_tags.length - 5, 1)) : []
     
     return (
       <div>

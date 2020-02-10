@@ -53,7 +53,7 @@ export default class Submission extends React.Component {
                   <div className="submission-text pa2">
                     <h1 className="f4 f3-l lh-title mb0 w-100">{site}</h1>
                     <span className="flex flex-wrap">
-                      <h2 className="f4 f3-l w-100-m w-50-ns mb0 inline">{recordTaken.toLocaleDateString("en-UK")}</h2>
+                      <h2 className="f4 f3-l w-100-m w-50-ns mb0 inline">{recordTaken.toLocaleDateString("en-GB")}</h2>
                       <span className="w-100-m w-50-ns flex flex-wrap">
                         <input name="compare" 
                                 type="checkbox" 

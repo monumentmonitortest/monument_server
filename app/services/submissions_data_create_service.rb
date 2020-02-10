@@ -9,7 +9,7 @@ class SubmissionsDataCreateService
 
     { 
       byMonth: by_month_object, 
-      tags: tags_object, 
+      ai_tags: ai_tags_object, 
       types: types_object, 
       maxSubs: top_scores_object, 
       minSubs: bottom_scores_object,
@@ -31,9 +31,10 @@ class SubmissionsDataCreateService
       Type.select(:name).group(:name).size.map {|name,number| {x: name.capitalize, y: number}}
     end
 
-    def tags_object
+    def ai_tags_object
       # get all the tags and their values
-      tags = @submissions.select(:tags).map { |t| t[:tags] }.flatten
+      # binding.pry
+      tags = @submissions.select(:ai_tags).map { |t| t[:ai_tags] }.flatten
       # create new hash
       new = Hash.new
       # flatten them down into one object

@@ -1,5 +1,5 @@
 class SubmissionSerializer < ActiveModel::Serializer
-  attributes :id, :siteName, :siteId, :recordTaken, :tags, :imageUrl, :typeName, :typeComment, :tags
+  attributes :id, :siteName, :siteId, :recordTaken, :ai_tags, :imageUrl, :typeName, :typeComment, :tags
 
   def imageUrl
     if Rails.env == 'development'
@@ -31,9 +31,9 @@ class SubmissionSerializer < ActiveModel::Serializer
     self.object.record_taken
   end
 
-  def tags
+  def ai_tags
     # sorts the tags by most likely, then reverses them, then splats them out as an array
-    self.object.tags.sort_by {|_key, value| value}.reverse
+    self.object.ai_tags.sort_by {|_key, value| value}.reverse
   end
 
 end

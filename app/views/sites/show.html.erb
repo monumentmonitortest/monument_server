@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
-<h3>Site general info</h3>
-<div class="row flex flex-wrap">
-  <div class="w-50 flex flex-column">
+<h3 class="f1">Site general info</h3>
+<div class="flex flex-wrap mb5">
+  <div class="w-100 flex flex-column">
 
     <div class="fw9 mb2">
       <%= @site.name %>
@@ -12,24 +12,19 @@
     </div>
 
     <div class="mv2">
-      <span class="fw9 db">Visits per annum:</span>
-      <%= @site.visits %>
+      <span class="fw9 db">Visits per annum: <%= @site.visits %></span>
+      
     </div>
 
     <div class="mv2">
-      <span class="fw9 db">Visitors per annum:</span>
-      <%= @site.visitors %>
+      <span class="fw9 db">Visitors per annum: <%= @site.visitors %></span>
     </div>
 
   </div>
-  <div class="w-50">
-    <div id="map"></div>
+   <!-- <div class="w-50">
+     <div id="map"></div> 
+   </div> -->
   </div>
-  
-
-</div>
-
-  <h3>Submissions</h3>
 
   <%= render template: "sites/site_submissions", site: @site %>
 

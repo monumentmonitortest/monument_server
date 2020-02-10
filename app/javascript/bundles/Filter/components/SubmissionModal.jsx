@@ -12,7 +12,7 @@ export default class SubmissionModal extends React.Component {
     const name = this.props.attributes['site-name']
     const type = this.props.attributes['type-name'].toLowerCase()
     const comment = this.props.attributes['type-comment']
-    const tags = this.props.attributes['tags']
+    const tags = this.props.attributes['ai-tags']
     
     return (
       <div className="flex flex-wrap flex-column h-100">
@@ -31,7 +31,7 @@ export default class SubmissionModal extends React.Component {
           </span>
 
           <span className="w-100">
-            <h2 className="f2 tr mt3 mb2">{date.toLocaleDateString("en-UK")}</h2>
+            <h2 className="f2 tr mt3 mb2">{date.toLocaleDateString("en-GB")}</h2>
             <h2 className="w-100 tr f1 mb5">{name}</h2>
           </span>
           <div>
