@@ -10,7 +10,7 @@ class Registration
     ActiveRecord::Base.transaction do
       submission = Submission.create!(site_id: site_id, reliable: reliable, record_taken: record_taken, image: image)
 
-      save_image(submission, image_file) if image_file.present?
+      save_image(submission, image_file, type_name) if image_file.present?
 
       submission.create_type!(name: type_name, 
                         email_address: email_address, 
@@ -30,10 +30,11 @@ class Registration
 
   private
 
-    def save_image(submission, image_file)
+    def save_image(submission, image_file, type_name)
+      image_name = "#{submission.record_taken.strftime("%d/%m/%Y")}_#{type_name.first.downcase}.jpg"
       begin
         file = URI.open(image_file)
-        submission.image.attach(io: file, filename: 'animage.jpg')
+        submission.image.attach(io: file, filename: image_name)
       rescue OpenURI::HTTPError => e
         puts "image is buggered"
         errors.add(:base, e.message)
