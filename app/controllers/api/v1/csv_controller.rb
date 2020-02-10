@@ -22,6 +22,14 @@ module Api
         name = Site.find(params[:site_id]).name
 
         respond_to do |format|
+          format.csv { send_data create_specific_site_report_with_tags(params[:site_id], params[:from_date], params[:to_date]), filename: "submissions-for-#{name}-tags-#{Date.today}.csv"  }
+        end
+      end
+
+      def site_specific_tags
+        name = Site.find(params[:site_id]).name
+
+        respond_to do |format|
           format.csv { send_data create_specific_site_report(params[:site_id], params[:from_date], params[:to_date]), filename: "submissions-for-#{name}-#{Date.today}.csv"  }
         end
       end
@@ -63,6 +71,7 @@ module Api
           end
         end
 
+        # Normal
         def create_specific_site_report(site_id, from_date, to_date)
           attributes = %w{date submissions ind-submitters}
           CSV.generate(headers: true) do |csv|
@@ -83,6 +92,25 @@ module Api
               
               csv << [date.strftime("%d/%m/%Y"), total_subs, unique_submitters]
             end
+          end
+        end
+
+        # With tags
+        def create_specific_site_report_with_tags(site_id, from_date, to_date)
+          attributes = %w{date ai_tags tags}
+          CSV.generate(headers: true) do |csv|
+            csv << attributes
+            
+            submissions = Submission.
+                            where(site_id: site_id).
+                            where("record_taken >= :start_date AND created_at <= :end_date",
+                               {start_date: from_date, end_date: to_date}).
+                            order(:record_taken)
+            
+            submissions.each do |sub|
+              info = [sub.record_taken.strftime("%d/%m/%Y"), sub.ai_tags] + sub.tag_list
+              csv << info
+            end             
           end
         end
 
