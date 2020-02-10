@@ -1,6 +1,6 @@
 <h3 id='site-info' class="f1">Submissions to date (<%=@site.submissions.count %>)</h3>
 
-<table id="site-submissions-admin-list">
+<table id="site-submissions-admin-list" class="w-100">
   <thead>
     <tr>
       <th>Image</th>
@@ -18,14 +18,14 @@
     <% @submissions.each do |submission| %>
       <tr>
         <%= form_for submission, remote: true do |f| %>
-          <td><%= image_tag(url_for(submission.image)) %></td>
-          <td><%= f.select :site_id, options_for_select(Site.all.map {|s| [s.name, s.id]}, [submission.site.name, submission.site.id] || "")%></td>
+          <td class='image'><%= image_tag(url_for(submission.image)) %></td>
+          <td class="sites"><%= f.select :site_id, options_for_select(Site.all.map {|s| [s.name, s.id]}, [submission.site.name, submission.site.id] || "")%></td>
           <td>Reliable? <%= f.check_box :reliable, checked: submission.reliable %></td>
           <td><%= submission.record_taken.strftime("%d/%m/%Y") %></td>
           <td><%= f.text_field :tag_list, value: f.object.tag_list.to_s, class: "tags" %> </td>
 
           <td><%= link_to "Destroy", submission, method: :delete, data: { confirm: "Are you sure?" } %></td>
-          <td><%= submit_tag("Update Submission", class: "#{submission.id}") %></td>
+          <td><%= submit_tag("Update", class: "#{submission.id}") %></td>
         <% end %>
       </tr>
     <% end %>

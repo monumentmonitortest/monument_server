@@ -27,8 +27,15 @@
   }
 }
 
-// TAGS!
+td.image img {
+  max-height: 40vh;
+}
 
+td.sites select {
+  max-width: 100px
+}
+
+// TAGS!
 div.tags input {
   border: 1px solid #CCC;
   background: #FFF;

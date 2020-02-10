@@ -1,13 +1,13 @@
 - cache object do
   %td.table-text= object.site_name
-  %td.table-text
+  %td.table-text.image
     -# TODO: refactor this with presenter
     = image_tag(url_for(object.image))
   
   %td.table-text= object.reliable
   %td.table-text= object.type_name
   %td.table-text= object.type.comment if object.type
-  %td.table-text= object.tags
+  %td.table-text= object.tag_list
   %td.table-text= object.record_taken.to_date.strftime "%d/%m/%y" if object.record_taken
 
   -# - if admin?
