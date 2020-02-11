@@ -7,6 +7,7 @@ export default class Form extends React.Component {
     this.state = {
       site: '',
       type: '',
+      tag: '',
       reliable: false
     }
   }
@@ -15,7 +16,8 @@ export default class Form extends React.Component {
     event.preventDefault()
     this.props.refineView({reliable: this.state.reliable, 
                            site: this.state.site, 
-                           type: this.state.type})
+                           type: this.state.type,
+                           tag: this.state.tag})
   }
 
   handleInputChange = event => {
@@ -53,8 +55,8 @@ export default class Form extends React.Component {
                 onChange={this.handleInputChange} />
             </span>
 
-            <span className="h-25">
-              <label>
+            {/* <span className="h-25"> */}
+              {/* <label>
                 Useful?
               </label>
               <input
@@ -63,7 +65,18 @@ export default class Form extends React.Component {
                 type="checkbox"
                 className=''
                 checked={this.state.reliable}
-                onChange={this.handleInputChange} />
+                onChange={this.handleInputChange} /> */}
+            {/* </span> */}
+
+            <span className="h-25">
+              <select id="tag" className="dark-color w-100" onChange={this.handleInputChange}>
+                <option defaultValue="">Select Tag</option>
+                  {this.props.tags.map((tag) => 
+                    <option 
+                      value={tag} 
+                      key={tag}
+                      className="dark-color w-100">{tag}</option>)}
+              </select>
             </span>
 
             <span className="h-25">

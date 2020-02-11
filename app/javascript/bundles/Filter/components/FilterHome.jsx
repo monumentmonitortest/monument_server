@@ -8,6 +8,7 @@ import Nav from './Nav.jsx'
 export default class FilterHome extends React.Component {
   static propTypes = {
     siteNames: PropTypes.array.isRequired, // this is passed from the Rails view
+    tags: PropTypes.array.isRequired,
   };
 
   /**
@@ -18,6 +19,7 @@ export default class FilterHome extends React.Component {
     this.state = {     
       site: '',
       type: '',
+      tag: '',
       reliable: false, 
       submissions: [],
       links: [],
@@ -58,13 +60,14 @@ export default class FilterHome extends React.Component {
   refineView = async ({reliable=this.state.reliable, 
                        site=this.state.site, 
                        type=this.state.type, 
+                       tag=this.state.tag,
                        size=this.state.pageSize,
                        pageNumber=this.state.pageNumber,
                        url="",
                        dataOnly=this.state.viewDataVis}) => {
     try {
       const endpoint = dataOnly ? 'api/v1/submission_data' : 'api/v1/submissions'
-      const requestURL = url ? url : `${endpoint}?reliable=${reliable}&site_filter=${site}&type_filter=${type}&bespoke_size=${size}&page=${pageNumber}`
+      const requestURL = url ? url : `${endpoint}?reliable=${reliable}&site_filter=${site}&type_filter=${type}&tag=${tag}&bespoke_size=${size}&page=${pageNumber}`
       const response = await fetch(requestURL)
       if (!response.ok) {
       throw Error(response.statusText)
@@ -78,6 +81,7 @@ export default class FilterHome extends React.Component {
         reliable: reliable,
         site: site, 
         type: type, 
+        tag: tag
       })
       
       // set state if data is returned
@@ -129,6 +133,7 @@ export default class FilterHome extends React.Component {
     } else {
       data = <ResultsManager 
                 siteNames={this.props.siteNames} 
+                tags={this.props.tags}
                 submissions={this.state.submissions} 
                 links={this.state.links} 
                 totalSubmissions={this.state.totalSubmissions}
@@ -146,6 +151,7 @@ export default class FilterHome extends React.Component {
             handleToggle={this.handleToggle}
             refineView={this.refineView}
             siteNames={this.props.siteNames}
+            tags={this.props.tags}
             handleToggleNav={this.handleToggleNav}
             navCollapsed={this.state.navCollapsed}
              />
