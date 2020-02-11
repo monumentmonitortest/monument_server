@@ -60,7 +60,7 @@ Numbers of submissions by type
   </div>
 </div>
 
-<h3>Reports by site</h3>
+<h3>Customise reports</h3>
 <div class="flex column mb6">
   <div class="w-50">
     <p>
@@ -69,15 +69,37 @@ Numbers of submissions by type
         To date:
           <%= date_field_tag(:from_date, Date.today, class: 'to-date') %><br/>
         Choose site: 
-          <%= select_tag :site_id, options_for_select(Site.all.collect { | site | [site.name, site.id] }), class: 'site-select'%>
+          <%= select_tag :site_id, options_for_select(Site.all.collect { | site | [site.name, site.id] }),  :include_blank => true, class: 'site-select'%><br/>
+        
+        <% tags = ActsAsTaggableOn::Tag.all.map {|t| t.name}.uniq %>
+        Choose tag: 
+          <%= select_tag :tag, options_for_select(tags), :include_blank => true, class: 'tag-select'%>
     </p>
   </div>
   <div class="w-50">
-      <%= link_to 'Site specific with tags',  api_v1_site_specific_tags_report_path(format: "csv", ), class: 'button', id: 'site-specific-report' %>
-      
-      <%= link_to 'Site specific with subission patterns',  api_v1_site_specific_report_path(format: "csv", ), class: 'button', id: 'site-specific-tag-report' %>
+      <span class="db">
+        Create site specific report of submission patterns (submitters and submission numbers) <br/>
+        <%= link_to 'Site specific with subission patterns',  api_v1_site_specific_report_path(format: "csv", ), class: 'button', id: 'site-specific-report' %>
+      </span>
+
+      <span class="db">
+        Create site specific report with all tags (manual) <br/>
+        <%= link_to 'Site specific with all tags',  api_v1_site_specific_tags_report_path(format: "csv", ), class: 'button', id: 'site-specific-tag-report' %>
+      </span>
+
+      <span class="db">
+        Create report specific to tags and or sites <br/>
+        <%= link_to 'Manual Tags',  api_v1_all_tags_report_path(format: "csv", ), class: 'button', id: 'manual-tag-report' %>
+      </span>
+
+      <span class="db">
+        AI tags to come<br/>
+        <%#= link_to 'Manual Tags',  api_v1_all_tags_report_path(format: "csv", ), class: 'button', id: 'manual-tag-report' %>
+      </span>
   </div>
 </div>
+
+
 
 <h3>Reports by type</h3>
 <div class="flex column mb6">

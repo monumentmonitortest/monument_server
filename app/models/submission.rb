@@ -28,6 +28,12 @@ class Submission < ApplicationRecord
       joins(:type).where(types: { name: type_name})
     end
   }
+
+  scope :with_tag,  ->(tag) { 
+    if tag.present?
+      tagged_with(tag) 
+    end
+  }
   
   def type_name
     @type_name ||= type.present? ? type.name : ""

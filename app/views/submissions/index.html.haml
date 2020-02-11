@@ -17,6 +17,10 @@
       .input-group
         = text_field_tag :type_filter, '', class: "submission-options", placeholder: "Search Type", autocomplete: :off, value: "#{params[:type_filter]}"
         %span.input-group-btn
+    
+    %div.filter.form-search
+      - tags = ActsAsTaggableOn::Tag.all.map {|t| t.name}.uniq
+      = select_tag :tag, options_for_select(tags), :include_blank => true, class: 'tag-select'
 
   %script(type="text/javascript")
     - if params[:f]

@@ -30,7 +30,8 @@ Rails.application.routes.draw do
       get :type_specific_report, to: 'csv#type_specific'
       get :basic_submission_report, to: 'csv#basic_submission'
       get :site_specific_report, to: 'csv#site_specific'
-      get :site_specific_tags_report, to: 'csv#site_specific'
+      get :site_specific_tags_report, to: 'csv#site_specific_tags'
+      get :all_tags_report, to: 'csv#tags_report'
       get :image_quality_report, to: 'csv#image_quality'
       get :all_images, to: 'image_zip#get_images'
 

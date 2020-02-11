@@ -19,20 +19,32 @@ module Api
       end
 
       def site_specific
+        return unless params[:site_id].present?
         name = Site.find(params[:site_id]).name
 
         respond_to do |format|
-          format.csv { send_data create_specific_site_report_with_tags(params[:site_id], params[:from_date], params[:to_date]), filename: "submissions-for-#{name}-tags-#{Date.today}.csv"  }
+          format.csv { send_data create_specific_site_report(params[:site_id], params[:from_date], params[:to_date]), filename: "submissions-for-#{name}-tags-#{Date.today}.csv"  }
         end
       end
 
       def site_specific_tags
+        return unless params[:site_id].present?
         name = Site.find(params[:site_id]).name
 
         respond_to do |format|
-          format.csv { send_data create_specific_site_report(params[:site_id], params[:from_date], params[:to_date]), filename: "submissions-for-#{name}-#{Date.today}.csv"  }
+          format.csv { send_data create_specific_site_tag_report(params[:site_id], params[:from_date], params[:to_date]), filename: "submissions-for-#{name}-#{Date.today}.csv"  }
         end
       end
+
+      def tags_report
+        return unless params[:site_id].present? || params[:tag].present?
+        site = params[:site_id] ? "" : Site.find(params[:site_id])
+
+        respond_to do |format|
+          format.csv { send_data create_tags_report(site, params[:tag]), filename: "tag-report-#{params["tag"]}-#{site}#{Date.today}.csv"  }
+        end
+      end
+
 
       def image_quality
         respond_to do |format|
@@ -96,7 +108,7 @@ module Api
         end
 
         # With tags
-        def create_specific_site_report_with_tags(site_id, from_date, to_date)
+        def create_specific_site_tag_report(site_id, from_date, to_date)
           attributes = %w{date ai_tags tags}
           CSV.generate(headers: true) do |csv|
             csv << attributes
@@ -108,9 +120,28 @@ module Api
                             order(:record_taken)
             
             submissions.each do |sub|
-              info = [sub.record_taken.strftime("%d/%m/%Y"), sub.ai_tags] + sub.tag_list
+              info = [sub.record_taken.strftime("%d/%m/%Y")] + sub.tag_list
               csv << info
             end             
+          end
+        end
+
+        # Just tag reports
+        def create_tags_report(site, tag)
+          attributes = %w{submission-id date tag}
+
+          if site.empty? && tag
+            # get all the submissions from a with that tag
+            submissions = Submission.all.tagged_with(tag)
+          elsif site && tag
+            submissions = site.submissions.tagged_with(tag)
+          end
+          
+          CSV.generate(headers: true) do |csv|
+            csv << attributes 
+            submissions.each do |sub|
+              csv << [sub.id, sub.record_taken.strftime("%d/%m/%Y")] + sub.tag_list
+            end
           end
         end
 
