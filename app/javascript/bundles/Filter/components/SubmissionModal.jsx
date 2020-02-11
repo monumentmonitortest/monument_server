@@ -12,8 +12,9 @@ export default class SubmissionModal extends React.Component {
     const name = this.props.attributes['site-name']
     const type = this.props.attributes['type-name'].toLowerCase()
     const comment = this.props.attributes['type-comment']
-    const tags = this.props.attributes['ai-tags']
-    
+    const aiTags = this.props.attributes['ai-tags']
+    const manualTags = this.props.attributes['tags']
+
     return (
       <div className="flex flex-wrap flex-column h-100">
         <div className="w-75 h-100">
@@ -35,9 +36,17 @@ export default class SubmissionModal extends React.Component {
             <h2 className="w-100 tr f1 mb5">{name}</h2>
           </span>
           <div>
+            <div className="fw9">Manual Tags:</div>
+            <ul className="list ph3">
+              {manualTags.map((tag) => {
+                return <li className="mb0">{tag}</li>
+              })}
+            </ul>
+          </div>
+          <div>
             <div className="fw9">AI Tags:</div>
             <ul className="list ph3">
-              {tags.map((tag) => {
+              {aiTags.map((tag) => {
                 return <li className="mb0">{tag[0]}: {tag[1].toFixed(2)}</li>
               })}
             </ul>

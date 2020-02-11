@@ -36,4 +36,8 @@ class SubmissionSerializer < ActiveModel::Serializer
     self.object.ai_tags.sort_by {|_key, value| value}.reverse
   end
 
+  def tags
+    self.object.tag_list
+  end
+
 end
