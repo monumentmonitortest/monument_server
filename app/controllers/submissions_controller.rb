@@ -7,9 +7,10 @@ class SubmissionsController < ApplicationController
   def index
     submissions_scope ||= reliable? ? Submission.with_attached_image.reliable : Submission.with_attached_image
 
-    submissions_scope = search_site(submissions_scope, params[:site_filter]) if params[:site_filter].present?
-    submissions_scope = type_search(submissions_scope, params[:type_filter]) if params[:type_filter].present?
-   
+    submissions_scope = search_site(submissions_scope, p_params[:site_filter]) if p_params[:site_filter].present?
+    submissions_scope = type_search(submissions_scope, p_params[:type_filter]) if p_params[:type_filter].present?
+    submissions_scope = submissions_scope.tagged_with(p_params[:tag]) if p_params[:tag].present?
+
     @submissions = smart_listing_create(:submissions, submissions_scope, partial: "submissions/list")
   end
 
@@ -42,17 +43,18 @@ class SubmissionsController < ApplicationController
   
   private
   
-  def permitted_params
+  def p_params
     params.permit(:reliable, 
                   :site_id,
                   :site_filter,
                   :type_filter,
+                  :tag,
                   :bespoke_size,
                   :page)
   end
 
   def reliable?
-    permitted_params[:reliable] == "true"
+    p_params[:reliable] == "true"
   end
 
   def set_submission
