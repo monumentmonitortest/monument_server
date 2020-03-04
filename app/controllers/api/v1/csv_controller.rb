@@ -30,12 +30,11 @@ module Api
       def site_specific_tags
         return unless params[:site_id].present?
         name = Site.find(params[:site_id]).name
-
         respond_to do |format|
           format.csv { send_data create_specific_site_tag_report(params[:site_id], params[:from_date], params[:to_date]), filename: "submissions-for-#{name}-#{Date.today}.csv"  }
         end
       end
-
+      
       def tags_report
         return unless params[:site_id].present? || params[:tag].present?
         site = params[:site_id] ? "" : Site.find(params[:site_id])
@@ -128,7 +127,7 @@ module Api
 
         # Just tag reports
         def create_tags_report(site, tag)
-          attributes = %w{submission-id date tag}
+          attributes = %w{submission-id date url tag}
 
           if site.empty? && tag
             # get all the submissions from a with that tag
@@ -136,11 +135,14 @@ module Api
           elsif site && tag
             submissions = site.submissions.tagged_with(tag)
           end
-          
+
           CSV.generate(headers: true) do |csv|
             csv << attributes 
             submissions.each do |sub|
-              csv << [sub.id, sub.record_taken.strftime("%d/%m/%Y")] + sub.tag_list
+              # removes the tag searched on
+              tag_list = sub.tag_list
+              tag_list.delete(tag)
+              csv << [sub.id, sub.record_taken.strftime("%d/%m/%Y"), sub.image_url] + tag_list
             end
           end
         end
