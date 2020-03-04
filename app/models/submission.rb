@@ -42,6 +42,10 @@ class Submission < ApplicationRecord
   def site_name
     @site_name ||= site.name
   end
+
+  def image_url
+    Rails.application.routes.url_helpers.rails_blob_path(image.attachment, only_path: true)
+  end
   
   private
 
