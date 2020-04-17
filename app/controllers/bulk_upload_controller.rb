@@ -24,6 +24,7 @@ class BulkUploadController < ApplicationController
     params.permit(:site_id,
                   :reliable, 
                   :record_taken, 
+                  :submitted_at,
                   :type_name, 
                   :email_address, 
                   :number, 

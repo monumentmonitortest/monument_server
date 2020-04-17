@@ -35,6 +35,7 @@ core.BulkUpload.readyBulkUpload = function() {
         
           var reliable = $('#tpl').find('#reliable').is(':checked')
           var date = $('#tpl').find('#record_taken').val()
+          var submittedAt = $('#tpl').find('#submitted_at').val()
           var typeName = $('#tpl').find('#type_name').val()
           
           var emailAddress = $('#tpl').find('#email_address').val()
@@ -45,6 +46,7 @@ core.BulkUpload.readyBulkUpload = function() {
           
           formData.append('reliable', reliable);
           formData.append('record_taken', date);
+          formData.append('submitted_at', submittedAt);
           formData.append('type_name', typeName);
           formData.append('comment', comment);
 

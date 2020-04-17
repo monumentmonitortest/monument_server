@@ -3,12 +3,12 @@ require 'uri'
 class Registration
   include ActiveModel::Model
 
-  attr_accessor :reliable, :site_id, :image, :image_file, :record_taken, :type_name, :email_address, :number, :insta_username, :twitter_username, :type_specific_id, :comment
+  attr_accessor :reliable, :site_id, :image, :image_file, :record_taken, :submitted_at, :type_name, :email_address, :number, :insta_username, :twitter_username, :type_specific_id, :comment
 
   def save
     return false if invalid?
     ActiveRecord::Base.transaction do
-      submission = Submission.create!(site_id: site_id, reliable: reliable, record_taken: record_taken, image: image)
+      submission = Submission.create!(site_id: site_id, reliable: reliable, record_taken: record_taken, submitted_at: submitted_at, image: image)
 
       save_image(submission, image_file, type_name) if image_file.present?
 
