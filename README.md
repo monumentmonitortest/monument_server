@@ -5,6 +5,10 @@
 ## Run React fonrend:
 sh -c rm -rf public/packs/* || true && bundle exec rake react_on_rails:locale && bin/webpack-dev-server
 
+OR
+
+sh -c 'rm -rf public/packs/* || true && bundle exec rake react_on_rails:locale && bin/webpack -w'
+
 ## Run server:
 
 bs rails s
