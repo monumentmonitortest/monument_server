@@ -23,6 +23,6 @@
   },
   "devDependencies": {
     "tachyons": "^4.10.0",
-    "webpack-dev-server": "2.11.2"
+    "webpack-dev-server": "3.1.11"
   }
 }
