@@ -27,6 +27,6 @@ yarn-debug.log*
 .yarn-integrity
 public/packs/manifest.json
 /public/packs/manifest.json
-
+latest.dump
 # Ignore google credentials
 mm-key.json
