@@ -1,13 +1,27 @@
 class SubmissionSerializer < ActiveModel::Serializer
-  attributes :id, :siteName, :siteId, :recordTaken, :ai_tags, :imageUrl, :typeName, :typeComment, :tags
+  include Rails.application.routes.url_helpers
+  
+  attributes :id, :siteName, :siteId, :recordTaken, :ai_tags, :imageUrlSmall,  :imageUrl, :typeName, :typeComment, :tags
+
+  def imageUrlSmall
+    variant = object.image.attachment.variant(resize: "300x300")
+    if Rails.env == 'development'
+      ActiveStorage::Current.set(host: "localhost:3000") do
+        rails_representation_url(variant, only_path: true)
+      end
+    else
+      rails_representation_url(variant, only_path: true)
+    end
+  end
 
   def imageUrl
     if Rails.env == 'development'
       ActiveStorage::Current.set(host: "localhost:3000") do
-        self.object.image.attachment.service_url
+        # self.object.image.attachment.service_url
+        rails_blob_path(object.image, only_path: true)
       end
     else
-      self.object.image.attachment.service_url
+      rails_blob_path(object.image, only_path: true)
     end
   end
 

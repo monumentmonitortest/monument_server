@@ -23,7 +23,7 @@ export default class Submission extends React.Component {
   }
 
   render() {
-    const image =  this.props.attributes["image-url"] || ""
+    const image =  this.props.attributes["image-url-small"] || ""
     const site  = this.props.attributes["site-name"] || ""
     const type  = this.props.attributes["type-name"] || ""
     const recordTaken  = new Date(this.props.attributes["record-taken"]) || ""

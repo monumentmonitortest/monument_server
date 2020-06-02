@@ -20,7 +20,7 @@
       <tr>
         <%= form_for submission, remote: true do |f| %>
           <td><%= submission.id %></td>
-          <td class='image'><%= image_tag(url_for(submission.image)) %></td>
+          <td class='image'><%= image_tag(url_for(submission.image.variant(resize:"200x200"))) %></td>
           <td class="sites"><%= f.select :site_id, options_for_select(Site.all.map {|s| [s.name, s.id]}, [submission.site.name, submission.site.id] || "")%></td>
           <td>Reliable? <%= f.check_box :reliable, checked: submission.reliable %></td>
           <td><%= submission.record_taken.strftime("%d/%m/%Y") %></td>
