@@ -30,3 +30,10 @@ public/packs/manifest.json
 latest.dump
 # Ignore google credentials
 mm-key.json
+
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity

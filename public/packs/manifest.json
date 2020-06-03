@@ -1,11 +1,37 @@
 {
-  "_/assets/images/download.png": "/packs/_/assets/images/download-f27b72907f6007804b6a3832e984065e.png",
-  "_/assets/images/logo-2019-inverted.png": "/packs/_/assets/images/logo-2019-inverted-6f880e61b1f5fc40b10c17266e82e70d.png",
-  "_/assets/images/main-logo-black-squished.jpg": "/packs/_/assets/images/main-logo-black-squished-65ac3998e85599a3b730f8d438b94865.jpg",
-  "application.js": "/packs/application-605feeb263c966c38762.js",
-  "application.js.map": "/packs/application-605feeb263c966c38762.js.map",
-  "filter-home-bundle.js": "/packs/filter-home-bundle-605feeb263c966c38762.js",
-  "filter-home-bundle.js.map": "/packs/filter-home-bundle-605feeb263c966c38762.js.map",
-  "hello_react.js": "/packs/hello_react-605feeb263c966c38762.js",
-  "hello_react.js.map": "/packs/hello_react-605feeb263c966c38762.js.map"
+  "application.js": "/packs/js/application-4e8cb3ac082d15c856ef.js",
+  "application.js.map": "/packs/js/application-4e8cb3ac082d15c856ef.js.map",
+  "entrypoints": {
+    "application": {
+      "js": [
+        "/packs/js/application-4e8cb3ac082d15c856ef.js"
+      ],
+      "js.map": [
+        "/packs/js/application-4e8cb3ac082d15c856ef.js.map"
+      ]
+    },
+    "filter-home-bundle": {
+      "js": [
+        "/packs/js/filter-home-bundle-31c7fc0a058998b04175.js"
+      ],
+      "js.map": [
+        "/packs/js/filter-home-bundle-31c7fc0a058998b04175.js.map"
+      ]
+    },
+    "hello_react": {
+      "js": [
+        "/packs/js/hello_react-cda834db5586f4d7eae7.js"
+      ],
+      "js.map": [
+        "/packs/js/hello_react-cda834db5586f4d7eae7.js.map"
+      ]
+    }
+  },
+  "filter-home-bundle.js": "/packs/js/filter-home-bundle-31c7fc0a058998b04175.js",
+  "filter-home-bundle.js.map": "/packs/js/filter-home-bundle-31c7fc0a058998b04175.js.map",
+  "hello_react.js": "/packs/js/hello_react-cda834db5586f4d7eae7.js",
+  "hello_react.js.map": "/packs/js/hello_react-cda834db5586f4d7eae7.js.map",
+  "media/images/download.png": "/packs/media/images/download-7d5f51b4.png",
+  "media/images/logo-2019-inverted.png": "/packs/media/images/logo-2019-inverted-3c6a6df7.png",
+  "media/images/main-logo-black-squished.jpg": "/packs/media/images/main-logo-black-squished-ddfe0bd5.jpg"
 }

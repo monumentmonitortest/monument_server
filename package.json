@@ -6,7 +6,7 @@
     "client/node_modules"
   ],
   "dependencies": {
-    "@rails/webpacker": "3.5",
+    "@rails/webpacker": "5.1.1",
     "babel-polyfill": "^6.26.0",
     "babel-preset-react": "^6.24.1",
     "blueimp-load-image": "^2.23.0",
@@ -22,7 +22,8 @@
     "victory": "^33.1.7"
   },
   "devDependencies": {
+    "@babel/preset-react": "^7.10.1",
     "tachyons": "^4.10.0",
-    "webpack-dev-server": "3.1.11"
+    "webpack-dev-server": "^3.11.0"
   }
 }
