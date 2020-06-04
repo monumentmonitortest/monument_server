@@ -7,10 +7,10 @@ class SubmissionSerializer < ActiveModel::Serializer
     variant = object.image.attachment.variant(resize: "300x300")
     if Rails.env == 'development'
       ActiveStorage::Current.set(host: "localhost:3000") do
-        rails_representation_url(variant, only_path: true)
+        rails_representation_url(variant, only_path: true, auto_orient: true)
       end
     else
-      rails_representation_url(variant, only_path: true)
+      rails_representation_url(variant, only_path: true, auto_orient: true)
     end
   end
 
@@ -18,10 +18,10 @@ class SubmissionSerializer < ActiveModel::Serializer
     if Rails.env == 'development'
       ActiveStorage::Current.set(host: "localhost:3000") do
         # self.object.image.attachment.service_url
-        rails_blob_path(object.image, only_path: true)
+        rails_blob_path(object.image, only_path: true, auto_orient: true)
       end
     else
-      rails_blob_path(object.image, only_path: true)
+      rails_blob_path(object.image, only_path: true, auto_orient: true)
     end
   end
 

@@ -24,16 +24,20 @@ class ImageLoader extends React.Component {
   // load the image first, and get it orientated
   componentDidMount() {
     loadImage( this.props.src, (img) => {
-      var base64data = img.toDataURL('image/jpeg'); this.setState({ imgSrc: base64data }); 
+      // debugger
+      // var base64data = img.toDataURL('image/jpeg'); 
+      this.setState({ imgSrc: img }); 
+      // console.log(base64data)
     }, { orientation: true, });
   }
 
-  // when searching, refining - we need to re-render component with new image url
+  // when searching/ refining - we need to re-render component with new image url
   componentDidUpdate(prevProps) {
     if (this.props.submissionId !== prevProps.submissionId) {
       this.setState({loaded: false})
       loadImage( this.props.src, (img) => {
-        var base64data = img.toDataURL('image/jpeg'); this.setState({ imgSrc: base64data }); 
+        // var base64data = img.toDataURL('image/jpeg'); 
+        this.setState({ imgSrc: img }); 
       }, { orientation: true, });
     }
   }
@@ -54,7 +58,7 @@ class ImageLoader extends React.Component {
     return (
       <div className={className} ref="foo">
         <img 
-          src={this.state.imgSrc} 
+          src={this.props.src} 
           className={className} 
           onLoad={this.onLoad}  />
       </div>
