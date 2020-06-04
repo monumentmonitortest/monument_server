@@ -19,10 +19,10 @@
     "react-lazy-load": "^3.0.13",
     "react-modal": "^3.9.1",
     "react-on-rails": "11.3.0",
+    "@babel/preset-react": "^7.10.1",
     "victory": "^33.1.7"
   },
   "devDependencies": {
-    "@babel/preset-react": "^7.10.1",
     "tachyons": "^4.10.0",
     "webpack-dev-server": "^3.11.0"
   }
