@@ -33,8 +33,8 @@ Rails.application.routes.draw do
       get :site_specific_tags_report, to: 'csv#site_specific_tags'
       get :all_tags_report, to: 'csv#tags_report'
       get :image_quality_report, to: 'csv#image_quality'
-      get :all_images, to: 'image_zip#get_images'
-
+      get :zip_images, to: 'image_zip#zip_images'
+      get :download_zip, to: 'image_zip#download_zip'
     end
   end
 end
