@@ -13,12 +13,13 @@ module Api
       end
 
       def download_zip
-        if Dir.exists?(TMP_ARCHIVE_FOLDER)
-          Rails.logger.info 'Zip file downloading'
+        # if Dir.exists?(TMP_ARCHIVE_FOLDER)
+          # Rails.logger.info 'Zip file downloading'
           send_file(Rails.root.join("#{TMP_ARCHIVE_FOLDER}.zip"), :type => 'application/zip', :filename => "submissions.zip", :disposition => 'attachment')
-        else
-          Rails.logger.info "Zip folder not present, try again later"
-        end
+        # else
+          # Rails.logger.info "Zip folder not present, try again later"
+          # redirect_back(fallback_location: results_path)
+        # end
       end
 
       private
