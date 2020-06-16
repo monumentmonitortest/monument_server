@@ -125,11 +125,18 @@ Numbers of submissions by type
 </div>
 
 
-<h3>Get all the images (in development...)</h3>
+<h3>Start job to Zip all images</h3>
 <div class="flex flex-wrap column justify-between">
 <% Site.all.each do |site| %>
   <p>
-    <%= link_to site.name, api_v1_all_images_path(site_id: site.id), class: 'button'  %>
+    <%= link_to site.name, api_v1_zip_images_path(site_id: site.id), class: 'button'  %>
   </p>
 <% end %>
+</div>
+
+<h3>Download zip of all images (ensure to leave enough time)</h3>
+<div class="flex flex-wrap column justify-between">
+  <p>
+    <%= link_to 'Download image Zip', api_v1_download_zip_path, class: 'button'  %>
+  </p>
 </div>
