@@ -5,11 +5,8 @@ class ImageZipCreationService
   end
 
   def create
-    # Simulation of an object with has_many_attached :documents
-    # job = Submission.all.map {|s| s.image.attachment }
     submissions = Site.find(@site_id).submissions
     # Tmp folder to store the download files from S3
-    # Notice we prfix the folder with a unique number (current_user.id)
     tmp_user_folder = "tmp/archive_submissions"
   
     # Determin the length of the folder
@@ -41,9 +38,7 @@ class ImageZipCreationService
 
   def create_tmp_folder_and_store_documents(document, tmp_user_folder, filename)
     file = File.open(File.join(tmp_user_folder, filename), 'wb') do |file|
-      # As per georgeclaghorn in comment ;)
       begin
-        # binding.pry
       document.download { |chunk| file.write(chunk) }
       rescue Aws::S3::Errors::ServiceError
         puts 'BUGGER'

@@ -15,26 +15,14 @@ RSpec.describe SubmissionZipWorker, type: :worker do
       end
 
       # Sidekiq::Testing.inline! do
-        it "calls image zip creation service" do
-          service = double("service double")
-          allow(ImageZipCreationService).to receive(:new).and_return(service)
-          allow(service).to receive(:create)
-          
-          expect(service).to receive(:create)
-          described_class.perform_async(site.id)
-          Sidekiq::Worker.drain_all
-        end
-      end
-    # end
-
-    context "given a site id" do
-
-      it "creates a zip file" do
-
-      end
-
-      it "zipfile contains all images from sites submission" do
-
+      it "calls image zip creation service" do
+        service = double("service double")
+        allow(ImageZipCreationService).to receive(:new).and_return(service)
+        allow(service).to receive(:create)
+        
+        expect(service).to receive(:create)#.with(site.id)
+        described_class.perform_async(site.id)
+        Sidekiq::Worker.drain_all
       end
     end
   end
