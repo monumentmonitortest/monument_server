@@ -1,9 +1,9 @@
 require 'zip'
 module Api
   module V1
-    # TODO - tests and DRY UP
     class ImageZipController < BaseController
-      
+      TMP_ARCHIVE_FOLDER = "tmp/archive_submissions"
+     
       def zip_images
         delete_current_tempfile
 
@@ -13,8 +13,12 @@ module Api
       end
 
       def download_zip
-        tmp_user_folder = "tmp/archive_submissions"
-        send_file(Rails.root.join("#{tmp_user_folder}.zip"), :type => 'application/zip', :filename => "Files_for_submissions.zip", :disposition => 'attachment')
+        if Dir.exists?(TMP_ARCHIVE_FOLDER)
+          Rails.logger.info 'Zip file downloading'
+          send_file(Rails.root.join("#{TMP_ARCHIVE_FOLDER}.zip"), :type => 'application/zip', :filename => "submissions.zip", :disposition => 'attachment')
+        else
+          Rails.logger.info "Zip folder not present, try again later"
+        end
       end
 
       private
@@ -24,10 +28,10 @@ module Api
       end
 
       def delete_current_tempfile
-        tmp_user_folder = "tmp/archive_submissions"
-
-        if Dir.exists?(tmp_user_folder)
-          FileUtils.rm_rf(Dir["#{tmp_user_folder}/*"]) 
+        # delete both archive folder and contents
+        if Dir.exists?(TMP_ARCHIVE_FOLDER)
+          FileUtils.rm_rf(Dir["#{TMP_ARCHIVE_FOLDER}/*"]) 
+          FileUtils.rm_rf(Dir["#{TMP_ARCHIVE_FOLDER}"]) 
         end
       end
     end
