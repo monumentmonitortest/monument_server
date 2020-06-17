@@ -65,7 +65,7 @@ RSpec.describe Api::V1::ImageZipController, :type => :request do
           expect(response.content_type).to eq "application/zip"
         end
         
-        xit "logs message" do
+        it "logs message" do
           expect(Rails.logger).to receive(:info).with("Zip file downloading")
           get '/api/v1/download_zip', headers: headers, as: :json
         end
@@ -81,7 +81,7 @@ RSpec.describe Api::V1::ImageZipController, :type => :request do
           allow(Rails.logger).to receive(:info)
         end
 
-        xit "returns error message" do
+        it "returns error message" do
           expect(Rails.logger).to receive(:info).with("Zip folder not present, try again later")
           get '/api/v1/download_zip', headers: headers, as: :json
         end
