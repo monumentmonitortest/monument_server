@@ -24,14 +24,21 @@ RSpec.describe SubmissionZipWorker, type: :worker do
         }.to change(SubmissionZipWorker.jobs, :size).by(1)
       end
 
-      # Sidekiq::Testing.inline! do
       it "calls image zip creation service" do
         service = double("service double")
         allow(ImageZipCreationService).to receive(:new).and_return(service)
         allow(service).to receive(:create)
         
-        expect(service).to receive(:create)#.with(site.id)
+        # TODO - deal with this email stuff..
+        email = double("email")
+        allow(email).to receive(:call).with(email: 'rosie.brigham.10@ucl.ac.uk', url: public_url).and_return(email)
+        
+        expect(service).to receive(:create)
         described_class.perform_async(zip_path, site.id)
+
+        expect(ZipMailer).to receive(:job_done).and_return(email)
+        expect(email).to receive(:deliver_now)
+
         Sidekiq::Worker.drain_all
       end
 
@@ -41,13 +48,6 @@ RSpec.describe SubmissionZipWorker, type: :worker do
         it "calls s3" do
           expect(subject).to eq public_url
         end
-      end
-
-      context "email" do
-        it "send an email" do
-
-        end
-
       end
     end
   end
