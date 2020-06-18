@@ -3,13 +3,10 @@ class SubmissionZipWorker
   sidekiq_options retry: false
   
   def perform(site_id, zip_directory)
-    # zip_directory = "#{archive_directory_base}_#{site_id}"
-
     ImageZipCreationService.new(site_id, zip_directory).create
     # SendEmail
     s3Url = upload_to_s3(zip_directory, site_id)
-    # binding.pry
-    puts s3Url
+    ZipMailer.job_done.(email: ENV["DESIGNATED_EMAIL"], url: s3Url).deliver_now
   end
 
   private
