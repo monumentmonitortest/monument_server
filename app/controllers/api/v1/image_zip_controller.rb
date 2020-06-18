@@ -7,10 +7,7 @@ module Api
       
       def zip_images
         delete_current_tempfile
-        # binding.pry
-        # this should create a zip file, upload it - then email
         SubmissionZipWorker.perform_async(permitted_params[:site_id], tmp_archive_dir)
-
         redirect_back(fallback_location: results_path)
       end
 
