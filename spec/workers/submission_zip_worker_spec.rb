@@ -6,7 +6,7 @@ RSpec.describe SubmissionZipWorker, type: :worker do
   let(:site) { create(:site) }
   let(:zip_path) { "tmp/achive_submission_#{site.id}"}
   let(:public_url) { "www.image.zip" }
-
+  let(:designated_email) { ENV['DESIGNATED_EMAIL'] }
   describe "#perform" do
     before do
       obj = double("S3 object", public_url: public_url, upload_file: true)
@@ -30,14 +30,14 @@ RSpec.describe SubmissionZipWorker, type: :worker do
         allow(service).to receive(:create)
         
         # TODO - deal with this email stuff..
-        email = double("email")
-        allow(email).to receive(:call).with(email: 'rosie.brigham.10@ucl.ac.uk', url: public_url).and_return(email)
+        mailer = double("email")
+        allow(mailer).to receive(:call).with(email: designated_email, url: public_url).and_return(mailer)
         
         expect(service).to receive(:create)
         described_class.perform_async(zip_path, site.id)
 
-        expect(ZipMailer).to receive(:job_done).and_return(email)
-        expect(email).to receive(:deliver_now)
+        expect(ZipMailer).to receive(:job_done).and_return(mailer)
+        expect(mailer).to receive(:deliver_now)
 
         Sidekiq::Worker.drain_all
       end
