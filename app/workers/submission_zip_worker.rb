@@ -18,9 +18,9 @@ class SubmissionZipWorker
     begin
       s3 = Aws::S3::Resource.new(region:'eu-west-2')
       if Rails.env == 'production'
-        obj = s3.bucket(ENV['S3_BUCKET_PRODUCTION']).object("archive_submissions_#{site_id}")
+        obj = s3.bucket(ENV['S3_BUCKET_PRODUCTION']).object("archive/#{site_id}_submissions")
       else
-        obj = s3.bucket(ENV['S3_BUCKET_DEVELOPMENT']).object("archive_submissions_#{site_id}")
+        obj = s3.bucket(ENV['S3_BUCKET_DEVELOPMENT']).object("archive/#{site_id}_submissions")
       end
       obj.upload_file("#{zip_path}.zip")
       obj.public_url
