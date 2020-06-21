@@ -3,9 +3,11 @@ class SubmissionZipWorker
   sidekiq_options retry: false
   
   def perform(site_id, zip_directory)
+    # Create zip and store in tmp folder
     ImageZipCreationService.new(site_id, zip_directory).create
-    # SendEmail
+    # Upload to S3
     s3Url = upload_to_s3(zip_directory, site_id)
+    # Send email
     ZipMailer.job_done.(email: ENV["DESIGNATED_EMAIL"], url: s3Url).deliver_now
   end
 

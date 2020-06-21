@@ -36,7 +36,7 @@ class ImageZipCreationService
       create_zip_from_tmp_folder(tmp_dir, filename, new_filename) unless directory_length_same_as_documents
     end
     
-    zip_path = "tmp/archive_submissions_#{@site_id}.zip"
+    zip_path = "#{@zip_path}.zip"
   end
 
   private
