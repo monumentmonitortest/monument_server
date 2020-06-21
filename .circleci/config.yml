@@ -25,6 +25,11 @@ jobs:
       - run:
           name: Which bundler?
           command: bundle -v
+      
+     # Set up ENV vars (TODO - remove this bit)
+      - run: 
+          name: "Setup custom environment variables"
+          command: echo 'export DESIGNATED_EMAIL="test@monumentmonitor.co.uk"' >> $BASH_ENV
 
       # Restore bundle cache
       - restore_cache:

@@ -66,7 +66,11 @@ RSpec.configure do |config|
   config.before(:each) do
     Sidekiq::Worker.clear_all
   end
-  
+
+  # stub calls to AWS
+  config.before do
+    Aws.config.update(stub_responses: true)
+  end
 
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
