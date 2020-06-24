@@ -14,7 +14,7 @@ RSpec.describe "BulkUpload", type: :request do
       let(:site) { create(:site) }
       it "create new submissions" do
         headers = { "CONTENT_TYPE" => "application/json" }
-        test_image_path = 'spec/support/assets/test-image.jpg'
+        test_image_path = 'spec/fixtures/assets/test-image.jpg'
         params = {  
                     "site_id": site.id,
                     "reliable": "false", 
@@ -38,7 +38,7 @@ RSpec.describe "BulkUpload", type: :request do
       # login_user
       it "does not create submissions" do
         headers = { "CONTENT_TYPE" => "application/json" }
-        test_image_path = 'spec/support/assets/test-image.jpg'
+        test_image_path = 'spec/fixtures/assets/test-image.jpg'
         params = { "file": { "0": Rack::Test::UploadedFile.new(test_image_path, 'image/jpg', true) } }
         
         expect {
