@@ -47,6 +47,12 @@ class Submission < ApplicationRecord
     Rails.application.routes.url_helpers.rails_blob_path(image.attachment, only_path: true)
   end
   
+  def set_filename
+    if self.image.attached?
+      file_name = "#{self.record_taken.strftime("%d-%m-%Y")}_#{type_name.first.downcase}.jpg"
+      self.image.blob.update(filename: file_name)
+    end
+  end
   private
 
   def validate_site_id
