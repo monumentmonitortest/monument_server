@@ -27,6 +27,22 @@ RSpec.describe Submission, type: :model do
     end
   end
 
+  context "set file name" do
+    let(:submission) { create(:submission_with_type) }
+    # subject { create(:submission_with_type) }
+
+    before { submission.set_filename}
+    it "corrects the file name" do
+      type = submission.type_name
+      expected_filename = "#{Date.today.strftime("%d-%m-%Y")}_#{type.first.downcase}.jpg"
+      # binding.pry
+      expect(submission.image.attachment.filename.to_s).to eq expected_filename
+
+
+    end
+  end
+
+
   context "scope" do
     let!(:submission_one) { create(:submission, reliable: true) }
     let!(:submission_two) { create(:submission) }
