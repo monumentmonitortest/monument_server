@@ -98,7 +98,7 @@ Numbers of submissions by type
 <div class="flex flex-wrap column justify-between">
 <% Site.all.each do |site| %>
   <p>
-    <%= link_to site.name, api_v1_zip_images_path(site_id: site.id), class: 'button'  %>
+    <%= link_to site.name, zip_images_path(site_id: site.id), class: 'button'  %>
   </p>
 <% end %>
 </div>

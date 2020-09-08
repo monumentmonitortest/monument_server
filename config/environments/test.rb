@@ -35,7 +35,7 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :test
 
   # Print deprecation notices to the stderr.
-  config.active_support.deprecation = :stderr
+  config.active_support.deprecation = :log
 
   # does not try to upload stuff
   config.active_storage.service = :test

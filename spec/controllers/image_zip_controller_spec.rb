@@ -1,7 +1,7 @@
 require 'rails_helper'
 Sidekiq::Testing.fake!
 
-RSpec.describe Api::V1::ImageZipController, :type => :request do
+RSpec.describe ImageZipController, :type => :request do
   let(:site) { create(:site) }
   let(:params) { {site_id: site.id} }
   tmp_user_folder = "tmp/archive_submissions"
@@ -12,7 +12,7 @@ RSpec.describe Api::V1::ImageZipController, :type => :request do
       FileUtils.rm_rf(Dir["#{tmp_user_folder}"]) 
     end
     context "without authentication" do
-      before {get '/api/v1/zip_images'}
+      before {get '/admin/zip_images'}
       it "returns http success" do
         # expect(response).to have_http_status(401)
         # expect(response.body).to include("Bad Credentials")
@@ -21,7 +21,7 @@ RSpec.describe Api::V1::ImageZipController, :type => :request do
 
     context "with authentication" do
       headers = { 'Authorization' => "Token #{ENV["API_TOKEN"]}" }
-      subject { get '/api/v1/zip_images', params: params, headers: headers, as: :json }
+      subject { get '/admin/zip_images', params: params, headers: headers, as: :json }
        
       it "returns http success" do
         subject
@@ -45,7 +45,7 @@ RSpec.describe Api::V1::ImageZipController, :type => :request do
   xdescribe "GET #download_zip" do
 
     context "without authentication" do
-      before { get '/api/v1/download_zip' }
+      before { get '/admin/download_zip' }
       xit "returns http success" do
         # expect(response).to have_http_status(401)
         # expect(response.body).to include("Bad Credentials")
@@ -56,7 +56,7 @@ RSpec.describe Api::V1::ImageZipController, :type => :request do
       headers = { 'Authorization' => "Token #{ENV["API_TOKEN"]}" }
 
       # before do
-      #   get '/api/v1/download_zip', headers: headers, as: :json
+      #   get '/admin/download_zip', headers: headers, as: :json
       # end
 
       context "if zip file present" do
@@ -70,14 +70,14 @@ RSpec.describe Api::V1::ImageZipController, :type => :request do
         before { allow(Rails.logger).to receive(:info) }
         
         it "downloads file" do
-          get '/api/v1/download_zip', headers: headers, as: :json
+          get '/admin/download_zip', headers: headers, as: :json
           expect(response).to have_http_status(:success)
           expect(response.content_type).to eq "application/zip"
         end
         
         it "logs message" do
           expect(Rails.logger).to receive(:info).with("Zip file downloading")
-          get '/api/v1/download_zip', headers: headers, as: :json
+          get '/admin/download_zip', headers: headers, as: :json
         end
       end
 
@@ -93,7 +93,7 @@ RSpec.describe Api::V1::ImageZipController, :type => :request do
 
         it "returns error message" do
           expect(Rails.logger).to receive(:info).with("Zip folder not present, try again later")
-          get '/api/v1/download_zip', headers: headers, as: :json
+          get '/admin/download_zip', headers: headers, as: :json
         end
       end
     end
