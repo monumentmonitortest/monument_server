@@ -1,5 +1,4 @@
 class ResultsController < ApplicationController
-  DATE = '01/09/2018'.to_date
 
   def index
     @type_numbers = create_type_numbers_array
@@ -12,7 +11,7 @@ class ResultsController < ApplicationController
 
   def create_type_numbers_array
     Type::NAMES.map do |name|
-      Submission.joins(:type).where(types: { name: name }).where("record_taken > ?", DATE).count
+      Submission.joins(:type).where(types: { name: name }).count
     end
   end
 
