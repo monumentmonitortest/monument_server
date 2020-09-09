@@ -1,4 +1,5 @@
-class BulkUploadController < ApplicationController
+
+class Admin::BulkUploadController < ApplicationController
   skip_before_action :verify_authenticity_token, :only => [:create]
   before_action :redirect_unless_admin
 
@@ -14,7 +15,7 @@ class BulkUploadController < ApplicationController
       end
     else
       flash[:notice] = 'Make sure you include some pictures!'
-      redirect_back(fallback_location: bulk_upload_index_path)
+      redirect_back(fallback_location: admin_bulk_upload_index_path)
     end
   end
 

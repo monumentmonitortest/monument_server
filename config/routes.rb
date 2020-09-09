@@ -13,8 +13,7 @@ Rails.application.routes.draw do
       resources :registrations
     end
     
-    resources :bulk_upload, only: [:index, :create]
-  
+    
     resources :insta_upload
     
     resources :results
@@ -22,6 +21,11 @@ Rails.application.routes.draw do
     get :zip_images, to: 'image_zip#zip_images'
     get :download_zipped_images, to: 'image_zip#download_zip'
     # post '/sites/csv/results', to: 'csv#results', as: :results
+  end
+  
+  # todo - will slowly be moving controllers from scope to namespace
+  namespace :admin do
+    resources :bulk_upload, only: [:index, :create]
   end
   
   # API  
