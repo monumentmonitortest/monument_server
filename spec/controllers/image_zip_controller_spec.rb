@@ -48,19 +48,13 @@ RSpec.describe ImageZipController, :type => :request do
             subject
           end
         end
-
-
-      end
-
-      context "if folder already present" do
-        # it deletes it
       end
     end
   end
   
 
 
-  xdescribe "GET #download_zip" do
+  describe "GET #download_zip" do
 
     context "without authentication" do
       before { get '/admin/download_zip' }
@@ -72,46 +66,43 @@ RSpec.describe ImageZipController, :type => :request do
 
     context "with authentication" do
       headers = { 'Authorization' => "Token #{ENV["API_TOKEN"]}" }
-
-      # before do
-      #   get '/admin/download_zip', headers: headers, as: :json
-      # end
+      let(:public_url) { 'www.images.zip' }
+      
+      
+      subject { get '/admin/download_zipped_images', params: { site_id: site_id }, headers: headers, as: :json }
 
       context "if zip file present" do
-        before(:all) do
-          # Create the tmp archive folder if it exists
-          FileUtils.mkdir_p(tmp_user_folder) unless Dir.exists?(tmp_user_folder)
-          # Copy test zip from support folder
-          FileUtils.cp 'spec/support/assets/archive_submissions.zip', 'tmp/'
+        before do
+          obj = double("S3 object", public_url: public_url, exists?: true)
+          aws = double("AWS", object: obj)
+          
+          allow_any_instance_of(Aws::S3::Resource)
+            .to receive(:bucket)
+            .and_return(aws)
         end
-        
-        before { allow(Rails.logger).to receive(:info) }
-        
+                
         it "downloads file" do
-          get '/admin/download_zip', headers: headers, as: :json
-          expect(response).to have_http_status(:success)
-          expect(response.content_type).to eq "application/zip"
+          subject
+          expect(flash[:notice]).to be_present
+          expect(response).to redirect_to(public_url)
         end
         
-        it "logs message" do
-          expect(Rails.logger).to receive(:info).with("Zip file downloading")
-          get '/admin/download_zip', headers: headers, as: :json
-        end
       end
 
       context "if zip file not present" do
         before do
-          # Delete existing folders if they exist
-          if Dir.exists?(tmp_user_folder)
-            FileUtils.rm_rf(Dir["#{tmp_user_folder}/*"]) 
-            FileUtils.rm_rf(Dir["#{tmp_user_folder}"]) 
-          end
-          allow(Rails.logger).to receive(:info)
+          obj = double("S3 object", public_url: public_url, exists?: false)
+          aws = double("AWS", object: obj)
+          
+          allow_any_instance_of(Aws::S3::Resource)
+            .to receive(:bucket)
+            .and_return(aws)
         end
 
-        it "returns error message" do
-          expect(Rails.logger).to receive(:info).with("Zip folder not present, try again later")
-          get '/admin/download_zip', headers: headers, as: :json
+        it "redirects back" do
+          subject
+          expect(flash[:alert]).to be_present
+          expect(response).to redirect_to('/admin/results')
         end
       end
     end

@@ -99,7 +99,8 @@ Numbers of submissions by type
   <div class="w-50">
     <h4>Create new zip</h4>
     <p class="w-60-l">
-      This will compress all the images for a given site, submitted up to now, and send the link to the given email address
+      This will compress all the images for a given site, submitted up to now, and send the link to the given email address. 
+      <strong>This will take a while!</strong>
     </p>
     <%= form_tag("/admin/zip_images", method: "get") do %>
       <%= select_tag :site_id, options_for_select(Site.all.collect { | site | [site.name, site.id] }),  :include_blank => true %><br/>
@@ -111,7 +112,8 @@ Numbers of submissions by type
   <div class="w-50">  
     <h4>Download current zip</h4>    
       <p class="w-60-l">
-        This will find the latest compressed file for a given site, and download them. If no compressed file is present, you will need to use the form above.
+        This will find the latest compressed file for a given site, and download them. 
+        If no compressed file is present, you will need to create one using the form to the left.
       </p>
       <%= form_tag("/admin/download_zipped_images", method: "get") do %>
         <%= select_tag :site_id, options_for_select(Site.all.collect { | site | [site.name, site.id] }),  :include_blank => true %><br/>

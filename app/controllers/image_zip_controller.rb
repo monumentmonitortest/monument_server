@@ -1,6 +1,5 @@
 require 'zip'
 class ImageZipController < ApplicationController
-  #  TODO - work on this
   TMP_ARCHIVE_FOLDER_BASE = "tmp/archive_submissions".freeze
   
   def zip_images
@@ -10,13 +9,13 @@ class ImageZipController < ApplicationController
   end
 
   def download_zip
-    # return folder for previously zipped folders
-    # if Dir.exists?(TMP_ARCHIVE_FOLDER) && Dir.exists?(tmp_archive_dir)
-    #   flash[:notice] = 'Zip file downloading'
-    #   send_file(Rails.root.join("#{TMP_ARCHIVE_FOLDER}.zip"), :type => 'application/zip', :filename => "submissions.zip", :disposition => 'attachment')
-    # else
-    #   flash[:notice] = "Zip folder not present, you need to create it using zip create and download"
-    # end
+    obj = get_directory
+    unless obj.exists?
+      redirect_back(fallback_location: results_path, alert: "Zip folder not present, you need to create it using 'zip create and download'")
+    else
+      redirect_to obj.public_url
+      flash[:notice] = "Zip file downloading"
+    end
   end
   private
   
@@ -36,6 +35,21 @@ class ImageZipController < ApplicationController
   def permitted_params
     params.permit(:site_id, :email)
   end
+
+  def get_directory
+    # TODO - dry up s3 calls
+    begin
+      s3 = Aws::S3::Resource.new(region:'eu-west-2')
+      if Rails.env == 'production'
+        obj = s3.bucket(ENV['S3_BUCKET_PRODUCTION']).object("archive/#{site_id}_submissions")
+      else
+        obj = s3.bucket(ENV['S3_BUCKET_DEVELOPMENT']).object("archive/#{site_id}_submissions")
+      end
+    rescue Aws::S3::Errors::ServiceError
+      puts 'BUGGER'
+    end
+  end
+
 
   def delete_current_tempfile
     # delete both archive folder and contents

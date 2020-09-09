@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     resources :results
     
     get :zip_images, to: 'image_zip#zip_images'
+    get :download_zipped_images, to: 'image_zip#download_zip'
     # post '/sites/csv/results', to: 'csv#results', as: :results
   end
   
@@ -34,7 +35,6 @@ Rails.application.routes.draw do
       get :site_specific_tags_report, to: 'csv#site_specific_tags'
       get :all_tags_report, to: 'csv#tags_report'
       get :image_quality_report, to: 'csv#image_quality'
-      get :download_zip, to: 'image_zip#download_zip'
     end
   end
 end
