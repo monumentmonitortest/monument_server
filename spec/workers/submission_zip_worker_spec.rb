@@ -3,10 +3,10 @@ require 'sidekiq/testing'
 Sidekiq::Testing.fake!
 
 RSpec.describe SubmissionZipWorker, type: :worker do
-  let(:site) { create(:site) }
-  let(:zip_path) { "tmp/achive_submission_#{site.id}"}
-  let(:public_url) { "www.image.zip" }
-  let(:designated_email) { ENV['DESIGNATED_EMAIL'] }
+  let(:site_id)        { '1' }
+  let(:zip_path)    {  "tmp/achive_submission_#{site_id}"}
+  let(:public_url)  { "www.image.zip" }
+  let(:email)       { 'email@yay.com' }
   describe "#perform" do
     before do
       obj = double("S3 object", public_url: public_url, upload_file: true)
@@ -20,7 +20,7 @@ RSpec.describe SubmissionZipWorker, type: :worker do
     context "when called" do
       it "creates an async job" do
         expect {
-          described_class.perform_async(site.id)
+          described_class.perform_async(site_id, email, zip_path)
         }.to change(SubmissionZipWorker.jobs, :size).by(1)
       end
 
@@ -31,10 +31,10 @@ RSpec.describe SubmissionZipWorker, type: :worker do
         
         # TODO - deal with this email stuff..
         mailer = double("email")
-        allow(mailer).to receive(:call).with(email: designated_email, url: public_url).and_return(mailer)
+        allow(mailer).to receive(:call).with(email: email, url: public_url).and_return(mailer)
         
         expect(service).to receive(:create)
-        described_class.perform_async(zip_path, site.id)
+        described_class.perform_async(site_id, email, zip_path)
 
         expect(ZipMailer).to receive(:job_done).and_return(mailer)
         expect(mailer).to receive(:deliver_now)
@@ -43,7 +43,7 @@ RSpec.describe SubmissionZipWorker, type: :worker do
       end
 
       context "uploading to s3" do
-        subject { described_class.new.send(:upload_to_s3,zip_path, site.id)  }
+        subject { described_class.new.send(:upload_to_s3, zip_path, site_id)  }
             
         it "calls s3" do
           expect(subject).to eq public_url

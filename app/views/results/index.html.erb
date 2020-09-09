@@ -1,11 +1,5 @@
 <h2 id="csv-reports">Results</h2>
 
-<div>
-  <p>
-    Note - all results here are from after 01/09/2018
-  </p>
-</div>
-
 Numbers of submissions by type
 <table class="u-full-width">
   <thead>
@@ -23,35 +17,10 @@ Numbers of submissions by type
     </tr>
   </tbody>
 </table>
-<button>To CSV</button>
+<button>Basic submission CSV</button>
 
-<p>Numbers of submissions by site</p>
 
-<table class="u-full-width">
-  <thead>
-    <tr>
-      <th>Site name</th>
-      <th>Submission count</th>
-      <th>Instagram</th>
-      <th>Email</th>
-      <th>Twitter</th>
-      <th>Whatsapp</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @site_numbers.each do |site| %>
-      <tr>
-        <td><%= site[:name] %></td>
-        <td><%= site[:submissions] %></td>
-        <td><%= site[:instagram] %></td>
-        <td><%= site[:email] %></td>
-        <td><%= site[:twitter] %></td>
-        <td><%= site[:whatsapp] %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<button>To CSV</button>
+<button>Site breakdown CSV CSV</button>
 <div class="mb6">
   <h3>Reports on all submissions</h3>
 
@@ -125,18 +94,32 @@ Numbers of submissions by type
 </div>
 
 
-<h3>Start job to Zip all images</h3>
+<h3>Zip images</h3>
 <div class="flex flex-wrap column justify-between">
-<% Site.all.each do |site| %>
-  <p>
-    <%= link_to site.name, api_v1_zip_images_path(site_id: site.id), class: 'button'  %>
-  </p>
-<% end %>
-</div>
+  <div class="w-50">
+    <h4>Create new zip</h4>
+    <p class="w-60-l">
+      This will compress all the images for a given site, submitted up to now, and send the link to the given email address. 
+      <strong>This will take a while!</strong>
+    </p>
+    <%= form_tag("/admin/zip_images", method: "get") do %>
+      <%= select_tag :site_id, options_for_select(Site.all.collect { | site | [site.name, site.id] }),  :include_blank => true %><br/>
+      <%= text_field :email, nil,  placeholder: "Email address" %> <br/>
+      <%= submit_tag("Collect and email zipped images") %>
+    <% end %>
+  </div>
 
-<h3>Download zip of all images (ensure to leave enough time)</h3>
-<div class="flex flex-wrap column justify-between">
-  <p>
-    <%= link_to 'Download image Zip', api_v1_download_zip_path, class: 'button'  %>
-  </p>
+  <div class="w-50">  
+    <h4>Download current zip</h4>    
+      <p class="w-60-l">
+        This will find the latest compressed file for a given site, and download them.
+        This is much quicker than creating one from scratch! 
+        If no compressed file is present, you will need to create one using the form to the left.
+      </p>
+      <%= form_tag("/admin/download_zipped_images", method: "get") do %>
+        <%= select_tag :site_id, options_for_select(Site.all.collect { | site | [site.name, site.id] }),  :include_blank => true %><br/>
+        <%= submit_tag("Collect and download zipped images") %>
+      <% end %>
+
+  </div>
 </div>
