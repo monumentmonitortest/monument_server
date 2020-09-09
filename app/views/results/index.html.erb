@@ -112,7 +112,8 @@ Numbers of submissions by type
   <div class="w-50">  
     <h4>Download current zip</h4>    
       <p class="w-60-l">
-        This will find the latest compressed file for a given site, and download them. 
+        This will find the latest compressed file for a given site, and download them.
+        This is much quicker than creating one from scratch! 
         If no compressed file is present, you will need to create one using the form to the left.
       </p>
       <%= form_tag("/admin/download_zipped_images", method: "get") do %>
@@ -122,4 +123,3 @@ Numbers of submissions by type
 
   </div>
 </div>
-<%#= link_to 'Download image Zip', api_v1_download_zip_path, class: 'button'  %>
