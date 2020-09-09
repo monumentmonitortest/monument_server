@@ -5,13 +5,13 @@ class ImageZipController < ApplicationController
   def zip_images
     delete_current_tempfile # does this work on AWS?
     SubmissionZipWorker.perform_async(site_id, email_address, tmp_archive_dir)
-    redirect_back(fallback_location: results_path, notice: 'Job started, images will be emailed when finished')
+    redirect_back(fallback_location: admin_results_path, notice: 'Job started, images will be emailed when finished')
   end
 
   def download_zip
     obj = get_directory
     unless obj.exists?
-      redirect_back(fallback_location: results_path, alert: "Zip folder not present, you need to create it using 'zip create and download'")
+      redirect_back(fallback_location: admin_results_path, alert: "Zip folder not present, you need to create it using 'zip create and download'")
     else
       redirect_to obj.public_url
       flash[:notice] = "Zip file downloading"

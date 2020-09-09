@@ -1,4 +1,4 @@
-class ResultsController < ApplicationController
+class Admin::ResultsController < ApplicationController
 
   def index
     @type_numbers = create_type_numbers_array
