@@ -94,18 +94,30 @@ Numbers of submissions by type
 </div>
 
 
-<h3>Start job to Zip all images</h3>
+<h3>Zip images</h3>
 <div class="flex flex-wrap column justify-between">
-<% Site.all.each do |site| %>
-  <p>
-    <%= link_to site.name, zip_images_path(site_id: site.id), class: 'button'  %>
-  </p>
-<% end %>
-</div>
+  <div class="w-50">
+    <h4>Create new zip</h4>
+    <p class="w-60-l">
+      This will compress all the images for a given site, submitted up to now, and send the link to the given email address
+    </p>
+    <%= form_tag("/admin/zip_images", method: "get") do %>
+      <%= select_tag :site_id, options_for_select(Site.all.collect { | site | [site.name, site.id] }),  :include_blank => true %><br/>
+      <%= text_field :email, nil,  placeholder: "Email address" %> <br/>
+      <%= submit_tag("Collect and email zipped images") %>
+    <% end %>
+  </div>
 
-<h3>Download zip of all images (ensure to leave enough time)</h3>
-<div class="flex flex-wrap column justify-between">
-  <p>
-    <%= link_to 'Download image Zip', api_v1_download_zip_path, class: 'button'  %>
-  </p>
+  <div class="w-50">  
+    <h4>Download current zip</h4>    
+      <p class="w-60-l">
+        This will find the latest compressed file for a given site, and download them. If no compressed file is present, you will need to use the form above.
+      </p>
+      <%= form_tag("/admin/download_zipped_images", method: "get") do %>
+        <%= select_tag :site_id, options_for_select(Site.all.collect { | site | [site.name, site.id] }),  :include_blank => true %><br/>
+        <%= submit_tag("Collect and download zipped images") %>
+      <% end %>
+
+  </div>
 </div>
+<%#= link_to 'Download image Zip', api_v1_download_zip_path, class: 'button'  %>

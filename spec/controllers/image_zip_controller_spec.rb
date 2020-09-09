@@ -2,10 +2,13 @@ require 'rails_helper'
 Sidekiq::Testing.fake!
 
 RSpec.describe ImageZipController, :type => :request do
-  let(:site) { create(:site) }
-  let(:params) { {site_id: site.id} }
-  tmp_user_folder = "tmp/archive_submissions"
-
+  let(:site_id)         { '1' }
+  let(:email)           { 'email@thing.com' }
+  let(:params)          {{ site_id: site_id, email: email }}
+  
+  tmp_user_folder =  "tmp/archive_submissions" 
+  let(:expected_folder) { tmp_user_folder + '_' + site_id  }
+  
   describe "GET #get_images" do
     after(:all) do
       FileUtils.rm_rf(Dir["#{tmp_user_folder}/*"]) 
@@ -32,6 +35,21 @@ RSpec.describe ImageZipController, :type => :request do
         it "calls submission zip worker" do
           expect{ subject }.to change(SubmissionZipWorker.jobs, :size).by(1) 
         end
+
+        it "uses supplied email address" do
+          expect(SubmissionZipWorker).to receive(:perform_async).with(site_id, email, expected_folder)
+          subject
+        end
+        
+        context 'without email supplied' do
+          let(:params) {{site_id: site_id}}
+          it "uses default email address if none supplied" do
+            expect(SubmissionZipWorker).to receive(:perform_async).with(site_id, ENV["DESIGNATED_EMAIL"], expected_folder)
+            subject
+          end
+        end
+
+
       end
 
       context "if folder already present" do
