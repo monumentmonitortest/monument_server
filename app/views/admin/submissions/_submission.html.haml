@@ -14,4 +14,4 @@
   -# These actions don't work, so they have been disabled. This whole view is pretty pointless really...
   -#   %td.actions= smart_listing_item_actions [{name: :show, url: submission_path(object)}, {name: :edit, url: edit_submission_path(object)}, {name: :destroy, url: submission_path(object), confirmation: "Are you sure you want to delete this submission?"}]
   -# - else
-  %td.actions= smart_listing_item_actions [{name: :show, url: submission_path(object)}]
+  %td.actions= smart_listing_item_actions [{name: :show, url: admin_submission_path(object)}]

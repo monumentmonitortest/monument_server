@@ -5,9 +5,8 @@ Rails.application.routes.draw do
   scope '/admin' do
     get '/', to: 'welcome#index'
     resources :types
-    resources :submissions
     
-  
+    
     
     
     resources :insta_upload
@@ -22,7 +21,8 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :bulk_upload, only: [:index, :create]
     resources :results
-
+    
+    resources :submissions
     resources :sites do
       resources :submissions
       resources :registrations
