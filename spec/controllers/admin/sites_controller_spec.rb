@@ -1,5 +1,5 @@
 require 'rails_helper'
-RSpec.describe SitesController, type: :controller do
+RSpec.describe Admin::SitesController, type: :controller do
   include Devise::Test::ControllerHelpers
 
   context 'GET /admin/sites' do

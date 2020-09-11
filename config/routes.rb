@@ -8,10 +8,6 @@ Rails.application.routes.draw do
     resources :submissions
     
   
-    resources :sites do
-      resources :submissions
-      resources :registrations
-    end
     
     
     resources :insta_upload
@@ -26,6 +22,11 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :bulk_upload, only: [:index, :create]
     resources :results
+
+    resources :sites do
+      resources :submissions
+      resources :registrations
+    end
   end
   
   # API  
