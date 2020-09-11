@@ -42,7 +42,7 @@ export default class Nav extends React.Component {
                 onClick={this.props.handleToggle}>Images</button>
             </div>
             <Form siteNames={this.props.siteNames} tags={this.props.tags} refineView={this.props.refineView} />
-            <Key />
+            <Key userEmail={this.props.userEmail} />
           </div>
         )}
 
