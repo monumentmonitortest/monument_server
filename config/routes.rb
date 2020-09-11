@@ -4,7 +4,6 @@ Rails.application.routes.draw do
     
   scope '/admin' do
     get '/', to: 'welcome#index'
-    resources :types
     
     
     
@@ -21,6 +20,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :bulk_upload, only: [:index, :create]
     resources :results
+    resources :types
     
     resources :submissions
     resources :sites do
