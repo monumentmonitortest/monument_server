@@ -10,7 +10,7 @@ class Admin::BulkUploadController < ApplicationController
     if params[:file].present?
       results = bulk_upload_images
       respond_to do |format|
-        format.html { redirect_to submissions_url }
+        format.html { redirect_to admin_submissions_url }
         format.json { render json: results }
       end
     else
