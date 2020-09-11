@@ -9,7 +9,7 @@ end
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2'
 # Use postgresql as the database for Active Record
-gem 'pg', '~> 0.18'
+gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 3.12'
 # Use SCSS for stylesheets
@@ -69,9 +69,10 @@ group :development, :test do
 end
 
 group :test do
-  gem 'shoulda', '~> 3.5'
-  gem 'shoulda-matchers', '~> 2.0'
+  gem 'shoulda', '4.0.0.rc2'
+  gem 'shoulda-matchers', '~> 4.0'
   gem 'rspec_junit_formatter', '~> 0.2.3'
+  gem "bigdecimal", "1.3.5"
 end
 
 group :development do
