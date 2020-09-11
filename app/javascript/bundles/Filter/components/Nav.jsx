@@ -4,7 +4,7 @@ import SquareLogo from 'images/main-logo-black-squished.jpg'
 
 import Key from './Key.jsx'
 import Form from './Form.jsx'
-
+import Login from './Login.jsx'
 
 export default class Nav extends React.Component {
   constructor(props) {
@@ -42,7 +42,10 @@ export default class Nav extends React.Component {
                 onClick={this.props.handleToggle}>Images</button>
             </div>
             <Form siteNames={this.props.siteNames} tags={this.props.tags} refineView={this.props.refineView} />
-            <Key />
+            <div className='w-100 absolute-ns bottom-0-ns'>
+              <Login userEmail={this.props.userEmail} />
+              <Key />
+            </div>
           </div>
         )}
 

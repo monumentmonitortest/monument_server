@@ -9,6 +9,7 @@ export default class FilterHome extends React.Component {
   static propTypes = {
     siteNames: PropTypes.array.isRequired, // this is passed from the Rails view
     tags: PropTypes.array.isRequired,
+    userEmail: PropTypes.string.isRequired
   };
 
   /**
@@ -154,6 +155,7 @@ export default class FilterHome extends React.Component {
             tags={this.props.tags}
             handleToggleNav={this.handleToggleNav}
             navCollapsed={this.state.navCollapsed}
+            userEmail={this.props.userEmail}
              />
           <main className={navCollapsed ? "collapsed ph4" : "full ph4"}>
             {data}
