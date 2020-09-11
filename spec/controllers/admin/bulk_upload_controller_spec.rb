@@ -1,5 +1,5 @@
 require 'rails_helper'
-RSpec.describe "BulkUpload", type: :request do
+RSpec.describe Admin::BulkUploadController, type: :request do
   include Rack::Test::Methods
   include ActionDispatch::TestProcess
   include Devise::Test::IntegrationHelpers

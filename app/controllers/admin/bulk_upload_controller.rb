@@ -1,4 +1,5 @@
-class BulkUploadController < ApplicationController
+
+class Admin::BulkUploadController < ApplicationController
   skip_before_action :verify_authenticity_token, :only => [:create]
   before_action :redirect_unless_admin
 
@@ -9,12 +10,12 @@ class BulkUploadController < ApplicationController
     if params[:file].present?
       results = bulk_upload_images
       respond_to do |format|
-        format.html { redirect_to submissions_url }
+        format.html { redirect_to admin_submissions_url }
         format.json { render json: results }
       end
     else
       flash[:notice] = 'Make sure you include some pictures!'
-      redirect_back(fallback_location: bulk_upload_index_path)
+      redirect_back(fallback_location: admin_bulk_upload_index_path)
     end
   end
 

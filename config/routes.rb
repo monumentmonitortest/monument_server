@@ -4,24 +4,29 @@ Rails.application.routes.draw do
     
   scope '/admin' do
     get '/', to: 'welcome#index'
-    resources :types
-    resources :submissions
     
-  
-    resources :sites do
-      resources :submissions
-      resources :registrations
-    end
     
-    resources :bulk_upload, only: [:index, :create]
-  
+    
+    
     resources :insta_upload
     
-    resources :results
     
     get :zip_images, to: 'image_zip#zip_images'
     get :download_zipped_images, to: 'image_zip#download_zip'
     # post '/sites/csv/results', to: 'csv#results', as: :results
+  end
+  
+  # todo - will slowly be moving controllers from scope to namespace
+  namespace :admin do
+    resources :bulk_upload, only: [:index, :create]
+    resources :results
+    resources :types
+    
+    resources :submissions
+    resources :sites do
+      resources :submissions
+      resources :registrations
+    end
   end
   
   # API  

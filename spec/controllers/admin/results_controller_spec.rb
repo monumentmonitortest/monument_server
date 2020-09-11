@@ -1,5 +1,5 @@
 require "rails_helper"
-RSpec.describe ResultsController do
+RSpec.describe Admin::ResultsController do
   
   context "#show" do
     render_views

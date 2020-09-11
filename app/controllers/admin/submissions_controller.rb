@@ -1,8 +1,9 @@
-class SubmissionsController < ApplicationController
+class Admin::SubmissionsController < ApplicationController
   include SmartListing::Helper::ControllerExtensions
   helper  SmartListing::Helper
   before_action :set_submission, only: [:show, :edit, :update, :destroy]
   before_action :redirect_unless_admin
+  respond_to :js, only: :create
 
   def index
     submissions_scope ||= reliable? ? Submission.with_attached_image.reliable : Submission.with_attached_image
@@ -11,7 +12,7 @@ class SubmissionsController < ApplicationController
     submissions_scope = type_search(submissions_scope, p_params[:type_filter]) if p_params[:type_filter].present?
     submissions_scope = submissions_scope.tagged_with(p_params[:tag]) if p_params[:tag].present?
 
-    @submissions = smart_listing_create(:submissions, submissions_scope, partial: "submissions/list")
+    @submissions = smart_listing_create(:submissions, submissions_scope, partial: "admin/submissions/list")
   end
 
   def show
@@ -24,7 +25,7 @@ class SubmissionsController < ApplicationController
   def update
     @submission.update_attributes(submission_params)
     respond_to do |format|  
-      format.js { render 'submissions/update'}
+      format.js { render 'admin/submissions/update.js.erb' }
     end  
   end
 
@@ -38,7 +39,9 @@ class SubmissionsController < ApplicationController
   end
 
   def destroy
+    site = @submission.site
     @submission.destroy
+    redirect_to admin_site_path(site.id)
   end
   
   private

@@ -13,20 +13,19 @@
       <th></th>
     </tr>
   </thead>
- 
   <%= paginate @submissions %>
   <tbody>
     <% @submissions.each do |submission| %>
       <tr>
-        <%= form_for submission, remote: true do |f| %>
+        <%= form_with scope: :submission, url: admin_submission_path(submission), method: :patch do |f| %>
           <td><%= submission.id %></td>
           <td class='image'><%= image_tag(url_for(submission.image.variant(resize:"200x200"))) %></td>
           <td class="sites"><%= f.select :site_id, options_for_select(Site.all.map {|s| [s.name, s.id]}, [submission.site.name, submission.site.id] || "")%></td>
           <td>Reliable? <%= f.check_box :reliable, checked: submission.reliable %></td>
           <td><%= submission.record_taken.strftime("%d/%m/%Y") %></td>
-          <td><%= f.text_field :tag_list, value: f.object.tag_list.to_s, class: "tags" %> </td>
+          <td><%= f.text_field :tag_list, value: submission.tag_list.to_s, class: "tags" %> </td>
 
-          <td><%= link_to "Destroy", submission, method: :delete, data: { confirm: "Are you sure?" } %></td>
+          <td><%= link_to "Destroy", admin_submission_path(submission), method: :delete, data: { confirm: "Are you sure?" } %></td>
           <td><%= submit_tag("Update", class: "#{submission.id}") %></td>
         <% end %>
       </tr>

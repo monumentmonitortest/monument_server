@@ -13,7 +13,7 @@
     %tbody
       - smart_listing.collection.each do |o|
         %tr
-        = smart_listing.render object: o, partial: "/submissions/submission", locals: {object: o}
+        = smart_listing.render object: o, partial: "admin/submissions/submission", locals: {object: o}
 
           
   %div.smart-listing-new-button

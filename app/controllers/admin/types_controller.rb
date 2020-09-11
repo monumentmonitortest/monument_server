@@ -1,4 +1,4 @@
-class TypesController < ApplicationController
+class Admin::TypesController < ApplicationController
   include SmartListing::Helper::ControllerExtensions
   helper  SmartListing::Helper
 
