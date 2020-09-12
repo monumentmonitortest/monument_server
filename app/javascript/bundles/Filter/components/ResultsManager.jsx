@@ -82,7 +82,6 @@ export default class ResultsManager extends React.Component {
           <li className="pointer mh2 tc">Show per page:</li>
           <li className="pointer mh2 tc"><a onClick={this.handlePaginationCount}>20</a></li>
           <li className="pointer mh2 tc"><a onClick={this.handlePaginationCount}>50</a></li>
-          <li className="pointer mh2 tc"><a onClick={this.handlePaginationCount}>100</a></li>
         </ul>
         
         <ul className="list flex flex-wrap items-center pa0 ma0">
@@ -103,6 +102,25 @@ export default class ResultsManager extends React.Component {
               {this.props.submissions.map((submission, i)=>(<Submission {...submission} key={i} handleSelectCompare={this.handleSelectCompare} />))}
           </div>
         </div>
+
+        <ul className="list flex flex-wrap items-center pa0 ma0 mb0">
+          <li><span className="mh2">{totalSubmissions} submissions found, page {pageNumber} of {pageNumbers}.</span></li>
+          <li className="pointer mh2 tc">Show per page:</li>
+          <li className="pointer mh2 tc"><a onClick={this.handlePaginationCount}>20</a></li>
+          <li className="pointer mh2 tc"><a onClick={this.handlePaginationCount}>50</a></li>
+        </ul>
+        
+        <ul className="list flex flex-wrap items-center pa0 ma0">
+          <li className="pointer mh2 tc">Navigate to:</li>
+          { Object.keys(links).map((keyName, i) => ( 
+            <Pagination 
+              direction={keyName}
+              link={links[keyName]}
+              handlePagination={this.handlePaginationUrl}
+              key={i} />
+            ))}
+        </ul>
+        
 
       </div>
     )
