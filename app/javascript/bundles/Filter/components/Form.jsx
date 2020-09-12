@@ -44,12 +44,14 @@ export default class Form extends React.Component {
     const selectString = {
                             selectSomeItems: "Select tags",
                           }
+    const typeOptions = ['Email', 'WhatsApp', 'Twitter', 'Instagram']
+    
     return (
       <form className="ph4 pv4 mb0 br1" onSubmit={this.handleSubmit}>
           <div className="flex flex-wrap items-center justify-between">
             <span className="h-25 w-100">
               <select id="site" className="dark-color w-100" onChange={this.handleInputChange}>
-                <option defaultValue="">Select Site</option>
+                <option defaultValue="">Select site</option>
               {this.props.siteNames.sort().map((site, i) => 
                 <option 
                   value={site} 
@@ -59,13 +61,12 @@ export default class Form extends React.Component {
             </span>
 
             <span className="h-25 w-100">
-              <input 
-                placeholder="Select submission type"
-                type="text" 
-                id="type" 
-                className="black w-100"
-                value={this.state.type} 
-                onChange={this.handleInputChange} />
+              <select id="type" className="black w-100" placeholder="Select submission type" onChange={this.handleInputChange}>
+                <option defaultValue="">Select submission type</option>
+                {typeOptions.map((type) =>
+                  <option value={type} key={type} className="dark-color w-100">{type}</option>
+                )}
+              </select>
             </span>
 
             <span className="h-25 w-100">
