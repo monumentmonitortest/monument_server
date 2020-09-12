@@ -8,7 +8,6 @@ export default class Form extends React.Component {
     this.state = {
       site: '',
       type: '',
-      // tag: '',
       selected: [],
       reliable: false
     }
@@ -16,10 +15,12 @@ export default class Form extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault()
+    // this returns a string of just the labels for selected tags
+    const selectedTags = this.state.selected.map(obj => { return obj.label})
     this.props.refineView({reliable: this.state.reliable, 
                            site: this.state.site, 
                            type: this.state.type,
-                           tag: this.state.tag})
+                           tags: selectedTags})
   }
 
   handleInputChange = event => {
@@ -33,8 +34,6 @@ export default class Form extends React.Component {
   }
 
   setSelectedTag = event => {
-    // this puts the whole event object in state
-    // so work has to be done in handle submit to reduce get just values
     const tag = event
     this.setState({selected: tag})
   }
@@ -90,7 +89,7 @@ export default class Form extends React.Component {
               </select>
             </span> */}
 
-            <span className="h-25">
+            <span className="h-25 center">
               <button className="flex center mt4 white-background dark-color" type="submit" onClick={this.handleSubmit}>
                 Search
               </button>

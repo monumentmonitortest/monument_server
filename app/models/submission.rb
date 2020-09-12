@@ -29,9 +29,10 @@ class Submission < ApplicationRecord
     end
   }
 
-  scope :with_tag,  ->(tag) { 
-    if tag.present?
-      tagged_with(tag) 
+  scope :with_tags, ->(tags) { 
+    if tags.present?
+      tags = tags.split(',')
+      tagged_with(tags, any: true) 
     end
   }
   

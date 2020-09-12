@@ -51,6 +51,18 @@ RSpec.describe Submission, type: :model do
       expect(Submission.all.reliable.count).to eq 1
       expect(Submission.all.reliable).to include submission_one
     end
+    
+    context "#tags" do
+    before do 
+      tag_list = ['tag one', 'tag two']
+      submission_one.tag_list = tag_list
+      submission_one.save
+    end
+
+      it "filters on multiple tags" do
+        expect(Submission.all.with_tags("tag one, tag two")).to eq [submission_one]
+      end
+    end
   end
 
   context "instance methods" do
@@ -67,5 +79,4 @@ RSpec.describe Submission, type: :model do
       end   
     end
   end
-
 end
