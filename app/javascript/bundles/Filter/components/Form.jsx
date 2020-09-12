@@ -61,7 +61,7 @@ export default class Form extends React.Component {
             </span>
 
             <span className="h-25 w-100">
-              <select id="type" className="black w-100" placeholder="Select submission type" onChange={this.handleInputChange}>
+              <select id="type" className="black w-100" placeholder="Select submission type" onChange={this.props.refineView()}>
                 <option defaultValue="">Select submission type</option>
                 {typeOptions.map((type) =>
                   <option value={type} key={type} className="dark-color w-100">{type}</option>
@@ -90,9 +90,13 @@ export default class Form extends React.Component {
               </select>
             </span> */}
 
-            <span className="h-25 center">
-              <button className="flex center mt4 white-background dark-color" type="submit" onClick={this.handleSubmit}>
+            <span className="h-25 w-100 flex justify-around">
+              <button className="mt4 white-background dark-color" type="submit" onClick={this.handleSubmit}>
                 Search
+              </button>
+
+              <button className="mt4 white-background dark-color" type="submit" onClick={() => window.location.reload(false)}>
+                Clear
               </button>
             </span>
           </div>
