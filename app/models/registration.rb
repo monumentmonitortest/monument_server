@@ -21,7 +21,7 @@ class Registration
                               type_specific_id: type_specific_id,
                               comment: comment)
 
-      submission.set_filename
+      submission.set_filename unless image_file.present? 
     end
     true
   rescue ActiveRecord::RecordInvalid => e
