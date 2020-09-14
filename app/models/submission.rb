@@ -3,6 +3,7 @@ class Submission < ApplicationRecord
   belongs_to :site
   has_one :type,  :dependent => :destroy
   accepts_nested_attributes_for :type
+  # belongs_to :participant
   
   validate :validate_site_id
   validates_presence_of :record_taken

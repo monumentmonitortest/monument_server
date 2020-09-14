@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_17_142825) do
+ActiveRecord::Schema.define(version: 2020_09_14_121042) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,11 @@ ActiveRecord::Schema.define(version: 2020_04_17_142825) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "participants", force: :cascade do |t|
+    t.string "participant_id"
+    t.datetime "first_submission"
+  end
+
   create_table "sites", force: :cascade do |t|
     t.string "name"
     t.float "latitude"
@@ -67,6 +72,10 @@ ActiveRecord::Schema.define(version: 2020_04_17_142825) do
     t.datetime "updated_at", null: false
     t.jsonb "metadata", default: {}, null: false
     t.datetime "submitted_at"
+    t.string "type_name"
+    t.text "comment"
+    t.string "type_specific_id"
+    t.integer "participant_id"
   end
 
   create_table "taggings", id: :serial, force: :cascade do |t|
