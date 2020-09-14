@@ -24,7 +24,7 @@ module Api
       private
 
         def scope
-          Submission.with_attached_image.search_site(site_filter).type_search(type_filter).with_tag(tag_filter)
+          Submission.with_attached_image.search_site(site_filter).type_search(type_filter).with_tags(tag_filter)
         end
 
         def scope_without_images
@@ -36,7 +36,7 @@ module Api
                         :site_id,
                         :site_filter,
                         :type_filter,
-                        :tag,
+                        :tags,
                         :bespoke_size,
                         :page,
                         :pagination)
@@ -63,14 +63,12 @@ module Api
         end
 
         def tag_filter
-          permitted_params[:tag]
+          permitted_params[:tags]
         end
-
+        
         def unsorted_sites
           @unsorted_sites||= Site::UNSORTED_SITES.map {|name| Site.find_by(name: name).try(:id) }
         end
-
-        
     end
   end
 end

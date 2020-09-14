@@ -6,6 +6,7 @@
     "client/node_modules"
   ],
   "dependencies": {
+    "@babel/preset-react": "^7.10.1",
     "@rails/webpacker": "5.1.1",
     "babel-polyfill": "^6.26.0",
     "babel-preset-react": "^6.24.1",
@@ -18,8 +19,8 @@
     "react-exif-orientation-img": "^0.1.5",
     "react-lazy-load": "^3.0.13",
     "react-modal": "^3.9.1",
+    "react-multi-select-component": "^3.0.2",
     "react-on-rails": "11.3.0",
-    "@babel/preset-react": "^7.10.1",
     "victory": "^33.1.7"
   },
   "devDependencies": {

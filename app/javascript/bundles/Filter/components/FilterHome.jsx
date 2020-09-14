@@ -20,7 +20,7 @@ export default class FilterHome extends React.Component {
     this.state = {     
       site: '',
       type: '',
-      tag: '',
+      tags: '',
       reliable: false, 
       submissions: [],
       links: [],
@@ -61,14 +61,14 @@ export default class FilterHome extends React.Component {
   refineView = async ({reliable=this.state.reliable, 
                        site=this.state.site, 
                        type=this.state.type, 
-                       tag=this.state.tag,
+                       tags=this.state.tags,
                        size=this.state.pageSize,
                        pageNumber=this.state.pageNumber,
                        url="",
                        dataOnly=this.state.viewDataVis}) => {
     try {
       const endpoint = dataOnly ? 'api/v1/submission_data' : 'api/v1/submissions'
-      const requestURL = url ? url : `${endpoint}?reliable=${reliable}&site_filter=${site}&type_filter=${type}&tag=${tag}&bespoke_size=${size}&page=${pageNumber}`
+      const requestURL = url ? url : `${endpoint}?reliable=${reliable}&site_filter=${site}&type_filter=${type}&tags=${tags}&bespoke_size=${size}&page=${pageNumber}`
       const response = await fetch(requestURL)
       if (!response.ok) {
       throw Error(response.statusText)
@@ -82,7 +82,7 @@ export default class FilterHome extends React.Component {
         reliable: reliable,
         site: site, 
         type: type, 
-        tag: tag
+        tags: tags
       })
       
       // set state if data is returned

@@ -3733,6 +3733,11 @@ globule@^1.0.0:
     lodash "~4.17.12"
     minimatch "~3.0.2"
 
+goober@^2.0.4:
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/goober/-/goober-2.0.5.tgz#619316153b0d0f1de685497ae580f826e10b1ae6"
+  integrity sha512-PGcyBrSn9XF+DE0EAgFLbJp6iH3muZ8AlxDRFnYkMWK88DLL5lnvEEY4g9LFEXo271rIwu4FT3y1x8mzka3fGw==
+
 graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.2.2:
   version "4.2.4"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.4.tgz#2256bde14d3632958c465ebc96dc467ca07a29fb"
@@ -6579,6 +6584,13 @@ react-modal@^3.9.1:
     prop-types "^15.5.10"
     react-lifecycles-compat "^3.0.0"
     warning "^4.0.3"
+
+react-multi-select-component@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/react-multi-select-component/-/react-multi-select-component-3.0.2.tgz#e19be2a0c8a9c339e5930d0f999b729f5308a4d3"
+  integrity sha512-7uT2g/3waS2l8io//LQ0ZyS0wL/On6Md22U/yANmdC+ObYct4si/iRuRVrshzBdYUrKKP1NOw2Wy7egfGfntSw==
+  dependencies:
+    goober "^2.0.4"
 
 react-on-rails@11.3.0:
   version "11.3.0"
