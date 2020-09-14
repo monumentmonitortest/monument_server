@@ -7,6 +7,7 @@ class TwitterJob
     client.search("#monumentmonitor").each do |tweet|
       if !tweet.retweet? && tweet.media.present?
         tweet.media.each do |media|
+          # this makes sure that tweets saved previously are not saved again
           Type.find_by(type_specific_id: media.id.to_s) ? "" : create_submission(tweet, media)
         end
       end
@@ -37,7 +38,10 @@ class TwitterJob
     )
     
     if registration.save
-      puts 'saved successffully'
+      unless Rails.env.test?
+        # I know this is annoying, but it's useful for quick debugging
+        puts 'saved successffully'
+      end
     else
       puts "there was an error: #{registration.error}"
     end
