@@ -16,6 +16,7 @@ class Registration
                                       submitted_at: submitted_at, 
                                       type_name: type_name,
                                       comment: comment,
+                                      type_specific_id: type_specific_id,
                                       image: image)
       
                                       # For twitter and insta uploads, using image URL
