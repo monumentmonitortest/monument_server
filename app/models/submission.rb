@@ -26,7 +26,7 @@ class Submission < ApplicationRecord
   scope :type_search, ->(type_name) {
     if type_name.present?
       type_name.upcase!
-      joins(:type).where(types: { name: type_name})
+      where(type_name:  type_name)
     end
   }
 
@@ -37,9 +37,9 @@ class Submission < ApplicationRecord
     end
   }
   
-  def type_name
-    @type_name ||= type.present? ? type.name : ""
-  end
+  # def type_name
+  #   self.type_name
+  # end
 
   def site_name
     @site_name ||= site.name

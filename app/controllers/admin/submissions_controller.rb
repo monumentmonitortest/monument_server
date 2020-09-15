@@ -9,7 +9,7 @@ class Admin::SubmissionsController < ApplicationController
     submissions_scope ||= reliable? ? Submission.with_attached_image.reliable : Submission.with_attached_image
 
     submissions_scope = search_site(submissions_scope, p_params[:site_filter]) if p_params[:site_filter].present?
-    submissions_scope = type_search(submissions_scope, p_params[:type_filter]) if p_params[:type_filter].present?
+    submissions_scope = submissions_scope.type_search(p_params[:type_filter]) if p_params[:type_filter].present?
     submissions_scope = submissions_scope.tagged_with(p_params[:tag]) if p_params[:tag].present?
 
     @submissions = smart_listing_create(:submissions, submissions_scope, partial: "admin/submissions/list")
@@ -79,10 +79,10 @@ class Admin::SubmissionsController < ApplicationController
     collection.where(site_id: Site.find_by(name: name))
   end
   
-  def type_search(collection, type_name)
-    type_name.upcase!
-    collection = collection.joins(:type).where(types: { name: type_name})
-    collection
-  end
+  # def type_search(collection, type_name)
+  #   type_name.upcase!
+  #   collection = collection.where(type_name:  type_name)
+  #   collection
+  # end
 
 end

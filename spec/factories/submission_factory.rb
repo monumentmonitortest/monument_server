@@ -5,7 +5,8 @@ FactoryBot.define do
     record_taken { Date.today }
     ai_tags  { {} }
     image { fixture_file_upload(Rails.root.join('spec', 'fixtures', 'assets', 'test-image.jpg'), 'image/jpg') }
-
+    type_name { "INSTAGRAM" }
+    
     factory :submission_with_type do
       type { Type.new(name: "EMAIL", data: { email_address: "thing@thing.com" }) }
     end
