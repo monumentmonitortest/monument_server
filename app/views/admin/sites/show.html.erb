@@ -28,10 +28,7 @@
 
   <%= render template: "admin/sites/site_submissions", site: @site %>
 
-  <% if admin? %>
-    <%= link_to "New Submission", new_admin_site_registration_url(@site, @submission) %>
-  <% end %>
-  
+
   <br/><br/>
   <%= link_to "View JS CSV", {}, :class => "js-csv" %>
 <br/>

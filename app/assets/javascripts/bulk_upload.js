@@ -38,10 +38,7 @@ core.BulkUpload.readyBulkUpload = function() {
           var submittedAt = $('#tpl').find('#submitted_at').val()
           var typeName = $('#tpl').find('#type_name').val()
           
-          var emailAddress = $('#tpl').find('#email_address').val()
-          var number = $('#tpl').find('#number').val()
-          var instaUsername = $('#tpl').find('#insta_username').val()
-          var twitterUsername = $('#tpl').find('#twitter_username').val()
+          var participantId = $('#tpl').find('#participant_id').val()
           var comment = $('#tpl').find('#comment').val()
           
           formData.append('reliable', reliable);
@@ -49,12 +46,7 @@ core.BulkUpload.readyBulkUpload = function() {
           formData.append('submitted_at', submittedAt);
           formData.append('type_name', typeName);
           formData.append('comment', comment);
-
-          formData.append('email_address', emailAddress);
-          formData.append('number', number);
-          formData.append('insta_username', instaUsername);
-          formData.append('twitter_username', twitterUsername);
-  
+          formData.append('participant_id', participantId);
       });
     },
     successmultiple: function(data,response) {

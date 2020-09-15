@@ -10,30 +10,50 @@ RSpec.describe Admin::BulkUploadController, type: :request do
       sign_in user
     end
     
+    let(:site) { create(:site) }
+    let(:headers)  { {"CONTENT_TYPE" => "application/json" }}
+    let(:test_image_path) { 'spec/fixtures/assets/test-image.jpg' }
+    let(:params) {{  
+                  "site_id": site.id,
+                  "reliable": "false", 
+                  "record_taken": "1111-11-11",
+                  "type_name": "INSTAGRAM", 
+                  "participant_id": "example@email.com", 
+                  "file": { "0": Rack::Test::UploadedFile.new(test_image_path, 'image/jpg', true) } 
+                }}
+                
     context "with correct params" do
-      let(:site) { create(:site) }
       it "create new submissions" do
-        headers = { "CONTENT_TYPE" => "application/json" }
-        test_image_path = 'spec/fixtures/assets/test-image.jpg'
-        params = {  
-                    "site_id": site.id,
-                    "reliable": "false", 
-                    "record_taken": "1111-11-11",
-                    "type_name": "INSTAGRAM", 
-                    "email_address": "", 
-                    "number": "", 
-                    "insta_username": "123", 
-                    "twitter_username": "",
-                    "file": { "0": Rack::Test::UploadedFile.new(test_image_path, 'image/jpg', true) } 
-                  }
-                  
         expect {
           post "/admin/bulk_upload", params, headers: headers
         }.to change(Submission, :count)
 
       end
     end
+
+    context "when participant exists" do
+      let(:email) { 'example@email.com' }
+      let!(:participant) { Participant.create(participant_id: 'example@email.com') }
       
+      before do
+        params["participant_id"] = email
+      end
+
+      it "adds to participants submissions" do
+        expect {
+          post "/admin/bulk_upload", params, headers: headers
+        }.to change(participant.submissions, :count)
+      end
+    end
+      
+    context "when participant does not exist" do
+      it "creates a new participant" do
+        expect {
+          post "/admin/bulk_upload", params, headers: headers
+        }.to change(Participant, :count)
+      end
+    end
+
     context "with image but incorrect params" do
       # login_user
       it "does not create submissions" do
