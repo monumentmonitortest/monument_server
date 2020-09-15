@@ -10,8 +10,8 @@ class Admin::ResultsController < ApplicationController
   private
 
   def create_type_numbers_array
-    Type::NAMES.map do |name|
-      Submission.joins(:type).where(types: { name: name }).count
+    Submission::TYPE_NAMES.map do |name|
+      Submission.where(type_name: name ).count
     end
   end
 
@@ -20,10 +20,10 @@ class Admin::ResultsController < ApplicationController
       {
         name: site.name, 
         submissions: site.submissions.count,
-        twitter: site.submissions.joins(:type).where(types: { name: "TWITTER" }).count,
-        instagram: site.submissions.joins(:type).where(types: { name: "INSTAGRAM" }).count,
-        email: site.submissions.joins(:type).where(types: { name: "EMAIL" }).count,
-        whatsapp: site.submissions.joins(:type).where(types: { name: "WHATSAPP" }).count
+        twitter: site.submissions.where(type_name: "TWITTER" ).count,
+        instagram: site.submissions.where(type_name: "INSTAGRAM" ).count,
+        email: site.submissions.where(type_name: "EMAIL").count,
+        whatsapp: site.submissions.where(type_name: "WHATSAPP").count
       }
     end
   end
