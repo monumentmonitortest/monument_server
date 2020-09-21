@@ -39,17 +39,14 @@ RSpec.describe Submission, type: :model do
   end
 
   context "set file name" do
-    let(:submission) { create(:submission_with_type) }
-    # subject { create(:submission_with_type) }
+    let(:submission) { create(:submission) }
 
     before { submission.set_filename}
     it "corrects the file name" do
       type = submission.type_name
       expected_filename = "#{Date.today.strftime("%d-%m-%Y")}_#{type.first.downcase}.jpg"
-      # binding.pry
+
       expect(submission.image.attachment.filename.to_s).to eq expected_filename
-
-
     end
   end
 
@@ -77,18 +74,11 @@ RSpec.describe Submission, type: :model do
   end
 
   context "instance methods" do
-    subject { create(:submission_with_type) }
+    subject { create(:submission) }
     describe "#site_name" do
-    it "returns site name" do
-      expect(subject.site_name).to eq subject.site.name
-    end 
-  end
-  
-    describe "#type_name" do
-      it "returns type name" do
-        # I know this is a pointless spec, but was important whilst doing the participant migration
-        expect(subject.type_name).to eq "INSTAGRAM"
-      end   
+      it "returns site name" do
+        expect(subject.site_name).to eq subject.site.name
+      end 
     end
   end
 end

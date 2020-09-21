@@ -2,7 +2,7 @@ require "rails_helper"
 RSpec.describe ImageZipCreationService do
   
   describe "#create" do
-    !let(:submission) { create(:submission_with_type) }  
+    !let(:submission) { create(:submission) }  
     tmp_user_folder = "tmp/archive_submissions"
     subject { described_class.new(submission.site.id, tmp_user_folder) }
 

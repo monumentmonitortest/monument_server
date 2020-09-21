@@ -1,7 +1,9 @@
 require 'rails_helper'
+# No longer used
 RSpec.describe Admin::TypesController, type: :controller do
-  context 'GET types' do
-    let!(:email_submission) { create(:submission_with_type) }
+  # TODO - delete this when removing types from the sytem
+  xcontext 'GET types' do
+    let!(:email_submission) { create(:submission, type_name: "EMAIL") }
     let!(:insta_submission) { create(:submission_with_insta_type) }
     let(:params) { {} }
     login_user
