@@ -68,19 +68,11 @@ Numbers of submissions by type
   </div>
 </div>
 
-
-
-<h3>Reports by type</h3>
+<h3>Other reports</h3>
 <div class="flex column mb6">
   <div class="w-50">
-    <h4>Submission numbers</h4>
-      <%= link_to 'instagram report', api_v1_type_specific_report_path(format: "csv", type_name: 'INSTAGRAM', data: 'insta_username'), class: 'button' %>
-
-      <%= link_to 'twitter report', api_v1_type_specific_report_path(format: "csv", type_name: 'TWITTER', data: 'twitter_username'), class: 'button'  %>
-
-      <%= link_to 'email report', api_v1_type_specific_report_path(format: "csv", type_name: 'EMAIL', data: 'email_address'), class: 'button'  %>
-
-      <%= link_to 'whatsapp report', api_v1_type_specific_report_path(format: "csv", type_name: 'WHATSAPP', data: 'number'), class: 'button'  %>
+    <h4>Participant report</h4>
+      <%= link_to 'Participant report', admin_participant_report_path(format: "csv"), class: 'button' %>
   </div>
 
   <div class="w-50">
