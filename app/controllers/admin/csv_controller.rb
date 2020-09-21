@@ -147,12 +147,11 @@ class Admin::CsvController < ApplicationController# TODO - make these all backgr
 
     def create_image_quality_report(type_params)
       attributes = %w{submission-id width height size resolution make model}
-      types = Type.where(name: type_params)
+      submissions = Submission.where(type_name: type_params)
       CSV.generate(headers: true) do |csv|
         csv << attributes
         
-        types.each do |type|
-          sub = type.submission
+        submissions.each do |sub|
           metadata = sub.metadata
           csv << [sub.id, metadata['width'], metadata['height'], metadata['size'], metadata['resolution'], metadata['make'], metadata['model']]
         end

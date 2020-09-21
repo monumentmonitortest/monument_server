@@ -34,6 +34,7 @@ Rails.application.routes.draw do
     get :site_specific_time_period_report, to: 'csv#site_specific_time_period'
     get :site_specific_tags_report, to: 'csv#site_specific_tags'
     get :tag_specific_report, to: 'csv#tags_report'
+    get :image_quality_report, to: 'csv#image_quality'
   end
   
   # API  
@@ -41,7 +42,6 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :submissions
       get :submission_data, to: 'submissions#data'
-      get :image_quality_report, to: 'csv#image_quality'
     end
   end
 end
