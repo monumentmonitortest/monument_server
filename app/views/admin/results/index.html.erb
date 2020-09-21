@@ -17,15 +17,13 @@ Numbers of submissions by type
     </tr>
   </tbody>
 </table>
-<button>Basic submission CSV</button>
 
-
-<button>Site breakdown CSV CSV</button>
 <div class="mb6">
   <h3>Reports on all submissions</h3>
 
   <div>
-    <%= link_to 'Basic submission report', api_v1_basic_submission_report_path(format: "csv"), class: 'button' %>
+    <%= link_to 'Basic submission report', admin_basic_submission_report_path(format: "csv"), class: 'button' %>
+    Returns a list of all submissions with site names, record_taken and type
   </div>
 </div>
 

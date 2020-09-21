@@ -27,7 +27,10 @@ Rails.application.routes.draw do
       resources :submissions
       resources :registrations
     end
+
+    # reporting
     get :participant_report, to: 'csv#participant_report'
+    get :basic_submission_report, to: 'csv#basic_submission'
   end
   
   # API  
@@ -35,7 +38,6 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :submissions
       get :submission_data, to: 'submissions#data'
-      get :basic_submission_report, to: 'csv#basic_submission'
       get :site_specific_report, to: 'csv#site_specific'
       get :site_specific_tags_report, to: 'csv#site_specific_tags'
       get :all_tags_report, to: 'csv#tags_report'

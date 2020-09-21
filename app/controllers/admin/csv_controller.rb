@@ -1,5 +1,5 @@
 # TODO - rename this reports controller or something
-class Admin::CsvController < ApplicationController
+class Admin::CsvController < ApplicationController# TODO - make these all background jobs
 
   
   def basic_submission
@@ -9,11 +9,8 @@ class Admin::CsvController < ApplicationController
     end
   end
   
-  # This should be renamed participant report
-  # this returns a list of participant ids, how many times they have submitted, and what type
-  # This is all that is needed
   def participant_report
-    # returns report with breakdown of individuals submissions
+    # returns report with breakdown of participation
     respond_to do |format|
       format.csv { send_data create_participant_report, filename: "participant-report-#{Date.today}.csv"  }
     end
@@ -60,15 +57,12 @@ class Admin::CsvController < ApplicationController
         csv << attributes
 
         Submission.all.each do |submission|
-          row = [submission.id, submission.site.name, submission.record_taken.strftime("%d/%m/%Y"), submission.type.name]
+          row = [submission.id, submission.site_name, submission.record_taken.strftime("%d/%m/%Y"), submission.type_name]
           csv << row
         end
       end
     end
 
-
-    # creates report on specific type
-    # TODO - make this background job!
     def create_participant_report
       attributes = %w{user-id type submission-numbers records-taken}
       CSV.generate(headers: true) do |csv|
