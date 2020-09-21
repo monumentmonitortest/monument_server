@@ -16,12 +16,13 @@ class Admin::CsvController < ApplicationController# TODO - make these all backgr
     end
   end
 
-  def site_specific
+  def site_specific_time_period
+    # what does this do?
     return unless params[:site_id].present?
     name = Site.find(params[:site_id]).name
 
     respond_to do |format|
-      format.csv { send_data create_specific_site_report(params[:site_id], params[:from_date], params[:to_date]), filename: "submissions-for-#{name}-tags-#{Date.today}.csv"  }
+      format.csv { send_data create_specific_site_time_period_report(params[:site_id], params[:from_date], params[:to_date]), filename: "submissions-for-#{name}-tags-#{Date.today}.csv"  }
     end
   end
 
@@ -81,24 +82,22 @@ class Admin::CsvController < ApplicationController# TODO - make these all backgr
       end
     end
 
-    # Normal
-    def create_specific_site_report(site_id, from_date, to_date)
+    def create_specific_site_time_period_report(site_id, from_date, to_date)
       attributes = %w{date submissions ind-submitters}
       CSV.generate(headers: true) do |csv|
         csv << attributes
         
         submissions_hash = {}
-        submissions = Submission.
+        submissions ||= Submission.
                         where(site_id: site_id).
                         where("record_taken >= :start_date AND created_at <= :end_date",
                             {start_date: Date.today- 1.year, end_date: Date.today}).
                         order(:record_taken)
-        
-          
+                  
         (from_date.to_date).upto(to_date.to_date) do |date|
           subs = submissions.where(record_taken: date)
           total_subs = subs.count
-          unique_submitters = subs.map {|q| q.type.data}.uniq.count
+          unique_submitters = subs.map {|s| s.participant }.uniq.count
           
           csv << [date.strftime("%d/%m/%Y"), total_subs, unique_submitters]
         end
@@ -107,7 +106,7 @@ class Admin::CsvController < ApplicationController# TODO - make these all backgr
 
     # With tags
     def create_specific_site_tag_report(site_id, from_date, to_date)
-      attributes = %w{date ai_tags tags}
+      attributes = %w{date tags}
       CSV.generate(headers: true) do |csv|
         csv << attributes
         
@@ -118,7 +117,7 @@ class Admin::CsvController < ApplicationController# TODO - make these all backgr
                         order(:record_taken)
         
         submissions.each do |sub|
-          info = [sub.record_taken.strftime("%d/%m/%Y")] + sub.tag_list
+          info = [sub.record_taken.strftime("%d/%m/%Y"), sub.tag_list]
           csv << info
         end             
       end
@@ -126,7 +125,7 @@ class Admin::CsvController < ApplicationController# TODO - make these all backgr
 
     # Just tag reports
     def create_tags_report(site, tag)
-      attributes = %w{submission-id date url tag}
+      attributes = %w{submission-id date url other-tags-on-image}
 
       if site.empty? && tag
         # get all the submissions from a with that tag
