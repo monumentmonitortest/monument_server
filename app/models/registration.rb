@@ -9,6 +9,7 @@ class Registration
     return false if invalid?
     ActiveRecord::Base.transaction do
       participant = find_or_create_participant(participant_id)
+      participant.update(first_submission: record_taken) if participant.first_submission.nil?
       submission = Submission.create!(site_id: site_id,
                                       participant_id: participant.id, 
                                       reliable: reliable, 
