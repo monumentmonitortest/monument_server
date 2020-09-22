@@ -39,10 +39,6 @@ class Submission < ApplicationRecord
     end
   }
   
-  # def type_name
-  #   self.type_name
-  # end
-
   def site_name
     @site_name ||= site.name
   end
