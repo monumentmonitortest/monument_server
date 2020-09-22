@@ -14,7 +14,8 @@ module Api
 
       def data
         # TODO - add some specs you lazy sod.
-        date = Date.today - 1.year.beginning_of_month
+        date = (Date.today - 1.year).beginning_of_month
+
         submissions ||= scope_without_images(date)
         submissions_data = SubmissionsDataCreateService.new(submissions, Date.today - 1.year).create
         render json: submissions_data
