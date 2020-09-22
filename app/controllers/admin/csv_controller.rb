@@ -17,7 +17,7 @@ class Admin::CsvController < ApplicationController# TODO - make these all backgr
   end
 
   def site_specific_time_period
-    # what does this do?
+    # returns report of submissions over specific time period (probably unessecary)
     return unless params[:site_id].present?
     name = Site.find(params[:site_id]).name
 
@@ -93,7 +93,7 @@ class Admin::CsvController < ApplicationController# TODO - make these all backgr
                         where("record_taken >= :start_date AND created_at <= :end_date",
                             {start_date: Date.today- 1.year, end_date: Date.today}).
                         order(:record_taken)
-                  
+                        
         (from_date.to_date).upto(to_date.to_date) do |date|
           subs = submissions.where(record_taken: date)
           total_subs = subs.count
