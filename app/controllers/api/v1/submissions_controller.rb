@@ -14,10 +14,9 @@ module Api
 
       def data
         # TODO - add some specs you lazy sod.
-        date = Date.today - 1.year
-        submissions ||= Submission.where('record_taken >= ?', date).search_site(site_filter)
-
-        submissions_data = SubmissionsDataCreateService.new(submissions, date).create
+        date = Date.today - 1.year.beginning_of_month
+        submissions ||= scope_without_images(date)
+        submissions_data = SubmissionsDataCreateService.new(submissions, Date.today - 1.year).create
         render json: submissions_data
       end
 
@@ -27,8 +26,8 @@ module Api
           Submission.with_attached_image.search_site(site_filter).type_search(type_filter).with_tags(tag_filter)
         end
 
-        def scope_without_images
-          Submission.search_site(site_filter).type_search(type_filter)
+        def scope_without_images(date)
+          Submission.where('record_taken >= ?', date).search_site(site_filter).type_search(type_filter).with_tags(tag_filter)
         end
 
         def permitted_params

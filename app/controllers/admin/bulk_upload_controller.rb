@@ -27,10 +27,7 @@ class Admin::BulkUploadController < ApplicationController
                   :record_taken, 
                   :submitted_at,
                   :type_name, 
-                  :email_address, 
-                  :number, 
-                  :insta_username, 
-                  :twitter_username,
+                  :participant_id,
                   :comment)
   end
 

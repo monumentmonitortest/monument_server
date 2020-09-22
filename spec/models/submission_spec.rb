@@ -17,9 +17,20 @@ RSpec.describe Submission, type: :model do
       end
     end
     
-    context 'when site id valid' do
-      let(:site)   { create(:site) }
+    context 'when participant id invalid' do
+      let(:site)    { create(:site) }
       let(:params) { { site_id: site.id, record_taken: Date.today }}
+      
+      it 'throws error' do
+        expect(subject.valid?).to be false
+        expect(subject.errors.messages[:participant_id].to_sentence).to eq "participant is invalid or missing"
+      end
+    end
+
+    context 'when site id and participant id valid' do
+      let(:site)   { create(:site) }
+      let(:participant) { create(:participant) }
+      let(:params) { { site_id: site.id, participant_id: participant.id, record_taken: Date.today }}
 
       it 'creates submission' do
         expect(subject.valid?).to be true
@@ -28,17 +39,14 @@ RSpec.describe Submission, type: :model do
   end
 
   context "set file name" do
-    let(:submission) { create(:submission_with_type) }
-    # subject { create(:submission_with_type) }
+    let(:submission) { create(:submission) }
 
     before { submission.set_filename}
     it "corrects the file name" do
       type = submission.type_name
       expected_filename = "#{Date.today.strftime("%d-%m-%Y")}_#{type.first.downcase}.jpg"
-      # binding.pry
+
       expect(submission.image.attachment.filename.to_s).to eq expected_filename
-
-
     end
   end
 
@@ -66,17 +74,11 @@ RSpec.describe Submission, type: :model do
   end
 
   context "instance methods" do
-    subject { create(:submission_with_type) }
+    subject { create(:submission) }
     describe "#site_name" do
-    it "returns site name" do
-      expect(subject.site_name).to eq subject.site.name
-    end 
-  end
-  
-    describe "#type_name" do
-      it "returns type name" do
-        expect(subject.type_name).to eq subject.type.name
-      end   
+      it "returns site name" do
+        expect(subject.site_name).to eq subject.site.name
+      end 
     end
   end
 end

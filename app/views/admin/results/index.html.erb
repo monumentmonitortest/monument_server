@@ -17,15 +17,13 @@ Numbers of submissions by type
     </tr>
   </tbody>
 </table>
-<button>Basic submission CSV</button>
 
-
-<button>Site breakdown CSV CSV</button>
 <div class="mb6">
   <h3>Reports on all submissions</h3>
 
   <div>
-    <%= link_to 'Basic submission report', api_v1_basic_submission_report_path(format: "csv"), class: 'button' %>
+    <%= link_to 'Basic submission report', admin_basic_submission_report_path(format: "csv"), class: 'button' %>
+    Returns a list of all submissions with site names, record_taken and type
   </div>
 </div>
 
@@ -33,63 +31,52 @@ Numbers of submissions by type
 <div class="flex column mb6">
   <div class="w-50">
     <p>
-        From date:
-          <%= date_field_tag(:from_date, Date.today - 1.week, class: 'from-date') %><br/>
-        To date:
-          <%= date_field_tag(:from_date, Date.today, class: 'to-date') %><br/>
-        Choose site: 
-          <%= select_tag :site_id, options_for_select(Site.all.collect { | site | [site.name, site.id] }),  :include_blank => true, class: 'site-select'%><br/>
-        
-        <% tags = ActsAsTaggableOn::Tag.all.map {|t| t.name}.uniq %>
-        Choose tag: 
-          <%= select_tag :tag, options_for_select(tags), :include_blank => true, class: 'tag-select'%>
+      From date:
+        <%= date_field_tag(:from_date, Date.today - 1.week, class: 'from-date mb4') %><br/>
+      To date:
+        <%= date_field_tag(:from_date, Date.today, class: 'to-date mb4') %><br/>
+      Choose site: 
+        <%= select_tag :site_id, options_for_select(Site.all.collect { | site | [site.name, site.id] }),  :include_blank => true, class: 'site-select mb4'%><br/>
+      
+      <% tags = ActsAsTaggableOn::Tag.all.map {|t| t.name}.uniq %>
+      Choose tag: 
+        <%= select_tag :tag, options_for_select(tags), :include_blank => true, class: 'tag-select mb4'%>
     </p>
   </div>
   <div class="w-50">
-      <span class="db">
-        Create site specific report of submission patterns (submitters and submission numbers) <br/>
-        <%= link_to 'Site specific with subission patterns',  api_v1_site_specific_report_path(format: "csv", ), class: 'button', id: 'site-specific-report' %>
-      </span>
+    <span class="db pb4">
+      <%= link_to 'Site specific with submission patterns',  admin_site_specific_time_period_report_path(format: "csv", ), class: 'button', id: 'site-specific-report' %><br/>
+      Creates a report of each day in the selected time frame, showing how many submissions and participants
+      each day for any given site. Should only be generated for short timeframes.
+    </span>
 
-      <span class="db">
-        Create site specific report with all tags (manual) <br/>
-        <%= link_to 'Site specific with all tags',  api_v1_site_specific_tags_report_path(format: "csv", ), class: 'button', id: 'site-specific-tag-report' %>
-      </span>
+    <span class="db pb4">
+      <%= link_to 'Site specific with tags',  admin_site_specific_tags_report_path(format: "csv", ), class: 'button', id: 'site-specific-tag-report' %><br/>
+      Returns list submissions for a selected site alongside any given tags.
+    </span>
 
-      <span class="db">
-        Create report specific to tags and or sites <br/>
-        <%= link_to 'Manual Tags',  api_v1_all_tags_report_path(format: "csv", ), class: 'button', id: 'manual-tag-report' %>
-      </span>
+    <span class="db pb4">
+      <%= link_to 'Tag specific report',  admin_tag_specific_report_path(format: "csv", ), class: 'button', id: 'manual-tag-report' %><br/>
+      Create report listing submissions with specified tag, or submissions with specified tag for a specific site.
+    </span>
 
-      <span class="db">
-        AI tags to come<br/>
-        <%#= link_to 'Manual Tags',  api_v1_all_tags_report_path(format: "csv", ), class: 'button', id: 'manual-tag-report' %>
-      </span>
   </div>
 </div>
 
-
-
-<h3>Reports by type</h3>
+<h3>Other reports</h3>
 <div class="flex column mb6">
   <div class="w-50">
-    <h4>Submission numbers</h4>
-      <%= link_to 'instagram report', api_v1_type_specific_report_path(format: "csv", type_name: 'INSTAGRAM', data: 'insta_username'), class: 'button' %>
-
-      <%= link_to 'twitter report', api_v1_type_specific_report_path(format: "csv", type_name: 'TWITTER', data: 'twitter_username'), class: 'button'  %>
-
-      <%= link_to 'email report', api_v1_type_specific_report_path(format: "csv", type_name: 'EMAIL', data: 'email_address'), class: 'button'  %>
-
-      <%= link_to 'whatsapp report', api_v1_type_specific_report_path(format: "csv", type_name: 'WHATSAPP', data: 'number'), class: 'button'  %>
+    <h4>Participant report</h4>
+      <%= link_to 'Participant report', admin_participant_report_path(format: "csv"), class: 'button' %>
   </div>
 
   <div class="w-50">
     <h4>Image quality</h4>
 
-    <%= link_to 'instagram report', api_v1_image_quality_report_path(format: "csv", type_name: 'INSTAGRAM'), class: 'button'  %>
-    <%= link_to 'twitter report', api_v1_image_quality_report_path(format: "csv", type_name: 'TWITTER'), class: 'button'  %>
-    <%= link_to 'email report', api_v1_image_quality_report_path(format: "csv", type_name: 'EMAIL'), class: 'button'  %>
-    <%= link_to 'whatsapp report', api_v1_image_quality_report_path(format: "csv", type_name: 'WHATSAPP'), class: 'button'  %>
+    <%= link_to 'instagram report', admin_image_quality_report_path(format: "csv", type_name: 'INSTAGRAM'), class: 'button'  %>
+    <%= link_to 'twitter report', admin_image_quality_report_path(format: "csv", type_name: 'TWITTER'), class: 'button'  %>
+    <%= link_to 'email report', admin_image_quality_report_path(format: "csv", type_name: 'EMAIL'), class: 'button'  %>
+    <%= link_to 'whatsapp report', admin_image_quality_report_path(format: "csv", type_name: 'WHATSAPP'), class: 'button'  %>
   </div>
 </div>
 

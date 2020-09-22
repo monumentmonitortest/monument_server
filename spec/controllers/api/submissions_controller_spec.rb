@@ -1,7 +1,7 @@
 require 'rails_helper'
 RSpec.describe Api::V1::SubmissionsController, :type => :request do
   context 'GET types' do
-    let!(:email_submission) { create(:submission_with_type) }
+    let!(:email_submission) { create(:submission, type_name: "EMAIL") }
     let!(:insta_submission) { create(:submission_with_insta_type) }
     let(:params) { {} }
     headers = { 'Authorization' => "Token #{ENV["API_TOKEN"]}" }

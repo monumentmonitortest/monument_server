@@ -1,7 +1,7 @@
 %div
   %h1= "Submissions"
   %p= "Browse through and filter all the submissions to date"
-  = smart_listing_controls_for(:admin_submissions, {class: ""}) do
+  = smart_listing_controls_for(:submissions, {class: ""}) do
     .checkbox
       %label.checkbox.inline
         = hidden_field_tag :reliable, "0"

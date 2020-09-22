@@ -11,8 +11,8 @@ describe SubmissionSerializer do
   it { should include(:siteId => submission.site_id) }
   it { should include(:siteName => submission.site.name) }
   it { should include(:tags => submission.tag_list) }
-  it { should include(:typeComment => submission.type.comment) }
-  it { should include(:typeName => submission.type.name) }
+  it { should include(:comment => submission.comment) }
+  it { should include(:typeName => submission.type_name) }
   it { should include(:imageUrlSmall) }
   it { should include(:imageUrl) }
 end

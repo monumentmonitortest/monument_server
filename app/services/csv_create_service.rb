@@ -1,3 +1,4 @@
+# Not currently used... not sure why
 class CSVCreateService
   def initialize(params)
     site = Site.find(params[:site_id])

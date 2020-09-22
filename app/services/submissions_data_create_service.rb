@@ -42,7 +42,6 @@ class SubmissionsDataCreateService
       tags.each do |hash| 
         # Hacky hack - due to incorrect migration - needs to be sorted!!
        unless hash == "{}"
-          puts hash
           hash.map do |text, value| 
             if new[text]
               new[text][:count] += 1

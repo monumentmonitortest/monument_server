@@ -61,7 +61,7 @@ export default class Form extends React.Component {
             </span>
 
             <span className="h-25 w-100">
-              <select id="type" className="black w-100" placeholder="Select submission type" onChange={this.props.refineView()}>
+              <select id="type" className="black w-100" placeholder="Select submission type" onChange={this.handleInputChange}>
                 <option defaultValue="">Select submission type</option>
                 {typeOptions.map((type) =>
                   <option value={type} key={type} className="dark-color w-100">{type}</option>

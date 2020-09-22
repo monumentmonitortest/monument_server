@@ -16,11 +16,10 @@
       <%= text_field_tag :comment %>
   
       <%= label_tag :type_name, "Source/Type" %>
-      <%= select_tag :type_name, options_for_select(Type::NAMES), class: "type_name_select" %>
+      <%= select_tag :type_name, options_for_select(Submission::TYPE_NAMES), class: "type_name_select" %>
       <div id="data-types">
-        <% Type::DATA_TYPES.each do |type| %>
-          <%= text_field_tag type.to_sym, "", placeholder: type, class: "#{type}" %>
-        <% end %>
+      <%= label_tag :type_name, "Participant email/number/twitter_id/insta_id" %>
+      <%= text_field_tag :participant_id, "", placeholder: 'Participant id', class: "participant_id" %>
       </div>
     </p>
   </div>

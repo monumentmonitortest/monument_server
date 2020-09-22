@@ -8,7 +8,6 @@ class InstagramUploadJob
 
   def perform
     @json_data.each do |post|
-      # binding.pry
         
       if post['shortcode_media']['edge_sidecar_to_children']
         images = post['shortcode_media']['edge_sidecar_to_children']['edges']
@@ -31,7 +30,6 @@ class InstagramUploadJob
   def create_submission(post, image, id)
     taken = post['shortcode_media']['taken_at_timestamp']
     record_taken = DateTime.strptime(taken.to_s,'%s')
-    # binding.pry
     
     if record_taken > @date
       text_node = post['shortcode_media']['edge_media_to_caption']['edges']
@@ -48,10 +46,7 @@ class InstagramUploadJob
           comment: post_desc,
           record_taken: record_taken, 
           type_name: 'INSTAGRAM', 
-          twitter_username: '',
-          email_address: '',
-          number: '',
-          insta_username: insta_user, 
+          participant_id: insta_user,
           type_specific_id: type_specific_id
         )
         

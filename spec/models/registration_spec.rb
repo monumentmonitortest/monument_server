@@ -10,10 +10,7 @@ RSpec.describe Registration, type: :model do
     site_id: site.id,
     record_taken: Date.today,
     type_name: "EMAIL",
-    email_address: email,
-    number: "",
-    insta_username: "",
-    twitter_username: "",
+    participant_id: email,
     image: image
   }}
 
@@ -28,7 +25,7 @@ RSpec.describe Registration, type: :model do
       end
       
       it "creates a new type" do
-        expect {subject.save}.to change{Type.count}.by(1) 
+        expect {subject.save}.to change{Participant.count}.by(1) 
       end
 
       

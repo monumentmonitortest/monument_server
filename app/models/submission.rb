@@ -3,13 +3,15 @@ class Submission < ApplicationRecord
   belongs_to :site
   has_one :type,  :dependent => :destroy
   accepts_nested_attributes_for :type
-  # belongs_to :participant
+  belongs_to :participant
   
   validate :validate_site_id
+  validate :validate_participant_id
   validates_presence_of :record_taken
 
   has_one_attached :image
   # to get url for image when developing API - use s.image.service_url
+  TYPE_NAMES = %w(INSTAGRAM EMAIL TWITTER WHATSAPP OTHER )
 
   scope :reliable, -> { where(reliable: true) }
   
@@ -26,7 +28,7 @@ class Submission < ApplicationRecord
   scope :type_search, ->(type_name) {
     if type_name.present?
       type_name.upcase!
-      joins(:type).where(types: { name: type_name})
+      where(type_name:  type_name)
     end
   }
 
@@ -37,10 +39,6 @@ class Submission < ApplicationRecord
     end
   }
   
-  def type_name
-    @type_name ||= type.present? ? type.name : ""
-  end
-
   def site_name
     @site_name ||= site.name
   end
@@ -59,5 +57,9 @@ class Submission < ApplicationRecord
 
   def validate_site_id
     errors.add(:site_id, "site id is invalid") unless Site.exists?(self.site_id)
+  end
+
+  def validate_participant_id
+    errors.add(:participant_id, "participant is invalid or missing") unless Participant.exists?(self.participant_id)
   end
 end
