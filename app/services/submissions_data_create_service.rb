@@ -11,6 +11,7 @@ class SubmissionsDataCreateService
     {
       byMonth: create_date_hash(@submissions, @date, 'record_taken'),
       participantsByMonth: create_date_hash(participants, @date, 'first_submission'),
+      totalParticipants: Participant.count,
       ai_tags: ai_tags_object, # WHY IS THIS A DIFFERENT CASE!
       types: types_object,
       maxSubs: top_scores_object,

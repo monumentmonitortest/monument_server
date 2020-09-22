@@ -14,7 +14,8 @@ export default class DataVis extends React.Component {
   render() {
 
     const {submissionsData} = this.props
-    const dailyData = submissionsData != "undefined" ? submissionsData.byMonth : []
+    const monthlyData = submissionsData != "undefined" ? submissionsData.byMonth : []
+    const monthlyParticipantData = submissionsData != "undefined" ? submissionsData.participantsByMonth : []
     const typeData = submissionsData != 'undefined' ? submissionsData.types : []
     const tagData = submissionsData != 'undefined' ? submissionsData.ai_tags : []
     const maxData = submissionsData != 'undefined' ? submissionsData.maxSubs : []
@@ -53,16 +54,20 @@ export default class DataVis extends React.Component {
             </div>
           </div>
           {/* Eventually there will be a snazzy area chart... if I can be bothered... */}
-          {/* <SubmissionAreaChart data={dailyData} /> */}
+          {/* <SubmissionAreaChart data={monthlyData} /> */}
         </div>
 
 
         {/*   Site Specific stats */}
         <div className="pa4 mt4 br2 data-box">
-          <h2 className="mb4 f1 title mb2">Stats for {this.props.siteName ? this.props.siteName : "all sites"}</h2>
+          <h2 className="mb4 f1 title mb2">Stats for {this.props.siteName ? this.props.siteName : "all sites"} over the last year</h2>
         
-          <h1 className="f2 f1-l lh-title mb0 mt4 data-bold-color">Submission numbers over the year</h1>
-          <SubmissionBarChart data={dailyData} />
+          <h1 className="f2 f1-l lh-title mb0 mt4 data-bold-color">Submission numbers</h1>
+          <SubmissionBarChart data={monthlyData} />
+          <hr className="w-60 ml0 mt0"></hr>
+
+          <h1 className="f2 f1-l lh-title mb0 mt4 data-bold-color">Participants</h1>
+          <SubmissionBarChart data={monthlyParticipantData} />
           <hr className="w-60 ml0 mt0"></hr>
 
           <div className="flex-ns">

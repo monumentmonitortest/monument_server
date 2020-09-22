@@ -1,5 +1,5 @@
 import React from 'react';
-import { VictoryBar, VictoryChart, VictoryAxis } from 'victory';
+import { VictoryBar, VictoryChart, VictoryAxis, VictoryGroup } from 'victory';
 
 
 export default class SubmissionBarChart extends React.Component {
@@ -16,6 +16,9 @@ export default class SubmissionBarChart extends React.Component {
         >
           <VictoryAxis 
             style={{tickLabels: {fill: "#bbbbbb", fontSize: 8}}} />
+          <VictoryGroup offset={20}>
+            {/* create a object what has both participant and submission in it */}
+            {/* then iterate through it in victory group - and create a bar chart for it */}
           <VictoryBar
             data={this.props.data}
             labels={({ datum }) => `${Math.floor(datum.y)}`}
@@ -32,6 +35,7 @@ export default class SubmissionBarChart extends React.Component {
               x: { fill:  "#bbbbbb"}
             }}
           />
+          </VictoryGroup>
         </VictoryChart>
       </div>
     )
