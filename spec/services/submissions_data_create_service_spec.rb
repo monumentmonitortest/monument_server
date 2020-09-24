@@ -38,7 +38,7 @@ RSpec.describe SubmissionsDataCreateService do
                               { x: '08/20', y: 1 },
                               { x: '09/20', y: 1 }],
         totalParticipants: 2,
-        ai_tags: [],
+        aiTags: [],
         types: [{ x: 'Email', y: 1 }, { x: 'Instagram', y: 1 }],
         maxSubs: ['Some Stones', 'Some Stones'],
         minSubs: ['Some Stones', 'Some Stones'] }
