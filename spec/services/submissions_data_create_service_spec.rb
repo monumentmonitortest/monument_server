@@ -6,7 +6,7 @@ RSpec.describe SubmissionsDataCreateService do
     let(:participant) { create(:participant, first_submission: Date.today)}
     let(:participant_two) { create(:participant, first_submission: Date.today - 1.month)}
     let!(:sub_one) { create(:submission, participant_id: participant.id) }
-    let!(:sub_two) { create(:submission_with_insta_type, participant_id: participant_two.id, record_taken: Date.today - 1.month) }
+    let!(:sub_two) { create(:submission, participant_id: participant_two.id, record_taken: Date.today - 1.month) }
 
     subject { described_class.new(Submission.all, Date.today - 1.year) }
 
@@ -39,7 +39,7 @@ RSpec.describe SubmissionsDataCreateService do
                               { x: '09/20', y: 1 }],
         totalParticipants: 2,
         aiTags: [],
-        types: [{ x: 'Email', y: 1 }, { x: 'Instagram', y: 1 }],
+        types: [{ x: 'Email', y: 2 }],
         maxSubs: ['Some Stones', 'Some Stones'],
         minSubs: ['Some Stones', 'Some Stones'] }
     end
