@@ -14,13 +14,15 @@ export default class DataVis extends React.Component {
   render() {
 
     const {submissionsData} = this.props
-    const dailyData = submissionsData != "undefined" ? submissionsData.byMonth : []
+    const monthlyData = submissionsData != "undefined" ? submissionsData.byMonth : []
+    const monthlyParticipantData = submissionsData != "undefined" ? submissionsData.participantsByMonth : []
+    const totalParticipants = submissionsData != "undefined" ? submissionsData.totalParticipants : 0
     const typeData = submissionsData != 'undefined' ? submissionsData.types : []
-    const tagData = submissionsData != 'undefined' ? submissionsData.ai_tags : []
+    const tagData = submissionsData != 'undefined' ? submissionsData.aiTags : []
     const maxData = submissionsData != 'undefined' ? submissionsData.maxSubs : []
     const minData = submissionsData != 'undefined' ? submissionsData.minSubs : []
 
-    const maxTags = submissionsData != 'undefined' ? submissionsData.ai_tags.slice(Math.max(submissionsData.ai_tags.length - 5, 1)) : []
+    const maxTags = submissionsData != 'undefined' ? submissionsData.aiTags.slice(Math.max(submissionsData.aiTags.length - 5, 1)) : []
     
     return (
       <div>
@@ -29,7 +31,10 @@ export default class DataVis extends React.Component {
           <h2 className="mb4 f1 title ">Project wide stats</h2>
           <div className="flex-ns items-end">
             <div className="w-30">
-              <h1 className="data-bold-color">{this.props.allSubmissionsTotal}</h1> 
+              <h1 className="data-bold-color mb0">{this.props.allSubmissionsTotal}</h1> 
+              <p>Submissions</p>
+              <h2 className="data-bold-color mb0">{totalParticipants}</h2> 
+              <p>Participants</p>
               <hr className="w-60 ml0"></hr>
               Total
             </div>
@@ -53,17 +58,20 @@ export default class DataVis extends React.Component {
             </div>
           </div>
           {/* Eventually there will be a snazzy area chart... if I can be bothered... */}
-          {/* <SubmissionAreaChart data={dailyData} /> */}
+          {/* <SubmissionAreaChart data={monthlyData} /> */}
         </div>
 
 
         {/*   Site Specific stats */}
         <div className="pa4 mt4 br2 data-box">
-          <h2 className="mb4 f1 title mb2">Stats for {this.props.siteName ? this.props.siteName : "all sites"}</h2>
+          <h2 className="mb4 f1 title mb2">Stats for {this.props.siteName ? this.props.siteName : "all sites"} over the last year</h2>
         
-          <h1 className="f2 f1-l lh-title mb0 mt4 data-bold-color">Submission numbers over the year</h1>
-          <SubmissionBarChart data={dailyData} />
+          <SubmissionBarChart submissionData={monthlyData} participantData={monthlyParticipantData}/>
           <hr className="w-60 ml0 mt0"></hr>
+
+          {/* <h1 className="f2 f1-l lh-title mb0 mt4 data-bold-color">Participants</h1>
+          <SubmissionBarChart data={monthlyParticipantData} />
+          <hr className="w-60 ml0 mt0"></hr> */}
 
           <div className="flex-ns">
             <div className="w-100 w-60-ns">
