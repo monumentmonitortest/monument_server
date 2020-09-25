@@ -4,13 +4,13 @@ class SubmissionZipWorker
   
   def perform(directory_suffix, site_id, email_address, type="", tags="")
     
-    tmp_directory = tmp_directory(directory_suffix)
+    local_tmp_directory = tmp_directory(directory_suffix)
     s3_directory = s3_directory(directory_suffix)
 
     # Create zip and store in tmp folder
-    ImageZipCreationService.new(tmp_directory, site_id, type, tags).create
+    ImageZipCreationService.new(local_tmp_directory, site_id, type, tags).create
     # Upload to S3
-    s3Url = upload_to_s3(tmp_directory, s3_directory)
+    s3Url = upload_to_s3(local_tmp_directory, s3_directory)
     # Send email
     ZipMailer.job_done(email: email_address, url: s3Url).deliver_now
   end
