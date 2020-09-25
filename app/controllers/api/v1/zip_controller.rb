@@ -6,7 +6,7 @@ module Api
         if !(email.present? && site_id.present?)
           render json: {notce: "Ensure you are logged in, and have selected a site"}
         else
-          SubmissionZipWorker.perform_async(site_id, email, 'tmp_archive_dir')
+          SubmissionZipWorker.perform_async(tmp_archive_dir, site_id, email, type, tags)
           render json: {notce: "Zip job has been stated, you will be emailed the images soon"}
         end
       end
@@ -31,6 +31,13 @@ module Api
 
       def tags
         @tags ||= permitted_params[:tags]
+      end
+
+      def tmp_archive_dir
+        dir = "#{site_id}"
+        dir = dir + "_#{type}" if type.present?
+        dir = dir + "_#{tags}" if tags.present?
+        dir.gsub(",","_").gsub(" ","_")
       end
     end
   end

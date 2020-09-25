@@ -2,13 +2,13 @@ class SubmissionZipWorker
   include Sidekiq::Worker
   sidekiq_options retry: false
   
-  def perform(site_id, email_address, directory_suffix)
+  def perform(directory_suffix, site_id, email_address, type="", tags="")
     
     tmp_directory = tmp_directory(directory_suffix)
     s3_directory = s3_directory(directory_suffix)
 
     # Create zip and store in tmp folder
-    ImageZipCreationService.new(site_id, tmp_directory).create
+    ImageZipCreationService.new(tmp_directory, site_id, type, tags).create
     # Upload to S3
     s3Url = upload_to_s3(tmp_directory, s3_directory)
     # Send email
