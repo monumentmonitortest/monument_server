@@ -23,5 +23,26 @@ RSpec.describe Api::V1::ZipController, :type => :request do
       end
     end
 
+
+    context "correct params are present" do
+      let(:params) {{ email: email, site_name: site_name }}
+      subject {  get '/api/v1/zip_images', params: params }
+
+      it "returns message" do
+        subject
+        expect(response.body).to include "Zip job has been stated, you will be emailed the images soon"
+      end
+
+      Sidekiq::Testing.inline! do
+        it "calls submission zip worker" do
+          expect{ subject }.to change(SubmissionZipWorker.jobs, :size).by(1) 
+        end
+
+        it "uses supplied email address" do
+          expect(SubmissionZipWorker).to receive(:perform_async).with(submission.site.id, email, 'tmp_archive_dir')
+          subject
+        end
+      end
+    end
   end
 end
