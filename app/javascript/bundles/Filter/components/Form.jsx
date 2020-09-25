@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import MultiSelect from "react-multi-select-component";
+import ZipForm from './ZipForm.jsx'
 
 export default class Form extends React.Component {
   constructor(props) {
@@ -101,6 +102,8 @@ export default class Form extends React.Component {
             </span>
           </div>
           
+          <ZipForm email={this.props.email} site={this.state.site} tags={this.state.selected} type={this.state.type}/>
+
         </form>
     )
   }
