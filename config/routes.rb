@@ -42,6 +42,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :submissions
       get :submission_data, to: 'submissions#data'
+      get :zip_images, to: 'zip#zip_images'
     end
   end
 end

@@ -7,19 +7,20 @@ export default class ZipForm extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    console.log("FiRED")
-    // this returns a string of just the labels for selected tags
+    console.log("FiReD")
     const {email} = this.props
     const {site} = this.props
     const {type} = this.props    
-    const tags = this.props.selected.map(obj => { return obj.label})
-    const url = `api/v1/zip_images?site_name=${site}&email=${email}&type=${type}&tags=${tags}`
+    const {tags} = this.props
+
+    var stringTags = (!tags.length) ? "" : tags.map(obj => { return obj.label})
+    
+    const url = `api/v1/zip_images?site_name=${site}&email=${email}&type=${type}&tags=${stringTags}`
 
     fetch(url)
       .then(response => response.json())
       .then(data => console.log(data, "This is the data"))
       .catch(error => console.log(error))
-    
   }
 
 
