@@ -3,7 +3,7 @@ require 'aws-sdk-s3'
 class ImageZipCreationService
   attr_accessor :tmp_dir, :site_id, :type, :tags
 
-  def initialize(tmp_dir, site_id, type, tags)
+  def initialize(tmp_dir, site_id, type="", tags="")
     @tmp_dir = tmp_dir
     @site_id = site_id
     @type = type

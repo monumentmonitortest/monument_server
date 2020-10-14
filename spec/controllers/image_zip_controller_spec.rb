@@ -7,8 +7,8 @@ RSpec.describe ImageZipController, :type => :request do
   let(:params)          {{ site_id: site_id, email: email }}
   
   tmp_user_folder =  "tmp/archive_submissions" 
-  let(:expected_folder) { tmp_user_folder + '_' + site_id  }
-  
+  let(:expected_directory_suffix) { '1'}
+
   describe "GET #get_images" do
     after(:all) do
       FileUtils.rm_rf(Dir["#{tmp_user_folder}/*"]) 
@@ -37,14 +37,14 @@ RSpec.describe ImageZipController, :type => :request do
         end
 
         it "uses supplied email address" do
-          expect(SubmissionZipWorker).to receive(:perform_async).with(site_id, email, expected_folder)
+          expect(SubmissionZipWorker).to receive(:perform_async).with(expected_directory_suffix, site_id, email)
           subject
         end
         
         context 'without email supplied' do
           let(:params) {{site_id: site_id}}
           it "uses default email address if none supplied" do
-            expect(SubmissionZipWorker).to receive(:perform_async).with(site_id, ENV["DESIGNATED_EMAIL"], expected_folder)
+            expect(SubmissionZipWorker).to receive(:perform_async).with(expected_directory_suffix, site_id, ENV["DESIGNATED_EMAIL"])
             subject
           end
         end

@@ -3,7 +3,6 @@ class SubmissionZipWorker
   sidekiq_options retry: false
   
   def perform(directory_suffix, site_id, email_address, type="", tags="")
-    
     local_tmp_directory = tmp_directory(directory_suffix)
     s3_directory = s3_directory(directory_suffix)
 

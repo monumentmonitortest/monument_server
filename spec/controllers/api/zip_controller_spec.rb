@@ -39,7 +39,7 @@ RSpec.describe Api::V1::ZipController, :type => :request do
         end
 
         it "uses supplied email address" do
-          expect(SubmissionZipWorker).to receive(:perform_async).with(submission.site.id, email, 'tmp_archive_dir')
+          expect(SubmissionZipWorker).to receive(:perform_async).with("#{submission.site.id}", submission.site.id, email, nil, nil)
           subject
         end
       end
