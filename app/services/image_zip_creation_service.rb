@@ -1,16 +1,18 @@
 require 'aws-sdk-s3'
 
 class ImageZipCreationService
-  attr_accessor :tmp_dir
+  attr_accessor :tmp_dir, :site_id, :type, :tags
 
-  def initialize(site_id, tmp_dir)
-    @site_id = site_id
+  def initialize(tmp_dir, site_id, type="", tags="")
     @tmp_dir = tmp_dir
+    @site_id = site_id
+    @type = type
+    @tags = tags
   end
 
   def create
-    submissions = Site.find(@site_id).submissions
-    
+    # submissions = Site.find(@site_id).submissions
+    submissions = Submission.with_attached_image.search_site(site_id).type_search(type).with_tags(tags)
 
     # Determine the length of the folder
     directory_length_same_as_documents = Dir["#{tmp_dir}/*"].length == submissions.length

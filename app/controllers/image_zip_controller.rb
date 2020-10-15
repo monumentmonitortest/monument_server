@@ -1,11 +1,14 @@
 require 'zip'
 class ImageZipController < ApplicationController
-  TMP_ARCHIVE_FOLDER_BASE = "tmp/archive_submissions".freeze
-  
+
   def zip_images
-    delete_current_tempfile # does this work on AWS?
-    SubmissionZipWorker.perform_async(site_id, email_address, tmp_archive_dir)
+    delete_current_tempfile
+    # TODO - ensure this is updated
+    tmp_dir = "#{site_id}"
+    SubmissionZipWorker.perform_async(tmp_dir, site_id, email_address)
     redirect_back(fallback_location: admin_results_path, notice: 'Job started, images will be emailed when finished')
+
+    # TODO - remove tempfile (possibly...)
   end
 
   def download_zip
@@ -29,7 +32,7 @@ class ImageZipController < ApplicationController
 
   def tmp_archive_dir
     # returns tmp/archive_submissions_6 for site ID 6
-    "#{TMP_ARCHIVE_FOLDER_BASE}_#{site_id}"
+    "#{site_id}"
   end
 
   def permitted_params
@@ -53,9 +56,9 @@ class ImageZipController < ApplicationController
 
   def delete_current_tempfile
     # delete both archive folder and contents
-    if Dir.exists?(tmp_archive_dir)
-      FileUtils.rm_rf(Dir["#{tmp_archive_dir}/*"]) 
-      FileUtils.rm_rf(Dir["#{tmp_archive_dir}"]) 
+    if Dir.exists?("tmp/archive/#{site_id}")
+      FileUtils.rm_rf(Dir["tmp/archive/#{site_id}/*"]) 
+      FileUtils.rm_rf(Dir["tmp/archive/#{site_id}"]) 
     end
   end
 end

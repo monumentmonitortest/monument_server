@@ -4,7 +4,7 @@ RSpec.describe ImageZipCreationService do
   describe "#create" do
     !let(:submission) { create(:submission) }  
     tmp_user_folder = "tmp/archive_submissions"
-    subject { described_class.new(submission.site.id, tmp_user_folder) }
+    subject { described_class.new(tmp_user_folder, submission.site.id, "", "") }
 
     after(:all) do
       FileUtils.rm_rf(Dir["#{tmp_user_folder}/*"]) 

@@ -68,6 +68,7 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem 'database_cleaner'
   gem 'dotenv-rails'
+  gem 'timecop'
 end
 
 group :test do
