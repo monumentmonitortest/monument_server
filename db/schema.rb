@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_14_121042) do
+ActiveRecord::Schema.define(version: 2020_11_03_121716) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,11 @@ ActiveRecord::Schema.define(version: 2020_09_14_121042) do
     t.datetime "first_submission"
   end
 
+  create_table "site_groups", force: :cascade do |t|
+    t.string "name"
+    t.integer "identifier"
+  end
+
   create_table "sites", force: :cascade do |t|
     t.string "name"
     t.float "latitude"
@@ -61,6 +66,7 @@ ActiveRecord::Schema.define(version: 2020_09_14_121042) do
     t.jsonb "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "site_group_id"
   end
 
   create_table "submissions", force: :cascade do |t|

@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Site Groups</h1>
+<% if @site_groups.present? %>
+  <% @site_groups.each do |sg| %>
+    <div class="mw9 center ph3-ns">
+      <div class="cf ph2-ns pv2 mv2 ">
+        <div class="fl w-10 pa2">
+          <%= sg.name %>
+        </div>
+        <div class="fl w-40 pa2 bb b--light-gray">
+          <% if sg.sites.present? %>
+            <% sg.sites.each do |site| %>
+              <span><%= link_to site.name, admin_site_path(site) %></span><br/>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+No site groups present
+<% end %>
