@@ -9,7 +9,11 @@
           <%= sg.name %>
         </div>
         <div class="fl w-40 pa2 bb b--light-gray">
-          <span><%= link_to sg.name, admin_site__group_path(sg) %></span>
+          <% if sg.sites.present? %>
+            <% sg.sites.each do |site| %>
+              <span><%= link_to site.name, admin_site_path(site) %></span><br/>
+            <% end %>
+          <% end %>
         </div>
       </div>
     </div>
