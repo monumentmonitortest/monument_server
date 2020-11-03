@@ -5,5 +5,6 @@ FactoryBot.define do
     latitude { 12.123 }
     longitude { - 12.123 }
     notes  { 'We are looking at these stones' }
+    site_group_id { create(:site_group).id }
   end
 end
