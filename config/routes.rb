@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     resources :bulk_upload, only: [:index, :create]
     resources :results
     resources :types
-    
+    resources :site_groups
     resources :submissions
     resources :sites do
       resources :submissions

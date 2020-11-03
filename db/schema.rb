@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 2020_11_03_121716) do
     t.jsonb "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "group_id"
+    t.integer "site_group_id"
   end
 
   create_table "submissions", force: :cascade do |t|
