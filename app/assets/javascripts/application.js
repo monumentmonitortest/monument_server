@@ -15,6 +15,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require smart_listing
+//= require micromodal/dist/micromodal
 //= require core
 //= require tags_input
 //= require bulk_upload

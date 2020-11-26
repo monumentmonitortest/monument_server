@@ -15,11 +15,12 @@
       <%= label_tag :comment, "Comment" %>
       <%= text_field_tag :comment %>
   
-      <%= label_tag :type_name, "Source/Type" %>
-      <%= select_tag :type_name, options_for_select(Submission::TYPE_NAMES), class: "type_name_select" %>
-      <div id="data-types">
       <%= label_tag :type_name, "Participant email/number/twitter_id/insta_id" %>
       <%= text_field_tag :participant_id, "", placeholder: 'Participant id', class: "participant_id" %>
+      
+      <%= label_tag :type_name, "Source/type" %>
+      <%= select_tag :type_name, options_for_select(Submission::TYPE_NAMES), class: "type_name_select" %>
+      <div id="data-types">
       </div>
     </p>
   </div>
