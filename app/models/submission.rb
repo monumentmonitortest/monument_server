@@ -11,7 +11,7 @@ class Submission < ApplicationRecord
 
   has_one_attached :image
   # to get url for image when developing API - use s.image.service_url
-  TYPE_NAMES = %w(INSTAGRAM EMAIL TWITTER WHATSAPP OTHER )
+  TYPE_NAMES = %w(EMAIL TWITTER WHATSAPP INSTAGRAM OTHER )
 
   scope :reliable, -> { where(reliable: true) }
   
