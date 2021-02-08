@@ -46,7 +46,8 @@ export default class Form extends React.Component {
                             selectSomeItems: "Select tags",
                           }
     const typeOptions = ['Email', 'WhatsApp', 'Twitter', 'Instagram']
-    
+    const zipButton = <ZipForm email={this.props.email} site={this.state.site} tags={this.state.selected} type={this.state.type}/>
+
     return (
       <form className="ph4 pv4 mb0 br1" onSubmit={this.handleSubmit}>
           <div className="flex flex-wrap items-center justify-between">
@@ -102,7 +103,7 @@ export default class Form extends React.Component {
             </span>
           </div>
           
-          <ZipForm email={this.props.email} site={this.state.site} tags={this.state.selected} type={this.state.type}/>
+          {this.props.email ? zipButton : null}
 
         </form>
     )
