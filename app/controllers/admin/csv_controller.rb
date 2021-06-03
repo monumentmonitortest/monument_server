@@ -58,7 +58,8 @@ class Admin::CsvController < ApplicationController # TODO: - make these all back
       csv << attributes
 
       Submission.all.each do |submission|
-        row = [submission.id, submission.site_name, submission.record_taken.strftime('%d/%m/%Y'), submission.type_name]
+        date = submission.submitted_at || submission.record_taken
+        row = [submission.id, submission.site_name, date.strftime('%d/%m/%Y'), submission.type_name]
         csv << row
       end
     end
