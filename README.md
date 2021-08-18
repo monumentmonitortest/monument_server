@@ -17,7 +17,8 @@ To create sites within the database, edit the [seeds](https://github.com/monumen
 
 ## Environment setup
 
-Create a .env file for storing local environmental variables, copy this from the .env.example file withing the base directory. *ensure this is included in the '.gitignore' file before committing on git*.
+Create a .env file for storing local environmental variables, copy this from the .exampleenv file withing the base directory. *Ensure this is included in the '.gitignore' file before committing on git*.
+
 
 A Twitter API account is required to retrieve images from twitter, a S3 account for image storage on AWS and a google account for metrics and email services.
 
@@ -43,11 +44,13 @@ pg_restore --verbose --clean --no-acl --no-owner -h localhost -U HEROKU_USERNAME
 Create dump file
 PGPASSWORD=mypassword pg_dump -Fc --no-acl --no-owner -h localhost -U HEROKU_USERNAME PRODUCTION_DATABASE_NAME > ms_prod.dump
 
-#Uploading images
+# Uploading images
 
 ## Twitter
-Images can be uploaded automatically from Twitter using the Twitter API. This can be run manually from the terminal by running
+Images can be uploaded automatically from Twitter using the Twitter API. This can be run manually from the terminal by running:
+
 `$ bin/rails runner 'lib/twitter_script.rb'`
+
 Alternatively it can be run using a cron job in your chosen hosting platform (i.e scheduler in Heroku).
 As the Twitter API only provides the past 7 days of tweet data free of charge, we reccomend running it at least once a week.
 
@@ -55,7 +58,9 @@ As the Twitter API only provides the past 7 days of tweet data free of charge, w
 Images can be uploaded from instagram by uploading a json file of an instragm scrape, using the instamanger tool.
 
 - Install instamancer onto your machine, follow these [directions](https://github.com/ScriptSmith/instamancer)
-- Run the following script from your terminal: `instamancer hashtag YOUR_HASHTAG --full --logging=info --visible`. This will create a JSON file containing data on all posts using your particular hastag.
+- Run the following script from your terminal: 
+`instamancer hashtag YOUR_HASHTAG --full --logging=info --visible`. 
+This will create a JSON file containing data on all posts using your particular hastag.
 - Upload the file into the server using the 'admin/insta_upload' view. You can select from which date uploads should be taken, as duplicates can be common as post IDs can change.
 
 ## Email and Whatsapp
