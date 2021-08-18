@@ -70,3 +70,19 @@ WhatsApp and emil images can be uploaded manually using the bulk upload form, fo
 # Reporting
 
 Reports can be generated in real time for submissions to the project in the 'admin/results' view.
+
+
+# API
+
+Information regarding the submissions can be obtained via the front end or through the API. Endpoints for this are as follows. (Authentication for the API is currently ongoing)
+
+### Retrieve submission data
+GET 'ROOT/submissions'
+
+Returns paginated json object containing latest submission information, including URL for images
+
+
+GET 'ROOT/submissions/submission_data'
+
+Returns unpaginated json object containing submission information, not including URLs for images
+      
