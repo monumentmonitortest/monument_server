@@ -1,35 +1,22 @@
-#A script to get the what percentage of work one off users contributed
 
-t = Type.where(name: "WHATSAPP")
-subs = {}
+#### new script...
 
-t.map do |type|
-  tuser = type.data["number"]
-  
-  if subs[tuser].present?
-    subs[tuser] << type.submission
-  else
-    subs[tuser] = []
-    subs[tuser] << type.submission
-  end
-end
+TYPE_NAME = 'ALL'
+subs = Submission.all
+count = subs.count
+participants = subs.map(&:participant_id).uniq
+pcount = participants.count
 
-#subs...
+# number of people who submitted only once
+one_offs = subs.select(:type_name,:participant_id).group(:type_name,:participant_id).having("count(*) < 2").size.count
 
-#one_off contributions
-one_offs = 0
-more_than_one = []
+# array of number of submissions per participant
+array = subs.select(:participant_id).group(:participant_id).size.values
+# average number of submissions
+av = array.sum(0.0)/array.size
 
-subs.each do |user|
-  dates = user[1].map(&:record_taken).uniq.count
-  if dates == 1
-    one_offs = one_offs + user[1].count
-  elsif dates > 1
-    more_than_one << user[0]
-  end
-end
-
-
-puts "total contributions in Twitter type: #{t.count}"
+puts "total submissions in #{TYPE_NAME} type: #{count}"
+puts "total participants in #{TYPE_NAME} type: #{pcount}"
 puts "total contributions from one offs: #{one_offs}"
-puts "percentage of one offs: #{(one_offs/t.count)*100}"
+puts "percentage of one offs: #{(one_offs.to_f/count.to_f)*100}"
+puts "Average submissions: #{av}"
