@@ -1,0 +1,27 @@
+{ 
+  "environments" : {
+    "test": {
+      "formation": {
+        "test": {
+          "quantity": 1,
+          "size": "Standard-1X"
+        }
+      },
+      "addons" : [
+        "heroku-postgresql"
+      ],
+      "buildpacks": [
+        { 
+          "url": "https://github.com/heroku/heroku-buildpack-ruby" 
+        },
+        { 
+          "url": "https://github.com/heroku/heroku-buildpack-nodejs" 
+        }
+      ],
+      "scripts": {
+        "test-setup": "./bin/setup",
+        "test": "bundle exec rspec"
+      }
+    }
+  }
+} 

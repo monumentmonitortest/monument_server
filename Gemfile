@@ -11,7 +11,7 @@ gem 'rails', '~> 6.0'
 # Use postgresql as the database for Active Record
 gem 'pg'
 # Use Puma as the app server
-gem 'puma', '~> 3.12'
+gem 'puma', '~> 4.3.6'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -66,7 +66,7 @@ group :development, :test do
   gem 'rspec'
   gem 'rspec-rails'
   gem 'rails-controller-testing'
-  gem 'database_cleaner'
+  gem 'database_cleaner', "~> 2.0"
   gem 'dotenv-rails'
   gem 'timecop'
 end
@@ -92,4 +92,4 @@ gem 'rails_12factor', group: :production
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem 'mini_racer', platforms: :ruby
+gem 'mini_racer', '~> 0.4.0', platforms: :ruby

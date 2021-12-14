@@ -17,7 +17,6 @@ module.exports = function(api) {
 
   return {
     presets: [
-      "@babel/preset-react",
       isTestEnv && [
         '@babel/preset-env',
         {
@@ -55,11 +54,21 @@ module.exports = function(api) {
         }
       ],
       [
+        '@babel/plugin-proposal-private-methods',
+        {
+          loose: true
+        }
+      ],
+      [
+        '@babel/plugin-proposal-private-property-in-object',
+        {
+          loose: true
+        }
+      ],
+      [
         '@babel/plugin-transform-runtime',
         {
-          helpers: false,
-          regenerator: true,
-          corejs: false
+          helpers: false
         }
       ],
       [
