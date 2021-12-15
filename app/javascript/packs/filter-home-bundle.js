@@ -1,20 +1,20 @@
 import ReactOnRails from 'react-on-rails';
 
-import FilterHome from '../bundles/Filter/components/FilterHome';
-import ResultsManager from '../bundles/Filter/components/ResultsManager';
-import Submission from '../bundles/Filter/components/Submission';
-import Pagination from '../bundles/Filter/components/Pagination';
-import ImageLoader from '../bundles/Filter/components/ImageLoader';
-import Form from '../bundles/Filter/components/Form';
-import Key from '../bundles/Filter/components/Key';
+// import FilterHome from '../src/FilterHome';
+// import ResultsManager from '../src/ResultsManager';
+// import Submission from '../src/Submission';
+// import Pagination from '../src/Pagination';
+// import ImageLoader from '../src/ImageLoader';
+// import Form from '../src/Form';
+import Key from '../src/Key';
 
 // This is how react_on_rails can see the HelloWorld in the browser.
 ReactOnRails.register({
-  FilterHome,
-  ResultsManager,
-  Submission,
-  Pagination,
-  ImageLoader,
-  Form,
+  // FilterHome,
+  // ResultsManager,
+  // Submission,
+  // Pagination,
+  // ImageLoader,
+  // Form,
   Key
 });
