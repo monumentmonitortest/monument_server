@@ -6,6 +6,7 @@
     "client/node_modules"
   ],
   "dependencies": {
+    "@babel/plugin-transform-react-jsx": "^7.16.5",
     "@rails/activestorage": "^6.1.4-3",
     "@rails/webpacker": "5.4.3",
     "babel-polyfill": "^6.26.0",
