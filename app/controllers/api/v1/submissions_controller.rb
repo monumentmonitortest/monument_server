@@ -24,7 +24,7 @@ module Api
       private
 
         def scope
-          Submission.with_attached_image.search_site(site_filter).type_search(type_filter).with_tags(tag_filter)
+          Submission.with_attached_image.includes([:site, :taggings, image_attachment: :blob]).search_site(site_filter).type_search(type_filter).with_tags(tag_filter)
         end
 
         def scope_without_images(date)

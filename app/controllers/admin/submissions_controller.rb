@@ -10,7 +10,7 @@ module Admin
 
     def index
       # TODO - move this to a service
-      submissions_scope ||= reliable? ? Submission.with_attached_image.reliable : Submission.with_attached_image
+      submissions_scope == Submission.with_attached_image.includes([:site, :taggings, image_attachment: :blob])
 
       submissions_scope = search_site(submissions_scope, p_params[:site_filter]) if p_params[:site_filter].present?
       submissions_scope = submissions_scope.type_search(p_params[:type_filter]) if p_params[:type_filter].present?

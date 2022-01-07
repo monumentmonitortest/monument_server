@@ -33,7 +33,13 @@ class Admin::SitesController < ApplicationController
   end
 
   def show
-    @submissions = @site.submissions.order(:record_taken).page(params[:page]).per(100)
+    @submissions = @site.submissions.includes(query_includes).order(:record_taken).page(params[:page]).per(100)
+  end
+
+  def query_includes
+    # {
+       [{image_attachment: :blob}, :taggings]
+    # }
   end
 
   private

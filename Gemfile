@@ -71,6 +71,7 @@ group :development, :test do
   gem 'database_cleaner', "~> 2.0"
   gem 'dotenv-rails'
   gem 'timecop'
+  gem 'bullet'
 end
 
 group :test do
