@@ -1,5 +1,5 @@
 require "rails_helper"
-RSpec.describe CSVCreateService do
+RSpec.describe CsvCreateService do
   let(:submission) { create(:submission) }
   let(:params) {{ site_id: submission.site_id }}
   let(:expected_csv) { "site_name,type_name,reliable,record_taken\nSome Stones,EMAIL,false,2019-04-26 00:00:00 UTC\n" }
