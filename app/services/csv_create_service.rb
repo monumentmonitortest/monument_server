@@ -1,5 +1,5 @@
 # Not currently used... not sure why
-class CSVCreateService
+class CsvCreateService
   def initialize(params)
     site = Site.find(params[:site_id])
     @submissions = site.submissions
