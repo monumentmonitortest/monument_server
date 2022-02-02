@@ -2,11 +2,12 @@
 
 require 'rails_helper'
 RSpec.describe Registration, type: :model do
+  include ActionDispatch::TestProcess::FixtureFile
   subject { described_class.new(params) }
 
   let(:site) { create(:site) }
   let(:email) { 'email@thing.com' }
-  let(:image) { fixture_file_upload('/assets/test-image.jpg', 'image/png') }
+  let(:image) { Rack::Test::UploadedFile.new('./spec/fixtures/assets/test-image.jpg', 'image/png') }
   let(:date)  { Date.today }
   let(:params) do
     {
@@ -48,7 +49,7 @@ RSpec.describe Registration, type: :model do
     end
 
     context 'with invalid file' do
-      let(:image) { fixture_file_upload('/assets/archive_submissions.zip', '.zip') }
+      let(:image) { Rack::Test::UploadedFile.new('./spec/fixtures/assets/archive_submissions.zip', '.zip') }
 
       it 'does not create a submission' do
         expect {subject.save}.to change {Submission.count}.by(1)
