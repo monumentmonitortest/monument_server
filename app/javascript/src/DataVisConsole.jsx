@@ -2,7 +2,7 @@ import React from 'react';
 
 import SubmissionBarChart from './data/SubmissionBarChart'
 // import SubmissionAreaChart from './data/SubmissionAreaChart'
-import TagScatterChart from './data/TagScatterChart'
+// import TagScatterChart from './data/TagScatterChart'
 import TypePieChart from './data/TypePieChart'
 
 export default class DataVis extends React.Component {
@@ -18,7 +18,7 @@ export default class DataVis extends React.Component {
     const monthlyParticipantData = submissionsData != "undefined" ? submissionsData.participantsByMonth : []
     const totalParticipants = submissionsData != "undefined" ? submissionsData.totalParticipants : 0
     const typeData = submissionsData != 'undefined' ? submissionsData.types : []
-    const tagData = submissionsData != 'undefined' ? submissionsData.aiTags : []
+    // const tagData = submissionsData != 'undefined' ? submissionsData.aiTags : []
     const maxData = submissionsData != 'undefined' ? submissionsData.maxSubs : []
     const minData = submissionsData != 'undefined' ? submissionsData.minSubs : []
 
@@ -64,16 +64,21 @@ export default class DataVis extends React.Component {
 
         {/*   Site Specific stats */}
         <div className="pa4 mt4 br2 data-box">
-          <h2 className="mb4 f1 title mb2">Stats for {this.props.siteName ? this.props.siteName : "all sites"} over the last year</h2>
+          <h2 className="mb4 f1 title mb2">Submission numbers for {this.props.siteName ? this.props.siteName : "all sites"} over the last year</h2>
         
-          <SubmissionBarChart submissionData={monthlyData} participantData={monthlyParticipantData}/>
+          <SubmissionBarChart submissionData={monthlyData} color={"#E7ECEF"} dataName={"Submissions"}/>
+          <hr className="w-60 ml0 mt0"></hr>
+
+          <h2 className="mb4 f1 title mb2">Participant numbers for all sites over the last year</h2>
+          
+          <SubmissionBarChart submissionData={monthlyParticipantData} color={"#379392"} dataName={"Participants"}/>
           <hr className="w-60 ml0 mt0"></hr>
 
           {/* <h1 className="f2 f1-l lh-title mb0 mt4 data-bold-color">Participants</h1>
           <SubmissionBarChart data={monthlyParticipantData} />
           <hr className="w-60 ml0 mt0"></hr> */}
 
-          <div className="flex-ns">
+          {/* <div className="flex-ns">
             <div className="w-100 w-60-ns">
               <h1 className="f2 f1-l lh-title mb0 mt4 data-bold-color">Vision AI tags</h1>
               <TagScatterChart data={tagData} />
@@ -90,7 +95,7 @@ export default class DataVis extends React.Component {
                 </tbody>
               </table>
             </div>
-          </div>
+          </div> */}
 
         </div>
 

@@ -10,26 +10,27 @@ export default class SubmissionBarChart extends React.Component {
   render() {
     const {submissionData} = this.props
     const {participantData} = this.props
-
+    const {color} = this.props
+    const {dataName} = this.props
     return (
       <div>
         <VictoryChart
           className="mv0"
           domainPadding={10}
         >
-        <VictoryLegend x={125} y={10}
+        {/* <VictoryLegend x={125} y={10}
           orientation="horizontal"
           gutter={20}
           colorScale={[ "#E7ECEF", "#379392"]}
           style={{ fontSize: 12 }}
           data={[
-            { name: "Submissions", labels: {fill: "#E7ECEF"}}, { name: "Participants", labels: {fill: "#E7ECEF"} }
+            { name: dataName, labels: {fill: "#E7ECEF"}}
           ]}
-        />
+        /> */}
 
           <VictoryAxis 
             style={{tickLabels: {fill: "#E7ECEF", fontSize: 8}}} />
-          <VictoryGroup offset={10} style={{ data: { width: 6 } }} colorScale={["#E7ECEF", "#379392"]} >
+          <VictoryGroup offset={10} style={{ data: { width: 10 } }} colorScale={[color]} >
             <VictoryBar
               data={submissionData}
               labels={({ datum }) => `${Math.floor(datum.y)}`}
@@ -44,7 +45,7 @@ export default class SubmissionBarChart extends React.Component {
               }}
             />
 
-            <VictoryBar
+            {/* <VictoryBar
               data={participantData}
               labels={({ datum }) => `${Math.floor(datum.y)}`}
               animate={{
@@ -55,7 +56,7 @@ export default class SubmissionBarChart extends React.Component {
               style={{
                 labels: { fontSize: 8, fill: "#379392"}
               }}
-            />
+            /> */}
           </VictoryGroup>
         </VictoryChart>
 
