@@ -38,10 +38,10 @@ class Admin::CsvController < ApplicationController # TODO: - make these all back
     return unless params[:site_id].present? || params[:tag].present?
 
     site = params[:site_id] ? '' : Site.find(params[:site_id])
-
-    respond_to do |format|
+    respond_to do |format|  
       format.csv { send_data create_tags_report(site, params[:tag]), filename: "tag-report-#{params['tag']}-#{site}#{Date.today}.csv" }
     end
+
   end
 
   def image_quality
@@ -57,7 +57,7 @@ class Admin::CsvController < ApplicationController # TODO: - make these all back
     CSV.generate(headers: true) do |csv|
       csv << attributes
 
-      Submission.all.each do |submission|
+      Submission.all.includes([:site]).each do |submission|
         date = submission.submitted_at || submission.record_taken
         row = [submission.id, submission.site_name, date.strftime('%d/%m/%Y'), submission.type_name]
         csv << row
@@ -111,6 +111,7 @@ class Admin::CsvController < ApplicationController # TODO: - make these all back
       csv << attributes
 
       submissions = Submission.
+                    includes([:taggings]).
                     where(site_id: site_id).
                     where('record_taken >= :start_date AND created_at <= :end_date',
                           { start_date: from_date, end_date: to_date }).
@@ -129,9 +130,9 @@ class Admin::CsvController < ApplicationController # TODO: - make these all back
 
     if site.empty? && tag
       # get all the submissions from a with that tag
-      submissions = Submission.all.tagged_with(tag)
+      submissions = Submission.all.includes([:image_attachment]).includes([:taggings]).tagged_with(tag)
     elsif site && tag
-      submissions = site.submissions.tagged_with(tag)
+      submissions = site.submissions.includes([:image_attachment]).includes([:taggings]).tagged_with(tag)
     end
 
     CSV.generate(headers: true) do |csv|
