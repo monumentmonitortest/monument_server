@@ -1,5 +1,5 @@
 
-<%= form_for :myDropzoneForm, html: {id: "dropzone-form-id"} do |f| %>
+<%= form_for :myDropzoneForm, html: {id: "dropzoneform"} do |f| %>
   <div id="tpl">
     <p>
       <%= f.label :site_id %><br>
@@ -25,15 +25,19 @@
     </p>
   </div>
 
-  <div id="files-field" class="dropzone" style="border: 2px dashed rgba(0, 0, 0, 0.3); min-height: 100px !important;">
+  <div id="files-field" class="dropzone dropzone-previews" style="border: 2px dashed rgba(0, 0, 0, 0.3); min-height: 100px !important;">
     <div class="dz-message" style="margin: 20px">
       Drag your pics here!
     </div>
+    <div id='dz-preview-container'></div>
   </div>
 
-  <p>
-    <%= f.submit %>
-  </p>
+
+
+  <pre id="output"></pre>
+  <div id="response" class="hidden"></div>
+  <%= f.submit %>
 <% end %>
 
-<div id="response" class="hidden"></div>
+
+<%# <script type="module">ReadyBulkUpload()</script> %>
