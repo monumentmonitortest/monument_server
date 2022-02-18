@@ -1,17 +1,32 @@
 import Dropzone from "dropzone";
 
-const newDropzone = new Dropzone("#dropzoneform", {
+
+// ------------ ********* --------------
+// Dropzone for drop upload
+// ------------ ********* --------------
+const newDropzone = new Dropzone("#simpledropzone", {
+  url: "/admin/drop_upload"
+});
+
+
+// ------------ ********* --------------
+// Dropzone for old bulk upload
+// ------------ ********* --------------
+const bulkDropzone = new Dropzone("#bulkdropzone", {
   url: "/admin/bulk_upload",
   autoProcessQueue: false,
+  autoQueue: true,
   uploadMultiple: true,
-  parallelUploads: 100,
+  parallelUploads: 2,
   maxFiles: 100,
+  ignoreHiddenFiles: true,
+  // acceptedFiles: '*.jpg',
   previewsContainer: '#dz-preview-container',
 
   init: function() {
     var myDropzone = this;
-    
-    var form = document.getElementById('dropzoneform');
+    console.log('initialized bulk dropzone')
+    var form = document.getElementById('bulkdropzone');
     form.addEventListener('submit', function(e) {
       e.preventDefault();
       myDropzone.processQueue();
