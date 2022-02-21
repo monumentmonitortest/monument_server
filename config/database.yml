@@ -80,6 +80,6 @@ test:
 #
 production:
   <<: *default
-  database: <%= ENV['DB_DATABASE'] %>
-  username: <%= ENV['DB_USERNAME'] %>
-  password: <%= ENV['DB_PASSWORD'] %>
+  database: monumental_server_production
+  username: monumental_server
+  password: <%= ENV['MONUMENTAL_SERVER_DATABASE_PASSWORD'] %>

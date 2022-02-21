@@ -33,8 +33,6 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'twitter'
 
-gem 'azure-storage-blob'
-
 gem 'httparty'
 gem "smart_listing"
 gem "jquery-rails"
