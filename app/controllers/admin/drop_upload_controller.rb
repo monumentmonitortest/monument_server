@@ -14,7 +14,7 @@ class Admin::DropUploadController < ApplicationController
       results = bulk_upload_images
       respond_to do |format|
         format.html { redirect_to admin_submissions_url }
-        format.json { render json: results }
+        format.json { render json: [results] }
       end
     else
       flash[:notice] = 'Make sure you include some pictures!'
@@ -25,6 +25,7 @@ class Admin::DropUploadController < ApplicationController
   private
 
   def bulk_upload_images
+    return "Only .jpg and .jpeg files can be uploaded here" unless file_type_correct(permitted_params[:file]) 
     registration_params = {
       type_name: TYPE_NAME, 
       site_id: unsorted_site_id, 
@@ -33,7 +34,6 @@ class Admin::DropUploadController < ApplicationController
       image: permitted_params[:file],
       record_taken: get_record_taken(permitted_params[:file].tempfile)
     }
-    binding.pry
     @registration = Registration.new(registration_params)
     
     if @registration.save
@@ -44,14 +44,20 @@ class Admin::DropUploadController < ApplicationController
     message
   end
   
+  def file_type_correct(file)
+    file.path.downcase.include?('.jpg') || file.path.downcase.include?('.jpeg')
+  end
+
   def get_record_taken(file)
-    exif = EXIFR::JPEG.new(file)
-    unless exif.date_time.present?
-      date_taken = Date.today
-    else
-      date_taken = exif.date_time
-    end
-    date_taken
+      exif = EXIFR::JPEG.new(file)
+      unless exif.date_time.present?
+        date_taken = Date.today
+      else
+        date_taken = exif.date_time
+      end
+      date_taken
+
+
   end
   
   def permitted_params

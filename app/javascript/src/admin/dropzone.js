@@ -2,6 +2,8 @@ import Dropzone from "dropzone";
 
 if (document.getElementById('bulk-upload')) {
   readyBulkUpload();
+  readyAutoParticipantFill()
+  readyAutoDateFille()
 }
 
 if (document.getElementById('drop-upload')) {
@@ -13,7 +15,27 @@ if (document.getElementById('drop-upload')) {
 // ------------ ********* --------------
 function readyDropUpload() {
   const newDropzone = new Dropzone("#simpledropzone", {
-    url: "/admin/drop_upload"
+    url: "/admin/drop_upload",
+    acceptedFiles: ".jpg, .jpeg",
+
+    init: function() {
+      var myDropzone = this
+
+      this.on("success", function(data,response) {
+        var textnode = document.createTextNode(response);
+
+        var div = document.getElementById('response')
+        div.innerHTML += response.toString() + "<br/>"
+      });
+
+      this.on("error", function(data,response) {
+        var textnode = document.createTextNode(response);
+
+        var div = document.getElementById('error')
+        // debugger
+        div.innerHTML += response.toString() + "<br/>"
+      });
+    }
   });
 }
 
@@ -82,3 +104,23 @@ function readyBulkUpload() {
   });
 }
 
+
+function readyAutoParticipantFill() {
+  document.getElementById('participant_id').addEventListener('change', (e) => {
+    console.log(e)
+    console.log(this.value)
+    if (this.value.includes("@")) {
+      document.getElementById("type_name option[value='EMAIL']").attr("selected", true);
+    } else if (this.value.includes("+")) {
+      document.getElementById("type_name option[value='WHATSAPP']").attr("selected", true);
+    } else {
+      return true
+    }
+ });
+}
+
+function readyAutoDateFille() {
+  document.getElementById('record_taken').addEventListener('change', (e) => {
+    document.getElementById('submitted_at').val(this.value)
+  })
+}
