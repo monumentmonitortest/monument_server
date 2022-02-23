@@ -52,10 +52,12 @@ class Registration
   end
 
   def find_or_create_participant(participant_id)
-    raise ActiveRecord::Rollback unless participant_id
-    anonymised_id = encrypt(participant_id)
-    participant = Participant.find_by(participant_id: anonymised_id)
-    participant.present? ? participant : Participant.create!(participant_id: participant_id)
+    if participant_id.present?
+      anonymised_id = encrypt(participant_id)
+      Participant.find_or_create_by(participant_id: anonymised_id)
+    else
+      Participant.find_or_create_by(participant_id: Participant::DEFAULT_EMAIL)
+    end
   end
     
   def encrypt(data)

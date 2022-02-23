@@ -30,7 +30,7 @@ class Admin::DropUploadController < ApplicationController
       type_name: TYPE_NAME, 
       site_id: unsorted_site_id, 
       submitted_at: Date.today,
-      participant_id: ENV['DEFAULT_PARTICIPANT'] || 'default@example.com',
+      participant_id: Participant::DEFAULT_EMAIL,
       image: permitted_params[:file],
       record_taken: get_record_taken(permitted_params[:file].tempfile)
     }
