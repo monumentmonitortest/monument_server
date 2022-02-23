@@ -17,7 +17,7 @@ class Admin::SitesController < ApplicationController
   def create
     @site = Site.new(site_params)
     if @site.save
-      redirect_to @site
+      redirect_to admin_sites_path
     else
       render 'new'
     end
@@ -48,6 +48,6 @@ class Admin::SitesController < ApplicationController
   end
 
   def site_params
-    params.require(:site).permit(:id, :name, :latitude, :longitude, :visits, :visitors, :pic_id, :notes)
+    params.require(:site).permit(:id, :name, :latitude, :longitude, :visits, :visitors, :pic_id, :notes, :site_group_id)
   end
 end

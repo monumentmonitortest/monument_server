@@ -20,6 +20,16 @@
   </div>
 </div>
 
+<div class='row'>
+  <div class="col">
+    <%= form.label :name, "Site Group"%>
+  </div>
+  <div class="col">
+    <%= form.select :site_group_id, options_for_select(SiteGroup.all.collect { | sg | [sg.name, sg.id] }) %>
+  </div>
+</div>
+
+
 <div class="row">
   <div class="col">
     <%= form.label :latitude, "Lattitude"%>

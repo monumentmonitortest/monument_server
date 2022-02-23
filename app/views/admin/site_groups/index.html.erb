@@ -21,3 +21,8 @@
 <% else %>
 No site groups present
 <% end %>
+
+
+<% if admin? %>
+  <%= link_to 'New Site Group', new_admin_site_group_path %>
+<% end %>
