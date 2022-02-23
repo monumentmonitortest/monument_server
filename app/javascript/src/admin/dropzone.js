@@ -22,18 +22,18 @@ function readyDropUpload() {
       var myDropzone = this
 
       this.on("success", function(data,response) {
+        var filename = data['upload']['filename']
         var textnode = document.createTextNode(response);
 
         var div = document.getElementById('response')
-        div.innerHTML += response.toString() + "<br/>"
+        div.innerHTML += filename + ": " + response.toString() + "<br/>"
       });
 
       this.on("error", function(data,response) {
+        var filename = data['upload']['filename']
         var textnode = document.createTextNode(response);
-
         var div = document.getElementById('error')
-        // debugger
-        div.innerHTML += response.toString() + "<br/>"
+        div.innerHTML += filename + ": " + response.toString() + "<br/>"
       });
     }
   });

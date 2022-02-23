@@ -35,17 +35,22 @@ class Admin::DropUploadController < ApplicationController
       record_taken: get_record_taken(permitted_params[:file].tempfile)
     }
     @registration = Registration.new(registration_params)
-    
-    if @registration.save
-      message = "Image upload sucessful"
-    else
-      message = "Image upload unsucessful: #{@registration.errors.messages}"
+    begin
+      if @registration.save
+        message = "Image upload sucessful"
+      else
+        message = "Image upload unsucessful: #{@registration.errors.messages}"
+      end
+    rescue
+      message = "whoops, something has gone wrong"
     end
+
     message
   end
   
   def file_type_correct(file)
-    file.path.downcase.include?('.jpg') || file.path.downcase.include?('.jpeg')
+    # file.content_type == "image/jpg" || "image/jpeg" - weirdly, on the spec the pnd image came up as a jpeg
+    file.original_filename.downcase.include?('.jpg') || file.original_filename.downcase.include?('.jpeg')
   end
 
   def get_record_taken(file)

@@ -32,6 +32,9 @@ class Registration
     # e.message and e.cause.message can be helpful
     errors.add(:base, e.message)
     false
+  rescue Errno::ENOENT => e
+    errors.add(:base, e.message)
+    false
   end
 
   private
