@@ -1,13 +1,23 @@
 <h3 id="drop-upload"> Bulk Upload</h3>
-<p>
-  Drop images into the box below. They will be automatically uploaded and
-  approriate metadata sought for them.
-  <br/>
-  If a 'date taken' entry cannot be found in the image meta data, the current date will be assigned along with
-  a tag for 'unsure date'.
-  <br/>
+<div>
+  <p>
+    Drop images into the box below. They will be automatically uploaded and
+    approriate metadata sought for them.
+  </p>
+
+  <p>
+    If a 'date taken' entry cannot be found in the image meta data, the current date will be assigned along with
+    a tag for 'unsure date'.
+  </p>
+  <p>
   Participant ID will automatically be assigned to the default email address, and the type will autmotically be assigned to 'email'.
-</p>
+  </p>
+  <p>
+    Only '.jpg' and '.jpeg' images can be uploaded here. If any other image types of image require uploading, please use the more indepth 
+    <%= link_to 'bulk upload', controller: 'admin/bulk_upload' %> form,
+    as this form cannot correctly assign values from image metadata other than from '.jpg' and '.jpeg' images.
+  </p>
+</div>
 
 <form action="/file-upload"
       class="dropzone simpledropzone"
