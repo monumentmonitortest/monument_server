@@ -1,5 +1,5 @@
 
-<%= form_for :myDropzoneForm, html: {id: "dropzone-form-id"} do |f| %>
+<%= form_for :myDropzoneForm, html: {id: "bulkdropzone"} do |f| %>
   <div id="tpl">
     <p>
       <%= f.label :site_id %><br>
@@ -16,24 +16,28 @@
       <%= text_field_tag :comment %>
   
       <%= label_tag :type_name, "Participant email/number/twitter_id/insta_id" %>
-      <%= text_field_tag :participant_id, "", placeholder: 'Participant id', class: "participant_id" %>
+      <%= text_field_tag :participant_id, "", placeholder: 'Participant id', id: "participant_id" %>
       
       <%= label_tag :type_name, "Source/type" %>
-      <%= select_tag :type_name, options_for_select(Submission::TYPE_NAMES), class: "type_name_select" %>
+      <%= select_tag :type_name, options_for_select(Submission::TYPE_NAMES), id: "type_name_select" %>
       <div id="data-types">
       </div>
     </p>
   </div>
 
-  <div id="files-field" class="dropzone" style="border: 2px dashed rgba(0, 0, 0, 0.3); min-height: 100px !important;">
+  <div id="files-field" class="dropzone dropzone-previews" style="border: 2px dashed rgba(0, 0, 0, 0.3); min-height: 100px !important;">
     <div class="dz-message" style="margin: 20px">
       Drag your pics here!
     </div>
+    <div id='dz-preview-container'></div>
   </div>
 
-  <p>
-    <%= f.submit %>
-  </p>
+
+
+  <pre id="output"></pre>
+  <div id="response" class="hidden"></div>
+  <%= f.submit %>
 <% end %>
 
-<div id="response" class="hidden"></div>
+
+<%# <script type="module">ReadyBulkUpload()</script> %>
