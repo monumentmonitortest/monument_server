@@ -4,6 +4,8 @@ class Participant < ApplicationRecord
   validate :validate_params, on: :create
   before_create :annonymize_participant_id
 
+  DEFAULT_EMAIL = (ENV['DEFAULT_PARTICIPANT'] || 'example@email.com').freeze
+
   def validate_params
     errors.add(:type, "participant id not present") unless participant_id.present? 
   end

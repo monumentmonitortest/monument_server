@@ -51,7 +51,7 @@ RSpec.describe Registration, type: :model do
     context 'with no participant' do
       let(:email) { '' }
       it "assigns a defualt participant" do
-        id = Participant.new(participant_id: ENV['DEFAULT_PARTICIPANT']).annonymize_participant_id
+        id = Participant.new(participant_id: Participant::DEFAULT_EMAIL).annonymize_participant_id
 
         subject.save
         submission = Submission.last

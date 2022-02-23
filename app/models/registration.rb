@@ -56,7 +56,7 @@ class Registration
       anonymised_id = encrypt(participant_id)
       Participant.find_or_create_by(participant_id: anonymised_id)
     else
-      Participant.find_or_create_by(participant_id: ENV['DEFAULT_PARTICIPANT'])
+      Participant.find_or_create_by(participant_id: Participant::DEFAULT_EMAIL)
     end
   end
     
