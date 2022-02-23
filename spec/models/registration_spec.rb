@@ -48,6 +48,17 @@ RSpec.describe Registration, type: :model do
       end
     end
 
+    context 'with no participant' do
+      let(:email) { '' }
+      it "assigns a defualt participant" do
+        id = Participant.new(participant_id: ENV['DEFAULT_PARTICIPANT']).annonymize_participant_id
+
+        subject.save
+        submission = Submission.last
+        expect(submission.participant.participant_id).to eq id
+      end
+    end
+
     context 'with invalid file' do
       let(:image) { Rack::Test::UploadedFile.new('./spec/fixtures/assets/archive_submissions.zip', '.zip') }
 
@@ -57,7 +68,7 @@ RSpec.describe Registration, type: :model do
     end
 
     context 'with incorrect params' do
-      let(:email) { '' }
+      let(:date) { '' }
       it 'does not create submission or type' do
         expect(subject.save).to be false
       end
