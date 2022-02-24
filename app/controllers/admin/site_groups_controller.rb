@@ -7,7 +7,7 @@ class Admin::SiteGroupsController < ApplicationController
   before_action :set_site_group, only: [:show, :edit, :update, :destroy]
   
   def index
-    @site_groups = SiteGroup.all
+    @site_groups = SiteGroup.all.includes([:sites])
   end
   
   def new
@@ -15,16 +15,16 @@ class Admin::SiteGroupsController < ApplicationController
   end
 
   def create
-    @site_group = SiteGroup.new(site_params)
+    @site_group = SiteGroup.new(site_group_params)
     if @site_group.save
-      redirect_to @site_group
+      redirect_to admin_site_groups_path
     else
       render 'new'
     end
   end
 
   def update
-    @site_group.update_attributes(site_params)
+    @site_group.update_attributes(site_group_params)
     if @site_group.save
       redirect_to @site_group
     else
@@ -41,7 +41,7 @@ class Admin::SiteGroupsController < ApplicationController
     @site_group = SiteGroup.find(params[:id])
   end
 
-  def site_params
-    params.require(:identifier, :name)
+  def site_group_params
+    params.require(:site_group).permit(:name, :identifier)
   end
 end
