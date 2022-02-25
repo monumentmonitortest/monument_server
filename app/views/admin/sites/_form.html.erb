@@ -13,7 +13,7 @@
 
 <div class='row'>
   <div class="col">
-    <%= form.label :name, "Site Name"%>
+    <%= form.label :name, "Site Name (required)"%>
   </div>
   <div class="col">
     <%= form.text_field :name, id: :name %>
@@ -22,7 +22,7 @@
 
 <div class='row'>
   <div class="col">
-    <%= form.label :name, "Site Group"%>
+    <%= form.label :name, "Site Group (required)"%>
   </div>
   <div class="col">
     <%= form.select :site_group_id, options_for_select(SiteGroup.all.collect { | sg | [sg.name, sg.id] }) %>
