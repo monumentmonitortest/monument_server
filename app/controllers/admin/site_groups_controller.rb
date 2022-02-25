@@ -39,6 +39,7 @@ class Admin::SiteGroupsController < ApplicationController
   def destroy
     if @site_group.sites.present?
       flash[:notice] = 'Cannot delete a site group that has associated sites'
+      redirect_to admin_site_groups_path
     else
       @site_group.destroy
       redirect_to admin_site_groups_path
