@@ -24,9 +24,9 @@ class Admin::SitesController < ApplicationController
   end
 
   def update
-    @site.update_attributes(site_params)
+    @site.update(site_params)
     if @site.save
-      redirect_to @site
+      redirect_to admin_site_path(@site)
     else
       render 'edit'
     end
@@ -40,6 +40,17 @@ class Admin::SitesController < ApplicationController
     # {
        [{image_attachment: :blob}, :taggings]
     # }
+  end
+
+  def destroy
+    # binding.pry
+    if @site.submissions.present?
+      flash[:notice] = 'Cannot delete a site that has associated submissions'
+      redirect_to admin_site_path(@site)
+    else
+      @site.destroy
+      render json: { deleted: true }, status: :no_content
+    end
   end
 
   private

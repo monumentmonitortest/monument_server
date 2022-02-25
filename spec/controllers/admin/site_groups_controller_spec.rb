@@ -9,7 +9,7 @@ RSpec.describe Admin::SiteGroupsController, type: :request do
 
   context 'GET /admin/sites_groups' do
     it 'returns a 200' do
-      response = get "/admin/site_groups", params: {}
+      response = get admin_site_groups_path, params: {}
       expect(response).to eq(200)
     end
   end
@@ -23,7 +23,7 @@ RSpec.describe Admin::SiteGroupsController, type: :request do
     context "with correct params" do
       it "create new site group" do
         expect {
-          post "/admin/site_groups", params: { site_group: params }
+          post admin_site_groups_path, params: { site_group: params }
         }.to change(SiteGroup, :count)
       end
     end
@@ -31,7 +31,7 @@ RSpec.describe Admin::SiteGroupsController, type: :request do
     context "with incorrect params" do
       it "does not create site group" do
         expect {
-          post "/admin/site_groups", params: { site_group: {} }
+          post admin_site_groups_path, params: { site_group: {} }
         }.to raise_error(ActionController::ParameterMissing)
       end
     end
@@ -44,11 +44,10 @@ RSpec.describe Admin::SiteGroupsController, type: :request do
       name: "Loch Doon",
       identifier: "Lake",
     }}
-    let(:path) { "/admin/site_groups/#{site_group.id}" }
     
     context "with correct params" do
       it "updates site group" do
-        patch path, params: { site_group: sg_params }
+        patch admin_site_group_path(site_group), params: { site_group: sg_params }
         expect(site_group.reload.name).to eq("Loch Doon")
       end
     end
@@ -57,7 +56,7 @@ RSpec.describe Admin::SiteGroupsController, type: :request do
       let(:sg_params) {{ }}
       it "does not update" do
         expect {
-          patch "/admin/site_groups/#{site_group.id}", params: sg_params
+          patch admin_site_group_path(site_group), params: sg_params
         }.to raise_error(ActionController::ParameterMissing)
       end
     end
@@ -68,12 +67,11 @@ RSpec.describe Admin::SiteGroupsController, type: :request do
     let(:sg_params) {{
       id: site_group.id
     }}
-    let(:path) { "/admin/site_groups/#{site_group.id}" }
     
     context "with correct params" do
       it "deletes site group" do
         expect {
-          delete "/admin/site_groups/#{site_group.id}", params: sg_params
+          delete admin_site_group_path(site_group), params: sg_params
         }.to change(SiteGroup, :count)
       end
     end

@@ -36,7 +36,7 @@
         </div>
         <div class="fl w-20 pa2">
           <%= link_to 'Edit', edit_admin_site_group_path(sg) %><br/>
-          <%= link_to "Destroy", admin_site_group_path(sg), method: :delete, data: { confirm: "Are you sure? This will delete all sites and submissions and cannot be reversed" } %>
+          <%= link_to "Delete", admin_site_group_path(sg), method: :delete, data: { confirm: "Are you sure? This cannot be reversed" } %>
         </div>
       </div>
     </div>
