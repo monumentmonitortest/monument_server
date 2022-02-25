@@ -24,9 +24,9 @@ class Admin::SiteGroupsController < ApplicationController
   end
 
   def update
-    @site_group.update_attributes(site_group_params)
+    @site_group.update(site_group_params)
     if @site_group.save
-      redirect_to @site_group
+      redirect_to admin_site_groups_path
     else
       render 'edit'
     end
@@ -35,6 +35,12 @@ class Admin::SiteGroupsController < ApplicationController
   def show
     @sites = @site_group.sites
   end
+
+  def destroy
+    @site_group.destroy
+    redirect_to admin_site_groups_path
+  end
+
 
   private
   def set_site_group

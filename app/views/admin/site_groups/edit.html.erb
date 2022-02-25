@@ -1,0 +1,8 @@
+<h1>Editing Site Group</h1>
+
+<%= form_with(model: @site_group, local: true, url: admin_site_group_path) do |form| %>
+  <%= render 'form', form: form, site_group: @site_group %>
+<% end %>
+
+<%= link_to 'Show', admin_site_group_path(@site_group) %> |
+<%= link_to 'Back', admin_site_groups_path %>
