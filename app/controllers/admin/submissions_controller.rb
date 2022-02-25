@@ -26,9 +26,10 @@ module Admin
     def edit; end
 
     def update
-      @submission.update_attributes(submission_params)
+      @submission.update(submission_params)
       respond_to do |format|
         format.js { render 'admin/submissions/update.js.erb' }
+        format.html { render 'admin/submissions/update.js.erb'}
       end
     end
 
@@ -63,6 +64,7 @@ module Admin
     end
 
     def set_submission
+      # binding.pry
       @submission = Submission.find(params[:id])
     end
 
