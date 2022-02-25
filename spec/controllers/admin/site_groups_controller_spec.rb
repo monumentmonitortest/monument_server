@@ -68,11 +68,20 @@ RSpec.describe Admin::SiteGroupsController, type: :request do
       id: site_group.id
     }}
     
-    context "with correct params" do
+    context "with no associated sites" do
       it "deletes site group" do
         expect {
           delete admin_site_group_path(site_group), params: sg_params
         }.to change(SiteGroup, :count)
+      end
+    end
+
+    context "with associated sites" do
+      let!(:site) { create(:site, site_group_id: site_group.id)}
+      it "does not deletes site group" do
+        expect {
+          delete admin_site_group_path(site_group), params: sg_params
+        }.to_not change(SiteGroup, :count)
       end
     end
   end
