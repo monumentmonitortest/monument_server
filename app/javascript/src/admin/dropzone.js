@@ -1,4 +1,5 @@
 import Dropzone from "dropzone";
+console.log("dropzone loaded")
 
 if (document.getElementById('bulk-upload')) {
   readyBulkUpload();
