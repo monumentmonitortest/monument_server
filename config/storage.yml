@@ -6,16 +6,8 @@ test:
   service: Disk
   root: <%= Rails.root.join("tmp/storage") %>
 
-amazonDev:
-  service: S3
-  region: <%= ENV['AWS_REGION'] %>
-  bucket: <%= ENV['S3_BUCKET_DEVELOPMENT'] %>
-  access_key_id: <%= ENV['AWS_ACCESS_KEY_ID'] %>
-  secret_access_key: <%= ENV['AWS_SECRET_ACCESS_KEY'] %>
-
-amazon:
-  service: S3
-  region: <%= ENV['AWS_REGION'] %>
-  bucket: <%=  ENV['S3_BUCKET_PRODUCTION'] %>
-  access_key_id: <%=  ENV['AWS_ACCESS_KEY_ID'] %>
-  secret_access_key: <%=  ENV['AWS_SECRET_ACCESS_KEY'] %>
+azure:
+  service: AzureStorage
+  storage_account_name: <%= ENV['STORAGE_ACCOUNT_NAME'] %>
+  storage_access_key: <%= ENV['STORAGE_ACCESS_KEY'] %>
+  container: <%= ENV['STORAGE_CONTAINER'] %>
