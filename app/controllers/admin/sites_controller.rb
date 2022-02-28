@@ -17,16 +17,16 @@ class Admin::SitesController < ApplicationController
   def create
     @site = Site.new(site_params)
     if @site.save
-      redirect_to @site
+      redirect_to admin_sites_path
     else
       render 'new'
     end
   end
 
   def update
-    @site.update_attributes(site_params)
+    @site.update(site_params)
     if @site.save
-      redirect_to @site
+      redirect_to admin_site_path(@site)
     else
       render 'edit'
     end
@@ -42,12 +42,23 @@ class Admin::SitesController < ApplicationController
     # }
   end
 
+  def destroy
+    # binding.pry
+    if @site.submissions.present?
+      flash[:notice] = 'Cannot delete a site that has associated submissions'
+      redirect_to admin_site_path(@site)
+    else
+      @site.destroy
+      render json: { deleted: true }, status: :no_content
+    end
+  end
+
   private
   def set_site
     @site = Site.find(params[:id])
   end
 
   def site_params
-    params.require(:site).permit(:id, :name, :latitude, :longitude, :visits, :visitors, :pic_id, :notes)
+    params.require(:site).permit(:id, :name, :latitude, :longitude, :visits, :visitors, :pic_id, :notes, :site_group_id)
   end
 end

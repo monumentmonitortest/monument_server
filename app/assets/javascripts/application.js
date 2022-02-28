@@ -18,5 +18,4 @@
 //= require micromodal/dist/micromodal
 //= require core
 //= require tags_input
-//= require bulk_upload
 //= require_tree .

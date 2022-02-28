@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   # todo - will slowly be moving controllers from scope to namespace
   namespace :admin do
     resources :bulk_upload, only: [:index, :create]
+    resources :drop_upload, only: [:index, :create]
     resources :results
     resources :types
     resources :site_groups

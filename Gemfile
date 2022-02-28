@@ -57,6 +57,8 @@ gem 'acts-as-taggable-on'
 gem 'image_processing'
 gem 'sidekiq'
 gem 'newrelic_rpm'
+gem 'exifr'
+
 
 
 group :development, :test do

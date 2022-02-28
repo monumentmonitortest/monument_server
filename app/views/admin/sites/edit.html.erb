@@ -1,8 +1,8 @@
 <h1>Editing Site</h1>
 
-<%= form_with(model: @site, local: true) do |form| %>
+<%= form_with(model: @site, local: true, url: admin_site_path) do |form| %>
   <%= render 'form', form: form, site: @site %>
 <% end %>
 
-<%= link_to 'Show', @site %> |
-<%= link_to 'Back', sites_path %>
+<%= link_to 'Show', admin_site_path(@site) %> |
+<%= link_to 'Back', admin_sites_path %>

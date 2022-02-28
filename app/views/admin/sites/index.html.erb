@@ -8,8 +8,14 @@
       <div class="fl w-10 pa2">
         <%= site.submissions.count %>
       </div>
-      <div class="fl w-40 pa2 bb b--light-gray">
+      <div class="fl w-60 pa2 bb b--light-gray">
         <span><%= link_to site.name, admin_site_path(site) %></span>
+      </div>
+      <div class="fl w-20 pa2">
+        <%= link_to 'Edit', edit_admin_site_path(site) %>
+      </div>
+      <div class="fl w-20 pa2">
+        <%= link_to "Delete", admin_site_path(site), method: :delete, data: { confirm: "Are you sure? This cannot be reversed" } %>
       </div>
     </div>
   </div>
