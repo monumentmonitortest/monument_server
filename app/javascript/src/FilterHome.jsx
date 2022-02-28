@@ -9,7 +9,8 @@ export default class FilterHome extends React.Component {
   static propTypes = {
     siteNames: PropTypes.array.isRequired, // this is passed from the Rails view
     tags: PropTypes.array.isRequired,
-    userEmail: PropTypes.string.isRequired
+    userEmail: PropTypes.string.isRequired,
+    siteName: PropTypes.string.isRequred // site name is only used for initial loading of page
   };
 
   /**
@@ -17,8 +18,8 @@ export default class FilterHome extends React.Component {
    */
   constructor(props) {
     super(props);
-    this.state = {     
-      site: '',
+    this.state = {  
+      site: '',   
       type: '',
       tags: '',
       reliable: false, 
@@ -38,19 +39,20 @@ export default class FilterHome extends React.Component {
 
   async componentDidMount() {
     try {
-      const response = await fetch('api/v1/submissions')
+      const response = await fetch(`api/v1/submissions?site_filter=${this.props.siteName}`)
       if (!response.ok) {
         throw Error(response.statusText)
       }
       const json = await response.json()
       const total = await response.headers.get("Total")
-
+      console.log(json)
       this.setState({
         submissions: json.data,
         allSubmissionsTotal: total,
         totalSubmissions: total,
         pageNumber: '1',
-        links: json.links
+        links: json.links,
+        site: this.props.siteName
       })
     } catch (error) {
       console.log(error)
@@ -152,6 +154,7 @@ export default class FilterHome extends React.Component {
             handleToggle={this.handleToggle}
             refineView={this.refineView}
             siteNames={this.props.siteNames}
+            siteName={this.props.siteName}
             tags={this.props.tags}
             handleToggleNav={this.handleToggleNav}
             navCollapsed={this.state.navCollapsed}
