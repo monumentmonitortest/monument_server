@@ -53,13 +53,13 @@ class Admin::CsvController < ApplicationController # TODO: - make these all back
   private
 
   def create_basic_submissions_report
-    attributes = %w[submission-id site-name record-taken type-name]
+    attributes = %w[submission-id site-name record-taken type-name at-home]
     CSV.generate(headers: true) do |csv|
       csv << attributes
 
       Submission.all.includes([:site]).each do |submission|
         date = submission.submitted_at || submission.record_taken
-        row = [submission.id, submission.site_name, date.strftime('%d/%m/%Y'), submission.type_name]
+        row = [submission.id, submission.site_name, date.strftime('%d/%m/%Y'), submission.type_name, submission.tag_list.include?("at home")]
         csv << row
       end
     end
