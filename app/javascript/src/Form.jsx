@@ -98,7 +98,7 @@ export default class Form extends React.Component {
                 Search
               </button>
 
-              <button className="mt4 white-background dark-color" type="submit" onClick={() => window.location.reload(true)}>
+              <button className="mt4 white-background dark-color" type="submit" onClick={() => window.location.replace('/')}>
                 Clear
               </button>
             </span>
