@@ -1,24 +1,63 @@
 <div class="">
   <div class="">
-    <h1>Admin Interface</h1>
+    <h3>Monument Monitor Admin Interface</h3>
 
     <% if admin?%>
-      <%= link_to 'Veiw all sites', controller: 'admin/sites' %> (edit submissions from here)
-      <br/>
-      <%= link_to 'Veiw site groups', controller: 'admin/site_groups' %>
-      <br/>
-      <%= link_to 'Veiw all submissions', controller: 'admin/submissions' %> (no editing or deleting possible)
-      <br/>
-      <%= link_to 'Veiw all types', controller: 'admin/types' %>
-      <br/>
-      <%= link_to 'Drop upload', controller: 'admin/bulk_upload' %> Faster uploading of .jpg & .jpeg images that required no other data entry
-      <br/>
-      <%= link_to 'Bulk upload', controller: 'admin/bulk_upload' %> Uploading for other images, in which more information is required
-      <br/>
-      <%= link_to 'Instgram upload', controller: 'insta_upload' %>
-      <br/>
-      <%= link_to 'Extract reports', controller: 'admin/results' %>
+
+      <div class="dt dt--fixed">
+        <div class="dtc tc pv4 bg-black-10 bb pa5">
+          <h4><%= link_to 'Site Groups', controller: 'admin/site_groups' %></h4>
+        </div>
+        <div class="dtc tc pv4 bg-black-05 bb pa5">
+          View, edit and add to site groups here. Every site must belong to a site group.
+          A site group can have multiple sites - such as where participants are asked to
+          take images of more than one location at a PIC
+        </div>
+        
+      </div>
+      <div class="dt dt--fixed">
+        <div class="dtc tc pv4 bg-black-10 bb pa5">
+          <h4><%= link_to 'Sites', controller: 'admin/sites' %></h4>
+        </div>
+        <div class="dtc tc pv4 bg-black-05 bb pa5">
+          View all sites from here. Submissions can be edited from each site page.
+        </div>
+        
+      </div>
+
+      <div class="dt dt--fixed">
+        <div class="dtc tc pv4 bg-black-10 bb pa5">
+          <h4><%= link_to 'Drop upload', controller: 'admin/drop_upload' %></h4>
+        </div>
+        <div class="dtc tc pv4 bg-black-05 bb pa5">
+          Fast upload process that automatically assigns images to 'unsorted' site to be sorted later, .jpg & .jpeg images only
+        </div>
+        
+      </div>
+
+      <div class="dt dt--fixed">
+        <div class="dtc tc pv4 bg-black-10 bb pa5">
+          <h4><%= link_to 'Bulk upload', controller: 'admin/bulk_upload' %></h4>
+        </div>
+        <div class="dtc tc pv4 bg-black-05 bb pa5">
+          Bulk upload process for any images not applicable for drop upload
+        </div>
+        
+      </div>
+
+      <div class="dt dt--fixed">
+        <div class="dtc tc pv4 bg-black-10 bb pa5">
+          <h4><%= link_to 'Reports', controller: 'admin/results' %></h4>
+        </div>
+        <div class="dtc tc pv4 bg-black-05 bb pa5">
+          Generate reports on submission numbers and tags.
+        </div>
+        
+      </div>
     <% end %>
+
+    <%#= link_to 'Veiw all types', controller: 'admin/types' %>
+    <%#= link_to 'Instgram upload', controller: 'insta_upload' %>
 
   </div>
 </div>

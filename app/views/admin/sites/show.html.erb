@@ -1,18 +1,7 @@
 <p id="notice"><%= notice %></p>
-<h3 class="f1">Site general info</h3>
-<div class="flex flex-wrap mb5">
-  <div class="w-100 flex flex-column">
+<h3 class="f1"><%= @site.name %></h3>
+<p>If a submission does not update (i.e, update button turns green) reload the page and it should work.</p>
 
-    <div class="fw9 mb2">
-      <h4 class="f2"><%= @site.name %></h4>
-    </div>
-
-    <div class="fw9 mv2">
-      <%= @site.pic_id %>
-    </div>
-
-  </div>
-</div>
 
 <%= render template: "admin/sites/site_submissions", site: @site %>
 
