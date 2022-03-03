@@ -2,7 +2,8 @@
 #### new script...
 
 TYPE_NAME = 'ALL'
-subs = Submission.all
+date = '01/06/2021'.to_date
+subs = Submission.where("submitted_at < ?", date)
 count = subs.count
 participants = subs.map(&:participant_id).uniq
 pcount = participants.count
@@ -20,3 +21,13 @@ puts "total participants in #{TYPE_NAME} type: #{pcount}"
 puts "total contributions from one offs: #{one_offs}"
 puts "percentage of one offs: #{(one_offs.to_f/count.to_f)*100}"
 puts "Average submissions: #{av}"
+
+
+
+subs = Submission.where("submitted_at < ?", date).where(type_name: "TWITTER")
+ps = subs.all.map {|s| s.participant}
+hash = ps.map { |p| {p.id => p.submissions.count} }
+hash.uniq.map {|v| v.values}.flatten
+
+
+ps = Participant.where("created_at < ?", date) #1703
