@@ -47,13 +47,14 @@ export default class Form extends React.Component {
                           }
     const typeOptions = ['Email', 'WhatsApp', 'Twitter', 'Instagram']
     const zipButton = <ZipForm email={this.props.email} site={this.state.site} tags={this.state.selected} type={this.state.type}/>
+    const defaultSelect = (this.props.siteName && this.props.siteName) || "Select Site"
 
     return (
       <form className="ph4 pv4 mb0 br1" onSubmit={this.handleSubmit}>
           <div className="flex flex-wrap items-center justify-between">
             <span className="h-25 w-100">
               <select id="site" className="dark-color w-100" onChange={this.handleInputChange}>
-                <option defaultValue="">Select site</option>
+                <option defaultValue="">{defaultSelect}</option>
               {this.props.siteNames.sort().map((site, i) => 
                 <option 
                   value={site} 
@@ -97,7 +98,7 @@ export default class Form extends React.Component {
                 Search
               </button>
 
-              <button className="mt4 white-background dark-color" type="submit" onClick={() => window.location.reload(false)}>
+              <button className="mt4 white-background dark-color" type="submit" onClick={() => window.location.replace('/')}>
                 Clear
               </button>
             </span>
