@@ -45,7 +45,6 @@ export default class FilterHome extends React.Component {
       }
       const json = await response.json()
       const total = await response.headers.get("Total")
-      console.log(json)
       this.setState({
         submissions: json.data,
         allSubmissionsTotal: total,
