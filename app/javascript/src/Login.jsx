@@ -19,7 +19,10 @@ class Login extends React.Component {
     return (
       <div className="w-100">
         <div className="pv3 tc w-100">
-          Logged in as {this.props.userEmail}, <a href='/admin' >Logout</a>
+          Logged in as {this.props.userEmail}
+        </div> 
+        <div className="pv3 tc w-100">
+           <a href='/admin' >Admin Interface</a>
         </div> 
       </div>
     )

@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 module Admin
   class SubmissionsController < ApplicationController
     include SmartListing::Helper::ControllerExtensions
@@ -7,9 +6,9 @@ module Admin
     before_action :set_submission, only: %i[show edit update destroy]
     before_action :redirect_unless_admin
     respond_to :js, only: :create
-
+    
     def index
-      # TODO - move this to a service
+      # NOTE - this method not currently used
       submissions_scope == Submission.with_attached_image.includes([:site, :taggings, image_attachment: :blob])
 
       submissions_scope = search_site(submissions_scope, p_params[:site_filter]) if p_params[:site_filter].present?
@@ -64,7 +63,6 @@ module Admin
     end
 
     def set_submission
-      # binding.pry
       @submission = Submission.find(params[:id])
     end
 
