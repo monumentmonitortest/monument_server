@@ -3,7 +3,7 @@ class BasicSubmissionReportWorker
   sidekiq_options retry: false
   
   def perform(email_address)
-    @report = create_basic_submissions_report
+    @report = BasicSubmissionReportJob.new.perform
 
     @local_tmp_directory = "tmp/basic_submissions"
     @s3_directory = "archive/basic_submissions.csv"
@@ -25,7 +25,6 @@ class BasicSubmissionReportWorker
 
   def upload_to_s3(tmp_directory, s3_directory)
     puts 'uploading to S3! (hopefully)'
-    binding.pry
     begin
       s3 = Aws::S3::Resource.new(region:'eu-west-2')
       if Rails.env == 'production'
@@ -38,23 +37,5 @@ class BasicSubmissionReportWorker
     rescue Aws::S3::Errors::ServiceError
       puts 'BUGGER'
     end
-  end
-
-
-  def create_basic_submissions_report
-    attributes = %w[submission-id site-name record-taken type-name]
-
-    CSV.open(Rails.root.join('tmp', "basic_submissions.csv"), "wb") do |csv|
-      csv << attributes
-  
-      Submission.all.includes([:site]).each do |submission|
-        date = submission.submitted_at || submission.record_taken
-        row = [submission.id, submission.site_name, date.strftime('%d/%m/%Y'), submission.type_name]
-        csv << row
-      end
-    end
-
-    # CSV.generate(headers: true) do |csv|
-    # end
-  end
+  end  
 end

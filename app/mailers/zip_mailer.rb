@@ -5,6 +5,6 @@ class ZipMailer < ApplicationMailer
   def job_done(email:, url: )
     @email = email
     @url  = url
-    mail(to: @email, subject: 'Your Zip job is ready')
+    mail(to: @email, subject: 'Your download is ready')
   end
 end
