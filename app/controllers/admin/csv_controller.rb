@@ -2,13 +2,17 @@
 class Admin::CsvController < ApplicationController # TODO: - make these all background jobs
   def basic_submission
     # returns basic report with all submissions
-    respond_to do |format|
-      format.csv { send_data create_basic_submissions_report, filename: "basic-submissions-#{Date.today}.csv" }
-    end
+    email = current_user.email
+    BasicSubmissionReportWorker.perform_async(email)
+    flash[:notice] = "Report has been started, you will be emailed the report soon"
+
+    # respond_to do |format|
+    #   format.csv { send_data create_basic_submissions_report, filename: "basic-submissions-#{Date.today}.csv" }
+    # end
   end
 
   def participant_report
-    # returns report with breakdown of participation
+    # returns report with breakdown of participation. Retained in case of PhD questions - not important to HES infrastructure
     respond_to do |format|
       format.csv { send_data create_participant_report, filename: "participant-report-#{Date.today}.csv" }
     end
@@ -19,7 +23,6 @@ class Admin::CsvController < ApplicationController # TODO: - make these all back
     return unless params[:site_id].present?
 
     name = Site.find(params[:site_id]).name
-
     respond_to do |format|
       format.csv { send_data create_specific_site_time_period_report(params[:site_id], params[:from_date], params[:to_date]), filename: "submissions-for-#{name}-tags-#{Date.today}.csv" }
     end
