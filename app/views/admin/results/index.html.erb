@@ -1,29 +1,12 @@
-<h2 id="csv-reports">Results</h2>
+<h2 id="csv-reports">Current total of submissions: <b><%= @submissions %></b></h2>
 
-Numbers of submissions by type
-<table class="u-full-width">
-  <thead>
-    <tr>
-      <% Type::NAMES.each do |type| %>
-        <th><%= type %></th>
-      <% end %>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <% @type_numbers.each do |type| %>
-        <td><%= type %></td>
-      <% end %>
-    </tr>
-  </tbody>
-</table>
-
-<div class="mb6">
-  <h3>Reports on all submissions</h3>
-
+<div class="mt6 mb6">
+  <h4>Submission report</h4>
+  <div class="mb3">
+    This report returns a list of all submissions with with site name, site group, record taken and the image URL. 
+  </div>
   <div>
     <%= link_to 'Basic submission report', admin_basic_submission_report_path(format: "csv"), class: 'button' %>
-    Returns a list of all submissions with site names, record_taken and type
   </div>
 </div>
 
@@ -43,6 +26,7 @@ Numbers of submissions by type
         <%= select_tag :tag, options_for_select(tags), :include_blank => true, class: 'tag-select mb4'%>
     </p>
   </div>
+  
   <div class="w-50">
     <span class="db pb4">
       <%= link_to 'Site specific with submission patterns',  admin_site_specific_time_period_report_path(format: "csv", ), class: 'button', id: 'site-specific-report' %><br/>
