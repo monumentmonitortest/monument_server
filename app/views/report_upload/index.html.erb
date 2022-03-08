@@ -1,9 +1,7 @@
-<h2>Upload JSON file from instagram scape here</h2>
+<h2>Upload Basic Submissions file here</h2>
 
-<p>Instagram can be scraped using this instamancer</p>
-<p>
-  right <a href="https://adamsm.com/instamancer/">here</a>
-</p>
+<p>This is to be used once, when transferring data from s3 into azure. </p>
+
 
 <%= form_tag({action: :create}, multipart: true) do %>
   <%= date_field_tag(:from_date, Date.today - 1.week) %><br/>

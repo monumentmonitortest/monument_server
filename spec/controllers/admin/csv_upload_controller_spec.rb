@@ -1,5 +1,5 @@
 require 'rails_helper'
-RSpec.describe InstaUploadController, type: :request do
+RSpec.describe ReportUploadController, type: :request do
   let(:headers)  { {"CONTENT_TYPE" => "application/json" }}
   let(:instamancer) { 'spec/fixtures/assets/monumentmonitor.json' }
   let(:params) {{  

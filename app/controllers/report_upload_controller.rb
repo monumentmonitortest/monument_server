@@ -1,4 +1,4 @@
-class InstaUploadController < ApplicationController
+class ReportUploadController < ApplicationController
   before_action :redirect_unless_admin
 
   def index
@@ -9,7 +9,7 @@ class InstaUploadController < ApplicationController
     file = params["CSV-file"].read
     data = JSON.parse(file)
     
-    InstagramUploadJob.new(data, date).perform
+    CsvReportUploadJob.new(data, date).perform
     redirect_to '/admin'
   end
 end

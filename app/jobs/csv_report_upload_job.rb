@@ -1,6 +1,6 @@
 require 'open-uri'
 
-class InstagramUploadJob
+class CsvReportUploadJob
   def initialize(json_data, date)
     @json_data = json_data
     @date = date.to_date
