@@ -7,7 +7,7 @@ RSpec.describe ZipMailer, type: :mailer do
     let(:mail)  { described_class.job_done(email: input_email, url: input_url).deliver_now }
 
     it "renders the headers" do
-      expect(mail.subject).to eq("Your Zip job is ready")
+      expect(mail.subject).to eq("Your download is ready")
       expect(mail.to).to eq([input_email])
       expect(mail.from).to eq(["notifications@example.com"])
     end
