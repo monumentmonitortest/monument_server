@@ -6,10 +6,8 @@ class ReportUploadController < ApplicationController
 
   def create
     date = params["from_date"]
-    file = params["CSV-file"].read
-    data = JSON.parse(file)
-    
-    CsvReportUploadJob.new(data, date).perform
+    file = params["CSV-file"]
+    CsvReportUploadWorker.perform_async(file, date)
     redirect_to '/admin'
   end
 end

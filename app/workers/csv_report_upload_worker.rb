@@ -1,6 +1,10 @@
 require 'open-uri'
 
-class CsvReportUploadJob
+class CsvReportUploadJWorker
+  include Sidekiq::Worker
+  sidekiq_options retry: false
+
+  
   def initialize(csv_file, date)
     @table = CSV.parse(File.read(csv_file), headers: true)
     @date = date.to_date
