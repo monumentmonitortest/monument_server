@@ -11,7 +11,7 @@ class Registration
       participant = find_or_create_participant(participant_id)
       participant.update(first_submission: record_taken) if participant.first_submission.nil?
       if submission_id.present?
-        submission = Submission.create!(submission_id: submission_id,
+        submission = Submission.create!(id: submission_id,
                                         site_id: site_id,
                                         participant_id: participant.id, 
                                         reliable: reliable, 

@@ -12,10 +12,10 @@
     },
     "filter-home-bundle": {
       "js": [
-        "/packs/js/filter-home-bundle-cd734a84831f911d3d4f.js"
+        "/packs/js/filter-home-bundle-907098a6397118162bd6.js"
       ],
       "js.map": [
-        "/packs/js/filter-home-bundle-cd734a84831f911d3d4f.js.map"
+        "/packs/js/filter-home-bundle-907098a6397118162bd6.js.map"
       ]
     },
     "hello_react": {
@@ -27,8 +27,8 @@
       ]
     }
   },
-  "filter-home-bundle.js": "/packs/js/filter-home-bundle-cd734a84831f911d3d4f.js",
-  "filter-home-bundle.js.map": "/packs/js/filter-home-bundle-cd734a84831f911d3d4f.js.map",
+  "filter-home-bundle.js": "/packs/js/filter-home-bundle-907098a6397118162bd6.js",
+  "filter-home-bundle.js.map": "/packs/js/filter-home-bundle-907098a6397118162bd6.js.map",
   "hello_react.js": "/packs/js/hello_react-d48d119849ed8032a2dd.js",
   "hello_react.js.map": "/packs/js/hello_react-d48d119849ed8032a2dd.js.map",
   "media/images/download.png": "/packs/media/images/download-7d5f51b4983549fec6f36fd012a7d4e2.png",
