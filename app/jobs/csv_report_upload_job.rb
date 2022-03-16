@@ -1,8 +1,7 @@
 require 'open-uri'
 
 class CsvReportUploadJob
-  include Rails.application.routes.url_helpers
-  
+ 
   def initialize(data_row, date)
     @data_row = data_row
     @date = date.to_date
@@ -59,10 +58,10 @@ class CsvReportUploadJob
   end
 
   def get_image_url
-    if Rails.env == 'production' || 'development'
+    if ENV['BASE_URL'].present?
       ENV['BASE_URL'] + @data_row['image_url'] 
     else
-      root_url + @data_row['image_url'] 
+      Rails.root + @data_row['image_url'] 
     end
   end
 end
