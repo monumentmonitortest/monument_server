@@ -61,10 +61,6 @@ class CsvReportUploadJob
     if ENV['BASE_URL'].present?
       ENV['BASE_URL'] + @data_row['image_url'] 
     else
-      puts "HELLLLLOOOO EARLLLL!!"
-      puts "HELLLLLOOOO EARLLLL!!"
-      puts "HELLLLLOOOO EARLLLL!!"
-      puts Rails.root + @data_row['image_url'] 
       Rails.root + @data_row['image_url'] 
     end
   end

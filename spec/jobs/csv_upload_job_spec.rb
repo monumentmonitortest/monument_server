@@ -18,18 +18,24 @@ RSpec.describe CsvReportUploadJob, type: :job do
       end
     end
     
-    # context "where site name does not exists" do
-    #   let(:data_row) { data[1] }
-    #   it "does not create a submission" do
-    #     expect { subject.create_submission }.to raise_error(RuntimeError)
-    #   end
-    # end
+    context "where site name does not exists" do
+      let(:data_row) { data[1] }
+      it "does not create a submission" do
+        # ensure the image url will work
+        data_row['image_url'] = Rails.root.join('spec', 'fixtures', 'assets', 'test-image.jpg').to_s
 
-    # context "where submission alread exists" do
-    #   before { create(:submission, id: data[0][0])}
-    #   it "creates a new submission" do
-    #     expect { subject.create_submission }.not_to change(Submission, :count)
-    #   end
-    # end
+        expect { subject.create_submission }.to raise_error(RuntimeError)
+      end
+    end
+
+    context "where submission alread exists" do
+      before { create(:submission, id: data[0][0])}
+      it "creates a new submission" do
+        # ensure the image url will work
+        data_row['image_url'] = Rails.root.join('spec', 'fixtures', 'assets', 'test-image.jpg').to_s
+
+        expect { subject.create_submission }.not_to change(Submission, :count)
+      end
+    end
   end
 end
