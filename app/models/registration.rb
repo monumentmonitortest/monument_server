@@ -3,22 +3,35 @@ require 'uri'
 class Registration
   include ActiveModel::Model
 
-  attr_accessor :reliable, :site_id, :image, :image_file, :record_taken, :submitted_at, :type_name, :participant_id, :type_specific_id, :comment
+  attr_accessor :submission_id, :reliable, :site_id, :image, :image_file, :record_taken, :submitted_at, :type_name, :participant_id, :type_specific_id, :comment
 
   def save
     return false if invalid?
     ActiveRecord::Base.transaction do
       participant = find_or_create_participant(participant_id)
       participant.update(first_submission: record_taken) if participant.first_submission.nil?
-      submission = Submission.create!(site_id: site_id,
-                                      participant_id: participant.id, 
-                                      reliable: reliable, 
-                                      record_taken: record_taken, 
-                                      submitted_at: submitted_at, 
-                                      type_name: type_name,
-                                      comment: comment,
-                                      type_specific_id: type_specific_id,
-                                      image: image)
+      if submission_id.present?
+        submission = Submission.create!(id: submission_id,
+                                        site_id: site_id,
+                                        participant_id: participant.id, 
+                                        reliable: reliable, 
+                                        record_taken: record_taken, 
+                                        submitted_at: submitted_at, 
+                                        type_name: type_name,
+                                        comment: comment,
+                                        type_specific_id: type_specific_id,
+                                        image: image)
+        else
+          submission = Submission.create!(site_id: site_id,
+            participant_id: participant.id, 
+            reliable: reliable, 
+            record_taken: record_taken, 
+            submitted_at: submitted_at, 
+            type_name: type_name,
+            comment: comment,
+            type_specific_id: type_specific_id,
+            image: image)
+        end
       
       # For twitter and insta uploads, using image URL
       save_image(submission, image_file, type_name) if image_file.present?
