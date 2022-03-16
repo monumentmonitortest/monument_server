@@ -8,7 +8,6 @@ Rails.application.routes.draw do
     
     
     
-    resources :insta_upload
     
     
     get :zip_images, to: 'image_zip#zip_images'
@@ -24,6 +23,7 @@ Rails.application.routes.draw do
     resources :types
     resources :site_groups
     resources :submissions
+    resources :report_upload
     resources :sites do
       resources :submissions
       resources :registrations
