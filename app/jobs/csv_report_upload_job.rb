@@ -1,6 +1,7 @@
 require 'open-uri'
 
 class CsvReportUploadJob
+  include Rails.application.routes.url_helpers
   
   def initialize(data_row, date)
     @data_row = data_row
@@ -17,7 +18,7 @@ class CsvReportUploadJob
     comment = @data_row["comment"] # comment
     metadata = @data_row["metadata"] # metadata
     tag_list = @data_row["tag_list"] #tag_list
-    image_url = ENV['BASE_URL'] + @data_row['image_url'] #image url
+    image_url = get_image_url #image url
     
     if record_taken > @date
       unless Submission.find_by(id: id)
@@ -57,5 +58,11 @@ class CsvReportUploadJob
     end
   end
 
-
+  def get_image_url
+    if Rails.env == 'production' || 'development'
+      ENV['BASE_URL'] + @data_row['image_url'] 
+    else
+      root_url + @data_row['image_url'] 
+    end
+  end
 end
