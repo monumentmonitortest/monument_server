@@ -1,6 +1,6 @@
 class BasicSubmissionReportJob
   def perform
-    attributes = %w[submission-id site-name record-taken record_submitted type-name comment tag_list tag_list image_url]
+    attributes = %w[submission-id site-name record-taken record_submitted type-name comment tag_list metadata image_url]
 
     CSV.open(Rails.root.join('tmp', "basic_submissions.csv"), "wb") do |csv|
       csv << attributes
