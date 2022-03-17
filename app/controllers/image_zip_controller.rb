@@ -13,10 +13,10 @@ class ImageZipController < ApplicationController
 
   def download_zip
     obj = get_directory
-    unless obj.exists?
+    unless obj.present?
       redirect_back(fallback_location: admin_results_path, alert: "Zip folder not present, you need to create it using 'zip create and download'")
     else
-      redirect_to obj.public_url
+      redirect_to obj
       flash[:notice] = "Zip file downloading"
     end
   end
@@ -40,16 +40,22 @@ class ImageZipController < ApplicationController
   end
 
   def get_directory
-    # TODO - dry up s3 calls
+    # binding.pry
     begin
-      s3 = Aws::S3::Resource.new(region:'eu-west-2')
+      client = Azure::Storage::Blob::BlobService.create(storage_account_name: ENV['STORAGE_ACCOUNT_NAME'], storage_access_key:ENV['STORAGE_ACCESS_KEY'])
       if Rails.env == 'production'
-        obj = s3.bucket(ENV['S3_BUCKET_PRODUCTION']).object("archive/#{site_id}_submissions")
+        if client.get_blob(ENV['STORAGE_CONTAINER'], "archive/#{site_id}_submissions.zip").present?
+          url = File.join(client.host,ENV['STORAGE_CONTAINER'], "archive/#{site_id}_submissions.zip")
+        end
       else
-        obj = s3.bucket(ENV['S3_BUCKET_DEVELOPMENT']).object("archive/#{site_id}_submissions")
-      end
-    rescue Aws::S3::Errors::ServiceError
-      puts 'BUGGER'
+        # update this with devlopment storage container
+        # obj = client.get_blob(ENV['STORAGE_CONTAINER'], "archive/#{site_id}_submissions")
+        if client.get_blob(ENV['STORAGE_CONTAINER'], "archive/#{site_id}_submissions.zip").present?
+          url = File.join(client.host,ENV['STORAGE_CONTAINER'], "archive/#{site_id}_submissions.zip")
+        end
+        end
+    rescue Azure::Core::Http::HTTPError
+      puts 'BUGGER - FILE NOT FOUND'
     end
   end
 
