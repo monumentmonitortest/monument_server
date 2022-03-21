@@ -23,7 +23,7 @@ class TwitterJob
     record_taken = tweet.created_at
     image_url = media.media_url
 
-    registration = Registration.new(reliable: false, 
+    registration = ScriptRegistration.new(reliable: false, 
       site_id: site_id, 
       image_file: image_url, 
       comment: twitter_desc,

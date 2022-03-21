@@ -21,7 +21,7 @@ class CsvReportUploadJob
     
     if record_taken > @date
       unless Submission.find_by(id: id)
-        registration = Registration.new(
+        registration = ScriptRegistration.new(
           submission_id: id,
           reliable: false, 
           site_id: site_id, 
@@ -58,7 +58,7 @@ class CsvReportUploadJob
   end
 
   def get_image_url
-    if ENV['BASE_URL'].present?
+    if ENV['BASE_URL'].present? && Rails.env == 'production' || Rails.env == 'development'
       ENV['BASE_URL'] + @data_row['image_url'] 
     else
       Rails.root + @data_row['image_url'] 
