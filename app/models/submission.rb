@@ -8,6 +8,7 @@ class Submission < ApplicationRecord
   validate :validate_site_id
   validate :validate_participant_id
   validates_presence_of :record_taken
+  validates :image, presence: true
 
   has_one_attached :image
   # to get url for image when developing API - use s.image.service_url

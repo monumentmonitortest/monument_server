@@ -7,19 +7,30 @@ RSpec.describe Submission, type: :model do
   end 
   
   context 'validations' do
-    subject { described_class.new(params) }
-    let(:params) { { site_id: 123, record_taken: Date.today }}
+    subject { described_class.new(correct_params) }
+    let(:participant)     { create(:participant) }
+    let(:participant_id)  { participant.id }
+    let(:site)            { create(:site) }
+    let(:site_id)         { site.id }
+    let(:record_taken)    { Date.today }
+    let(:image_url)       { Rack::Test::UploadedFile.new('./spec/fixtures/assets/test-image.jpg', 'image/png')}
     
-    context 'when site id invalid' do
+    let(:correct_params) {{ site_id: site_id, 
+                            participant_id: participant_id, 
+                            record_taken: record_taken,
+                            image: image_url }
+                          }
+    
+    context 'when site is invalid' do
+      let(:site_id) { 24 }
       it 'throws error' do
         expect(subject.valid?).to be false
         expect(subject.errors.messages[:site_id].to_sentence).to eq "site id is invalid"
       end
     end
     
-    context 'when participant id invalid' do
-      let(:site)    { create(:site) }
-      let(:params) { { site_id: site.id, record_taken: Date.today }}
+    context 'when participant is invalid' do
+      let(:participant_id)    { 24 }
       
       it 'throws error' do
         expect(subject.valid?).to be false
@@ -27,11 +38,16 @@ RSpec.describe Submission, type: :model do
       end
     end
 
-    context 'when site id and participant id valid' do
-      let(:site)   { create(:site) }
-      let(:participant) { create(:participant) }
-      let(:params) { { site_id: site.id, participant_id: participant.id, record_taken: Date.today }}
+    context "when image url is nil" do
+      let(:image_url) { nil }
 
+      it "throws an error" do
+        expect(subject.valid?).to be false
+        expect(subject.errors.messages[:image].to_sentence).to eq "can't be blank"
+      end
+    end
+
+    context 'when all params valid' do
       it 'creates submission' do
         expect(subject.valid?).to be true
       end
